@@ -1,0 +1,1 @@
+;[].filter(active).map(email)

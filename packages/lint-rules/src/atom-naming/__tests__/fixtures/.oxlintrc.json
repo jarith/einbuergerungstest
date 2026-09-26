@@ -1,0 +1,8 @@
+{
+  "categories": {},
+  "plugins": [],
+  "jsPlugins": ["../../../plugin.ts"],
+  "rules": {
+    "app/atom-naming": "error"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "oxc.path.oxfmt": "node_modules/.bin/oxfmt",
+  "oxc.fmt.configPath": ".oxfmtrc.json",
+  "files.exclude": {
+    "**/*.d.ts": false
+  },
+  "cucumber.features": ["e2e/features/**/*.feature"],
+  "cucumber.glue": ["e2e/steps/**/*.ts"]
+}

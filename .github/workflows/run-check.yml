@@ -1,0 +1,63 @@
+name: Run check
+
+on:
+  workflow_call:
+    inputs:
+      script:
+        description: Root package script to run
+        required: true
+        type: string
+      install-browsers:
+        description: Whether to install Chromium and its system dependencies
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  run-check:
+    name: Run ${{ inputs.script }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+
+      - name: Set up Yarn from package.json
+        run: |
+          corepack enable
+          corepack install
+
+      - name: Resolve Yarn cache directory
+        id: yarn-cache
+        run: echo "cache-directory=$(yarn config get cacheFolder)" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Yarn packages
+        uses: actions/cache@v6
+        with:
+          path: ${{ steps.yarn-cache.outputs.cache-directory }}
+          key: yarn-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('yarn.lock', '.yarnrc.yml', 'package.json') }}
+          restore-keys: |
+            yarn-${{ runner.os }}-${{ runner.arch }}-
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Install Playwright browser
+        if: ${{ inputs.install-browsers }}
+        run: yarn browser:install --with-deps
+
+      - name: Run check
+        env:
+          SCRIPT: ${{ inputs.script }}
+        run: yarn "$SCRIPT"

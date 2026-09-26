@@ -1,0 +1,23 @@
+{
+  "name": "@app/design-system",
+  "private": true,
+  "type": "module",
+  "sideEffects": [
+    "./src/styles.css"
+  ],
+  "exports": {
+    ".": "./src/index.ts",
+    "./styles.css": "./src/styles.css"
+  },
+  "scripts": {
+    "build": "yarn panda:prepare && PANDA_INCLUDE_STORIES=true yarn run -T -B storybook build",
+    "lint": "yarn run -T oxlint .",
+    "ts:compile": "yarn panda:prepare && yarn run -T tsc -p tsconfig.json",
+    "format": "yarn run -T oxfmt --write .",
+    "format:check": "yarn run -T oxfmt --check .",
+    "panda:prepare": "yarn run -T panda codegen --config panda.config.cts --cwd .",
+    "storybook": "yarn panda:prepare && yarn storybook:serve",
+    "storybook:serve": "PANDA_INCLUDE_STORIES=true yarn run -T -B storybook dev --port 6006 --no-open",
+    "test:storybook": "yarn build && yarn run -T playwright test --config playwright.config.ts"
+  }
+}

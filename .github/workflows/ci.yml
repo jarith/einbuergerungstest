@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build
+    uses: ./.github/workflows/run-check.yml
+    with:
+      script: build
+
+  lint:
+    name: Lint
+    uses: ./.github/workflows/run-check.yml
+    with:
+      script: lint
+
+  typecheck:
+    name: ts:compile
+    uses: ./.github/workflows/run-check.yml
+    with:
+      script: ts:compile
+
+  format-check:
+    name: Format check
+    uses: ./.github/workflows/run-check.yml
+    with:
+      script: format:check
+
+  unit-tests:
+    name: Unit tests
+    uses: ./.github/workflows/run-check.yml
+    with:
+      script: test
+
+  e2e-tests:
+    name: E2E tests
+    uses: ./.github/workflows/run-check.yml
+    with:
+      script: test:e2e
+      install-browsers: true
+
+  browser-tests:
+    name: Browser tests
+    uses: ./.github/workflows/run-check.yml
+    with:
+      script: test:browser
+      install-browsers: true
+
+  storybook-tests:
+    name: Storybook tests
+    uses: ./.github/workflows/run-check.yml
+    with:
+      script: test:storybook
+      install-browsers: true

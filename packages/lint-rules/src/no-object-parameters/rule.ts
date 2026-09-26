@@ -1,0 +1,71 @@
+/* oxlint-disable -- Vendored anti-slop implementation; see src/anti-slop/UPSTREAM.md. */
+
+import type { ESTree } from '@oxlint/plugins'
+import { defineRule } from '@oxlint/plugins'
+
+import type { TypeAliasEnvironment } from '../anti-slop/shared/type-alias-resolution.ts'
+import {
+  functionParameterBindingName,
+  functionParameterTypeAnnotation,
+} from '../anti-slop/shared/function-parameters.ts'
+import {
+  createTypeAliasEnvironment,
+  resolvedTypeMatches,
+} from '../anti-slop/shared/type-alias-resolution.ts'
+
+/** Ban the broad object type on function inputs, including local aliases to object. */
+export const rule = defineRule({
+  meta: {
+    type: 'problem',
+    docs: {
+      description:
+        'Disallow object function parameters; inputs must use an owner-provided type and be parsed at their boundary.',
+    },
+    messages: {
+      objectParameter:
+        'Parameter `{{parameter}}` uses the broad `object` type. Accept a named owner type; parse external input at its boundary before calling this function.',
+    },
+  },
+  createOnce(context) {
+    let environment: TypeAliasEnvironment | null = null
+
+    const resolvesToObject = (type: ESTree.TSType) =>
+      environment !== null &&
+      resolvedTypeMatches(type, environment, (resolved, matches) => {
+        if (resolved.type === 'TSObjectKeyword') return true
+        if (resolved.type === 'TSParenthesizedType') {
+          return matches(resolved.typeAnnotation)
+        }
+        return resolved.type === 'TSUnionType' && resolved.types.some(matches)
+      })
+
+    const checkParameters = (node: Extract<ESTree.Node, { params: ESTree.ParamPattern[] }>) => {
+      for (const parameter of node.params) {
+        const annotation = functionParameterTypeAnnotation(parameter)
+        if (annotation === null || annotation === undefined) continue
+        if (!resolvesToObject(annotation.typeAnnotation)) continue
+        context.report({
+          node: annotation.typeAnnotation,
+          messageId: 'objectParameter',
+          data: { parameter: functionParameterBindingName(parameter, context.sourceCode) },
+        })
+      }
+    }
+
+    return {
+      Program(node) {
+        environment = createTypeAliasEnvironment(node, context.sourceCode.visitorKeys)
+      },
+      ArrowFunctionExpression: checkParameters,
+      FunctionDeclaration: checkParameters,
+      FunctionExpression: checkParameters,
+      TSCallSignatureDeclaration: checkParameters,
+      TSConstructSignatureDeclaration: checkParameters,
+      TSConstructorType: checkParameters,
+      TSDeclareFunction: checkParameters,
+      TSEmptyBodyFunctionExpression: checkParameters,
+      TSFunctionType: checkParameters,
+      TSMethodSignature: checkParameters,
+    }
+  },
+})

@@ -1,0 +1,8 @@
+{
+  "categories": {},
+  "plugins": [],
+  "jsPlugins": ["../../../plugin.ts"],
+  "rules": {
+    "app/require-safety-comment-for-type-assertion": "error"
+  }
+}

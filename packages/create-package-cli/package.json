@@ -1,0 +1,13 @@
+{
+  "name": "@app/create-package-cli",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "yarn run -T tsc -p tsconfig.json",
+    "lint": "yarn run -T oxlint .",
+    "ts:compile": "yarn run -T tsc -p tsconfig.json",
+    "format": "yarn run -T oxfmt --write .",
+    "format:check": "yarn run -T oxfmt --check .",
+    "create-package": "yarn run build && node ./dist/index.js"
+  }
+}

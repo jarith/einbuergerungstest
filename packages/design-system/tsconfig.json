@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "lib": ["ES2025", "DOM", "DOM.Iterable", "ESNext.Disposable"],
+    "types": ["vite/client"]
+  },
+  "include": ["src", ".storybook/preview.tsx"],
+  "exclude": ["src/**/*.test.ts", "src/**/*.browser.test.tsx"]
+}

@@ -1,0 +1,68 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "arrowParens": "always",
+  "bracketSameLine": false,
+  "bracketSpacing": true,
+  "embeddedLanguageFormatting": "auto",
+  "endOfLine": "lf",
+  "htmlWhitespaceSensitivity": "css",
+  "ignorePatterns": [
+    "**/dist/**",
+    "**/storybook-static/**",
+    ".yarn/**",
+    "**/node_modules/**",
+    "**/test-results/**"
+  ],
+  "insertFinalNewline": true,
+  "jsdoc": false,
+  "jsxSingleQuote": false,
+  "objectWrap": "preserve",
+  "printWidth": 100,
+  "proseWrap": "preserve",
+  "quoteProps": "as-needed",
+  "semi": false,
+  "singleAttributePerLine": false,
+  "singleQuote": true,
+  "overrides": [
+    {
+      "files": ["**/*.{md,markdown,mdx}"],
+      "options": {
+        "printWidth": 90,
+        "proseWrap": "always"
+      }
+    }
+  ],
+  "sortImports": {
+    "customGroups": [],
+    "groups": [
+      "type-external",
+      { "newlinesBetween": false },
+      "value-external",
+      "type-builtin",
+      { "newlinesBetween": false },
+      "value-builtin",
+      ["type-internal", "type-subpath"],
+      { "newlinesBetween": false },
+      ["value-internal", "value-subpath"],
+      ["type-parent", "type-sibling", "type-index"],
+      { "newlinesBetween": false },
+      ["value-parent", "value-sibling", "value-index"],
+      "style",
+      "unknown"
+    ],
+    "ignoreCase": true,
+    "internalPattern": ["~/", "@/", "#"],
+    "newlinesBetween": true,
+    "order": "asc",
+    "partitionByComment": false,
+    "partitionByNewline": false,
+    "sortSideEffects": false
+  },
+  "sortPackageJson": {
+    "sortScripts": false
+  },
+  "sortTailwindcss": false,
+  "tabWidth": 2,
+  "trailingComma": "all",
+  "useTabs": false
+}

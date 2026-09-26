@@ -1,0 +1,8 @@
+{
+  "categories": {},
+  "plugins": [],
+  "jsPlugins": ["../../../plugin.ts"],
+  "rules": {
+    "app/no-module-mocking": "error"
+  }
+}

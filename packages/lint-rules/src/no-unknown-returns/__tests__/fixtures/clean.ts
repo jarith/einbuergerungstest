@@ -1,0 +1,1 @@
+type ImportedValue = unknown
