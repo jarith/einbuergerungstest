@@ -168,6 +168,7 @@
         "max": 1
       }
     ],
+    "curly": "error",
     "typescript/no-explicit-any": "error",
     "typescript/no-unsafe-assignment": "error",
     "typescript/no-unsafe-argument": "error",
