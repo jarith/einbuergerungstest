@@ -7,8 +7,8 @@ import { panel } from './panel.styles'
 
 export type PanelProps = PrimitiveProps<PaperProps> &
   Omit<ComponentPropsWithoutRef<'section'>, keyof PaperProps> &
-  Readonly<{ ref?: Ref<HTMLElement> }>
+  Readonly<{ tone?: 'surface' | 'muted'; edge?: 'bordered' | 'plain'; ref?: Ref<HTMLElement> }>
 
-export const Panel = ({ ref, ...props }: PanelProps) => (
-  <Paper component="section" {...props} ref={ref} classNames={panel()} />
+export const Panel = ({ tone = 'surface', edge = 'bordered', ref, ...props }: PanelProps) => (
+  <Paper component="section" {...props} ref={ref} classNames={panel({ tone, edge })} />
 )

@@ -17,8 +17,9 @@ const config = {
               log.code === 'MODULE_LEVEL_DIRECTIVE' &&
               log.message.includes('use client') &&
               log.message.includes('@mantine/')
-            )
+            ) {
               return
+            }
 
             defaultHandler(level, log)
           },

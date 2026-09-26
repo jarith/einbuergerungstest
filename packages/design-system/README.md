@@ -1,9 +1,10 @@
 # Design system
 
-This package follows Groove Forge's design-system implementation, with three example
-components and a small starter token set. Mantine provides behavior and accessible
-primitives. Panda owns visual values, recipes, and layout. Customize the sample values for
-your product; they are not a copy of Groove Forge's product palette.
+This package follows Groove Forge's design-system structure. The baseline theme comes from
+[`einbuergerungstest.pen`](../../einbuergerungstest.pen): Mantine provides controls and
+interaction, while Panda owns the color roles, geometry, recipes, and layout. See
+[the design mapping](DESIGN_MAPPING.md) for the extracted primitive inventory and source
+evidence. The existing alternate skin remains an optional token-only example.
 
 ## Structure
 
@@ -11,10 +12,12 @@ your product; they are not a copy of Groove Forge's product palette.
 packages/design-system/
 ├── .storybook/                       # Shared provider, stylesheet, and theme toolbar
 ├── src/
-│   ├── components/                   # Public primitives; add components here
+│   ├── components/                   # Public Mantine-backed primitives
 │   │   ├── button/                   # Render, recipe, styles, and stories together
-│   │   ├── panel/
-│   │   └── text-input/
+│   │   ├── choice-group/
+│   │   ├── dialog/
+│   │   ├── navigation-item/
+│   │   └── ...                       # Fields, status, progress, and separators
 │   ├── design-system-provider/       # One visual root per document
 │   ├── foundation/
 │   │   ├── mantine/                  # CSS-variable adapters and wrapper prop types
@@ -38,24 +41,30 @@ packages/design-system/
 ## Use it
 
 ```tsx
-import { Button, DesignSystemProvider, Panel, TextInput } from '@app/design-system'
+import { Button, ChoiceGroup, DesignSystemProvider, Panel } from '@app/design-system'
 import '@app/design-system/styles.css'
 
 const Example = () => (
   <DesignSystemProvider colorScheme="light" skin="baseline">
-    <Panel aria-label="Project settings">
-      <TextInput label="Project name" />
-      <Button appearance="solid">Save</Button>
+    <Panel aria-label="Study question">
+      <ChoiceGroup
+        label="Which right does the Basic Law protect?"
+        options={[
+          { value: 'a', marker: 'A', label: 'Freedom of religion' },
+          { value: 'b', marker: 'B', label: 'Freedom of speech' },
+        ]}
+      />
+      <Button appearance="solid">Next question</Button>
     </Panel>
   </DesignSystemProvider>
 )
 ```
 
-The public examples are `Button` (`solid`, `outline`, `ghost`, disabled, loading),
-`TextInput` (label, description, error, disabled, ref), and `Panel` (a semantic section).
-Native attributes, refs, and behavior props remain available. Mantine visual props such as
-`color`, `variant`, `size`, `radius`, `classNames`, and `vars` stay private. `className`
-and `style` remain deliberate escape hatches.
+The public primitives include actions, fields, answer choices, filters, navigation,
+statuses, progress, notices, dividers, and dialogs. Native attributes and behavior props
+remain available. Mantine visual props such as `color`, `variant`, `size`, `radius`,
+`classNames`, and `vars` stay private. `className` and `style` remain deliberate escape
+hatches.
 
 Use `css`, `cx`, `cva`, `sva`, `token`, or the public layout helpers from the package
 entry. Built-in examples are `stack`, `hstack`, `vstack`, `flex`, `grid`, `wrap`,
@@ -70,14 +79,14 @@ theme previews. The template's application continues to own its Reatom state sco
 
 ## Customize and extend
 
-1. Edit `tokens/colors.ts` and `tokens/tokens.ts` for primitive values. The sample uses
-   system font stacks, so no font downloads are required. Spacing and font sizes are
-   design pixels: `spacing.4` means four pixels, not a framework scale index.
+1. Edit `tokens/colors.ts` and `tokens/tokens.ts` for source values. Inter Variable is
+   self-hosted by the package stylesheet. Spacing and font sizes are design pixels:
+   `spacing.4` means four pixels, not a framework scale index.
 2. Add role aliases and shared control geometry in `tokens/semantics.ts`. Keep foreground
    and background roles paired, and check both color schemes when changing them.
 3. Edit `tokens/themes.ts` for skins. `DesignTheme` requires the same categories and keys
-   while permitting different values. The alternate example changes accent, font, radius,
-   and control height entirely through tokens.
+   while permitting different values. The baseline is the `.pen` design; the pre-existing
+   alternate example changes accent, font, radius, and control height through tokens.
 4. `foundation/panda/panda-theme.ts` projects dimensions to rem once, keeps strokes in
    pixels, and emits text/layer styles and conditional CSS variables. Add media thresholds
    to Panda configuration only when your application needs them; the default token and
@@ -91,8 +100,7 @@ theme previews. The template's application continues to own its Reatom state sco
    under `src/recipes` when multiple components need them.
 
 Keep product features, routing, and state outside this package. Add further token
-categories and components only when there is a consumer. Groove Forge's music-specific
-tokens, design-extraction evidence, font assets, and full component catalog are omitted.
+categories and components only when there is a consumer.
 
 ## Generation and verification
 

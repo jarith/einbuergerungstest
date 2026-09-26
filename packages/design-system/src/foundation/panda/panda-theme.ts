@@ -22,9 +22,13 @@ const project = <T extends string | number>(
 
 const textRoles = {
   body: ['16', 'regular'],
-  controlLabel: ['16', 'medium'],
+  controlLabel: ['14', 'semibold'],
+  actionLabel: ['15', 'semibold'],
   caption: ['14', 'regular'],
-  heading: ['20', 'bold'],
+  choiceDescription: ['13', 'regular'],
+  overline: ['12', 'bold'],
+  heading: ['20', 'semibold'],
+  dialogTitle: ['28', 'bold'],
   title: ['32', 'bold'],
 } as const
 
@@ -107,7 +111,7 @@ export const pandaTheme = {
         backgroundColor: 'field.bg',
         color: 'field.fg',
         border: '{borderWidths.control} solid {colors.field.border}',
-        borderRadius: 'control',
+        borderRadius: 'field',
       },
     },
     focus: {

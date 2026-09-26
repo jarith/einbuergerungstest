@@ -1,0 +1,22 @@
+import type { ModalProps } from '@mantine/core'
+import { Modal } from '@mantine/core'
+
+import type { PrimitiveProps } from '../../foundation/mantine/props'
+import { token } from '../../foundation/panda/styling'
+import { dialog } from './dialog.styles'
+
+export type DialogProps = Omit<PrimitiveProps<ModalProps>, 'transitionProps' | 'overlayProps'> &
+  Readonly<{ title: NonNullable<ModalProps['title']> }>
+
+/** Focus-trapped confirmation surface for the test and backup flows. */
+export const Dialog = (props: DialogProps) => (
+  <Modal
+    closeButtonProps={{ 'aria-label': 'Close dialog' }}
+    centered
+    {...props}
+    size={token.var('sizes.dialog.default')}
+    transitionProps={{ duration: 0 }}
+    overlayProps={{ backgroundOpacity: 1 }}
+    classNames={dialog()}
+  />
+)
