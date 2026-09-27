@@ -2,7 +2,7 @@
 
 ## Goal
 
-Provide one validated, versioned Berlin question bank and every referenced image to the
+Provide one validated Berlin question bank and every referenced image to the
 app and offline cache. Keep the current web/public bank and images as the authored source
 and preserve their runtime URLs.
 
@@ -14,17 +14,18 @@ and preserve their runtime URLs.
   stable keys, group membership, source IDs, image dimensions, and every referenced image
   variant.
 - Keep the authored bank and images in web/public. Validate all 13 groups' English and
-  German titles/descriptions, add a bank revision, and treat display number as
-  presentation data rather than a persistence key.
-- Publish the current bank URL with its revision in the data and offline cache version.
-  Produce an asset list for the PWA precache from the same validated source.
-- In question-bank/infrastructure and application, fetch once through a cached promise,
-  validate at runtime, index by stable key/group/display order, resolve image URLs against
-  the bank asset URL, and expose loading/error/retry states.
+  German titles/descriptions, and treat display number as presentation data rather than
+  a persistence key.
+- Publish the bank and image files at their existing static URLs. Let the later PWA build
+  generate its precache from the output.
+- Fetch the bank at startup, validate it at runtime, resolve image URLs against the bank
+  asset URL, and expose loading/error/retry states. Render images with native `<img>` and
+  `srcset` when their questions are shown.
 
 ## Complete when
 
-Routes can obtain the full bank without duplicate fetches; all 310 questions and 35 unique
-image files resolve; missing or malformed content fails visibly before study or mock
-actions start. This task feeds [router](04-router-shell.md), [study](08-ordered-study.md),
-and [PWA](20-pwa.md).
+The app can obtain the full bank; all 310 questions validate and all 35 referenced image
+files exist in the production build. A missing or malformed bank fails visibly before
+study or mock actions start; image loading happens when an
+illustrated question is shown. This task feeds [router](04-router-shell.md),
+[study](08-ordered-study.md), and [PWA](20-pwa.md).

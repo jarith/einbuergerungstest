@@ -9,7 +9,7 @@ learner data only; the question bank remains a static resource.
 
 - In modules/learner-state/domain, define a versioned snapshot containing UI language,
   study translation, appearance, planned date, all-question and per-group positions,
-  ordered study attempts, mock sittings with their selections, and bank revisions. Use
+  ordered study attempts, and mock sittings with their selections. Use
   stable question keys and explicit completed/unfinished states. Derive mock question
   attempts from selected answers of completed sittings rather than storing a second copy.
 - In infrastructure, own the IndexedDB schema, upgrade/migration path, validation, atomic
@@ -27,9 +27,9 @@ learner data only; the question bank remains a static resource.
 - At a fresh application launch, close a persisted active mock as unfinished; merely
   backgrounding the same running app keeps it active. Clear a planned test date only when
   opening after its local calendar date has passed.
-- Compare saved bank revisions with loaded content before reusing history for progress.
-  Preserve older records for export and require an explicit migration/compatibility rule
-  instead of silently attaching them to changed questions.
+- When official question content changes, define an explicit compatibility or migration
+  rule for saved history before attaching old attempts to changed questions. Preserve
+  older records for export.
 
 ## Complete when
 

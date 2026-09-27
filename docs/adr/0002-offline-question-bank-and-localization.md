@@ -21,29 +21,37 @@ device-local progress with manual export and import, without accounts or a backe
 Keep one authored JSON file for the Berlin bank. Filter it in memory for group study and
 select from it for mock tests. Splitting this small bank would add loading and update
 coordination while offline study and mock tests still need the complete bank. Publish it
-as one versioned static asset alongside the separate question images; the source PDF is
-not an app asset. Vite serves `web/public` through its `publicDir` setting. Image paths in
-the bank are relative to the bank URL and include responsive WebP variants. Validate the
-bank's question IDs, answer options, translations, and image references before publishing
-it.
+as one static asset alongside the separate question images; the source PDF is not an app
+asset. Vite serves `web/public` through its `publicDir` setting. Fetch the bank once and
+render its relative image paths with native `<img>` `srcset` and `sizes`, so the browser
+loads the illustrated question's image when needed. Validate the bank's question IDs,
+answer options, translations, and image metadata when loading it, and include the
+referenced image files in the deployment.
 
 Use a stable question key based on `section` and `source_question_id`, independent of its
-display position. Include a bank revision in the published data and record it with
-attempts so later content changes can be handled against saved history deliberately.
+display position. Review saved-history compatibility deliberately if official question
+content changes, before reusing attempts against changed questions.
 
 ### Offline access and updates
 
-Use a service worker to precache the app shell, code, styles, manifest, icons, both UI
-language catalogs, the entire question bank, and every responsive illustration variant.
-Serve these resources from the cache when offline. Show that the app is ready for offline
-use only after the required resources have been cached successfully. Optimize the
-illustrations for delivery before shipping them, since they dominate the initial download.
+For the final PWA implementation, use Workbox `generateSW` to build a content-revisioned
+precache from Vite's completed `dist` output. Include the app shell, code, styles,
+manifest, icons, both UI language catalogs, the JSON bank, and every responsive
+illustration variant; configure the generated precache to include `.json` and `.webp`
+files explicitly. Workbox tracks file changes, so do not maintain a separate bank asset
+manifest or add revision queries to resource URLs. Serve these resources from the cache
+when offline. Show that the app is ready for offline use only after the required resources
+have been cached successfully. Optimize the illustrations for delivery before shipping
+them, since they dominate the initial download. See the
+[Workbox precaching guide](https://developer.chrome.com/docs/workbox/modules/workbox-precaching)
+and
+[Workbox build options](https://developer.chrome.com/docs/workbox/modules/workbox-build).
 
 When a new version is published, prepare its resources before replacing the old cache.
-Apply an available update at a safe point so a live mock test is not interrupted. Keep
-learner data separate from resource caches. A browser tab and an installed PWA use the
-same service worker and application logic. The installed iPhone or iPad app needs its own
-online preparation because
+Keep the new worker waiting and apply an available update at a safe point so a live mock
+test is not interrupted. Keep learner data separate from resource caches. A browser tab
+and an installed PWA use the same service worker and application logic. The installed
+iPhone or iPad app needs its own online preparation because
 [WebKit does not copy Safari's local website data into it](https://webkit.org/blog/14787/webkit-features-in-safari-17-2/).
 
 ### Learner state
@@ -78,6 +86,6 @@ The app can be deployed as static files and works without a network after offlin
 preparation. The complete image set increases the first download, but makes unseen
 illustrated questions available offline. Learners transfer or back up progress manually;
 there is no automatic cross-device sync, and browser storage can be cleared or evicted.
-Bank revisions and saved history need explicit handling when official question content
-changes. UI messages and question translations share a language preference and validation
-process while remaining in their respective catalog and content records.
+Saved history needs explicit handling when official question content changes. UI messages
+and question translations share a language preference and validation process while
+remaining in their respective catalog and content records.

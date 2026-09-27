@@ -20,8 +20,7 @@ deliberately contains no unit-test implementation.
   router or learner persistence yet.
 - The bank has 310 questions, 13 groups with English and German metadata, and 13
   illustrated questions referencing 35 unique image files. The authored bank and images
-  stay in web/public. The bank still needs a revision before learner history records it;
-  Task 01 covers that runtime contract.
+  stay in web/public. Task 01 covers their runtime contract.
 
 ## Architecture and data flow
 
@@ -46,12 +45,12 @@ bootstrap and resolves its route-specific data; it must not freeze live progress
 stale one-time copy. Page components subscribe to the shared Reatom projections. Pages
 never import another page.
 
-Use a stable question key made from section and source_question_id. Record the bank
-revision with study attempts and mock papers. Persist the source facts: settings, study
-positions, study attempts, and mock sittings. Derive a single question-attempt timeline
-from study attempts and selected answers in completed mocks, then derive current question
-status, solved counts, percentages, and mock summaries. A blank answer in a completed mock
-and every selection in an unfinished mock create no question attempt.
+Use a stable question key made from section and source_question_id. Persist the source
+facts: settings, study positions, study attempts, and mock sittings. Derive a single
+question-attempt timeline from study attempts and selected answers in completed mocks,
+then derive current question status, solved counts, percentages, and mock summaries. A blank
+answer in a completed mock and every selection in an unfinished mock create no question
+attempt.
 
 ## Router contract
 
@@ -93,7 +92,7 @@ each outcome is verified.
 
 | Order | Task                                                         | Depends on    | Outcome                                                                      |
 | ----- | ------------------------------------------------------------ | ------------- | ---------------------------------------------------------------------------- |
-| 01    | [Resources and question bank](01-resources.md)               | —             | Versioned, validated bank and image loading.                                 |
+| 01    | [Resources and question bank](01-resources.md)               | —             | Validated bank and native image loading.                                      |
 | 02    | [Learner state and IndexedDB](02-learner-state-indexeddb.md) | 01            | Durable Reatom-synchronized facts and safe backup operations.                |
 | 03    | [Localization and preferences model](03-localization.md)     | 01–02         | English/German UI and independent study translation setting.                 |
 | 04    | [Router and app shell](04-router-shell.md)                   | 01–03         | reatomRoute composition, page contracts, and responsive navigation.          |
