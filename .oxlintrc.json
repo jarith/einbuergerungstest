@@ -254,6 +254,16 @@
   ],
   "overrides": [
     {
+      "files": [".smithers/**"],
+      "rules": {
+        "eslint/no-restricted-imports": "off",
+        "eslint/no-underscore-dangle": "off",
+        "app/no-runtime-typeof": "off",
+        "app/no-unknown-parameters": "off",
+        "app/prefer-array-methods": "off"
+      }
+    },
+    {
       "files": ["packages/create-package-cli/src/generator.ts"],
       "rules": {
         "app/no-runtime-typeof": [

@@ -24,3 +24,5 @@ styled-system/
 .playwright-mcp/
 .DS_Store
 .idea/
+.flows/
+.smithers/
