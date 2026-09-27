@@ -22,15 +22,19 @@ export const findWorkspaceRoot = async (start: string): Promise<string> => {
   try {
     const manifest: unknown = JSON.parse(await readFile(join(directory, 'package.json'), 'utf8'))
 
-    if (isWorkspaceManifest(manifest) && manifest.workspaces.includes('packages/*'))
+    if (isWorkspaceManifest(manifest) && manifest.workspaces.includes('packages/*')) {
       return directory
+    }
   } catch (error) {
-    if (!isCode(error, 'ENOENT')) throw error
+    if (!isCode(error, 'ENOENT')) {
+      throw error
+    }
   }
   const parent = dirname(directory)
 
-  if (parent === directory)
+  if (parent === directory) {
     throw new Error('Run this command inside a repository with packages/* workspaces.')
+  }
 
   return findWorkspaceRoot(parent)
 }
@@ -47,8 +51,9 @@ export const createPackage = async (root: string, name: string): Promise<string>
   try {
     await mkdir(destination)
   } catch (error) {
-    if (isCode(error, 'EEXIST'))
+    if (isCode(error, 'EEXIST')) {
       throw new Error(`Package directory already exists: packages/${name}`, { cause: error })
+    }
     throw error
   }
 

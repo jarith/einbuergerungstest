@@ -2,7 +2,7 @@ import type { Page } from '@playwright/test'
 import { expect } from '@playwright/test'
 import { createBdd } from 'playwright-bdd'
 
-import questionBank from '../../resources/bamf-einbuergerungstest-berlin.json' with { type: 'json' }
+import questionBank from '../../web/public/questionbank-berlin.json' with { type: 'json' }
 import { sourceQuestion, sourceQuestionOnPage, studyAnswer } from './helpers'
 
 const { When, Then } = createBdd()

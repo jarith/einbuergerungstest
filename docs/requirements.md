@@ -3,12 +3,11 @@
 ## Purpose and source material
 
 The app prepares a learner for the Berlin Einbürgerungstest with the supplied
-[`bamf-einbuergerungstest-berlin.json`](../resources/bamf-einbuergerungstest-berlin.json).
-The file contains 300 general and 10 Berlin questions, four answer choices per question,
-English text for every question and choice, and local PDF image resources for the 13
-illustrated questions. The German text and answer choices are the exam content. The
-English translations are an unofficial study aid; the app does not need an additional
-translation notice.
+[`questionbank-berlin.json`](../web/public/questionbank-berlin.json). The file contains
+300 general and 10 Berlin questions, four answer choices per question, English text for
+every question and choice, and local image resources for the 13 illustrated questions. The
+German text and answer choices are the exam content. The English translations are an
+unofficial study aid; the app does not need an additional translation notice.
 
 The
 [BAMF test guide](https://www.bamf.de/DE/Themen/Integration/ZugewanderteTeilnehmende/Einbuergerung/einbuergerung-node.html)

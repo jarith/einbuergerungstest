@@ -4,11 +4,10 @@ Status: Proposed
 
 ## Context
 
-The [Berlin question bank](../../resources/bamf-einbuergerungstest-berlin.json) contains
-310 questions in one roughly 300 KB JSON file. Each question and answer choice keeps its
+The [Berlin question bank](../../web/public/questionbank-berlin.json) contains 310
+questions in one roughly 300 KB JSON file. Each question and answer choice keeps its
 German exam text beside an English study translation. Thirteen questions reference local
-images, which together are about 10.45 MiB. The group titles and descriptions currently
-have only English text.
+illustrations. The group titles and descriptions currently have only English text.
 
 The [requirements](../requirements.md) call for offline access to every question and
 illustration, English and German UI, optional English study translations, and progress
@@ -23,8 +22,8 @@ Keep one authored JSON file for the Berlin bank. Filter it in memory for group s
 select from it for mock tests. Splitting this small bank would add loading and update
 coordination while offline study and mock tests still need the complete bank. Publish it
 as one versioned static asset alongside the separate question images; the source PDF is
-not an app asset. The build must include these files explicitly because Vite does not
-publish the repository's top-level `resources` directory automatically. Validate the
+not an app asset. Vite serves `web/public` through its `publicDir` setting. Image paths in
+the bank are relative to the bank URL and include responsive WebP variants. Validate the
 bank's question IDs, answer options, translations, and image references before publishing
 it.
 
@@ -35,10 +34,10 @@ attempts so later content changes can be handled against saved history deliberat
 ### Offline access and updates
 
 Use a service worker to precache the app shell, code, styles, manifest, icons, both UI
-language catalogs, the entire question bank, and all 13 illustrations. Serve these
-resources from the cache when offline. Show that the app is ready for offline use only
-after the required resources have been cached successfully. Optimize the illustrations for
-delivery before shipping them, since they dominate the initial download.
+language catalogs, the entire question bank, and every responsive illustration variant.
+Serve these resources from the cache when offline. Show that the app is ready for offline
+use only after the required resources have been cached successfully. Optimize the
+illustrations for delivery before shipping them, since they dominate the initial download.
 
 When a new version is published, prepare its resources before replacing the old cache.
 Apply an available update at a safe point so a live mock test is not interrupted. Keep

@@ -1,7 +1,7 @@
 import type { Locator, Page } from '@playwright/test'
 import { expect } from '@playwright/test'
 
-import questionBank from '../../resources/bamf-einbuergerungstest-berlin.json' with { type: 'json' }
+import questionBank from '../../web/public/questionbank-berlin.json' with { type: 'json' }
 
 export const sourceQuestion = (number: number) => {
   const question = questionBank.questions[number - 1]

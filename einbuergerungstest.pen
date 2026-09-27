@@ -16279,7 +16279,7 @@
                           "fill": {
                             "type": "image",
                             "enabled": true,
-                            "url": "resources/question-021.png",
+                            "url": "web/public/images/full/question-021.webp",
                             "mode": "fit"
                           },
                           "width": "fill_container",
@@ -17069,7 +17069,7 @@
                   "fill": {
                     "type": "image",
                     "enabled": true,
-                    "url": "resources/question-021.png",
+                    "url": "web/public/images/full/question-021.webp",
                     "mode": "fit"
                   },
                   "width": "fill_container",
@@ -17673,7 +17673,7 @@
                   "fill": {
                     "type": "image",
                     "enabled": true,
-                    "url": "resources/question-021.png",
+                    "url": "web/public/images/full/question-021.webp",
                     "mode": "fit"
                   },
                   "width": "fill_container",
@@ -18750,7 +18750,7 @@
                               "fill": {
                                 "type": "image",
                                 "enabled": true,
-                                "url": "resources/question-301.png",
+                                "url": "web/public/images/full/question-301.webp",
                                 "mode": "fit"
                               },
                               "width": "fill_container",
@@ -19697,7 +19697,7 @@
                   "fill": {
                     "type": "image",
                     "enabled": true,
-                    "url": "resources/question-301.png",
+                    "url": "web/public/images/full/question-301.webp",
                     "mode": "fit"
                   },
                   "width": "fill_container",
@@ -20370,7 +20370,7 @@
                   "fill": {
                     "type": "image",
                     "enabled": true,
-                    "url": "resources/question-301.png",
+                    "url": "web/public/images/full/question-301.webp",
                     "mode": "fit"
                   },
                   "width": "fill_container",
@@ -21512,7 +21512,7 @@
                               "fill": {
                                 "type": "image",
                                 "enabled": true,
-                                "url": "resources/question-301.png",
+                                "url": "web/public/images/full/question-301.webp",
                                 "mode": "fit"
                               },
                               "width": "fill_container",
@@ -22608,7 +22608,7 @@
                   "fill": {
                     "type": "image",
                     "enabled": true,
-                    "url": "resources/question-301.png",
+                    "url": "web/public/images/full/question-301.webp",
                     "mode": "fit"
                   },
                   "width": "fill_container",
@@ -23431,7 +23431,7 @@
                   "fill": {
                     "type": "image",
                     "enabled": true,
-                    "url": "resources/question-301.png",
+                    "url": "web/public/images/full/question-301.webp",
                     "mode": "fit"
                   },
                   "width": "fill_container",
@@ -24758,7 +24758,7 @@
                               "fill": {
                                 "type": "image",
                                 "enabled": true,
-                                "url": "resources/question-301.png",
+                                "url": "web/public/images/full/question-301.webp",
                                 "mode": "fit"
                               },
                               "width": "fill_container",
@@ -25853,7 +25853,7 @@
                       "fill": {
                         "type": "image",
                         "enabled": true,
-                        "url": "resources/question-301.png",
+                        "url": "web/public/images/full/question-301.webp",
                         "mode": "fit"
                       },
                       "width": "fill_container",
@@ -26626,7 +26626,7 @@
                       "fill": {
                         "type": "image",
                         "enabled": true,
-                        "url": "resources/question-301.png",
+                        "url": "web/public/images/full/question-301.webp",
                         "mode": "fit"
                       },
                       "width": "fill_container",
@@ -44856,7 +44856,7 @@
                           "fill": {
                             "type": "image",
                             "enabled": true,
-                            "url": "resources/question-070.png",
+                            "url": "web/public/images/full/question-070.webp",
                             "mode": "fit"
                           },
                           "width": "fill_container",
@@ -45638,7 +45638,7 @@
                   "fill": {
                     "type": "image",
                     "enabled": true,
-                    "url": "resources/question-070.png",
+                    "url": "web/public/images/full/question-070.webp",
                     "mode": "fit"
                   },
                   "width": "fill_container",
@@ -46225,7 +46225,7 @@
                   "fill": {
                     "type": "image",
                     "enabled": true,
-                    "url": "resources/question-070.png",
+                    "url": "web/public/images/full/question-070.webp",
                     "mode": "fit"
                   },
                   "width": "fill_container",
@@ -47307,7 +47307,7 @@
                               "fill": {
                                 "type": "image",
                                 "enabled": true,
-                                "url": "resources/question-301.png",
+                                "url": "web/public/images/full/question-301.webp",
                                 "mode": "fit"
                               },
                               "width": "fill_container",
@@ -48390,7 +48390,7 @@
                   "fill": {
                     "type": "image",
                     "enabled": true,
-                    "url": "resources/question-301.png",
+                    "url": "web/public/images/full/question-301.webp",
                     "mode": "fit"
                   },
                   "width": "fill_container",
@@ -49200,7 +49200,7 @@
                   "fill": {
                     "type": "image",
                     "enabled": true,
-                    "url": "resources/question-301.png",
+                    "url": "web/public/images/full/question-301.webp",
                     "mode": "fit"
                   },
                   "width": "fill_container",
@@ -50528,7 +50528,7 @@
                               "fill": {
                                 "type": "image",
                                 "enabled": true,
-                                "url": "resources/question-301.png",
+                                "url": "web/public/images/full/question-301.webp",
                                 "mode": "fit"
                               },
                               "width": "fill_container",
@@ -51435,7 +51435,7 @@
                       "fill": {
                         "type": "image",
                         "enabled": true,
-                        "url": "resources/question-301.png",
+                        "url": "web/public/images/full/question-301.webp",
                         "mode": "fit"
                       },
                       "width": "fill_container",
@@ -52157,7 +52157,7 @@
                       "fill": {
                         "type": "image",
                         "enabled": true,
-                        "url": "resources/question-301.png",
+                        "url": "web/public/images/full/question-301.webp",
                         "mode": "fit"
                       },
                       "width": "fill_container",
@@ -63147,7 +63147,7 @@
                   "fill": {
                     "type": "image",
                     "enabled": true,
-                    "url": "resources/question-021.png",
+                    "url": "web/public/images/full/question-021.webp",
                     "mode": "fit"
                   },
                   "width": "fill_container",
@@ -65386,7 +65386,7 @@
                       "fill": {
                         "type": "image",
                         "enabled": true,
-                        "url": "resources/question-301.png",
+                        "url": "web/public/images/full/question-301.webp",
                         "mode": "fit"
                       },
                       "width": "fill_container",
@@ -67967,7 +67967,7 @@
                   "fill": {
                     "type": "image",
                     "enabled": true,
-                    "url": "resources/question-021.png",
+                    "url": "web/public/images/full/question-021.webp",
                     "mode": "fit"
                   },
                   "width": "fill_container",
@@ -68698,7 +68698,7 @@
                   "fill": {
                     "type": "image",
                     "enabled": true,
-                    "url": "resources/question-021.png",
+                    "url": "web/public/images/full/question-021.webp",
                     "mode": "fit"
                   },
                   "width": 720,

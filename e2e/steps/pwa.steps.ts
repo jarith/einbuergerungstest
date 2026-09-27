@@ -8,7 +8,9 @@ const { Given, When, Then } = createBdd()
 Then('the app manifest supports a standalone launch with icons', async ({ page }) => {
   const path = await page.locator('link[rel="manifest"]').getAttribute('href')
 
-  if (path === null || path === '') throw new Error('The page does not link to a web app manifest.')
+  if (path === null || path === '') {
+    throw new Error('The page does not link to a web app manifest.')
+  }
 
   const response = await page.request.get(new URL(path, page.url()).toString())
 
@@ -39,7 +41,9 @@ When('the app has been prepared for offline use', async ({ page }) => {
   await expect
     .poll(() =>
       page.evaluate(async () => {
-        if (!('serviceWorker' in navigator)) return false
+        if (!('serviceWorker' in navigator)) {
+          return false
+        }
 
         const registration = await navigator.serviceWorker.getRegistration()
 
@@ -75,7 +79,9 @@ Then('the study answer controls are usable by touch', async ({ page }) => {
   for (const label of ['A', 'B', 'C', 'D']) {
     const box = await studyAnswer(page, label).boundingBox()
 
-    if (!box) throw new Error(`Answer ${label} has no visible touch target.`)
+    if (!box) {
+      throw new Error(`Answer ${label} has no visible touch target.`)
+    }
 
     expect(box.width).toBeGreaterThanOrEqual(44)
     expect(box.height).toBeGreaterThanOrEqual(44)

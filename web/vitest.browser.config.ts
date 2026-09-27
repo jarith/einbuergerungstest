@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [react()],
   test: {
     include: ['src/**/*.browser.test.tsx'],
+    passWithNoTests: true,
     allowOnly: (process.env['CI'] ?? '') === '',
     browser: {
       enabled: true,
