@@ -41,8 +41,13 @@ packages/design-system/
 ## Use it
 
 ```tsx
-import { Button, ChoiceGroup, DesignSystemProvider, Panel } from '@app/design-system'
-import '@app/design-system/styles.css'
+import {
+  Button,
+  ChoiceGroup,
+  DesignSystemProvider,
+  Panel,
+} from '@einbuergerungstest/design-system'
+import '@einbuergerungstest/design-system/styles.css'
 
 const Example = () => (
   <DesignSystemProvider colorScheme="light" skin="baseline">
@@ -110,10 +115,10 @@ From the repository root:
 yarn dev
 yarn storybook
 yarn build
-yarn workspace @app/design-system build
+yarn workspace @einbuergerungstest/design-system build
 yarn ts:compile
-yarn workspace @app/design-system lint
-yarn workspace @app/design-system format:check
+yarn workspace @einbuergerungstest/design-system lint
+yarn workspace @einbuergerungstest/design-system format:check
 yarn test:storybook
 yarn test:browser
 yarn test:e2e

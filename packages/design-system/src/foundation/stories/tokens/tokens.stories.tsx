@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { cx } from '@app/design-system'
+import { cx } from '@einbuergerungstest/design-system'
 
 import { tokenStyles } from './tokens.stories.styles'
 

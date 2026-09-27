@@ -24,7 +24,10 @@ export default defineConfig({
       : ['**/*.stories.tsx', '**/*.stories.styles.ts']),
   ],
   outdir: 'styled-system',
-  importMap: { css: '@app/design-system', patterns: '@app/design-system' },
+  importMap: {
+    css: '@einbuergerungstest/design-system',
+    patterns: '@einbuergerungstest/design-system',
+  },
   conditions: {
     extend: {
       alternate: '[data-ds-theme=alternate] &',

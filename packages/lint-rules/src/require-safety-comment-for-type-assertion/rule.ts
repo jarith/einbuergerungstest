@@ -15,7 +15,7 @@ const commentOwnerKinds = new Set([
   'VariableDeclaration',
 ])
 
-function isConstAssertion(node: Assertion) {
+const isConstAssertion = (node: Assertion) => {
   return (
     node.typeAnnotation.type === 'TSTypeReference' &&
     node.typeAnnotation.typeName.type === 'Identifier' &&
@@ -23,7 +23,7 @@ function isConstAssertion(node: Assertion) {
   )
 }
 
-function configuredSafetyMarkers(option: unknown) {
+const configuredSafetyMarkers = (option: unknown) => {
   if (typeof option !== 'object' || option === null || !('markers' in option)) {
     return DEFAULT_SAFETY_MARKERS
   }
@@ -35,27 +35,26 @@ function configuredSafetyMarkers(option: unknown) {
   return markers.length > 0 ? markers : DEFAULT_SAFETY_MARKERS
 }
 
-function markerPattern(markers: string[]) {
+const markerPattern = (markers: string[]) => {
   const alternation = markers
     .map((marker) => marker.replaceAll(/[.*+?^${}()|[\]\\]/gu, String.raw`\$&`))
     .join('|')
   return new RegExp(String.raw`(?:^|[^\p{L}\p{N}_])(?:${alternation})\s*:\s*\S`, 'u')
 }
 
-function hasSafetyJustificationBefore(
+const hasSafetyJustificationBefore = (
   sourceCode: SourceCode,
   owner: ESTree.Node,
   assertion: Assertion,
   pattern: RegExp,
-) {
+) => {
   return sourceCode
     .getCommentsBefore(owner)
     .some((comment) => comment.end <= assertion.start && pattern.test(comment.value))
 }
 
-function hasSafetyComment(sourceCode: SourceCode, node: Assertion, pattern: RegExp): boolean {
-  let current: ESTree.Node = node
-  while (true) {
+const hasSafetyComment = (sourceCode: SourceCode, node: Assertion, pattern: RegExp): boolean => {
+  for (let current: ESTree.Node = node; ;) {
     if (hasSafetyJustificationBefore(sourceCode, current, node, pattern)) return true
     if (commentOwnerKinds.has(current.type)) {
       const exportDeclaration = current.parent

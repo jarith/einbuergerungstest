@@ -1,14 +1,18 @@
 {
-  "name": "@app/e2e",
+  "name": "@einbuergerungstest/e2e",
   "private": true,
   "type": "module",
   "scripts": {
-    "typecheck": "yarn run -T tsc -p tsconfig.json",
+    "ts:compile": "yarn run -T tsc -p tsconfig.json",
+    "build": "echo",
     "lint": "yarn run -T oxlint .",
+    "format": "yarn run -T oxfmt --write .",
     "format:check": "yarn run -T oxfmt --check .",
+    "test": "echo",
+    "test:browser": "echo",
     "bddgen": "yarn run -T bddgen",
-    "test:e2e": "yarn workspace @app/web build && yarn bddgen && yarn run -T playwright test",
-    "test:e2e:headed": "yarn workspace @app/web build && yarn bddgen && yarn run -T playwright test --headed",
+    "test:e2e": "yarn workspace @einbuergerungstest/web build && yarn bddgen && yarn run -T playwright test",
+    "test:e2e:headed": "yarn workspace @einbuergerungstest/web build && yarn bddgen && yarn run -T playwright test --headed",
     "browser:install": "yarn run -T playwright install chromium",
     "report": "yarn run -T playwright show-report"
   }

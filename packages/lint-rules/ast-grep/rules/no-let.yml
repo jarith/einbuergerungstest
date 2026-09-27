@@ -1,0 +1,33 @@
+id: no-let-ts
+language: TypeScript
+severity: error
+message: Unexpected let, use const instead.
+rule:
+  any:
+    - all:
+        - kind: lexical_declaration
+        - regex: '^let\b'
+        - not:
+            inside:
+              kind: for_statement
+              field: initializer
+    - all:
+        - kind: for_in_statement
+        - regex: '^for(?:\s+await)?\s*\(\s*let\b'
+---
+id: no-let-tsx
+language: Tsx
+severity: error
+message: Unexpected let, use const instead.
+rule:
+  any:
+    - all:
+        - kind: lexical_declaration
+        - regex: '^let\b'
+        - not:
+            inside:
+              kind: for_statement
+              field: initializer
+    - all:
+        - kind: for_in_statement
+        - regex: '^for(?:\s+await)?\s*\(\s*let\b'

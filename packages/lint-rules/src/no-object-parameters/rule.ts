@@ -27,11 +27,11 @@ export const rule = defineRule({
     },
   },
   createOnce(context) {
-    let environment: TypeAliasEnvironment | null = null
+    const state: { environment: TypeAliasEnvironment | null } = { environment: null }
 
     const resolvesToObject = (type: ESTree.TSType) =>
-      environment !== null &&
-      resolvedTypeMatches(type, environment, (resolved, matches) => {
+      state.environment !== null &&
+      resolvedTypeMatches(type, state.environment, (resolved, matches) => {
         if (resolved.type === 'TSObjectKeyword') return true
         if (resolved.type === 'TSParenthesizedType') {
           return matches(resolved.typeAnnotation)
@@ -54,7 +54,7 @@ export const rule = defineRule({
 
     return {
       Program(node) {
-        environment = createTypeAliasEnvironment(node, context.sourceCode.visitorKeys)
+        state.environment = createTypeAliasEnvironment(node, context.sourceCode.visitorKeys)
       },
       ArrowFunctionExpression: checkParameters,
       FunctionDeclaration: checkParameters,

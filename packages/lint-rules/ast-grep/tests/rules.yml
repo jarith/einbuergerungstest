@@ -1,0 +1,183 @@
+id: no-barrel-imports-ts
+valid:
+  - "import { foo } from './foo'"
+  - "export { foo } from './foo'"
+  - "export type { Foo } from './foo'"
+invalid:
+  - "import * as Utils from './utils'"
+  - "export * from './foo'"
+  - "export type * from './foo'"
+---
+id: no-classes-ts
+valid:
+  - 'const createFoo = () => ({ bar() {} })'
+  - 'const value = { x: 1 }'
+invalid:
+  - 'class Foo { bar() {} }'
+  - 'const Foo = class { bar() {} }'
+  - 'class Child extends Parent {}'
+---
+id: no-conditional-empty-object-spread-ts
+valid:
+  - 'const result = { value }'
+  - 'const result = { ...values }'
+  - 'const result = condition ? { value } : {}'
+invalid:
+  - 'const result = { ...(condition ? { value } : {}) }'
+  - 'const result = { ...(condition ? {} : { value }) }'
+---
+id: no-function-declarations-ts
+valid:
+  - 'const foo = () => {}'
+  - 'const foo = function () {}'
+invalid:
+  - 'function foo() {}'
+  - 'export function foo() {}'
+  - 'export default function foo() {}'
+  - 'function* foo() { yield 1 }'
+  - 'async function foo() {}'
+---
+id: no-hardcoded-font-size-ts
+valid:
+  - "const a = { fontSize: 'sm' }"
+  - "const a = { fontSize: { base: 'sm' } }"
+  - "const a = { height: '14px' }"
+  - "const a = { fontSize: { base: { deeper: '14px' } } }"
+invalid:
+  - "const a = { fontSize: '14px' }"
+  - "const a = { fontSize: '1.5rem' }"
+  - "const a = { 'fontSize': '2em' }"
+  - "const a = { fontSize: { base: '12px' } }"
+  - "const a = { fontSize: { tablet: '16%' } }"
+---
+id: no-let-ts
+valid:
+  - 'const value = 1'
+  - 'for (let i = 0; i < 3; i++) {}'
+invalid:
+  - 'let value = 1'
+  - 'const f = () => { let value = 1 }'
+  - 'for (let value of values) {}'
+  - 'for (let key in value) {}'
+---
+id: no-module-scope-listeners-ts
+valid:
+  - "const setup = () => { document.addEventListener('click', handler) }"
+  - "function setup() { window.addEventListener('click', handler) }"
+  - "const setup = { run() { document.addEventListener('click', handler) } }"
+  - "window['addEventListener']('click', handler)"
+  - "element.addEventListener('click', handler)"
+invalid:
+  - "document.addEventListener('click', handler)"
+  - "window.addEventListener('click', handler)"
+  - "if (enabled) { window.addEventListener('click', handler) }"
+  - "document[addEventListener]('click', handler)"
+---
+id: prefer-inline-named-exports-ts
+valid:
+  - 'export const value = 1'
+  - "export { value } from './source'"
+  - 'export {}'
+invalid:
+  - 'export { value }'
+  - 'export { value as renamed }'
+  - 'export type { Value }'
+---
+id: reatom-file-boundaries-ts
+valid:
+  - "reatomRoutes({ path: '/' })"
+  - "api.reatomRoute({ path: '/' })"
+invalid:
+  - "reatomRoute({ path: '/' }, 'homeRoute')"
+---
+id: no-barrel-imports-tsx
+valid:
+  - "import { foo } from './foo'"
+  - "export { foo } from './foo'"
+  - "export type { Foo } from './foo'"
+invalid:
+  - "import * as Utils from './utils'"
+  - "export * from './foo'"
+  - "export type * from './foo'"
+---
+id: no-classes-tsx
+valid:
+  - 'const createFoo = () => ({ bar() {} })'
+  - 'const value = { x: 1 }'
+invalid:
+  - 'class Foo { bar() {} }'
+  - 'const Foo = class { bar() {} }'
+  - 'class Child extends Parent {}'
+---
+id: no-conditional-empty-object-spread-tsx
+valid:
+  - 'const result = { value }'
+  - 'const result = { ...values }'
+  - 'const result = condition ? { value } : {}'
+invalid:
+  - 'const result = { ...(condition ? { value } : {}) }'
+  - 'const result = { ...(condition ? {} : { value }) }'
+---
+id: no-function-declarations-tsx
+valid:
+  - 'const foo = () => {}'
+  - 'const foo = function () {}'
+invalid:
+  - 'function foo() {}'
+  - 'export function foo() {}'
+  - 'export default function foo() {}'
+  - 'function* foo() { yield 1 }'
+  - 'async function foo() {}'
+---
+id: no-hardcoded-font-size-tsx
+valid:
+  - "const a = { fontSize: 'sm' }"
+  - "const a = { fontSize: { base: 'sm' } }"
+  - "const a = { height: '14px' }"
+  - "const a = { fontSize: { base: { deeper: '14px' } } }"
+invalid:
+  - "const a = { fontSize: '14px' }"
+  - "const a = { fontSize: '1.5rem' }"
+  - "const a = { 'fontSize': '2em' }"
+  - "const a = { fontSize: { base: '12px' } }"
+  - "const a = { fontSize: { tablet: '16%' } }"
+---
+id: no-let-tsx
+valid:
+  - 'const value = 1'
+  - 'for (let i = 0; i < 3; i++) {}'
+invalid:
+  - 'let value = 1'
+  - 'const f = () => { let value = 1 }'
+  - 'for (let value of values) {}'
+  - 'for (let key in value) {}'
+---
+id: no-module-scope-listeners-tsx
+valid:
+  - "const setup = () => { document.addEventListener('click', handler) }"
+  - "function setup() { window.addEventListener('click', handler) }"
+  - "const setup = { run() { document.addEventListener('click', handler) } }"
+  - "window['addEventListener']('click', handler)"
+  - "element.addEventListener('click', handler)"
+invalid:
+  - "document.addEventListener('click', handler)"
+  - "window.addEventListener('click', handler)"
+  - "if (enabled) { window.addEventListener('click', handler) }"
+  - "document[addEventListener]('click', handler)"
+---
+id: prefer-inline-named-exports-tsx
+valid:
+  - 'export const value = 1'
+  - "export { value } from './source'"
+  - 'export {}'
+invalid:
+  - 'export { value }'
+  - 'export { value as renamed }'
+  - 'export type { Value }'
+---
+id: reatom-file-boundaries-tsx
+valid:
+  - "reatomRoutes({ path: '/' })"
+  - "api.reatomRoute({ path: '/' })"
+invalid:
+  - "reatomRoute({ path: '/' }, 'homeRoute')"

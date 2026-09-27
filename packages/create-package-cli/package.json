@@ -1,5 +1,5 @@
 {
-  "name": "@app/create-package-cli",
+  "name": "@einbuergerungstest/create-package-cli",
   "private": true,
   "type": "module",
   "scripts": {
@@ -8,6 +8,8 @@
     "ts:compile": "yarn run -T tsc -p tsconfig.json",
     "format": "yarn run -T oxfmt --write .",
     "format:check": "yarn run -T oxfmt --check .",
+    "test": "yarn run -T vitest run src --passWithNoTests",
+    "test:browser": "echo",
     "create-package": "yarn run build && node ./dist/index.js"
   }
 }

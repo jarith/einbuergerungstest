@@ -4,7 +4,7 @@ import type { ESTree, SourceCode } from '@oxlint/plugins'
 
 import { resolveVariable } from './scope.ts'
 
-function isGlobalReflect(sourceCode: SourceCode, expression: ESTree.Node) {
+const isGlobalReflect = (sourceCode: SourceCode, expression: ESTree.Node) => {
   if (expression.type !== 'Identifier' || expression.name !== 'Reflect') return false
   if (sourceCode.isGlobalReference(expression)) return true
   const variable = resolveVariable(sourceCode, expression)
@@ -12,11 +12,11 @@ function isGlobalReflect(sourceCode: SourceCode, expression: ESTree.Node) {
 }
 
 /** Reports whether a call target names one method on the global Reflect object. */
-export function isGlobalReflectMethodCall(
+export const isGlobalReflectMethodCall = (
   sourceCode: SourceCode,
   callee: ESTree.Node,
   methodName: string,
-) {
+) => {
   if (!('property' in callee) || !('object' in callee) || !('computed' in callee)) return false
   if (!isGlobalReflect(sourceCode, callee.object)) return false
   const property = callee.property

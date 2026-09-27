@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+// oxlint-disable-next-line eslint/no-restricted-imports -- This interactive story owns its open state locally.
 import { useState } from 'react'
 
 import type { DialogProps } from './dialog'

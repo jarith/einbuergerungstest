@@ -19,21 +19,22 @@ import { resolveVariable } from '../anti-slop/shared/scope.ts'
 
 type FunctionNode = ESTree.Function | ESTree.ArrowFunctionExpression
 
-function unwrapExpression(expression: ESTree.Node) {
-  let current = expression
-  while (
-    current.type === 'ParenthesizedExpression' ||
-    current.type === 'TSAsExpression' ||
-    current.type === 'TSSatisfiesExpression' ||
-    current.type === 'TSTypeAssertion' ||
-    current.type === 'TSNonNullExpression'
-  ) {
+const unwrapExpression = (expression: ESTree.Node) => {
+  for (let current = expression; ;) {
+    if (
+      current.type !== 'ParenthesizedExpression' &&
+      current.type !== 'TSAsExpression' &&
+      current.type !== 'TSSatisfiesExpression' &&
+      current.type !== 'TSTypeAssertion' &&
+      current.type !== 'TSNonNullExpression'
+    ) {
+      return current
+    }
     current = current.expression
   }
-  return current
 }
 
-function variableDeclarator(variable: Variable) {
+const variableDeclarator = (variable: Variable) => {
   if (variable.defs.length !== 1) return null
   const [definition] = variable.defs
   return definition?.type === 'Variable' && definition.node.type === 'VariableDeclarator'
@@ -41,7 +42,7 @@ function variableDeclarator(variable: Variable) {
     : null
 }
 
-function isStableConstVariable(variable: Variable, declarator: ESTree.VariableDeclarator) {
+const isStableConstVariable = (variable: Variable, declarator: ESTree.VariableDeclarator) => {
   return (
     declarator.parent.type === 'VariableDeclaration' &&
     declarator.parent.kind === 'const' &&
@@ -49,11 +50,11 @@ function isStableConstVariable(variable: Variable, declarator: ESTree.VariableDe
   )
 }
 
-function hasKnownEvidence(
+const hasKnownEvidence = (
   sourceCode: SourceCode,
   expression: ESTree.Node,
   visitedVariables = new Set<Variable>(),
-): boolean {
+): boolean => {
   if (isKnownEvidenceExpression(expression)) return true
   const unwrapped = unwrapExpression(expression)
   if (unwrapped.type !== 'Identifier') return false
@@ -71,7 +72,7 @@ function hasKnownEvidence(
   return hasKnownEvidence(sourceCode, declarator.init, visitedVariables)
 }
 
-function isFunctionExpression(node: ESTree.Node): node is FunctionNode {
+const isFunctionExpression = (node: ESTree.Node): node is FunctionNode => {
   return (
     node.type === 'ArrowFunctionExpression' ||
     node.type === 'FunctionDeclaration' ||
@@ -81,7 +82,7 @@ function isFunctionExpression(node: ESTree.Node): node is FunctionNode {
   )
 }
 
-function localFunctionForCall(sourceCode: SourceCode, callee: ESTree.Node) {
+const localFunctionForCall = (sourceCode: SourceCode, callee: ESTree.Node) => {
   const unwrapped = unwrapExpression(callee)
   if (isFunctionExpression(unwrapped)) return unwrapped
   if (unwrapped.type !== 'Identifier') return null
@@ -101,7 +102,7 @@ function localFunctionForCall(sourceCode: SourceCode, callee: ESTree.Node) {
   return isFunctionExpression(unwrappedInitializer) ? unwrappedInitializer : null
 }
 
-function variableTypeAnnotation(sourceCode: SourceCode, variable: Variable) {
+const variableTypeAnnotation = (sourceCode: SourceCode, variable: Variable) => {
   if (variable.defs.length !== 1) return null
   const [definition] = variable.defs
   if (definition === undefined) return null
@@ -121,16 +122,16 @@ function variableTypeAnnotation(sourceCode: SourceCode, variable: Variable) {
   return parameter === undefined ? null : (functionParameterTypeAnnotation(parameter) ?? null)
 }
 
-function hasInformativeType(type: ESTree.TSType, environment: TypeEnvironment) {
+const hasInformativeType = (type: ESTree.TSType, environment: TypeEnvironment) => {
   return classifyUnsafeDictionaryValue(type, environment) === null
 }
 
-function hasKnownCallArgumentEvidence(
+const hasKnownCallArgumentEvidence = (
   sourceCode: SourceCode,
   expression: ESTree.Node,
   environment: TypeEnvironment,
   visitedVariables = new Set<Variable>(),
-): boolean {
+): boolean => {
   if (expression.type === 'ParenthesizedExpression' || expression.type === 'TSNonNullExpression') {
     return hasKnownCallArgumentEvidence(
       sourceCode,
@@ -174,7 +175,7 @@ function hasKnownCallArgumentEvidence(
   return hasKnownCallArgumentEvidence(sourceCode, declarator.init, environment, visitedVariables)
 }
 
-function typePredicateSubjectIndex(sourceCode: SourceCode, owner: FunctionNode) {
+const typePredicateSubjectIndex = (sourceCode: SourceCode, owner: FunctionNode) => {
   const predicate = owner.returnType?.typeAnnotation
   if (predicate?.type !== 'TSTypePredicate' || predicate.parameterName.type !== 'Identifier') {
     return null
@@ -186,18 +187,21 @@ function typePredicateSubjectIndex(sourceCode: SourceCode, owner: FunctionNode) 
   return index === -1 ? null : index
 }
 
-function annotationTarget(
+const annotationTarget = (
   annotation: ESTree.TSTypeAnnotation | null | undefined,
   environment: TypeEnvironment,
-) {
+) => {
   return annotation === null || annotation === undefined
     ? null
     : classifyWideningTarget(annotation.typeAnnotation, environment)
 }
 
-function enclosingFunction(node: ESTree.Node) {
-  let current = node.parent
-  while (current !== null && current.type !== 'Program') {
+const enclosingFunction = (node: ESTree.Node) => {
+  for (
+    let current = node.parent;
+    current !== null && current.type !== 'Program';
+    current = current.parent
+  ) {
     if (
       current.type === 'ArrowFunctionExpression' ||
       current.type === 'FunctionDeclaration' ||
@@ -205,18 +209,17 @@ function enclosingFunction(node: ESTree.Node) {
     ) {
       return current
     }
-    current = current.parent
   }
   return null
 }
 
-function sourceKeyName(sourceCode: SourceCode, key: ESTree.Node) {
+const sourceKeyName = (sourceCode: SourceCode, key: ESTree.Node) => {
   if (key.type === 'Identifier' || key.type === 'PrivateIdentifier') return key.name
   if (key.type === 'Literal') return String(key.value)
   return sourceCode.getText(key)
 }
 
-function functionName(sourceCode: SourceCode, owner: FunctionNode | null) {
+const functionName = (sourceCode: SourceCode, owner: FunctionNode | null) => {
   if (owner === null) return 'anonymous function'
   if (owner.id !== null) return owner.id.name
   const parent = owner.parent
@@ -225,16 +228,16 @@ function functionName(sourceCode: SourceCode, owner: FunctionNode | null) {
   return 'anonymous function'
 }
 
-function isEmptyObjectExpression(expression: ESTree.Node) {
+const isEmptyObjectExpression = (expression: ESTree.Node) => {
   const unwrapped = unwrapExpression(expression)
   return unwrapped.type === 'ObjectExpression' && unwrapped.properties.length === 0
 }
 
-function isDictionaryAccumulatorTarget(destination: WideningTarget) {
+const isDictionaryAccumulatorTarget = (destination: WideningTarget) => {
   return destination.kind === 'open dictionary' || destination.kind === 'generic container'
 }
 
-function hasParentAssertion(node: ESTree.Node) {
+const hasParentAssertion = (node: ESTree.Node) => {
   return node.parent?.type === 'TSAsExpression' || node.parent?.type === 'TSTypeAssertion'
 }
 
@@ -252,7 +255,7 @@ export const rule = defineRule({
     },
   },
   createOnce(context) {
-    let environment: TypeEnvironment | null = null
+    const state: { environment: TypeEnvironment | null } = { environment: null }
 
     const reportFlow = (
       expression: ESTree.Node,
@@ -272,11 +275,11 @@ export const rule = defineRule({
     }
 
     const targetFromAnnotation = (annotation: ESTree.TSTypeAnnotation | null | undefined) =>
-      environment === null ? null : annotationTarget(annotation, environment)
+      state.environment === null ? null : annotationTarget(annotation, state.environment)
 
     return {
       Program(node) {
-        environment = createTypeEnvironment(node, context.sourceCode.visitorKeys)
+        state.environment = createTypeEnvironment(node, context.sourceCode.visitorKeys)
       },
       VariableDeclarator(node) {
         if (node.init === null || node.id.type !== 'Identifier') return
@@ -315,7 +318,7 @@ export const rule = defineRule({
         )
       },
       CallExpression(node) {
-        if (environment === null) return
+        if (state.environment === null) return
         const owner = localFunctionForCall(context.sourceCode, node.callee)
         if (owner === null) return
         const parameterIndex = typePredicateSubjectIndex(context.sourceCode, owner)
@@ -337,7 +340,7 @@ export const rule = defineRule({
         ) {
           return
         }
-        if (!hasKnownCallArgumentEvidence(context.sourceCode, argument, environment)) {
+        if (!hasKnownCallArgumentEvidence(context.sourceCode, argument, state.environment)) {
           return
         }
         context.report({
@@ -367,18 +370,18 @@ export const rule = defineRule({
         )
       },
       TSAsExpression(node) {
-        if (environment === null || hasParentAssertion(node)) return
+        if (state.environment === null || hasParentAssertion(node)) return
         reportFlow(
           node.expression,
-          classifyWideningTarget(node.typeAnnotation, environment),
+          classifyWideningTarget(node.typeAnnotation, state.environment),
           'assertion',
         )
       },
       TSTypeAssertion(node) {
-        if (environment === null || hasParentAssertion(node)) return
+        if (state.environment === null || hasParentAssertion(node)) return
         reportFlow(
           node.expression,
-          classifyWideningTarget(node.typeAnnotation, environment),
+          classifyWideningTarget(node.typeAnnotation, state.environment),
           'assertion',
         )
       },

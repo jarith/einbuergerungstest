@@ -1,4 +1,4 @@
-import { css, grid } from '@app/design-system'
+import { css, grid } from '@einbuergerungstest/design-system'
 
 export const tokenStyles = {
   content: css({ display: 'grid', gap: 'layout.section', maxWidth: 'content' }),

@@ -1,5 +1,5 @@
 {
-  "name": "@app/web",
+  "name": "@einbuergerungstest/web",
   "private": true,
   "type": "module",
   "scripts": {
@@ -7,10 +7,12 @@
     "dev:serve": "yarn run -T vite --host 127.0.0.1",
     "ts:compile": "yarn run -T tsc -p tsconfig.json",
     "lint": "yarn run -T oxlint .",
+    "format": "yarn run -T oxfmt --write .",
     "format:check": "yarn run -T oxfmt --check .",
-    "panda:prepare": "yarn workspace @app/design-system panda:prepare",
+    "panda:prepare": "yarn workspace @einbuergerungstest/design-system panda:prepare",
     "build": "yarn panda:prepare && yarn run -T vite build",
     "preview": "yarn run -T vite preview --host 127.0.0.1",
+    "test": "yarn run -T vitest run",
     "test:browser": "yarn panda:prepare && yarn run -T vitest run --config vitest.browser.config.ts"
   }
 }

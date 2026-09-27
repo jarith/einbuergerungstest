@@ -3,9 +3,9 @@
 import type { ESTree } from '@oxlint/plugins'
 import { defineRule } from '@oxlint/plugins'
 
-function isRuntimeFunction(
+const isRuntimeFunction = (
   node: ESTree.Node,
-): node is ESTree.Function | ESTree.ArrowFunctionExpression {
+): node is ESTree.Function | ESTree.ArrowFunctionExpression => {
   return (
     node.type === 'ArrowFunctionExpression' ||
     node.type === 'FunctionDeclaration' ||
@@ -13,19 +13,21 @@ function isRuntimeFunction(
   )
 }
 
-function isInsideTypeGuard(node: ESTree.Node) {
-  let current = node.parent
-  while (current !== null && current.type !== 'Program') {
+const isInsideTypeGuard = (node: ESTree.Node) => {
+  for (
+    let current = node.parent;
+    current !== null && current.type !== 'Program';
+    current = current.parent
+  ) {
     if (isRuntimeFunction(current)) {
       return current.returnType?.typeAnnotation.type === 'TSTypePredicate'
     }
-    current = current.parent
   }
   return false
 }
 
 /** Return whether typeof safely probes for the existence of a possibly absent binding. */
-function isExistenceProbe(node: ESTree.UnaryExpression) {
+const isExistenceProbe = (node: ESTree.UnaryExpression) => {
   const parent = node.parent
   if (parent.type !== 'BinaryExpression') return false
   if (!['===', '!==', '==', '!='].includes(parent.operator)) return false

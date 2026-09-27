@@ -1,0 +1,73 @@
+id: no-module-scope-listeners-ts
+language: TypeScript
+severity: error
+message: document/window.addEventListener() must be called inside a function body, not at module scope.
+rule:
+  all:
+    - kind: call_expression
+    - has:
+        field: function
+        any:
+          - all:
+              - kind: member_expression
+              - has:
+                  field: object
+                  regex: '^(?:document|window)$'
+              - has:
+                  field: property
+                  regex: '^addEventListener$'
+          - all:
+              - kind: subscript_expression
+              - has:
+                  field: object
+                  regex: '^(?:document|window)$'
+              - has:
+                  field: index
+                  regex: '^addEventListener$'
+    - not:
+        inside:
+          any:
+            - kind: arrow_function
+            - kind: function_expression
+            - kind: function_declaration
+            - kind: method_definition
+            - kind: generator_function
+            - kind: generator_function_declaration
+          stopBy: end
+---
+id: no-module-scope-listeners-tsx
+language: Tsx
+severity: error
+message: document/window.addEventListener() must be called inside a function body, not at module scope.
+rule:
+  all:
+    - kind: call_expression
+    - has:
+        field: function
+        any:
+          - all:
+              - kind: member_expression
+              - has:
+                  field: object
+                  regex: '^(?:document|window)$'
+              - has:
+                  field: property
+                  regex: '^addEventListener$'
+          - all:
+              - kind: subscript_expression
+              - has:
+                  field: object
+                  regex: '^(?:document|window)$'
+              - has:
+                  field: index
+                  regex: '^addEventListener$'
+    - not:
+        inside:
+          any:
+            - kind: arrow_function
+            - kind: function_expression
+            - kind: function_declaration
+            - kind: method_definition
+            - kind: generator_function
+            - kind: generator_function_declaration
+          stopBy: end

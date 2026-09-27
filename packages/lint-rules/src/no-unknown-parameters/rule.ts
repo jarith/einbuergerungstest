@@ -9,10 +9,10 @@ import {
   functionParameterTypeAnnotation,
 } from '../anti-slop/shared/function-parameters.ts'
 
-function isTypePredicateSubject(
+const isTypePredicateSubject = (
   owner: Extract<ESTree.Node, { params: ESTree.ParamPattern[] }>,
   parameterName: string,
-) {
+) => {
   const predicate = owner.returnType?.typeAnnotation
   return (
     predicate?.type === 'TSTypePredicate' &&

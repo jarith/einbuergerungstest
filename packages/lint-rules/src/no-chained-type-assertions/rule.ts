@@ -5,19 +5,18 @@ import { defineRule } from '@oxlint/plugins'
 
 type Assertion = ESTree.TSAsExpression | ESTree.TSTypeAssertion
 
-function isTypeAssertionExpression(node: ESTree.Node | null): node is Assertion {
+const isTypeAssertionExpression = (node: ESTree.Node | null): node is Assertion => {
   return node?.type === 'TSAsExpression' || node?.type === 'TSTypeAssertion'
 }
 
-function unwrapParenthesizedExpression(expression: ESTree.Node) {
-  let current = expression
-  while (current.type === 'ParenthesizedExpression') {
+const unwrapParenthesizedExpression = (expression: ESTree.Node) => {
+  for (let current = expression; ;) {
+    if (current.type !== 'ParenthesizedExpression') return current
     current = current.expression
   }
-  return current
 }
 
-function isConstAssertion(node: Assertion) {
+const isConstAssertion = (node: Assertion) => {
   const { typeAnnotation } = node
   return (
     typeAnnotation.type === 'TSTypeReference' &&
@@ -26,30 +25,23 @@ function isConstAssertion(node: Assertion) {
   )
 }
 
-function isOutermostAssertionInChain(node: Assertion) {
-  let current: ESTree.Node = node
-  let parent = node.parent
-
-  while (parent?.type === 'ParenthesizedExpression' && parent.expression === current) {
+const isOutermostAssertionInChain = (node: Assertion) => {
+  for (let current: ESTree.Node = node, parent = node.parent; ;) {
+    if (parent?.type !== 'ParenthesizedExpression' || parent.expression !== current) {
+      return !isTypeAssertionExpression(parent) || parent.expression !== current
+    }
     current = parent
     parent = parent.parent
   }
-
-  return !isTypeAssertionExpression(parent) || parent.expression !== current
 }
 
-function isForbiddenAssertionChain(node: Assertion) {
-  let assertionCount = 0
-  let hasNonConstAssertion = false
-  let current: ESTree.Node = node
-
-  while (isTypeAssertionExpression(current)) {
-    assertionCount += 1
-    hasNonConstAssertion ||= !isConstAssertion(current)
+const isForbiddenAssertionChain = (node: Assertion) => {
+  if (!isTypeAssertionExpression(unwrapParenthesizedExpression(node.expression))) return false
+  for (let current: ESTree.Node = node; isTypeAssertionExpression(current);) {
+    if (!isConstAssertion(current)) return true
     current = unwrapParenthesizedExpression(current.expression)
   }
-
-  return assertionCount > 1 && hasNonConstAssertion
+  return false
 }
 
 /** Disallow nested TypeScript type assertions, while permitting chains made only of const assertions. */

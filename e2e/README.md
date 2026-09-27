@@ -6,9 +6,9 @@ repository root; run the following commands there:
 ```sh
 yarn browser:install
 yarn test:e2e
-yarn workspace @app/e2e test:e2e:headed
-yarn workspace @app/e2e bddgen
-yarn workspace @app/e2e report
+yarn workspace @einbuergerungstest/e2e test:e2e:headed
+yarn workspace @einbuergerungstest/e2e bddgen
+yarn workspace @einbuergerungstest/e2e report
 ```
 
 On Linux CI, use `yarn browser:install --with-deps` to install browser system

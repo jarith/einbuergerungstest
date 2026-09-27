@@ -1,0 +1,17 @@
+id: no-classes-ts
+language: TypeScript
+severity: error
+message: Unexpected class, use functions instead.
+rule:
+  any:
+    - kind: class_declaration
+    - kind: class
+---
+id: no-classes-tsx
+language: Tsx
+severity: error
+message: Unexpected class, use functions instead.
+rule:
+  any:
+    - kind: class_declaration
+    - kind: class

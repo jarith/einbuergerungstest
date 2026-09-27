@@ -3,7 +3,7 @@
 import type { ESTree, SourceCode, Scope, Variable } from '@oxlint/plugins'
 
 /** Unwrap syntax-only wrappers when inspecting array methods and accumulator references. */
-export function unwrapArrayExpression(node: ESTree.Node): ESTree.Node {
+export const unwrapArrayExpression = (node: ESTree.Node): ESTree.Node => {
   while (
     node.type === 'ParenthesizedExpression' ||
     node.type === 'ChainExpression' ||
@@ -18,20 +18,18 @@ export function unwrapArrayExpression(node: ESTree.Node): ESTree.Node {
 }
 
 /** Resolve a local binding by scope, not by identifier spelling. */
-export function resolveArrayBinding(sourceCode: SourceCode, node: ESTree.Node) {
+export const resolveArrayBinding = (sourceCode: SourceCode, node: ESTree.Node) => {
   node = unwrapArrayExpression(node)
   if (node.type !== 'Identifier') return null
-  let scope: Scope | null = sourceCode.getScope(node)
-  while (scope !== null) {
+  for (let scope: Scope | null = sourceCode.getScope(node); scope !== null; scope = scope.upper) {
     const variable = scope.set.get(node.name)
     if (variable !== undefined) return variable
-    scope = scope.upper
   }
   return null
 }
 
 /** Read static method names, including computed string literals, without evaluating expressions. */
-export function arrayMethodTarget(node: ESTree.Node) {
+export const arrayMethodTarget = (node: ESTree.Node) => {
   node = unwrapArrayExpression(node)
   if (node.type !== 'MemberExpression') return null
   const property = node.property
@@ -44,7 +42,7 @@ export function arrayMethodTarget(node: ESTree.Node) {
   return null
 }
 
-function isArrayAnnotation(type: ESTree.TSType): boolean {
+const isArrayAnnotation = (type: ESTree.TSType): boolean => {
   if (type.type === 'TSArrayType' || type.type === 'TSTupleType') return true
   if (type.type === 'TSParenthesizedType') return isArrayAnnotation(type.typeAnnotation)
   if (type.type === 'TSTypeOperator' && type.operator === 'readonly') {
@@ -58,11 +56,11 @@ function isArrayAnnotation(type: ESTree.TSType): boolean {
 }
 
 /** Recognize local array evidence; unknown receivers and iterator pipelines are deliberately excluded. */
-export function isKnownArrayExpression(
+export const isKnownArrayExpression = (
   sourceCode: SourceCode,
   node: ESTree.Node,
   visited = new Set<Variable>(),
-): boolean {
+): boolean => {
   node = unwrapArrayExpression(node)
   if (node.type === 'ArrayExpression') return true
   if (node.type === 'CallExpression') {

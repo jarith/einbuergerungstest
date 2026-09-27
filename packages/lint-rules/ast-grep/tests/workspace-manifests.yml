@@ -1,0 +1,27 @@
+id: no-workspace-dependencies
+valid:
+  - '{"name":"@einbuergerungstest/web","scripts":{}}'
+  - '{"name":"@einbuergerungstest/web","dependenciesMeta":{"tool":{"built":true}}}'
+invalid:
+  - '{"dependencies":{"react":"19.3.0"}}'
+  - '{"devDependencies":{"typescript":"7.0.2"}}'
+  - '{"peerDependencies":{"react":"^19"}}'
+  - '{"optionalDependencies":{"tool":"1.0.0"}}'
+  - '{"bundleDependencies":["tool"]}'
+  - '{"bundledDependencies":["tool"]}'
+---
+id: required-workspace-scripts
+valid:
+  - '{"scripts":{"ts:compile":"tsc","lint":"oxlint .","build":"vite build","format":"oxfmt --write .","format:check":"oxfmt --check .","test":"vitest run","test:browser":"vitest run --browser"}}'
+  - '{"scripts":{"ts:compile":"tsc","lint":"oxlint .","build":"vite build","lint:ast-grep":"ast-grep scan","format":"oxfmt --write .","format:check":"oxfmt --check .","test":"vitest run","test:browser":"vitest run --browser"}}'
+invalid:
+  - '{}'
+  - '{"scripts":{}}'
+  - '{"ts:compile":"tsc","scripts":{"lint":"oxlint .","build":"vite build","format":"oxfmt --write .","format:check":"oxfmt --check .","test":"vitest run","test:browser":"vitest run --browser"}}'
+  - '{"scripts":{"lint":"oxlint .","build":"vite build","format":"oxfmt --write .","format:check":"oxfmt --check .","test":"vitest run","test:browser":"vitest run --browser"}}'
+  - '{"scripts":{"ts:compile":"tsc","build":"vite build","format":"oxfmt --write .","format:check":"oxfmt --check .","test":"vitest run","test:browser":"vitest run --browser"}}'
+  - '{"scripts":{"ts:compile":"tsc","lint":"oxlint .","format":"oxfmt --write .","format:check":"oxfmt --check .","test":"vitest run","test:browser":"vitest run --browser"}}'
+  - '{"scripts":{"ts:compile":"tsc","lint":"oxlint .","build":"vite build","format:check":"oxfmt --check .","test":"vitest run","test:browser":"vitest run --browser"}}'
+  - '{"scripts":{"ts:compile":"tsc","lint":"oxlint .","build":"vite build","format":"oxfmt --write .","test":"vitest run","test:browser":"vitest run --browser"}}'
+  - '{"scripts":{"ts:compile":"tsc","lint":"oxlint .","build":"vite build","format":"oxfmt --write .","format:check":"oxfmt --check .","test:browser":"vitest run --browser"}}'
+  - '{"scripts":{"ts:compile":"tsc","lint":"oxlint .","build":"vite build","format":"oxfmt --write .","format:check":"oxfmt --check .","test":"vitest run"}}'

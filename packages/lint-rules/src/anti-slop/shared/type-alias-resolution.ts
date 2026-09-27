@@ -25,15 +25,14 @@ type TypeMatcher = (type: ESTree.TSType, matches: (type: ESTree.TSType) => boole
 
 const environmentsByProgram = new WeakMap<ESTree.Program, TypeAliasEnvironment>()
 
-function isNode(value: unknown): value is ESTree.Node {
+const isNode = (value: unknown): value is ESTree.Node => {
   return (
     typeof value === 'object' && value !== null && 'type' in value && typeof value.type === 'string'
   )
 }
 
-function enclosingTypeScope(node: ESTree.Node) {
-  let current: ESTree.Node | null = node.parent
-  while (current !== null) {
+const enclosingTypeScope = (node: ESTree.Node) => {
+  for (let current: ESTree.Node | null = node.parent; current !== null; current = current.parent) {
     if (
       current.type === 'Program' ||
       current.type === 'BlockStatement' ||
@@ -43,12 +42,11 @@ function enclosingTypeScope(node: ESTree.Node) {
     ) {
       return current
     }
-    current = current.parent
   }
   return node
 }
 
-function declaredTypeBinding(node: ESTree.Node) {
+const declaredTypeBinding = (node: ESTree.Node) => {
   if (node.type === 'TSTypeAliasDeclaration') {
     return { alias: node, name: node.id.name }
   }
@@ -70,12 +68,12 @@ function declaredTypeBinding(node: ESTree.Node) {
   return null
 }
 
-function collectTypeBindings(
+const collectTypeBindings = (
   node: ESTree.Node,
   visitorKeys: SourceCode['visitorKeys'],
   bindingsByName: Map<string, TypeBinding[]>,
   aliases: ESTree.TSTypeAliasDeclaration[],
-): void {
+): void => {
   const declared = declaredTypeBinding(node)
   if (declared !== null) {
     const bindings = bindingsByName.get(declared.name) ?? []
@@ -102,10 +100,10 @@ function collectTypeBindings(
 }
 
 /** Collect every lexical type alias and competing type binding in a program. */
-export function createTypeAliasEnvironment(
+export const createTypeAliasEnvironment = (
   program: ESTree.Program,
   visitorKeys: SourceCode['visitorKeys'],
-): TypeAliasEnvironment {
+): TypeAliasEnvironment => {
   const cached = environmentsByProgram.get(program)
   if (cached !== undefined) return cached
   const bindingsByName = new Map<string, TypeBinding[]>()
@@ -116,66 +114,68 @@ export function createTypeAliasEnvironment(
   return environment
 }
 
-function ancestorDistance(ancestor: ESTree.Node, node: ESTree.Node) {
-  let current: ESTree.Node | null = node
-  let distance = 0
-  while (current !== null) {
+const ancestorDistance = (ancestor: ESTree.Node, node: ESTree.Node) => {
+  for (
+    let current: ESTree.Node | null = node, distance = 0;
+    current !== null;
+    current = current.parent, distance += 1
+  ) {
     if (current === ancestor) return distance
-    current = current.parent
-    distance += 1
   }
   return null
 }
 
-function nearestTypeBindings(name: string, use: ESTree.Node, environment: TypeAliasEnvironment) {
+const nearestTypeBindings = (name: string, use: ESTree.Node, environment: TypeAliasEnvironment) => {
   const candidates = environment.bindingsByName.get(name) ?? []
-  let nearestDistance = Number.POSITIVE_INFINITY
-  let nearest: TypeBinding[] = []
+  const nearest: { distance: number; bindings: TypeBinding[] } = {
+    distance: Number.POSITIVE_INFINITY,
+    bindings: [],
+  }
   for (const candidate of candidates) {
     const distance = ancestorDistance(candidate.scope, use)
-    if (distance === null || distance > nearestDistance) continue
-    if (distance === nearestDistance) {
-      nearest.push(candidate)
+    if (distance === null || distance > nearest.distance) continue
+    if (distance === nearest.distance) {
+      nearest.bindings.push(candidate)
       continue
     }
-    nearestDistance = distance
-    nearest = [candidate]
+    nearest.distance = distance
+    nearest.bindings = [candidate]
   }
-  return nearest
+  return nearest.bindings
 }
 
 /** Resolve the nearest visible alias with this name, respecting lexical shadowing. */
-export function visibleTypeAlias(
+export const visibleTypeAlias = (
   name: string,
   use: ESTree.Node,
   environment: TypeAliasEnvironment,
-) {
+) => {
   if (lexicalTypeParameterNames(use, environment.visitorKeys).has(name)) return null
   const bindings = nearestTypeBindings(name, use, environment)
   return bindings.length === 1 ? (bindings[0]?.alias ?? null) : null
 }
 
 /** Return whether a local declaration shadows a built-in type at this use. */
-export function hasVisibleTypeBinding(
+export const hasVisibleTypeBinding = (
   name: string,
   use: ESTree.Node,
   environment: TypeAliasEnvironment,
-) {
+) => {
   return (
     lexicalTypeParameterNames(use, environment.visitorKeys).has(name) ||
     nearestTypeBindings(name, use, environment).length > 0
   )
 }
 
-function typeReferenceName(type: ESTree.TSTypeReference) {
+const typeReferenceName = (type: ESTree.TSTypeReference) => {
   return type.typeName.type === 'Identifier' ? type.typeName.name : null
 }
 
-function aliasSubstitutions(
+const aliasSubstitutions = (
   alias: ESTree.TSTypeAliasDeclaration,
   reference: ESTree.TSTypeReference,
   base: Map<string, TypeSubstitution>,
-) {
+) => {
   const parameters = alias.typeParameters?.params ?? []
   const arguments_ = reference.typeArguments?.params ?? []
   const next = new Map(base)
@@ -193,11 +193,11 @@ function aliasSubstitutions(
 }
 
 /** Match a type after resolving visible aliases and substituting their type parameters. */
-export function resolvedTypeMatches(
+export const resolvedTypeMatches = (
   type: ESTree.TSType,
   environment: TypeAliasEnvironment,
   matcher: TypeMatcher,
-): boolean {
+): boolean => {
   const evaluate = (
     current: ESTree.TSType,
     substitutions: Map<string, TypeSubstitution>,

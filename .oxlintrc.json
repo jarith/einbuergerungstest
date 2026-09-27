@@ -17,6 +17,28 @@
     "suspicious": "error"
   },
   "rules": {
+    "curly": "error",
+    "eslint/no-restricted-imports": [
+      "error",
+      {
+        "paths": [
+          {
+            "name": "react",
+            "importNames": ["default"],
+            "allowTypeImports": true,
+            "message": "Use named React imports; hooks are not allowed."
+          }
+        ],
+        "patterns": [
+          {
+            "regex": ".*",
+            "importNamePattern": "^use($|[A-Z0-9])",
+            "allowTypeImports": true,
+            "message": "React hooks are not allowed."
+          }
+        ]
+      }
+    ],
     "@stylistic/padding-line-between-statements": [
       "error",
       {
@@ -168,7 +190,6 @@
         "max": 1
       }
     ],
-    "curly": "error",
     "typescript/no-explicit-any": "error",
     "typescript/no-unsafe-assignment": "error",
     "typescript/no-unsafe-argument": "error",
@@ -198,7 +219,6 @@
     ],
     "app/no-array-filter-map": "error",
     "app/no-chained-type-assertions": "error",
-    "app/no-conditional-empty-object-spread": "error",
     "app/no-known-value-widening": "error",
     "app/no-module-mocking": "error",
     "app/no-object-parameters": "error",
@@ -213,21 +233,12 @@
     "app/no-unsafe-dictionary-type": "error",
     "app/require-safety-comment-for-type-assertion": "error",
     "app/no-atom-in-props": "error",
-    "app/no-barrel-imports": "error",
-    "app/no-classes": "error",
     "app/no-hardcoded-design-literals": "error",
-    "app/no-hardcoded-font-size": "error",
     "app/component-folder-structure": "error",
     "app/no-conditional-jsx-return": "error",
-    "app/no-deep-slice-imports": "error",
-    "app/no-function-declarations": "error",
-    "app/no-let": "warn",
     "app/no-inline-types": "error",
-    "app/no-module-scope-listeners": "error",
     "app/no-reexport-outside-index": "warn",
     "app/prefer-array-methods": "warn",
-    "app/prefer-inline-named-exports": "error",
-    "app/reatom-file-boundaries": "warn",
     "app/atom-naming": "warn",
     "app/require-action-for-set": "error"
   },
@@ -256,7 +267,6 @@
     {
       "files": [
         "packages/lint-rules/src/no-hardcoded-design-literals/rule.ts",
-        "packages/lint-rules/src/no-hardcoded-font-size/rule.ts",
         "packages/lint-rules/src/test-utils/run-oxlint.ts"
       ],
       "rules": {
@@ -270,12 +280,6 @@
       }
     },
     {
-      "files": ["**/*.route.ts", "**/*.route.tsx"],
-      "rules": {
-        "app/reatom-file-boundaries": "off"
-      }
-    },
-    {
       "files": ["**/*.stories.tsx"],
       "rules": {
         "app/component-folder-structure": "off",
@@ -285,10 +289,7 @@
     {
       "files": ["**/*.test.ts", "**/*.test.tsx", "**/test-setup.ts"],
       "rules": {
-        "app/no-classes": "off",
-        "app/no-let": "off",
         "app/no-hardcoded-design-literals": "off",
-        "app/reatom-file-boundaries": "off",
         "app/require-action-for-set": "off",
         "app/prefer-array-methods": "off"
       }
@@ -302,10 +303,7 @@
     {
       "files": ["e2e/**"],
       "rules": {
-        "app/no-classes": "off",
-        "app/no-inline-types": "off",
-        "app/no-function-declarations": "off",
-        "app/no-let": "off"
+        "app/no-inline-types": "off"
       }
     },
     {
@@ -325,11 +323,8 @@
       "rules": {
         "app/no-atom-in-props": "off",
         "app/no-hardcoded-design-literals": "off",
-        "app/no-hardcoded-font-size": "off",
         "app/component-folder-structure": "off",
         "app/no-conditional-jsx-return": "off",
-        "app/no-deep-slice-imports": "off",
-        "app/reatom-file-boundaries": "off",
         "app/atom-naming": "off",
         "app/require-action-for-set": "off"
       }

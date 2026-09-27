@@ -7,12 +7,12 @@ import { resolveVariable } from '../anti-slop/shared/scope.ts'
 
 const moduleMockMethods = new Set(['doMock', 'mock', 'unstable_mockModule'])
 
-function importedName(node: ESTree.Node) {
+const importedName = (node: ESTree.Node) => {
   if (node.type !== 'ImportSpecifier') return null
   return node.imported.type === 'Identifier' ? node.imported.name : node.imported.value
 }
 
-function isTestFrameworkObject(sourceCode: SourceCode, expression: ESTree.Node) {
+const isTestFrameworkObject = (sourceCode: SourceCode, expression: ESTree.Node) => {
   if (expression.type !== 'Identifier') return false
   if (
     (expression.name === 'vi' || expression.name === 'jest') &&
@@ -35,7 +35,7 @@ function isTestFrameworkObject(sourceCode: SourceCode, expression: ESTree.Node) 
   })
 }
 
-function moduleMockCall(sourceCode: SourceCode, callee: ESTree.Node) {
+const moduleMockCall = (sourceCode: SourceCode, callee: ESTree.Node) => {
   if (!('property' in callee) || !('object' in callee) || !('computed' in callee)) return false
   if (!isTestFrameworkObject(sourceCode, callee.object)) return false
   const property = callee.property

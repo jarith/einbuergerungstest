@@ -1,0 +1,29 @@
+id: no-barrel-imports-ts
+language: TypeScript
+severity: error
+message: Use named imports and re-exports instead of namespace imports or wildcard re-exports.
+rule:
+  any:
+    - all:
+        - kind: import_statement
+        - has:
+            kind: namespace_import
+            stopBy: end
+    - all:
+        - kind: export_statement
+        - regex: '^export\s+(?:type\s+)?\*'
+---
+id: no-barrel-imports-tsx
+language: Tsx
+severity: error
+message: Use named imports and re-exports instead of namespace imports or wildcard re-exports.
+rule:
+  any:
+    - all:
+        - kind: import_statement
+        - has:
+            kind: namespace_import
+            stopBy: end
+    - all:
+        - kind: export_statement
+        - regex: '^export\s+(?:type\s+)?\*'

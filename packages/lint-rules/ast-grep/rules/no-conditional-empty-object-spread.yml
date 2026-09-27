@@ -1,0 +1,25 @@
+id: no-conditional-empty-object-spread-ts
+language: TypeScript
+severity: error
+message: This conditional spread hides property omission behind an empty object. Build the object in separate statements.
+rule:
+  any:
+    - pattern:
+        context: '({ ...($COND ? {} : $VALUE) })'
+        selector: spread_element
+    - pattern:
+        context: '({ ...($COND ? $VALUE : {}) })'
+        selector: spread_element
+---
+id: no-conditional-empty-object-spread-tsx
+language: Tsx
+severity: error
+message: This conditional spread hides property omission behind an empty object. Build the object in separate statements.
+rule:
+  any:
+    - pattern:
+        context: '({ ...($COND ? {} : $VALUE) })'
+        selector: spread_element
+    - pattern:
+        context: '({ ...($COND ? $VALUE : {}) })'
+        selector: spread_element

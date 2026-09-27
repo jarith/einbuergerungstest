@@ -58,14 +58,18 @@ export const createPackage = async (root: string, name: string): Promise<string>
   }
 
   const manifest = {
-    name: `@app/${name}`,
+    name: `@einbuergerungstest/${name}`,
     private: true,
     type: 'module',
     exports: { '.': './src/index.ts' },
     scripts: {
-      typecheck: 'yarn run -T tsc -p tsconfig.json && yarn run -T tsc -p tsconfig.test.json',
+      'ts:compile': 'yarn run -T tsc -p tsconfig.json && yarn run -T tsc -p tsconfig.test.json',
+      build: 'yarn ts:compile',
       lint: 'yarn run -T oxlint .',
+      format: 'yarn run -T oxfmt --write .',
       'format:check': 'yarn run -T oxfmt --check .',
+      test: 'yarn run -T vitest run src --passWithNoTests',
+      'test:browser': 'node -e "console.log(\'No browser tests in this workspace\')"',
     },
   }
 

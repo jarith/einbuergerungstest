@@ -1,4 +1,4 @@
-import { css, hstack, stack, toolbar } from '@app/design-system'
+import { css, hstack, stack, toolbar } from '@einbuergerungstest/design-system'
 
 export const studyStyles = {
   root: stack({ gap: 'layout.section', maxWidth: 'content' }),

@@ -1,0 +1,14 @@
+id: no-workspace-dependencies
+language: Json
+severity: error
+message: Declare dependencies in the root package.json, not a workspace package.json.
+files:
+  - web/package.json
+  - e2e/package.json
+  - packages/*/package.json
+rule:
+  all:
+    - kind: pair
+    - has:
+        field: key
+        regex: '^"(dependencies|devDependencies|peerDependencies|optionalDependencies|bundleDependencies|bundledDependencies)"$'
