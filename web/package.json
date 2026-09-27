@@ -9,7 +9,7 @@
     "lint": "yarn run -T oxlint .",
     "format:check": "yarn run -T oxfmt --check .",
     "panda:prepare": "yarn workspace @app/design-system panda:prepare",
-    "build": "yarn panda:prepare && yarn run -T vite build",
+    "build": "yarn resources:check && yarn panda:prepare && yarn run -T vite build",
     "preview": "yarn run -T vite preview --host 127.0.0.1",
     "test:browser": "yarn panda:prepare && yarn run -T vitest run --config vitest.browser.config.ts"
   }

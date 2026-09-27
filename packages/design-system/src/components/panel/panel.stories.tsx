@@ -13,3 +13,11 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default = {} satisfies Story
+
+export const Muted = {
+  args: { tone: 'muted', children: 'A quieter summary surface.' },
+} satisfies Story
+
+export const Plain = {
+  args: { edge: 'plain', children: 'A settings section without an enclosing rule.' },
+} satisfies Story

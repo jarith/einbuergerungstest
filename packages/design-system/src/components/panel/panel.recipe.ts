@@ -13,4 +13,15 @@ export const panelRecipe = defineSlotRecipe({
       minWidth: 0,
     },
   },
+  variants: {
+    tone: {
+      surface: {},
+      muted: { root: { backgroundColor: 'surface-muted', borderColor: 'transparent' } },
+    },
+    edge: {
+      bordered: {},
+      plain: { root: { border: 'none' } },
+    },
+  },
+  defaultVariants: { tone: 'surface', edge: 'bordered' },
 })

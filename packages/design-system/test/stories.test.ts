@@ -2,13 +2,37 @@ import { AxeBuilder } from '@axe-core/playwright'
 import { expect, test } from '@playwright/test'
 
 const themes = [
-  { colorScheme: 'light', skin: 'baseline', accent: 'rgb(33, 90, 171)', height: '44px' },
-  { colorScheme: 'dark', skin: 'baseline', accent: 'rgb(150, 191, 255)', height: '44px' },
-  { colorScheme: 'light', skin: 'alternate', accent: 'rgb(84, 53, 173)', height: '48px' },
-  { colorScheme: 'dark', skin: 'alternate', accent: 'rgb(200, 182, 255)', height: '48px' },
+  {
+    colorScheme: 'light',
+    skin: 'baseline',
+    accent: 'rgb(63, 91, 23)',
+    actionHeight: '46px',
+    fieldHeight: '44px',
+  },
+  {
+    colorScheme: 'dark',
+    skin: 'baseline',
+    accent: 'rgb(167, 192, 128)',
+    actionHeight: '46px',
+    fieldHeight: '44px',
+  },
+  {
+    colorScheme: 'light',
+    skin: 'alternate',
+    accent: 'rgb(84, 53, 173)',
+    actionHeight: '48px',
+    fieldHeight: '48px',
+  },
+  {
+    colorScheme: 'dark',
+    skin: 'alternate',
+    accent: 'rgb(200, 182, 255)',
+    actionHeight: '48px',
+    fieldHeight: '48px',
+  },
 ] as const
 
-for (const { colorScheme, skin, accent, height } of themes) {
+for (const { colorScheme, skin, accent, actionHeight, fieldHeight } of themes) {
   test.describe(`${skin} / ${colorScheme}`, () => {
     const globals = `colorScheme:${colorScheme};skin:${skin}`
 
@@ -22,8 +46,8 @@ for (const { colorScheme, skin, accent, height } of themes) {
       await expect(panel).toBeVisible()
       await expect(input).toHaveValue('My next app')
       await expect(input).toHaveAccessibleDescription('Choose a name for your next idea.')
-      await expect(input).toHaveCSS('height', height)
-      await expect(button).toHaveCSS('min-height', height)
+      await expect(input).toHaveCSS('height', fieldHeight)
+      await expect(button).toHaveCSS('min-height', actionHeight)
       await expect(button).toHaveCSS('background-color', accent)
 
       await input.focus()
@@ -51,6 +75,66 @@ for (const { colorScheme, skin, accent, height } of themes) {
     })
   })
 }
+
+for (const colorScheme of ['light', 'dark']) {
+  test(`${colorScheme} study choices expose selection and feedback`, async ({ page }) => {
+    await page.goto(
+      `/iframe.html?id=foundation-components--study-question&globals=colorScheme:${colorScheme}`,
+    )
+
+    const answers = page.getByRole('radio')
+
+    await expect(answers).toHaveCount(4)
+    await expect(answers.nth(0)).toHaveAttribute('aria-checked', 'true')
+
+    await answers.nth(0).press('ArrowDown')
+
+    await expect(answers.nth(1)).toHaveAttribute('aria-checked', 'true')
+    await expect(page.getByText('Correct', { exact: true })).toBeVisible()
+
+    await answers.nth(0).hover()
+
+    await expect(answers.nth(0)).toHaveCSS(
+      'background-color',
+      colorScheme === 'light' ? 'rgb(246, 212, 208)' : 'rgb(77, 38, 39)',
+    )
+
+    const accessibility = await new AxeBuilder({ page }).include('#storybook-root').analyze()
+
+    expect(accessibility.violations).toEqual([])
+  })
+}
+
+test('compact filter choices remain keyboard operable', async ({ page }) => {
+  await page.goto('/iframe.html?id=components-segmentedchoice--filters')
+
+  const incorrect = page.getByRole('radio', { name: 'Incorrect' })
+
+  await page.getByText('Incorrect', { exact: true }).click()
+
+  await expect(incorrect).toBeChecked()
+
+  await incorrect.focus()
+
+  await incorrect.press('ArrowRight')
+
+  await expect(page.getByRole('radio', { name: 'Untried' })).toBeChecked()
+})
+
+test('confirmation dialog traps focus and restores it on Escape', async ({ page }) => {
+  await page.goto('/iframe.html?id=components-dialog--confirmation')
+
+  const trigger = page.getByRole('button', { name: 'Submit test' })
+
+  await trigger.click()
+
+  await expect(page.getByRole('dialog', { name: 'Submit the mock test?' })).toBeVisible()
+
+  await page.keyboard.press('Escape')
+
+  await expect(page.getByRole('dialog')).toHaveCount(0)
+  await expect(trigger).toBeFocused()
+})
 
 for (const state of ['disabled', 'loading']) {
   test(`${state} button cannot be activated`, async ({ page }) => {

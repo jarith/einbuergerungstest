@@ -3,8 +3,9 @@ import { createPackage, findWorkspaceRoot } from './generator'
 try {
   const [name, ...extra] = process.argv.slice(2)
 
-  if (name === undefined || name === '' || extra.length > 0)
+  if (name === undefined || name === '' || extra.length > 0) {
     throw new Error('Usage: yarn create:package <kebab-case-name>')
+  }
   const root = await findWorkspaceRoot(process.cwd())
 
   await createPackage(root, name)

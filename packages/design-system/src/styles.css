@@ -1,3 +1,4 @@
 @layer mantine, reset, base, tokens, recipes, utilities;
 
+@import '@fontsource-variable/inter/wght.css' layer(base);
 @import '@mantine/core/styles.layer.css';
