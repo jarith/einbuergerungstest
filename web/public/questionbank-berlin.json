@@ -5,67 +5,93 @@
     {
       "id": "constitution-rights",
       "title": "Constitution, rights, and democratic principles",
-      "description": "The Basic Law, fundamental freedoms, the rule of law, separation of powers, and Germany’s democratic and social principles."
+      "title_de": "Verfassung, Grundrechte und demokratische Grundsätze",
+      "description": "The Basic Law, fundamental freedoms, the rule of law, separation of powers, and Germany’s democratic and social principles.",
+      "description_de": "Das Grundgesetz, die Grundfreiheiten, der Rechtsstaat, die Gewaltenteilung sowie die demokratischen und sozialen Grundsätze Deutschlands."
     },
     {
       "id": "federalism-state-symbols",
       "title": "Federal structure, state identity, and symbols",
-      "description": "The roles of the federation, states, and municipalities; their responsibilities; and Germany’s name, flag, eagle, anthem, and honors."
+      "title_de": "Föderaler Aufbau, staatliche Identität und Symbole",
+      "description": "The roles of the federation, states, and municipalities; their responsibilities; and Germany’s name, flag, eagle, anthem, and honors.",
+      "description_de": "Die Aufgaben von Bund, Ländern und Gemeinden, ihre Zuständigkeiten sowie Deutschlands Name, Flagge, Bundesadler, Nationalhymne und staatliche Ehrungen."
     },
     {
       "id": "government-institutions",
       "title": "Government, parliament, and federal institutions",
-      "description": "The responsibilities of the Bundestag, Bundesrat, president, chancellor, cabinet, and other federal bodies, including how laws are made."
+      "title_de": "Regierung, Parlament und Bundesorgane",
+      "description": "The responsibilities of the Bundestag, Bundesrat, president, chancellor, cabinet, and other federal bodies, including how laws are made.",
+      "description_de": "Die Aufgaben von Bundestag, Bundesrat, Bundespräsident, Bundeskanzler, Bundeskabinett und anderen Bundesorganen, einschließlich der Gesetzgebung."
     },
     {
       "id": "elections-participation",
       "title": "Elections, parties, and civic participation",
-      "description": "Voting rights and procedures, political parties, parliamentary opposition, coalitions, demonstrations, and volunteering."
+      "title_de": "Wahlen, Parteien und politische Beteiligung",
+      "description": "Voting rights and procedures, political parties, parliamentary opposition, coalitions, demonstrations, and volunteering.",
+      "description_de": "Wahlrechte und Wahlverfahren, politische Parteien, parlamentarische Opposition, Koalitionen, Demonstrationen und ehrenamtliches Engagement."
     },
     {
       "id": "justice-legal-system",
       "title": "Courts, police, and legal responsibility",
-      "description": "The Constitutional Court, judges, lay judges, police, court proceedings, legal help, and responsibility under criminal law."
+      "title_de": "Gerichte, Polizei und rechtliche Verantwortung",
+      "description": "The Constitutional Court, judges, lay judges, police, court proceedings, legal help, and responsibility under criminal law.",
+      "description_de": "Das Bundesverfassungsgericht, Richterinnen und Richter, Schöffinnen und Schöffen, die Polizei, Gerichtsverfahren, rechtliche Hilfe und strafrechtliche Verantwortung."
     },
     {
       "id": "economy-social-security",
       "title": "Economy, employment, and social security",
-      "description": "The social market economy, employment, unions, workplace representation, and social insurance."
+      "title_de": "Wirtschaft, Arbeit und soziale Sicherung",
+      "description": "The social market economy, employment, unions, workplace representation, and social insurance.",
+      "description_de": "Die soziale Marktwirtschaft, Beschäftigung, Gewerkschaften, betriebliche Interessenvertretung und Sozialversicherung."
     },
     {
       "id": "jewish-life-nazi-history",
       "title": "Jewish life, National Socialism, and remembrance",
-      "description": "Jewish life in Germany, Nazi rule and persecution, antisemitism, Holocaust remembrance, and Germany’s responsibility toward Israel."
+      "title_de": "Jüdisches Leben, Nationalsozialismus und Erinnerung",
+      "description": "Jewish life in Germany, Nazi rule and persecution, antisemitism, Holocaust remembrance, and Germany’s responsibility toward Israel.",
+      "description_de": "Jüdisches Leben in Deutschland, NS-Herrschaft und Verfolgung, Antisemitismus, Erinnerung an den Holocaust und Deutschlands Verantwortung gegenüber Israel."
     },
     {
       "id": "postwar-ddr-reunification",
       "title": "Postwar Germany, the DDR, and reunification",
-      "description": "The Allied occupation, the founding of two German states, the Cold War, the Berlin Wall, life in the DDR, and reunification."
+      "title_de": "Nachkriegsdeutschland, die DDR und die Wiedervereinigung",
+      "description": "The Allied occupation, the founding of two German states, the Cold War, the Berlin Wall, life in the DDR, and reunification.",
+      "description_de": "Die Besatzung durch die Alliierten, die Gründung zweier deutscher Staaten, der Kalte Krieg, die Berliner Mauer, das Leben in der DDR und die Wiedervereinigung."
     },
     {
       "id": "europe-eu",
       "title": "Europe and the European Union",
-      "description": "Germany’s neighbors, European integration, EU institutions and elections, Schengen, and the euro."
+      "title_de": "Europa und die Europäische Union",
+      "description": "Germany’s neighbors, European integration, EU institutions and elections, Schengen, and the euro.",
+      "description_de": "Deutschlands Nachbarländer, die europäische Integration, Institutionen und Wahlen der EU, der Schengen-Raum und der Euro."
     },
     {
       "id": "family-education",
       "title": "Family, children, and education",
-      "description": "Parental responsibilities, childcare, school and adult education, marriage and divorce, protection of children, and continuing education."
+      "title_de": "Familie, Kinder und Bildung",
+      "description": "Parental responsibilities, childcare, school and adult education, marriage and divorce, protection of children, and continuing education.",
+      "description_de": "Elterliche Verantwortung, Kinderbetreuung, schulische Bildung und Erwachsenenbildung, Ehe und Scheidung, Kinderschutz und Weiterbildung."
     },
     {
       "id": "everyday-administration",
       "title": "Everyday administration and consumer matters",
-      "description": "Registering a move, permits, local rules, dealing with authorities, housing rules, and consumer remedies."
+      "title_de": "Alltag, Verwaltung und Verbraucherfragen",
+      "description": "Registering a move, permits, local rules, dealing with authorities, housing rules, and consumer remedies.",
+      "description_de": "Die Anmeldung nach einem Umzug, Genehmigungen, örtliche Vorschriften, der Umgang mit Behörden, Regeln rund ums Wohnen und Rechte bei Verbraucherproblemen."
     },
     {
       "id": "equality-religion-migration",
       "title": "Equal treatment, religion, culture, and migration",
-      "description": "Discrimination, the relationship between state and religion, religious tolerance and holidays, and migration to Germany."
+      "title_de": "Gleichbehandlung, Religion, Kultur und Migration",
+      "description": "Discrimination, the relationship between state and religion, religious tolerance and holidays, and migration to Germany.",
+      "description_de": "Diskriminierung, das Verhältnis von Staat und Religion, religiöse Toleranz und Feiertage sowie Migration nach Deutschland."
     },
     {
       "id": "berlin",
       "title": "Berlin’s geography, symbols, and government",
-      "description": "Berlin’s boroughs, flag and coat of arms, state elections, political information, and Senate offices."
+      "title_de": "Berlins Geografie, Symbole und Regierung",
+      "description": "Berlin’s boroughs, flag and coat of arms, state elections, political information, and Senate offices.",
+      "description_de": "Berlins Bezirke, Flagge und Wappen, Wahlen zum Abgeordnetenhaus, politische Informationen und Senatsverwaltungen."
     }
   ],
   "questions": [

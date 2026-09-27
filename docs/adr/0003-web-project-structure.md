@@ -71,8 +71,8 @@ tracked by `.gitkeep` files. The page's `index.ts` is its public interface, and
 The application root under `web/src/app/` composes the page routes, responsive shell, UI
 localization, and offline lifecycle. `web/src/shared/` holds only small,
 domain-independent code with multiple consumers, such as route path builders. The authored
-bank and images stay in `web/resources/`; build-time resource tooling stays in
-`web/scripts/`.
+bank and images stay in `web/public/`, which Vite serves directly. Build-time resource
+tooling, if needed, belongs in `web/scripts/`.
 
 Pages must never import another page, including a page's internal component. They navigate
 through shared route paths and obtain reusable behavior through module public interfaces.

@@ -7,7 +7,7 @@ Status: Proposed
 The [Berlin question bank](../../web/public/questionbank-berlin.json) contains 310
 questions in one roughly 300 KB JSON file. Each question and answer choice keeps its
 German exam text beside an English study translation. Thirteen questions reference local
-illustrations. The group titles and descriptions currently have only English text.
+illustrations. Group titles and descriptions have English and German text.
 
 The [requirements](../requirements.md) call for offline access to every question and
 illustration, English and German UI, optional English study translations, and progress
@@ -65,12 +65,12 @@ single source of truth when changing languages. Use locale-aware formatting and 
 messages for counts and dates.
 
 Keep question and answer translations beside their German originals in the bank, rather
-than moving them into UI message catalogs. Add German and English fields for each group's
-title and description. The UI language selects interface and group text, while the study
-translation preference independently controls whether English question text is shown
-beside German. Hide that control in German UI without clearing its saved value. A live
-mock test always displays German question content; its completed review may show English
-alongside German in English UI.
+than moving them into UI message catalogs. Keep each group's existing English
+title/description fields and its German title_de/description_de fields. The UI language
+selects interface and group text, while the study translation preference independently
+controls whether English question text is shown beside German. Hide that control in German
+UI without clearing its saved value. A live mock test always displays German question
+content; its completed review may show English alongside German in English UI.
 
 ## Consequences
 
