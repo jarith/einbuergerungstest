@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { cx } from '@einbuergerungstest/design-system'
+import { Grid } from '@einbuergerungstest/design-system/jsx'
 
 import { tokenStyles } from './tokens.stories.styles'
 
@@ -15,20 +16,20 @@ const swatches = [
 ] as const
 
 const TokenExamples = () => (
-  <div className={tokenStyles.content}>
-    <div className={tokenStyles.swatches}>
+  <Grid maxWidth="content">
+    <Grid minChildWidth="swatch.min">
       {swatches.map((swatch) => (
         <div key={swatch.label} className={cx(tokenStyles.swatch, swatch.className)}>
           {swatch.label}
         </div>
       ))}
-    </div>
+    </Grid>
     <h2 className={tokenStyles.heading}>Heading</h2>
     <p className={tokenStyles.body}>Body text uses the same tokens as application content.</p>
     <p className={tokenStyles.caption}>
       Change Theme and Skin in the toolbar to inspect the roles.
     </p>
-  </div>
+  </Grid>
 )
 
 const meta = { title: 'Foundation/Tokens', component: TokenExamples } satisfies Meta<

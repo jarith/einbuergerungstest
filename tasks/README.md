@@ -79,11 +79,18 @@ page-to-page imports.
 | /settings                        | settings         | Current settings, backup summary, import/reset actions.                                      |
 | /settings/installation           | installation     | Offline readiness and installation guidance.                                                 |
 
-The optional study question key is a validated search parameter, used when opening a
-question from progress without overwriting the saved sequential position. Use route path
-builders and go methods for navigation, support browser back/forward and direct links, and
-show a useful not-found state for invalid keys or unknown URLs. The live mock route must
-intercept attempted departure for its exit confirmation.
+Question selection is a path parameter: `/study/:questionKey`,
+`/study/groups/:groupId/:questionKey`, and `/mock-test/:testId/:questionKey`. The shorter
+entry URLs in the table redirect with history replacement to the saved or first question;
+`/mock-test` shows its start state when no sitting is active. The URL is the source of
+truth for the displayed question. Explicit study links do not overwrite saved sequential
+positions. Loaders validate bank, group, and paper membership and resolve question image
+metadata. See [task 04's execution plan](04-run-plan.md).
+
+Use route path builders and go methods for navigation, support browser back/forward and
+direct links, and show a useful not-found state for invalid keys or unknown URLs. The live
+mock route intercepts attempted departure for exit confirmation and persists unfinished
+status before leaving. Reloaded active mocks become unfinished under the storage policy.
 
 ## Ordered work
 

@@ -11,6 +11,7 @@ export const choiceGroupRecipe = defineSlotRecipe({
       width: '100%',
       minHeight: 'control.choice',
       display: 'flex',
+      flexWrap: 'wrap',
       alignItems: 'center',
       gap: '12',
       paddingBlock: 'choice.block',
@@ -37,10 +38,22 @@ export const choiceGroupRecipe = defineSlotRecipe({
       borderRadius: 'field',
       textStyle: 'controlLabel',
     },
-    body: { display: 'flex', flexDirection: 'column', minWidth: 0, flex: 1 },
+    body: {
+      display: 'flex',
+      flexDirection: 'column',
+      minWidth: 0,
+      flex: 1,
+      overflowWrap: 'anywhere',
+    },
     label: { textStyle: 'body', fontWeight: 'medium' },
     description: { textStyle: 'choiceDescription', color: 'content.muted' },
-    result: { textStyle: 'caption', fontWeight: 'semibold', flexShrink: 0 },
+    result: {
+      textStyle: 'caption',
+      fontWeight: 'semibold',
+      flexShrink: 0,
+      overflowWrap: 'anywhere',
+      '@media (max-width: 40rem)': { flexBasis: '100%' },
+    },
   },
   variants: {
     result: {

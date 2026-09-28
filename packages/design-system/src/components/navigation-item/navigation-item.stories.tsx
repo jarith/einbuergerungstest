@@ -5,7 +5,7 @@ import { NavigationItem } from './navigation-item'
 const meta = {
   title: 'Components/NavigationItem',
   component: NavigationItem,
-  args: { label: 'Study' },
+  args: { label: 'Study', href: '#study' },
 } satisfies Meta<typeof NavigationItem>
 
 export default meta

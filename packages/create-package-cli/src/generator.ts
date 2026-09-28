@@ -65,7 +65,7 @@ export const createPackage = async (root: string, name: string): Promise<string>
     scripts: {
       'ts:compile': 'yarn run -T tsc -p tsconfig.json && yarn run -T tsc -p tsconfig.test.json',
       build: 'yarn ts:compile',
-      lint: 'yarn run -T oxlint .',
+      lint: 'yarn run -T oxlint -c ../../oxlint.config.ts .',
       format: 'yarn run -T oxfmt --write .',
       'format:check': 'yarn run -T oxfmt --check .',
       test: 'yarn run -T vitest run src --passWithNoTests',

@@ -7,17 +7,18 @@
   ],
   "exports": {
     ".": "./src/index.ts",
+    "./jsx": "./src/jsx/index.ts",
     "./styles.css": "./src/styles.css"
   },
   "scripts": {
     "build": "yarn panda:prepare && PANDA_INCLUDE_STORIES=true yarn run -T -B storybook build",
-    "lint": "yarn run -T oxlint .",
+    "lint": "yarn run -T oxlint -c ../../oxlint.config.ts .",
     "ts:compile": "yarn panda:prepare && yarn run -T tsc -p tsconfig.json",
     "format": "yarn run -T oxfmt --write .",
     "format:check": "yarn run -T oxfmt --check .",
     "test": "yarn run -T vitest run src --passWithNoTests",
     "test:browser": "echo",
-    "panda:prepare": "yarn run -T panda codegen --config panda.config.cts --cwd .",
+    "panda:prepare": "yarn run -T panda codegen --config panda.config.ts --cwd .",
     "storybook": "yarn panda:prepare && yarn storybook:serve",
     "storybook:serve": "PANDA_INCLUDE_STORIES=true yarn run -T -B storybook dev --port 6006 --no-open",
     "test:storybook": "yarn build && yarn run -T playwright test --config playwright.config.ts"

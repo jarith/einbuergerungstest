@@ -1,7 +1,7 @@
 # Task 01 run plan — Resources and question bank
 
-Follow-up review superseded the planned bank revision, custom loader, and build validation
-script. The bank and images remain static Vite public assets with runtime bank parsing.
+Follow-up review superseded the custom loader and build validation script. The bank and
+images remain static Vite public assets with runtime bank parsing.
 
 ## Selection and starting state
 
@@ -18,8 +18,7 @@ script. The bank and images remain static Vite public assets with runtime bank p
 ## Requirements and scope
 
 - Keep the authored JSON and images at their existing public paths and retain the
-  relative image URLs. Add a bank revision and make the bank URL and precache asset list
-  derive from the validated source. Expose the revision for the later offline cache.
+  relative image URLs. The bank and images are fixed and require no content versioning.
 - Define pure bank/group/question/option/image contracts and stable keys from `section`
   plus `source_question_id`. Validate section counts, 310 unique keys, four A–D options
   and one matching correct choice, German and English content, all 13 bilingual group

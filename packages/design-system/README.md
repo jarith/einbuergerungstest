@@ -34,7 +34,7 @@ packages/design-system/
 │   ├── index.ts                      # Public API
 │   └── styles.css                    # Public stylesheet and layer order
 ├── test/                             # Storybook browser and accessibility checks
-├── panda.config.cts                  # Pure configuration for all consumers
+├── panda.config.ts                   # Pure configuration for all consumers
 └── styled-system/                    # Generated and ignored; never edit
 ```
 
@@ -71,10 +71,47 @@ remain available. Mantine visual props such as `color`, `variant`, `size`, `radi
 `classNames`, and `vars` stay private. `className` and `style` remain deliberate escape
 hatches.
 
-Use `css`, `cx`, `cva`, `sva`, `token`, or the public layout helpers from the package
-entry. Built-in examples are `stack`, `hstack`, `vstack`, `flex`, `grid`, `wrap`,
-`container`, and `center`; `toolbar` shows how to add a custom pattern. Pattern calls
-belong in colocated `.styles.ts` files. Component recipes and generated files are private.
+`NavigationItem` requires an `href` and renders a native link. Use route-generated
+destinations in the application so ordinary clicks can be guarded while new-tab and
+link-copy behavior remains native. Disabled items expose `aria-disabled`, have no
+destination, and are removed from sequential keyboard navigation.
+
+Import layout primitives from `@einbuergerungstest/design-system/jsx` and styling helpers
+from the package entry. Prefer `Grid`/`GridItem`, `Stack`, `HStack`, `VStack`, `Flex`,
+`Wrap`, `Container`, `Center`, or the custom `Toolbar` for layout; use `Box` when no
+specific layout fits. These generated Panda components use the same configured patterns
+and defaults as the function helpers. Preserve semantic elements with `as`, for example
+`<Container as="main">...</Container>`, without adding a wrapper.
+
+Simple static layout props can live directly in JSX. Keep substantial styles and pattern
+function calls in colocated `.styles.ts` files; use `css.raw()` for extractable objects
+consumed through a primitive's `css` prop. Spread imported style objects into that prop
+(`css={{ ...styles.content }}`) to preserve merging with pattern defaults while avoiding
+the Panda lint plugin's false positives on imported object members. Keep finite visual
+variants in `.recipe.ts` files. Existing semantic components still take priority,
+including this package's `Divider`.
+
+The `css`, `cx`, `cva`, `sva`, `token`, `stack`, `hstack`, `vstack`, `flex`, `grid`,
+`wrap`, `container`, `center`, and `toolbar` helpers remain available for local styles and
+components that need classes. Component recipes and generated files are private.
+
+The root `oxlint.config.ts` loads the Panda and Storybook plugins. Panda's config path is
+absolute so every workspace resolves the same tokens. Generated modules and private
+package subpaths are blocked outside the design system; recipe factories belong in
+`.recipe.ts` files. An explicit list exempts only configuration modules imported by
+`panda.config.ts` from `no-config-function-in-source`.
+
+Panda rules prefer full property names, logical properties, composite declarations, and
+parent-owned spacing. Native text margins are reset once in the global styles. The
+previous Panda plugin 0.3.2 did not match the former absolute source globs correctly, so
+`file-not-included` remains disabled; this also limited `no-config-function-in-source`.
+`prefer-shorthand-properties` and `prefer-atomic-properties` are disabled in favor of
+their opposites. A documented inline exception covers the provider's `colorScheme` state,
+which the plugin mistakes for styling. Shell styles also document narrow
+composite-property exceptions where strict tokens cannot express two-value inset or
+padding declarations without resetting the opposite edge. Safe-area padding tokens are
+derived from both themes' geometry because Panda cannot resolve the existing flat dotted
+token keys in token-to-token references.
 
 Mount one provider per document and import the public stylesheet once. Mantine controls
 `data-mantine-color-scheme`; the provider controls the independent `data-ds-theme` root
@@ -124,11 +161,19 @@ yarn test:browser
 yarn test:e2e
 ```
 
-`panda:prepare` runs `panda codegen` for helpers and types. The root PostCSS plugin emits
-CSS during Vite and Storybook builds and watches sources during development. Both use the
-same config and ignored `styled-system` directory. Do not delete generated helpers while a
-dev server is using them. This follows Panda's
+`panda:prepare` runs `panda codegen` for helpers, React primitives, and types.
+`jsxFramework: 'react'` enables JSX extraction, and `importMap.jsx` recognizes primitive
+imports through the public `/jsx` entry. The root PostCSS plugin emits CSS during Vite and
+Storybook builds and watches sources during development. Both use the same config and
+ignored `styled-system` directory. Do not delete generated helpers while a dev server is
+using them. This follows Panda's
 [Vite/PostCSS integration](https://panda-css.com/docs/installation/vite).
+
+Keep `include` globs relative to the design-system directory, which is the explicit `cwd`
+for both PostCSS and CLI generation. With Panda 2.0.0, absolute globs can scan files but
+reject them during PostCSS source admission, silently omitting utility CSS. Verify the
+built application with the responsive shell scenarios in `e2e/features/shell.feature`;
+successful helper generation or `panda debug` output alone does not catch this failure.
 
 App extraction excludes stories and `*.stories.styles.ts`. Storybook scripts set
 `PANDA_INCLUDE_STORIES=true` to include them. All registered recipe variants are emitted

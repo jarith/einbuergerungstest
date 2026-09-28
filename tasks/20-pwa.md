@@ -15,8 +15,8 @@ verified mobile experience.
   its generated precache. Report "ready offline" only after this full required set is
   cached. Show resource failures and retry.
 - Prepare an update's assets before activation and defer the switch while a live mock is
-  in progress. Keep IndexedDB learner data independent of service-worker caches. Recheck
-  saved-history compatibility when official question content changes.
+  in progress. Keep IndexedDB learner data independent of service-worker caches. The
+  question bank and images are fixed and need no content-versioning behavior.
 - Verify a cold installed launch, offline reload, study, illustrated question, progress,
   and backup transfer at desktop, 820×1180, and 390×844. Run typecheck, lint, format
   check, build, and relevant acceptance scenarios. Add no unit tests; reconcile the

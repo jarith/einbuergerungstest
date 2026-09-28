@@ -1,18 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { Stack, Toolbar } from '@einbuergerungstest/design-system/jsx'
 
 import { Button } from '../../../components/button/button'
 import { Panel } from '../../../components/panel/panel'
-import { layoutStyles } from './layout.stories.styles'
 
 const LayoutExamples = () => (
-  <div className={layoutStyles.stack}>
+  <Stack as="section" aria-label="Layout composition">
     <Panel aria-label="Stack example">Stack uses the shared section gap.</Panel>
-    <div className={layoutStyles.toolbar}>
+    <Toolbar role="toolbar" aria-label="Actions">
       <Button>Save</Button>
       <Button appearance="outline">Cancel</Button>
       <Button appearance="ghost">More actions</Button>
-    </div>
-  </div>
+    </Toolbar>
+  </Stack>
 )
 
 const meta = { title: 'Foundation/Layout', component: LayoutExamples } satisfies Meta<

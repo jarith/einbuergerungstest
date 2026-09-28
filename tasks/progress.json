@@ -1,8 +1,11 @@
 {
   "implementedTasks": [
-    "Resources and question bank"
+    "Resources and question bank",
+    "Learner state and IndexedDB",
+    "Localization and preferences model",
+    "Router and app shell"
   ],
-  "nextTask": "Learner state and IndexedDB",
+  "nextTask": "Core question and answer rules",
   "dependencies": {
     "Resources and question bank": [],
     "Learner state and IndexedDB": [

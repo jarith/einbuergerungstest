@@ -14,7 +14,10 @@ group's study flow.
   description, question count, and start/continue action. Include a direct action for
   studying all 310 questions.
 - Navigation uses route paths, not imports from the Study page. Reuse the shared progress
-  projection for solved counts and the translation-independent localized group metadata.
+  projection for contributing question counts and the translation-independent localized group metadata.
+
+Count Learning and Learned questions equally, once per question, following the
+[learning-status requirements](../docs/requirements.md#question-learning-status).
 
 ## Complete when
 

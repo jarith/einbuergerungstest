@@ -1,7 +1,17 @@
 import type { QuestionBank } from '../domain/question-bank'
-import { isJsonValue, parseQuestionBank } from '../domain/question-bank'
+import { getQuestionKey, isJsonValue, parseQuestionBank } from '../domain/question-bank'
 
-type LoadedQuestionBank = Readonly<{ bank: QuestionBank; url: URL }>
+export type LoadedQuestion = Readonly<{
+  question: QuestionBank['questions'][number]
+  key: ReturnType<typeof getQuestionKey>
+  image: ResolvedQuestionImage | undefined
+}>
+
+type LoadedQuestionBank = Readonly<{
+  bank: QuestionBank
+  url: URL
+  getQuestion: (key: string) => LoadedQuestion | undefined
+}>
 
 export type ResolvedImageVariant = Readonly<{ width: number; url: string }>
 
@@ -41,9 +51,14 @@ export const resolveQuestionImage = (
   }
 }
 
-export const fetchQuestionBank = async (): Promise<LoadedQuestionBank> => {
+export const fetchQuestionBank = async (signal?: AbortSignal): Promise<LoadedQuestionBank> => {
   const url = getQuestionBankUrl()
-  const response = await fetch(url)
+
+  const timeout = AbortSignal.timeout(30_000)
+
+  const response = await fetch(url, {
+    signal: signal === undefined ? timeout : AbortSignal.any([signal, timeout]),
+  })
 
   if (!response.ok) {
     throw new Error(`Question bank could not be loaded (${response.status}).`)
@@ -55,5 +70,13 @@ export const fetchQuestionBank = async (): Promise<LoadedQuestionBank> => {
   }
   const bank = parseQuestionBank(value)
 
-  return { bank, url }
+  const questions = new Map<string, LoadedQuestion>(
+    bank.questions.map((question) => {
+      const key = getQuestionKey(question)
+
+      return [key, { question, key, image: resolveQuestionImage(question, url) }]
+    }),
+  )
+
+  return { bank, url, getQuestion: (key) => questions.get(key) }
 }

@@ -53,6 +53,7 @@ export const colorRoles = {
 /** UI pixels, except opacity. Add geometry only when a component needs it. */
 export const geometry = {
   sizes: {
+    '0': 0,
     'control.action': 46,
     'control.field': 44,
     'control.icon': 46,
@@ -63,8 +64,12 @@ export const geometry = {
     'icon.action': 18,
     'icon.field': 16,
     'progress.track': 5,
+    'swatch.min': 160,
     'dialog.default': 500,
     content: 1112,
+    'shell.sidebar': 236,
+    'shell.context': 36,
+    'shell.footer': 51,
   },
   radii: { control: 10, field: 8, panel: 12, dialog: 14, badge: 6, navigation: 8, progress: 3 },
   borderWidths: { control: 1, selected: 2, focus: 2 },
@@ -81,6 +86,10 @@ export const geometry = {
     'choice.block': 12,
     'badge.inline': 10,
     'focus.offset': 3,
+    'shell.sidebarBlock': 30,
+    'shell.sidebarInline': 18,
+    'shell.contentBlock': 26,
+    'shell.contentInline': 46,
   },
   opacity: { disabled: 0.5 },
 } as const

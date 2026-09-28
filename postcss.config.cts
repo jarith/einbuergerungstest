@@ -11,7 +11,7 @@ const path = require('node:path') as typeof Path
 module.exports = {
   plugins: [
     panda({
-      configPath: path.join(__dirname, 'packages/design-system/panda.config.cts'),
+      configPath: path.join(__dirname, 'packages/design-system/panda.config.ts'),
       cwd: path.join(__dirname, 'packages/design-system'),
     }),
   ],

@@ -29,8 +29,8 @@ answer options, translations, and image metadata when loading it, and include th
 referenced image files in the deployment.
 
 Use a stable question key based on `section` and `source_question_id`, independent of its
-display position. Review saved-history compatibility deliberately if official question
-content changes, before reusing attempts against changed questions.
+display position. The bank and images are fixed and will never change. Saved history
+references those keys directly; no content versioning or history migration is needed.
 
 ### Offline access and updates
 
@@ -85,7 +85,6 @@ content; its completed review may show English alongside German in English UI.
 The app can be deployed as static files and works without a network after offline
 preparation. The complete image set increases the first download, but makes unseen
 illustrated questions available offline. Learners transfer or back up progress manually;
-there is no automatic cross-device sync, and browser storage can be cleared or evicted.
-Saved history needs explicit handling when official question content changes. UI messages
-and question translations share a language preference and validation process while
-remaining in their respective catalog and content records.
+there is no automatic cross-device sync, and browser storage can be cleared or evicted. UI
+messages and question translations share a language preference and validation process
+while remaining in their respective catalog and content records.

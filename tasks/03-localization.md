@@ -21,6 +21,28 @@ content and an independent English study-translation preference.
 - Connect saved light/dark appearance to the existing DesignSystemProvider. Keep the
   preference in learner state so export/import includes it.
 
+## Implementation boundaries
+
+See the [refined run plan](03-run-plan.md) for decisions and verification. Declare direct
+runtime dependencies in the root manifest, as required by this repository's workspace
+rules. Bootstrap exposes `localization` after learner hydration. Its preferences are
+derived from committed learner state, including import and reset; callers save changes
+through `learner.updatePreferences`.
+
+Reatom views read `localization.t()` for typed messages, `appearance()` for the saved
+theme, and `getGroup(group)` for bank metadata. Use `canTranslate(context)` to show the
+translation control and `getQuestion(question, context)` to obtain German text with
+optional English alongside it. Context is required so a live mock cannot accidentally use
+the study translation preference. Render German and English text with their own `lang`
+attributes in task 05. Use catalog plural messages for counts, `formatNumber` for numbers
+and percentages, `formatDate` for timestamps, and `formatPlannedDate` for saved local
+calendar dates. Add new page copy to both catalogs as each page is implemented; never
+display raw infrastructure exception messages as translated UI feedback.
+
+This task provides the shared localization foundation and integrates the current root. The
+router, settings controls, and actual study/review screens remain in their numbered tasks.
+Their page-level acceptance scenarios become executable with those screens.
+
 ## Complete when
 
 Switching UI language and reloading preserves the preference; switching through German

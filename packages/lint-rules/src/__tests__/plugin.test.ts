@@ -5,7 +5,7 @@ import { resolve } from 'node:path'
 import plugin from '../plugin.ts'
 import { runOxlint } from '../test-utils/run-oxlint'
 
-const configPath = resolve(import.meta.dirname, '../../../../.oxlintrc.json')
+const configPath = resolve(import.meta.dirname, '../../../../oxlint.config.ts')
 
 const ruleNames = Object.keys(plugin.rules ?? {})
 

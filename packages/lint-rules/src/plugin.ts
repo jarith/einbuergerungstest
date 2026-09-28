@@ -1,7 +1,6 @@
 import { definePlugin } from '@oxlint/plugins'
 
 /* oxlint-disable import/no-default-export */
-import { rule as atomNamingRule } from './atom-naming/rule.ts'
 import { rule as componentFolderStructureRule } from './component-folder-structure/rule.ts'
 import { rule as noArrayFilterMapRule } from './no-array-filter-map/rule.ts'
 import { rule as noAtomInPropsRule } from './no-atom-in-props/rule.ts'
@@ -44,7 +43,6 @@ const plugin = definePlugin({
     'no-unknown-type-aliases': noUnknownTypeAliasesRule,
     'no-unsafe-dictionary-type': noUnsafeDictionaryTypeRule,
     'require-safety-comment-for-type-assertion': requireSafetyCommentForTypeAssertionRule,
-    'atom-naming': atomNamingRule,
     'component-folder-structure': componentFolderStructureRule,
     'no-atom-in-props': noAtomInPropsRule,
     'no-hardcoded-design-literals': noHardcodedDesignLiteralsRule,

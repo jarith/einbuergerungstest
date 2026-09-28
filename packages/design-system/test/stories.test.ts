@@ -36,6 +36,20 @@ for (const { colorScheme, skin, accent, actionHeight, fieldHeight } of themes) {
   test.describe(`${skin} / ${colorScheme}`, () => {
     const globals = `colorScheme:${colorScheme};skin:${skin}`
 
+    test('public JSX patterns emit themed layout styles', async ({ page }) => {
+      await page.goto(`/iframe.html?id=foundation-layout--composition&globals=${globals}`)
+
+      const composition = page.getByRole('region', { name: 'Layout composition' })
+      const actions = page.getByRole('toolbar', { name: 'Actions' })
+
+      await expect(composition).toHaveCSS('display', 'flex')
+      await expect(composition).toHaveCSS('flex-direction', 'column')
+      await expect(composition).toHaveCSS('gap', '20px')
+      await expect(actions).toHaveCSS('display', 'flex')
+      await expect(actions).toHaveCSS('flex-wrap', 'wrap')
+      await expect(actions.getByRole('button')).toHaveCount(3)
+    })
+
     test('composition loads styled, keyboard-accessible controls', async ({ page }) => {
       await page.goto(`/iframe.html?id=foundation-components--composition&globals=${globals}`)
 
