@@ -177,5 +177,18 @@
     "needsReview": "Wiederholen",
     "learning": "In Bearbeitung",
     "learned": "Gelernt"
+  },
+  "groups": {
+    "eyebrow": "LERNEN / FRAGENGRUPPEN",
+    "title": "Nach Fragengruppen lernen",
+    "description": "Wähle ein Thema und lerne seine Fragen der Reihe nach. Jede Gruppe speichert deine Position.",
+    "studyAll": "Alle {{count, number}} Fragen lernen",
+    "summary": "{{count, number}} Gruppen · {{questions, number}} Fragen",
+    "progressHelp": "Fragen mit dem Status „In Bearbeitung“ oder „Gelernt“ zählen jeweils einmal zum Gruppen- und Gesamtfortschritt. Eine falsche Antwort entfernt diesen Beitrag bis zur nächsten richtigen Antwort.",
+    "questionCount_one": "{{count, number}} Frage",
+    "questionCount_other": "{{count, number}} Fragen",
+    "start": "Gruppe lernen",
+    "continue": "Gruppe fortsetzen",
+    "completed": "Abgeschlossene Gruppe ansehen"
   }
 }

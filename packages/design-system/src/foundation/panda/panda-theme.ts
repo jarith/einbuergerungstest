@@ -144,7 +144,7 @@ export const pandaTheme = {
 
 export const globalStyles = defineGlobalStyles({
   // Reset native text margins once; layout primitives own spacing between elements.
-  ':where(h1, h2, p)': { margin: 0 },
+  ':where(h1, h2, h3, p, ol)': { margin: 0 },
   body: { textStyle: 'body', backgroundColor: 'canvas', color: 'content.primary' },
   ':where(:focus-visible), .ds-focus:focus-visible': { layerStyle: 'focus' },
   '*, *::before, *::after': {

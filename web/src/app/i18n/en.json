@@ -177,5 +177,18 @@
     "needsReview": "Needs review",
     "learning": "Learning",
     "learned": "Learned"
+  },
+  "groups": {
+    "eyebrow": "STUDY / QUESTION GROUPS",
+    "title": "Study by question group",
+    "description": "Choose a topic to study its questions in order. Each group saves your place.",
+    "studyAll": "Study all {{count, number}} questions",
+    "summary": "{{count, number}} groups · {{questions, number}} questions",
+    "progressHelp": "Learning and Learned questions each count once toward group and overall progress. A wrong answer removes that contribution until the next correct answer.",
+    "questionCount_one": "{{count, number}} question",
+    "questionCount_other": "{{count, number}} questions",
+    "start": "Study group",
+    "continue": "Continue group",
+    "completed": "View completed group"
   }
 }

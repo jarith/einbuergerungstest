@@ -39,7 +39,10 @@ export const AppLayout = reatomComponent(({ route, routes, title }: AppLayoutPro
       localization={data.localization}
       title={title()}
       isTitleHidden={
-        routes.dashboard.exact() || routes.study.entry.exact() || routes.study.study.exact()
+        routes.dashboard.exact() ||
+        routes.study.entry.exact() ||
+        routes.study.study.exact() ||
+        routes.groups.exact()
       }
       destinations={[
         {

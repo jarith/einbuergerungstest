@@ -19,6 +19,7 @@ export const createStudyModel = (
     mode,
     groupId,
   )
+
   const group = resources.questions.bank.groups.find((item) => item.id === groupId)
 
   return computed(() => {
