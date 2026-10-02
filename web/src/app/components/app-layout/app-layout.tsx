@@ -43,7 +43,8 @@ export const AppLayout = reatomComponent(({ route, routes, title }: AppLayoutPro
         routes.study.entry.exact() ||
         routes.study.study.exact() ||
         routes.groups.exact() ||
-        routes.mock.entry.match()
+        routes.mock.entry.match() ||
+        routes.testReview.exact()
       }
       destinations={[
         {
@@ -78,7 +79,7 @@ export const AppLayout = reatomComponent(({ route, routes, title }: AppLayoutPro
         },
       ]}
       links={[
-        ...(routes.progress.match()
+        ...(routes.progress.exact()
           ? [{ label: t('navigation.questions'), href: routes.questions.path() }]
           : []),
       ]}

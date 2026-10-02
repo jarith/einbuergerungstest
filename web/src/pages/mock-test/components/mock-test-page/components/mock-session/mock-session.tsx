@@ -16,9 +16,11 @@ export const MockSession = reatomComponent(({ model }: MockSessionProps) => {
   const { sitting, loaded, answer, index } = model()
   const t = model.localization.t()
   const seconds = model.mock.remaining()
+
   const timer = `${Math.floor(seconds / 60)
     .toString()
     .padStart(2, '0')}:${(seconds % 60).toString().padStart(2, '0')}`
+
   const isPending = model.mock.pending() || seconds === 0 || sitting?.status !== 'active'
 
   return (

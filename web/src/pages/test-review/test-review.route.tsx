@@ -4,6 +4,7 @@ import { wrap } from '@reatom/core'
 import type { AppRoute } from '../../app/routing'
 import { pageNotFound, RoutePage } from '../../app/routing'
 import { TestReviewPage } from './components/test-review-page/test-review-page'
+import { createTestReviewModel } from './test-review.model'
 
 export const createTestReviewRoute = (parent: AppRoute) =>
   parent.reatomRoute(
@@ -27,7 +28,7 @@ export const createTestReviewRoute = (parent: AppRoute) =>
           return selected
         })
 
-        return { ...resources, testId, paper }
+        return { ...resources, testId, paper, model: createTestReviewModel(resources, testId) }
       },
       render: (self): ReactElement => (
         <RoutePage

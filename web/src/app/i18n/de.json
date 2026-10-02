@@ -161,7 +161,19 @@
     "questionList": "Alle 33 Fragen",
     "blanks_one": "{{count}} unbeantwortete Frage",
     "blanks_other": "{{count}} unbeantwortete Fragen",
-    "backToQuestions": "Zurück zu den Fragen"
+    "backToQuestions": "Zurück zu den Fragen",
+    "completed": "Abgeschlossen",
+    "threshold": "Zum Bestehen brauchst du 17 richtige Antworten.",
+    "blankResult_one": "{{count}} unbeantwortete Frage wurde als falsch gewertet.",
+    "blankResult_other": "{{count}} unbeantwortete Fragen wurden als falsch gewertet.",
+    "timeout": "Die Zeit ist abgelaufen. Gespeicherte Antworten wurden automatisch ausgewertet.",
+    "submitted": "Von dir abgegeben.",
+    "noScore": "Keine Punktzahl",
+    "unfinishedHelp_one": "{{count}} Auswahl gespeichert. Dieser Test zählt nicht als abgeschlossen und kann nicht fortgesetzt werden.",
+    "unfinishedHelp_other": "{{count}} Auswahlen gespeichert. Dieser Test zählt nicht als abgeschlossen und kann nicht fortgesetzt werden.",
+    "startAnother": "Neuen Probetest starten",
+    "yourChoice": "Deine Auswahl:",
+    "backToOverview": "Zurück zur Übersicht"
   },
   "dialogs": {
     "submitTitle": "Diesen Test abgeben?",

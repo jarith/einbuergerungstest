@@ -161,7 +161,19 @@
     "questionList": "All 33 questions",
     "blanks_one": "{{count}} unanswered question",
     "blanks_other": "{{count}} unanswered questions",
-    "backToQuestions": "Back to questions"
+    "backToQuestions": "Back to questions",
+    "completed": "Completed",
+    "threshold": "You need 17 correct answers to pass.",
+    "blankResult_one": "{{count}} unanswered question counted as incorrect.",
+    "blankResult_other": "{{count}} unanswered questions counted as incorrect.",
+    "timeout": "Time is up. Saved answers were graded automatically.",
+    "submitted": "Submitted by you.",
+    "noScore": "No score",
+    "unfinishedHelp_one": "{{count}} choice saved. This test is not counted as completed and cannot be resumed.",
+    "unfinishedHelp_other": "{{count}} choices saved. This test is not counted as completed and cannot be resumed.",
+    "startAnother": "Start another mock test",
+    "yourChoice": "You chose",
+    "backToOverview": "Back to overview"
   },
   "dialogs": {
     "submitTitle": "Submit this test?",
