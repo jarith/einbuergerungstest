@@ -94,7 +94,9 @@
     "zoomIn": "Vergrößern",
     "zoomOut": "Verkleinern",
     "imageViewport": "Vergrößertes Fragebild",
-    "imageHelp": "Vergrößere das Bild, um Details zu erkennen. Verschiebe den sichtbaren Ausschnitt per Touch, Trackpad oder mit den Pfeiltasten, wenn das Bild fokussiert ist."
+    "imageHelp": "Vergrößere das Bild, um Details zu erkennen. Verschiebe den sichtbaren Ausschnitt per Touch, Trackpad oder mit den Pfeiltasten, wenn das Bild fokussiert ist.",
+    "allQuestions": "ALLE FRAGEN",
+    "allComplete": "Du hast das Ende aller 310 Fragen erreicht. Du kannst einen neuen Durchgang beginnen oder deinen Fortschritt ansehen."
   },
   "dashboard": {
     "testToday": "Deine Prüfung ist heute",

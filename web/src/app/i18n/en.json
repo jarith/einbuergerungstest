@@ -94,7 +94,9 @@
     "zoomIn": "Zoom in",
     "zoomOut": "Zoom out",
     "imageViewport": "Enlarged question image",
-    "imageHelp": "Zoom in to inspect details. Scroll the image with touch, a trackpad, or arrow keys when the image is focused."
+    "imageHelp": "Zoom in to inspect details. Scroll the image with touch, a trackpad, or arrow keys when the image is focused.",
+    "allQuestions": "ALL QUESTIONS",
+    "allComplete": "You reached the end of all 310 questions. You can start another pass or review your progress."
   },
   "dashboard": {
     "testToday": "Your test is today",
