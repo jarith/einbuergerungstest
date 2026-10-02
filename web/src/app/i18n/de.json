@@ -225,5 +225,16 @@
     "showMore": "Nächste {{count}} Fragen anzeigen",
     "noAttempts": "Keine Versuche",
     "hasImage": "Frage enthält ein Bild"
+  },
+  "history": {
+    "context": "Fortschritt / Frage {{number}}",
+    "latest": "Letzter Versuch",
+    "earlier": "Frühere Versuche",
+    "noAttempts": "Noch keine Antworten gespeichert. Lerne diese Frage, um deinen ersten Versuch zu starten.",
+    "noEarlier": "Keine früheren Versuche.",
+    "study": "Diese Frage lernen",
+    "back": "Zurück zu allen Fragen",
+    "sourceStudy": "Lernen",
+    "sourceMock": "Abgeschlossener Probetest"
   }
 }

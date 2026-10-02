@@ -2,6 +2,7 @@ import { action, atom, computed, effect, urlAtom, withAsync, wrap } from '@reato
 
 import type { AppResources } from '../../app/bootstrap.model'
 import type { QuestionKey } from '../../modules/question-bank'
+import { browserNavigationAtom } from '../../shared/navigation/browser-navigation.model'
 
 export const createMockPageModel = (
   resources: AppResources,
@@ -58,6 +59,8 @@ export const createMockPageModel = (
         const seconds = mock.remaining()
 
         if (sitting?.status === 'completed') {
+          browserNavigationAtom.cancel()
+
           mock.cancelSubmission()
 
           urlAtom.go(`/progress/tests/${encodeURIComponent(sitting.id)}`, true)

@@ -9,3 +9,5 @@ export { fetchQuestionBank, resolveQuestionImage } from './infrastructure/questi
 export { QuestionContent } from './components/question-content/question-content'
 
 export type { QuestionContentProps } from './components/question-content/question-content'
+
+export { QuestionImage } from './components/question-image/question-image'

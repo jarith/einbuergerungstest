@@ -4,6 +4,7 @@ import { wrap } from '@reatom/core'
 import type { AppRoute } from '../../app/routing'
 import { pageNotFound, RoutePage } from '../../app/routing'
 import { QuestionHistoryPage } from './components/question-history-page/question-history-page'
+import { createQuestionHistoryModel } from './question-history.model'
 
 export const createQuestionHistoryRoute = (parent: AppRoute) =>
   parent.reatomRoute(
@@ -17,7 +18,7 @@ export const createQuestionHistoryRoute = (parent: AppRoute) =>
           throw pageNotFound()
         }
 
-        return { ...resources, selected }
+        return { ...resources, selected, model: createQuestionHistoryModel(resources, selected) }
       },
       render: (self): ReactElement => (
         <RoutePage

@@ -9,9 +9,16 @@
     "Settings page",
     "Ordered study flow",
     "Study page",
-    "Dashboard page"
+    "Dashboard page",
+    "Group study flow",
+    "Study groups page",
+    "Mock test domain",
+    "Mock test page",
+    "Test review page",
+    "Question list page",
+    "Question history page"
   ],
-  "nextTask": "Group study flow",
+  "nextTask": "Progress page",
   "dependencies": {
     "Resources and question bank": [],
     "Learner state and IndexedDB": ["Resources and question bank"],

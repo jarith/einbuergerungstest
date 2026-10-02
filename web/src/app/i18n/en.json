@@ -225,5 +225,16 @@
     "showMore": "Show next {{count}} questions",
     "noAttempts": "No attempts",
     "hasImage": "Question includes an image"
+  },
+  "history": {
+    "context": "Progress / Question {{number}}",
+    "latest": "Latest attempt",
+    "earlier": "Earlier attempts",
+    "noAttempts": "No answers recorded yet. Study this question to make your first attempt.",
+    "noEarlier": "No earlier attempts.",
+    "study": "Study this question",
+    "back": "Back to all questions",
+    "sourceStudy": "Study",
+    "sourceMock": "Completed mock test"
   }
 }

@@ -111,11 +111,11 @@ each outcome is verified.
 | 10    | [Dashboard page](10-dashboard-page.md)                       | 04, 06–08     | Entry actions, countdown, overall and group progress.                        |
 | 11    | [Group study flow](11-group-study.md)                        | 01–02, 08–09  | Scoped bank-order passes, group route, and per-group positions.              |
 | 12    | [Study groups page](12-study-groups-page.md)                 | 03–04, 06, 11 | Localized picker for all 13 groups.                                          |
-| 13    | [Mock test domain](13-mock-test-domain.md)                   | 01–02, 05–06  | Paper, timer, lifecycle, and grading.                                        |
-| 14    | [Mock test page](14-mock-test-page.md)                       | 04–05, 13     | Timed sitting and submission/exit controls.                                  |
-| 15    | [Test review page](15-test-review-page.md)                   | 03–05, 13     | Completed and unfinished review states.                                      |
-| 16    | [Question list page](16-question-list-page.md)               | 04, 06        | Browse/filter all 310 questions.                                             |
-| 17    | [Question history page](17-question-history-page.md)         | 04–06, 08     | Latest and earlier attempts, study entry.                                    |
+| 13 ✓  | [Mock test domain](13-mock-test-domain.md)                   | 01–02, 05–06  | Paper, timer, lifecycle, and grading.                                        |
+| 14 ✓  | [Mock test page](14-mock-test-page.md)                       | 04–05, 13     | Timed sitting and submission/exit controls.                                  |
+| 15 ✓  | [Test review page](15-test-review-page.md)                   | 03–05, 13     | Completed and unfinished review states.                                      |
+| 16 ✓  | [Question list page](16-question-list-page.md)               | 04, 06        | Browse/filter all 310 questions.                                             |
+| 17 ✓  | [Question history page](17-question-history-page.md)         | 04–06, 08     | Latest and earlier attempts, study entry.                                    |
 | 18    | [Progress page](18-progress-page.md)                         | 06, 13, 15–17 | Question and mock history overview with backup access.                       |
 | 19    | [Installation page](19-installation-page.md)                 | 03–04         | iPhone/iPad steps and progress transfer guidance.                            |
 | 20    | [PWA and release integration](20-pwa.md)                     | 01–19         | Standalone launch, complete offline cache, safe updates, final verification. |
