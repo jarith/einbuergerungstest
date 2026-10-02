@@ -47,23 +47,23 @@ Feature: Study question groups and see their progress
     And I choose the "Constitution, rights, and democratic principles" group
     And I select study answer "D"
     And I open dashboard
-    Then the "Constitution, rights, and democratic principles" group shows 1 of 27 solved and 4 percent
-    And the dashboard shows 1 of 310 solved questions and 0 percent
+    Then the "Constitution, rights, and democratic principles" group shows 1 of 27 contributing to progress and 4 percent
+    And the dashboard shows 1 of 310 questions contributing to progress and 0 percent
     When I reload the app
-    Then the "Constitution, rights, and democratic principles" group shows 1 of 27 solved and 4 percent
+    Then the "Constitution, rights, and democratic principles" group shows 1 of 27 contributing to progress and 4 percent
 
-  Scenario: All-question study shares the latest status with group progress
+  Scenario: All-question study shares the learning status with group progress
     When I start studying
     And I select study answer "D"
     And I open dashboard
-    Then the "Constitution, rights, and democratic principles" group shows 1 of 27 solved and 4 percent
+    Then the "Constitution, rights, and democratic principles" group shows 1 of 27 contributing to progress and 4 percent
     When I open progress
     And I open question 1 from progress
     And I retry the study question
     And I select study answer "A"
     And I open dashboard
-    Then the "Constitution, rights, and democratic principles" group shows 0 of 27 solved and 0 percent
-    And the dashboard shows 0 of 310 solved questions and 0 percent
+    Then the "Constitution, rights, and democratic principles" group shows 0 of 27 contributing to progress and 0 percent
+    And the dashboard shows 0 of 310 questions contributing to progress and 0 percent
 
   Scenario: A completed mock answer updates its question group
     When I start a mock test
@@ -71,7 +71,7 @@ Feature: Study question groups and see their progress
     And I answer the first mock question correctly
     And I submit the mock test with unanswered questions
     And I open dashboard
-    Then the noted mock question's group shows one solved question
+    Then the noted mock question's group shows one question contributing to progress
 
   Scenario: The group picker follows the selected UI language
     When I choose German as UI language

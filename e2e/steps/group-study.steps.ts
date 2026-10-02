@@ -28,14 +28,14 @@ const groupProgress = (page: Page, title: string) =>
 const expectGroupProgress = async (
   page: Page,
   title: string,
-  solved: number,
+  contributing: number,
   total: number,
   percent: number,
 ) => {
   const progress = groupProgress(page, title)
 
   await expect(progress).toBeVisible()
-  await expect(progress).toContainText(new RegExp(`\\b${solved}\\s*/\\s*${total}\\b`))
+  await expect(progress).toContainText(new RegExp(`\\b${contributing}\\s*/\\s*${total}\\b`))
   await expect(progress).toContainText(new RegExp(`\\b${percent}\\s*%`))
 }
 
@@ -104,13 +104,13 @@ Then('the dashboard shows zero progress for every question group', async ({ page
 })
 
 Then(
-  'the {string} group shows {int} of {int} solved and {int} percent',
-  async ({ page }, title: string, solved: number, total: number, percent: number) => {
+  'the {string} group shows {int} of {int} contributing to progress and {int} percent',
+  async ({ page }, title: string, contributing: number, total: number, percent: number) => {
     const group = groupByTitle(title)
 
     expect(groupCount(group.id)).toBe(total)
 
-    await expectGroupProgress(page, title, solved, total, percent)
+    await expectGroupProgress(page, title, contributing, total, percent)
   },
 )
 
@@ -120,18 +120,21 @@ When("I note the first mock question's group", async ({ page }) => {
   notedMockGroup.set(page, question.group_id)
 })
 
-Then("the noted mock question's group shows one solved question", async ({ page }) => {
-  const groupId = notedMockGroup.get(page)
-  const group = questionBank.groups.find((candidate) => candidate.id === groupId)
+Then(
+  "the noted mock question's group shows one question contributing to progress",
+  async ({ page }) => {
+    const groupId = notedMockGroup.get(page)
+    const group = questionBank.groups.find((candidate) => candidate.id === groupId)
 
-  if (!group) {
-    throw new Error('No mock question group was noted in this scenario.')
-  }
+    if (!group) {
+      throw new Error('No mock question group was noted in this scenario.')
+    }
 
-  const total = groupCount(group.id)
+    const total = groupCount(group.id)
 
-  await expectGroupProgress(page, group.title, 1, total, Math.round(100 / total))
-})
+    await expectGroupProgress(page, group.title, 1, total, Math.round(100 / total))
+  },
+)
 
 Then('the Constitution and rights group has a German title and description', async ({ page }) => {
   const englishGroup = groupByTitle('Constitution, rights, and democratic principles')

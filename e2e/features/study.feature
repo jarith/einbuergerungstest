@@ -11,8 +11,8 @@ Feature: Study the Berlin question bank in order
     And study answer "D" is marked correct
     And I see immediate incorrect feedback
     When I open progress
-    Then question 1 has status "mistaken"
-    And the question totals are 0 correct, 1 mistaken, and 309 untried
+    Then question 1 has status "needs-review"
+    And the question totals are 309 not started, 1 needing review, 0 learning, and 0 learned
 
   Scenario: A later attempt changes the latest status but retains the mistake
     When I start studying
@@ -22,7 +22,7 @@ Feature: Study the Berlin question bank in order
     Then study answer "D" is marked correct
     And I see immediate correct feedback
     When I open progress
-    Then question 1 has status "correct"
+    Then question 1 has status "learning"
     And question 1 has 2 recorded attempts
 
   Scenario: Translation shows both languages and remains enabled

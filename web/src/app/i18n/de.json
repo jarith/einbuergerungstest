@@ -59,7 +59,6 @@
   "study": {
     "correct": "Richtig",
     "mistaken": "Falsch",
-    "untried": "Unbeantwortet",
     "checkAnswer": "Antwort prüfen",
     "tryAgain": "Erneut versuchen",
     "completed": "Lerndurchgang abgeschlossen",
@@ -73,10 +72,10 @@
     "imageHelp": "Vergrößere das Bild, um Details zu erkennen. Verschiebe den sichtbaren Ausschnitt per Touch, Trackpad oder mit den Pfeiltasten, wenn das Bild fokussiert ist."
   },
   "dashboard": {
-    "solved": "{{solved, number}} von {{total, number}} gelöst",
     "testToday": "Deine Prüfung ist heute",
     "daysUntilTest_one": "Noch {{count, number}} Tag bis zur Prüfung",
-    "daysUntilTest_other": "Noch {{count, number}} Tage bis zur Prüfung"
+    "daysUntilTest_other": "Noch {{count, number}} Tage bis zur Prüfung",
+    "contributing": "{{count, number}} von {{total, number}} tragen zum Fortschritt bei"
   },
   "mock": {
     "start": "Probetest starten",
@@ -110,5 +109,11 @@
     "storage": "Deine Änderungen konnten nicht gespeichert werden. Versuche es erneut, bevor du diese Seite verlässt.",
     "storageConflict": "Deine Daten wurden in einem anderen App-Fenster geändert. Lade die App neu, um die zuletzt gespeicherten Daten zu verwenden.",
     "notFound": "Diese Seite wurde nicht gefunden. Kehre zur Übersicht zurück."
+  },
+  "progress": {
+    "notStarted": "Nicht begonnen",
+    "needsReview": "Wiederholen",
+    "learning": "In Bearbeitung",
+    "learned": "Gelernt"
   }
 }

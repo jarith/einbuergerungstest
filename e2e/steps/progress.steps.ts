@@ -2,44 +2,37 @@ import type { Page } from '@playwright/test'
 import { expect } from '@playwright/test'
 import { createBdd } from 'playwright-bdd'
 
+import { questionStatusLabel } from './helpers'
+
 const { When, Then } = createBdd()
 
 const exportedBackups = new WeakMap<Page, string>()
 
-const statusLabel = (status: string) => {
-  if (status === 'correct') {
-    return '(?:Correct|Richtig)'
-  }
-
-  if (status === 'mistaken') {
-    return '(?:Incorrect|Wrong|Falsch)'
-  }
-
-  if (status === 'untried') {
-    return '(?:Untried|Ungeübt)'
-  }
-
-  throw new Error(`Unknown question status: ${status}`)
-}
-
 Then('question {int} has status {string}', async ({ page }, number: number, status: string) => {
   await expect(
     page.getByRole('button', {
-      name: new RegExp(`(?:Question|Frage) ${number}.*${statusLabel(status)}`),
+      name: new RegExp(`(?:Question|Frage) ${number}.*${questionStatusLabel(status)}`),
     }),
   ).toBeVisible()
 })
 
 Then(
-  'the question totals are {int} correct, {int} mistaken, and {int} untried',
-  async ({ page }, correct: number, mistaken: number, untried: number) => {
+  'the question totals are {int} not started, {int} needing review, {int} learning, and {int} learned',
+  async ({ page }, notStarted: number, needsReview: number, learning: number, learned: number) => {
     const progress = page.getByRole('region', { name: /^(Question progress|Fragenfortschritt)$/ })
 
-    await expect(progress).toContainText(new RegExp(`${correct}\\s+(?:correct|richtig)`, 'i'))
     await expect(progress).toContainText(
-      new RegExp(`${mistaken}\\s+(?:incorrect|wrong|falsch)`, 'i'),
+      new RegExp(`${notStarted}\\s+${questionStatusLabel('not-started')}`, 'i'),
     )
-    await expect(progress).toContainText(new RegExp(`${untried}\\s+(?:untried|ungeübt)`, 'i'))
+    await expect(progress).toContainText(
+      new RegExp(`${needsReview}\\s+${questionStatusLabel('needs-review')}`, 'i'),
+    )
+    await expect(progress).toContainText(
+      new RegExp(`${learning}\\s+${questionStatusLabel('learning')}`, 'i'),
+    )
+    await expect(progress).toContainText(
+      new RegExp(`${learned}\\s+${questionStatusLabel('learned')}`, 'i'),
+    )
   },
 )
 

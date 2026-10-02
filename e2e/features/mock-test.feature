@@ -29,7 +29,7 @@ Feature: Practice a Berlin Einbürgerungstest
     Then the mock result is 0 of 33 and "failed"
     And the completed test review shows every question and correct answer
     When I open progress
-    Then the question totals are 0 correct, 0 mistaken, and 310 untried
+    Then the question totals are 310 not started, 0 needing review, 0 learning, and 0 learned
     And the mock totals are 1 completed, 0 passed, 1 failed, and 0 unfinished
     When I open the completed test from history
     Then the completed test review shows every question and correct answer
@@ -65,7 +65,7 @@ Feature: Practice a Berlin Einbürgerungstest
     And I open progress
     Then the unfinished test appears in history without a score
     And the mock totals are 0 completed, 0 passed, 0 failed, and 1 unfinished
-    And the question totals are 0 correct, 0 mistaken, and 310 untried
+    And the question totals are 310 not started, 0 needing review, 0 learning, and 0 learned
     When I open the unfinished test from history
     Then the unfinished test review shows mock answer "A" without a score
 

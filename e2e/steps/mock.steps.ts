@@ -2,7 +2,12 @@ import type { Page } from '@playwright/test'
 import { expect } from '@playwright/test'
 import { createBdd } from 'playwright-bdd'
 
-import { mockAnswer, sourceQuestionInText, sourceQuestionOnPage } from './helpers'
+import {
+  mockAnswer,
+  questionStatusLabel,
+  sourceQuestionInText,
+  sourceQuestionOnPage,
+} from './helpers'
 
 const { Given, When, Then } = createBdd()
 
@@ -208,7 +213,7 @@ Then('that mock question has status {string}', async ({ page }, status: string) 
     throw new Error('No mock question was recorded in this scenario.')
   }
 
-  const label = status === 'correct' ? 'Richtig' : 'Falsch'
+  const label = questionStatusLabel(status)
 
   await expect(
     page.getByRole('button', { name: new RegExp(`Frage ${number}.*${label}`) }),

@@ -115,10 +115,8 @@ Use these four statuses consistently in question indicators, totals, filters, an
 Provide localized labels in English and German, with text or icons alongside the colors.
 Progress counts Learning and Learned equally, while status totals distinguish them.
 
-The executable acceptance specification is in [`e2e/features/`](../e2e/features/). The
-existing scenarios still use the previous status terminology; updating them and their step
-definitions to the four-state rules is part of
-[progress projections](../tasks/06-progress-projections.md). The glossary is in
+The executable acceptance specification is in [`e2e/features/`](../e2e/features/). Its
+existing status and total assertions use this four-state terminology. The glossary is in
 [`CONTEXT.md`](./CONTEXT.md), and the device-local storage decision is in
 [`adr/0001-device-local-progress.md`](./adr/0001-device-local-progress.md).
 

@@ -48,8 +48,8 @@ never import another page.
 Use a stable question key made from section and source_question_id. Persist the source
 facts: settings, study positions, study attempts, and mock sittings. Derive a single
 question-attempt timeline from study attempts and selected answers in completed mocks,
-then derive current question status, solved counts, percentages, and mock summaries. A blank
-answer in a completed mock and every selection in an unfinished mock create no question
+then derive current question status, contributing counts, percentages, and mock summaries.
+A blank answer in a completed mock and every selection in an unfinished mock create no question
 attempt.
 
 ## Router contract
@@ -104,7 +104,7 @@ each outcome is verified.
 | 03    | [Localization and preferences model](03-localization.md)     | 01–02         | English/German UI and independent study translation setting.                 |
 | 04    | [Router and app shell](04-router-shell.md)                   | 01–03         | reatomRoute composition, page contracts, and responsive navigation.          |
 | 05    | [Core question and answer rules](05-core-question-answer.md) | 01–02         | Shared rendering, answer semantics, images, and attempt recording.           |
-| 06    | [Progress projections](06-progress-projections.md)           | 01–02, 05     | Latest-attempt statuses and aggregate counts.                                |
+| 06    | [Progress projections](06-progress-projections.md)           | 01–02, 05     | Four-state learning statuses and aggregate counts.                          |
 | 07    | [Settings page](07-settings-page.md)                         | 02–04         | Preferences, planned date, backup, import, and reset UI.                     |
 | 08    | [Ordered study flow](08-ordered-study.md)                    | 05–06         | Bank-order study with saved position and immediate feedback.                 |
 | 09    | [Study page](09-study-page.md)                               | 04–05, 08     | All-question presentation with a group-capable page structure.               |
@@ -133,7 +133,7 @@ the stated dependencies hold.
   820×1180, and 390×844. Do not add unit tests.
 - Confirm 310 questions and every illustration work offline; English and German UI keep
   German exam content intact; the study translation preference survives reload.
-- Confirm latest-attempt progress, per-group counts, saved study positions, 30+3 mock
+- Confirm four-state learning progress, per-group counts, saved study positions, 30+3 mock
   sampling, 60-minute deadline, 17/33 pass rule, unfinished history, and blank-answer
   semantics.
 - Confirm import preview and explicit replacement, invalid-backup preservation, complete

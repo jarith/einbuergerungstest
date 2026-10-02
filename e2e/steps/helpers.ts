@@ -70,3 +70,18 @@ export const expectHighlight = async (option: Locator, hue: 'red' | 'green') => 
 
   expect(colors.some((color) => colorMatches(color, hue))).toBe(true)
 }
+
+export const questionStatusLabel = (status: string) => {
+  switch (status) {
+    case 'not-started':
+      return '(?:Not started|Nicht begonnen)'
+    case 'needs-review':
+      return '(?:Needs review|Wiederholen)'
+    case 'learning':
+      return '(?:Learning|In Bearbeitung)'
+    case 'learned':
+      return '(?:Learned|Gelernt)'
+    default:
+      throw new Error(`Unknown question status: ${status}`)
+  }
+}

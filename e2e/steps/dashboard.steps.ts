@@ -55,11 +55,11 @@ Then('the past test date is rejected with visible feedback', async ({ page }) =>
 })
 
 Then(
-  'the dashboard shows {int} of 310 solved questions and {int} percent',
-  async ({ page }, solved: number, percent: number) => {
+  'the dashboard shows {int} of 310 questions contributing to progress and {int} percent',
+  async ({ page }, contributing: number, percent: number) => {
     const dashboard = page.getByRole('main')
 
-    await expect(dashboard).toContainText(new RegExp(`\\b${solved}\\s*/\\s*310\\b`))
+    await expect(dashboard).toContainText(new RegExp(`\\b${contributing}\\s*/\\s*310\\b`))
     await expect(dashboard).toContainText(new RegExp(`\\b${percent}\\s*%`))
   },
 )

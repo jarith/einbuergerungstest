@@ -4,9 +4,10 @@
     "Learner state and IndexedDB",
     "Localization and preferences model",
     "Router and app shell",
-    "Core question and answer rules"
+    "Core question and answer rules",
+    "Progress projections"
   ],
-  "nextTask": "Progress projections",
+  "nextTask": "Settings page",
   "dependencies": {
     "Resources and question bank": [],
     "Learner state and IndexedDB": [

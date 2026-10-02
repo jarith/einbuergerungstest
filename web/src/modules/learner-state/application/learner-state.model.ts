@@ -21,6 +21,7 @@ import {
 } from '../domain/learner-state'
 import { createLearnerRepository } from '../infrastructure/learner-repository'
 import { decodeLearnerSnapshot, parsePlannedDate } from '../infrastructure/snapshot-codec'
+import { createProgressModel } from './progress.model'
 
 type SnapshotMutation = (snapshot: LearnerSnapshot) => LearnerSnapshot
 
@@ -366,6 +367,7 @@ export const createLearnerState = (bank: QuestionBank) => {
 
   const learnerStateAtom = computed(() => snapshotAtom(), 'learnerState').extend(() => ({
     bootstrap,
+    progress: createProgressModel(bank, requireSnapshot),
     updatePreferences,
     setStudyPosition,
     recordStudyAnswer,

@@ -59,7 +59,6 @@
   "study": {
     "correct": "Correct",
     "mistaken": "Incorrect",
-    "untried": "Untried",
     "checkAnswer": "Check answer",
     "tryAgain": "Try again",
     "completed": "Study complete",
@@ -73,10 +72,10 @@
     "imageHelp": "Zoom in to inspect details. Scroll the image with touch, a trackpad, or arrow keys when the image is focused."
   },
   "dashboard": {
-    "solved": "{{solved, number}} of {{total, number}} solved",
     "testToday": "Your test is today",
     "daysUntilTest_one": "{{count, number}} day until your test",
-    "daysUntilTest_other": "{{count, number}} days until your test"
+    "daysUntilTest_other": "{{count, number}} days until your test",
+    "contributing": "{{count, number}} of {{total, number}} contributing to progress"
   },
   "mock": {
     "start": "Start mock test",
@@ -110,5 +109,11 @@
     "storage": "Your changes could not be saved. Try again before leaving this page.",
     "storageConflict": "Your data changed in another app window. Reload to use the latest saved data.",
     "notFound": "This page could not be found. Return to the dashboard."
+  },
+  "progress": {
+    "notStarted": "Not started",
+    "needsReview": "Needs review",
+    "learning": "Learning",
+    "learned": "Learned"
   }
 }
