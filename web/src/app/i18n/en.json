@@ -96,7 +96,15 @@
     "imageViewport": "Enlarged question image",
     "imageHelp": "Zoom in to inspect details. Scroll the image with touch, a trackpad, or arrow keys when the image is focused.",
     "allQuestions": "ALL QUESTIONS",
-    "allComplete": "You reached the end of all 310 questions. You can start another pass or review your progress."
+    "allComplete": "You reached the end of all 310 questions. You can start another pass or review your progress.",
+    "previous": "Previous",
+    "retryQuestion": "Retry question",
+    "finish": "Finish study",
+    "restart": "Start another pass",
+    "helpTitle": "How Study works",
+    "helpBody": "Choose an answer to see feedback. You can try the question again later.",
+    "status": "Question status",
+    "progressHelp": "Open a question in Progress to study it."
   },
   "dashboard": {
     "testToday": "Your test is today",

@@ -5,6 +5,7 @@ import type { AppRoute } from '../../app/routing'
 import { pageNotFound, RoutePage } from '../../app/routing'
 import { getQuestionKey } from '../../modules/question-bank'
 import { StudyPage } from './components/study-page/study-page'
+import { createStudyModel } from './study.model'
 
 export const createStudyRoutes = (parent: AppRoute) => {
   const load = async (questionKey: string | undefined, groupId?: string) => {
@@ -40,7 +41,16 @@ export const createStudyRoutes = (parent: AppRoute) => {
       throw pageNotFound()
     }
 
-    return { ...resources, selected, group, ordered }
+    return {
+      ...resources,
+      selected,
+      group,
+      ordered,
+      model:
+        groupId === undefined
+          ? createStudyModel(resources, questionKey === undefined ? undefined : selected.key)
+          : null,
+    }
   }
 
   const study = parent.reatomRoute(
@@ -77,16 +87,7 @@ export const createStudyRoutes = (parent: AppRoute) => {
   const entry = parent.reatomRoute(
     {
       path: 'study',
-      loader: async () => {
-        const isEntry = entry.exact()
-        const data = await wrap(load(undefined))
-
-        if (isEntry) {
-          study.go({ questionKey: data.selected.key }, true)
-        }
-
-        return data
-      },
+      loader: async () => await wrap(load(undefined)),
       render: (self): ReactElement => (
         <RoutePage
           loader={self.loader}

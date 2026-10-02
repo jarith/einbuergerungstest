@@ -96,7 +96,15 @@
     "imageViewport": "Vergrößertes Fragebild",
     "imageHelp": "Vergrößere das Bild, um Details zu erkennen. Verschiebe den sichtbaren Ausschnitt per Touch, Trackpad oder mit den Pfeiltasten, wenn das Bild fokussiert ist.",
     "allQuestions": "ALLE FRAGEN",
-    "allComplete": "Du hast das Ende aller 310 Fragen erreicht. Du kannst einen neuen Durchgang beginnen oder deinen Fortschritt ansehen."
+    "allComplete": "Du hast das Ende aller 310 Fragen erreicht. Du kannst einen neuen Durchgang beginnen oder deinen Fortschritt ansehen.",
+    "previous": "Zurück",
+    "retryQuestion": "Erneut versuchen",
+    "finish": "Lernen abschließen",
+    "restart": "Neuen Durchgang starten",
+    "helpTitle": "So funktioniert Lernen",
+    "helpBody": "Wähle eine Antwort, um Rückmeldung zu erhalten. Du kannst die Frage später erneut versuchen.",
+    "status": "Fragenstatus",
+    "progressHelp": "Öffne eine Frage im Fortschritt, um sie zu üben."
   },
   "dashboard": {
     "testToday": "Deine Prüfung ist heute",

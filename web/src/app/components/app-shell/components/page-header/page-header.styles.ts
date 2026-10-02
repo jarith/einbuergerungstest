@@ -1,6 +1,7 @@
 import { css } from '@einbuergerungstest/design-system'
 
 export const styles = {
+  hiddenHeading: css({ srOnly: true }),
   context: css.raw({
     display: 'none',
     '@media (min-width: 64rem)': {

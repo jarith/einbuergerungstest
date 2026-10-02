@@ -16,13 +16,21 @@ import { StorageFooter } from './components/storage-footer/storage-footer'
 type AppShellProps = Readonly<{
   localization: AppResources['localization']
   title: string
+  isTitleHidden?: boolean
   destinations: readonly Destination[]
   links: readonly PageLink[]
   children?: ReactNode
 }>
 
 export const AppShell = reatomComponent(
-  ({ localization, title, destinations, links, children }: AppShellProps) => {
+  ({
+    localization,
+    title,
+    destinations,
+    links,
+    children,
+    isTitleHidden = false,
+  }: AppShellProps) => {
     const t = localization.t()
 
     return (
@@ -38,7 +46,12 @@ export const AppShell = reatomComponent(
             <StorageFooter label={t('app.deviceLocal')} />
           </div>
           <Stack as="main" id="main" tabIndex={-1} css={{ ...shellStyles.main }}>
-            <PageHeader context={t('app.context')} title={title} links={links} />
+            <PageHeader
+              context={t('app.context')}
+              title={title}
+              links={links}
+              isTitleHidden={isTitleHidden}
+            />
             {children}
           </Stack>
         </Grid>

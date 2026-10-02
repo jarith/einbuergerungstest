@@ -38,6 +38,7 @@ export const AppLayout = reatomComponent(({ route, routes, title }: AppLayoutPro
     <AppShell
       localization={data.localization}
       title={title()}
+      isTitleHidden={routes.study.entry.exact() || routes.study.study.exact()}
       destinations={[
         {
           label: t('navigation.home'),
@@ -71,9 +72,6 @@ export const AppLayout = reatomComponent(({ route, routes, title }: AppLayoutPro
         },
       ]}
       links={[
-        ...(routes.study.entry.match()
-          ? [{ label: t('navigation.groups'), href: routes.groups.path() }]
-          : []),
         ...(routes.progress.match()
           ? [{ label: t('navigation.questions'), href: routes.questions.path() }]
           : []),
