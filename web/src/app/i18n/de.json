@@ -214,5 +214,16 @@
     "start": "Gruppe lernen",
     "continue": "Gruppe fortsetzen",
     "completed": "Abgeschlossene Gruppe ansehen"
+  },
+  "questions": {
+    "bank": "Fragenkatalog",
+    "total": "{{count}} insgesamt",
+    "all": "Alle",
+    "filter": "Nach Lernstatus filtern",
+    "showing": "{{count}} von {{total}} Fragen angezeigt",
+    "empty": "Noch keine Fragen mit diesem Status. Wähle einen anderen Filter, um den Katalog zu durchsuchen.",
+    "showMore": "Nächste {{count}} Fragen anzeigen",
+    "noAttempts": "Keine Versuche",
+    "hasImage": "Frage enthält ein Bild"
   }
 }

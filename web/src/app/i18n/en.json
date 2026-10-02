@@ -214,5 +214,16 @@
     "start": "Study group",
     "continue": "Continue group",
     "completed": "View completed group"
+  },
+  "questions": {
+    "bank": "Question bank",
+    "total": "{{count}} total",
+    "all": "All",
+    "filter": "Filter by learning status",
+    "showing": "Showing {{count}} of {{total}} questions",
+    "empty": "No questions have this status yet. Choose another filter to browse the bank.",
+    "showMore": "Show next {{count}} questions",
+    "noAttempts": "No attempts",
+    "hasImage": "Question includes an image"
   }
 }
