@@ -200,7 +200,14 @@
     "notStarted": "Nicht begonnen",
     "needsReview": "Wiederholen",
     "learning": "In Bearbeitung",
-    "learned": "Gelernt"
+    "learned": "Gelernt",
+    "browse": "Alle {{count, number}} Fragen ansehen",
+    "mockTitle": "Probetests",
+    "mockTotals": "{{completed, number}} abgeschlossen · {{passed, number}} bestanden · {{failed, number}} nicht bestanden · {{unfinished, number}} unvollständig",
+    "noMocks": "Noch keine Probetests. Abgeschlossene und unvollständige Tests erscheinen hier.",
+    "noScore": "Ohne Ergebnis · Antworten ansehen",
+    "unfinishedHelp": "Unvollständige Tests werden ohne Ergebnis gespeichert und zählen nicht als abgeschlossen.",
+    "backup": "Daten sichern, importieren oder zurücksetzen"
   },
   "groups": {
     "eyebrow": "LERNEN / FRAGENGRUPPEN",

@@ -200,7 +200,14 @@
     "notStarted": "Not started",
     "needsReview": "Needs review",
     "learning": "Learning",
-    "learned": "Learned"
+    "learned": "Learned",
+    "browse": "Browse all {{count, number}} questions",
+    "mockTitle": "Mock tests",
+    "mockTotals": "{{completed, number}} completed · {{passed, number}} passed · {{failed, number}} failed · {{unfinished, number}} unfinished",
+    "noMocks": "No mock tests yet. Your completed and unfinished tests will appear here.",
+    "noScore": "No score · review answers",
+    "unfinishedHelp": "Unfinished tests are saved without a score and do not count as completed.",
+    "backup": "Back up, import or reset data"
   },
   "groups": {
     "eyebrow": "STUDY / QUESTION GROUPS",

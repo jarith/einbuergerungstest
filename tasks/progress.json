@@ -16,9 +16,10 @@
     "Mock test page",
     "Test review page",
     "Question list page",
-    "Question history page"
+    "Question history page",
+    "Progress page"
   ],
-  "nextTask": "Progress page",
+  "nextTask": "Installation page",
   "dependencies": {
     "Resources and question bank": [],
     "Learner state and IndexedDB": ["Resources and question bank"],
