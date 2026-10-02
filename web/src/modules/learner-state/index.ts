@@ -26,3 +26,6 @@ export {
 } from './domain/question-progress'
 export { getMockSummaries, getMockTotals } from './domain/mock-progress'
 export { QuestionStatusBadge } from './components/question-status-badge/question-status-badge'
+export { getLocalDate } from './domain/learner-state'
+export { createBackupModel } from './application/backup.model'
+export { BackupControls } from './components/backup-controls/backup-controls'

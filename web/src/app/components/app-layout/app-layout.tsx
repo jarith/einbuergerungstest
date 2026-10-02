@@ -77,9 +77,6 @@ export const AppLayout = reatomComponent(({ route, routes, title }: AppLayoutPro
         ...(routes.progress.match()
           ? [{ label: t('navigation.questions'), href: routes.questions.path() }]
           : []),
-        ...(routes.settings.match()
-          ? [{ label: t('navigation.installation'), href: routes.installation.path() }]
-          : []),
       ]}
     >
       {page ?? <RouteStatus error={pageNotFound()} language={data.localization.language()} />}

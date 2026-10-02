@@ -1,5 +1,26 @@
-import type { PageProps } from '../../../../app/routing'
+import { Stack } from '@einbuergerungstest/design-system/jsx'
+import { reatomComponent } from '@reatom/react'
 
-export const SettingsPage = ({ data }: PageProps) => (
-  <div data-question-count={data.questions.bank.question_count}>Settings</div>
+import type { PageProps } from '../../../../app/routing'
+import type { SettingsData } from '../../settings.model'
+import { BackupControls } from '../../../../modules/learner-state'
+import { PreferencesSection } from './components/preferences-section/preferences-section'
+import { styles } from './settings-page.styles'
+
+export const SettingsPage = reatomComponent(
+  ({ data }: PageProps<SettingsData>) => (
+    <Stack gap="layout.section">
+      <p>{data.localization.t()('settings.description')}</p>
+      <PreferencesSection data={data} />
+      <BackupControls
+        learner={data.learner}
+        localization={data.localization}
+        model={data.settings.backup}
+      />
+      <a className={styles.link} href="/installation">
+        {data.localization.t()('settings.installGuide')} →
+      </a>
+    </Stack>
+  ),
+  'SettingsPage',
 )
