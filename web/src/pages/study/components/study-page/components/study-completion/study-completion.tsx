@@ -1,4 +1,4 @@
-import { Button, Panel } from '@einbuergerungstest/design-system'
+import { Button, ButtonLink, Panel } from '@einbuergerungstest/design-system'
 import { Stack, Wrap } from '@einbuergerungstest/design-system/jsx'
 import { wrap } from '@reatom/core'
 import { reatomComponent } from '@reatom/react'
@@ -14,27 +14,38 @@ export const StudyCompletion = reatomComponent(({ model }: StudySessionProps) =>
     <Panel>
       <Stack gap="16">
         <p className={styles.label}>{model.scope()}</p>
-        <h2 className={styles.heading}>{t('study.completed')}</h2>
+        <h2 className={styles.heading}>
+          {t(model.isGroup ? 'study.groupCompleted' : 'study.completed')}
+        </h2>
+        {model.isGroup ? <p>{t('study.groupReached', { count: total.total })}</p> : null}
         <p>{model.completion()}</p>
         <p>
           {t('dashboard.contributing', { count: total.contributing, total: total.total })} ·{' '}
           {total.percentage}%
         </p>
-        <Wrap gap="12">
+        <Wrap gap="12" flexDirection={model.isGroup ? 'column' : 'row'}>
           <Button
             onClick={wrap(() => {
               void model.restart()
             })}
             disabled={model.flow.pending()}
           >
-            {t('study.restart')}
+            {t(model.isGroup ? 'study.reviewGroup' : 'study.restart')}
           </Button>
-          <a className={styles.link} href="/progress">
-            {t('navigation.progress')}
-          </a>
-          <a className={styles.link} href={model.exitPath}>
-            {t('navigation.home')}
-          </a>
+          {model.isGroup ? (
+            <ButtonLink appearance="outline" href={model.exitPath}>
+              {t('study.backToGroups')}
+            </ButtonLink>
+          ) : (
+            <>
+              <a className={styles.link} href="/progress">
+                {t('navigation.progress')}
+              </a>
+              <a className={styles.link} href={model.exitPath}>
+                {t('navigation.home')}
+              </a>
+            </>
+          )}
         </Wrap>
       </Stack>
     </Panel>

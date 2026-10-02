@@ -10,8 +10,16 @@ export const createStudyModel = (
   target: QuestionKey,
   mode: StudyMode,
   navigate: (key: QuestionKey) => void,
+  groupId: string | null = null,
 ) => {
-  const flow = createOrderedStudy(resources.questions.bank, resources.learner, target, mode)
+  const flow = createOrderedStudy(
+    resources.questions.bank,
+    resources.learner,
+    target,
+    mode,
+    groupId,
+  )
+  const group = resources.questions.bank.groups.find((item) => item.id === groupId)
 
   return computed(() => {
     const current = flow()
@@ -28,7 +36,18 @@ export const createStudyModel = (
       () => resources.learner.progress.questions().get(flow().key)?.status ?? 'not-started',
       'study.status',
     ),
-    totals: resources.learner.progress.totals,
+    totals: computed(() => {
+      if (groupId === null) {
+        return resources.learner.progress.totals()
+      }
+      const total = resources.learner.progress.groups().get(groupId)
+
+      if (total === undefined) {
+        throw new Error('This study group has no progress summary.')
+      }
+
+      return total
+    }, 'study.totals'),
     previous: action(async () => {
       await wrap(flow.previous())
 
@@ -52,9 +71,22 @@ export const createStudyModel = (
     }, 'study.restart').extend(withAsync()),
     localization: resources.localization,
     translation: resources.localization.translation,
-    scope: computed(() => resources.localization.t()('study.allQuestions'), 'study.scopeLabel'),
-    completion: computed(() => resources.localization.t()('study.allComplete'), 'study.completion'),
-    exitPath: '/',
+    scope: computed(
+      () =>
+        group === undefined
+          ? resources.localization.t()('study.allQuestions')
+          : resources.localization.getGroup(group).title,
+      'study.scopeLabel',
+    ),
+    completion: computed(
+      () =>
+        resources.localization.t()(
+          group === undefined ? 'study.allComplete' : 'study.groupComplete',
+        ),
+      'study.completion',
+    ),
+    isGroup: group !== undefined,
+    exitPath: group === undefined ? '/' : '/study/groups',
   }))
 }
 

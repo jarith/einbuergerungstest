@@ -64,7 +64,23 @@ export const createStudyRoutes = (parent: AppRoute) => {
                 study.go({ questionKey: key, mode })
               }
             })
-          : null,
+          : createStudyModel(
+              resources,
+              selected.key,
+              'sequential',
+              (key) => {
+                const current = groupStudy()
+
+                if (
+                  groupStudy.exact() &&
+                  current?.questionKey === selected.key &&
+                  current.groupId === groupId
+                ) {
+                  groupStudy.go({ groupId, questionKey: key })
+                }
+              },
+              groupId,
+            ),
     }
   }
 
@@ -146,6 +162,15 @@ export const createStudyRoutes = (parent: AppRoute) => {
         const data = await wrap(load(undefined, groupId))
 
         if (isEntry) {
+          if (data.learner()?.positions.groups[groupId] === undefined) {
+            await wrap(
+              data.learner.setStudyPosition(groupId, {
+                questionKey: data.selected.key,
+                status: 'in-progress',
+              }),
+            )
+          }
+
           groupStudy.go({ groupId, questionKey: data.selected.key }, true)
         }
 

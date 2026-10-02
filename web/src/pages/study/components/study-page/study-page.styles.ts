@@ -1,6 +1,7 @@
 import { css } from '@einbuergerungstest/design-system'
 
 export const styles = {
+  root: css.raw({ overflowWrap: 'anywhere', hyphens: 'auto' }),
   scope: css.raw({ textStyle: 'overline', textTransform: 'uppercase' }),
   columns: css.raw({
     gap: '32',

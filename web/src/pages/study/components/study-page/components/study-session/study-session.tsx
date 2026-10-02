@@ -20,14 +20,14 @@ export const StudySession = reatomComponent(({ model }: StudySessionProps) => {
   const error = model.flow.error()
 
   return (
-    <Stack gap="layout.section">
+    <Stack gap="layout.section" css={{ ...styles.root }}>
       {current.isCompleted ? (
         <StudyCompletion model={model} />
       ) : (
         <>
           <Flex justify="space-between" gap="16" css={{ ...styles.scope }}>
             <span>
-              {t('navigation.study')} / {model.scope()}
+              {t(model.isGroup ? 'navigation.groups' : 'navigation.study')} / {model.scope()}
             </span>
             <span
               aria-label={t('common.questionPosition', {
@@ -58,6 +58,11 @@ export const StudySession = reatomComponent(({ model }: StudySessionProps) => {
                 t={t}
               />
               <StudyControls model={model} />
+              {model.isGroup ? (
+                <a className={styles.link} href={model.exitPath}>
+                  ← {t('study.backToGroups')}
+                </a>
+              ) : null}
             </Stack>
             <StudyHelp model={model} />
           </Grid>

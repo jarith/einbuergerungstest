@@ -16,14 +16,24 @@ export const createOrderedStudy = (
   learner: ReturnType<typeof createLearnerState>,
   target: QuestionKey,
   mode: StudyMode,
+  groupId: string | null = null,
 ) => {
-  const ordered = bank.questions.toSorted((left, right) => left.number - right.number)
+  if (groupId !== null && !bank.groups.some((group) => group.id === groupId)) {
+    throw new Error('Choose a group in the question bank.')
+  }
+
+  const ordered = bank.questions.filter(
+    (question) => groupId === null || question.group_id === groupId,
+  )
+
   const first = ordered[0]
 
   if (first === undefined || !ordered.some((question) => getQuestionKey(question) === target)) {
     throw new Error('Choose a question in the ordered question bank.')
   }
-  const savedPosition = learner()?.positions.all
+
+  const savedPosition =
+    groupId === null ? learner()?.positions.all : learner()?.positions.groups[groupId]
 
   const position = atom<StudyPosition>(
     {
@@ -86,7 +96,7 @@ export const createOrderedStudy = (
 
   const savePosition = async (next: StudyPosition) => {
     if (mode === 'sequential') {
-      await wrap(learner.setStudyPosition(null, next))
+      await wrap(learner.setStudyPosition(groupId, next))
     }
 
     position.set(next)
