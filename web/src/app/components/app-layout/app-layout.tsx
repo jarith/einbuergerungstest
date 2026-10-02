@@ -44,7 +44,8 @@ export const AppLayout = reatomComponent(({ route, routes, title }: AppLayoutPro
         routes.study.study.exact() ||
         routes.groups.exact() ||
         routes.mock.entry.match() ||
-        routes.testReview.exact()
+        routes.testReview.exact() ||
+        routes.installation.exact()
       }
       destinations={[
         {

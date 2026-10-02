@@ -17,9 +17,10 @@
     "Test review page",
     "Question list page",
     "Question history page",
-    "Progress page"
+    "Progress page",
+    "Installation page"
   ],
-  "nextTask": "Installation page",
+  "nextTask": "PWA and release integration",
   "dependencies": {
     "Resources and question bank": [],
     "Learner state and IndexedDB": ["Resources and question bank"],

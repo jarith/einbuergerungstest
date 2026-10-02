@@ -243,5 +243,27 @@
     "back": "Zurück zu allen Fragen",
     "sourceStudy": "Lernen",
     "sourceMock": "Abgeschlossener Probetest"
+  },
+  "installation": {
+    "context": "EINSTELLUNGEN / INSTALLATION",
+    "title": "Lerne von deinem Home-Bildschirm aus.",
+    "description": "Installiere die App auf deinem iPhone oder iPad. Öffne die installierte App danach online, um alle Fragen und Bilder zum Offline-Lernen vorzubereiten.",
+    "stepsTitle": "So installierst du die App aus Safari",
+    "safariTitle": "Öffne diese App in Safari",
+    "safariHelp": "Wenn du einen anderen Browser verwendest, öffne diese Seite zuerst in Safari.",
+    "shareTitle": "Tippe auf „Teilen“",
+    "shareHelp": "Das Teilen-Symbol kann sich oben oder unten auf dem Bildschirm befinden.",
+    "homeTitle": "Zum Home-Bildschirm",
+    "homeHelp": "Scrolle bei Bedarf im Teilen-Menü, um diese Option zu finden.",
+    "addTitle": "Hinzufügen",
+    "addHelp": "Bestätige den App-Namen, um die Installation abzuschließen.",
+    "transferTitle": "Übertrage deinen Safari-Fortschritt",
+    "transferHelp": "Die installierte App hat einen eigenen, von Safari getrennten Speicher. Dein Fortschritt wird nicht automatisch übertragen. Exportiere in Safari eine Sicherung und importiere sie in der installierten App. Prüfe die Vorschau und bestätige das Ersetzen der Daten.",
+    "separatePreparation": "Die installierte App muss auch separat online vorbereitet werden. Lass sie geöffnet, bis sie offline bereit ist. Die Vorbereitung in Safari bereitet die installierte App nicht vor.",
+    "backup": "Einstellungen & Sicherung öffnen",
+    "installed": "Du verwendest die installierte App.",
+    "offlineTitle": "Offline-Bereitschaft auf diesem Gerät",
+    "ready": "Offline bereit. Alle Fragen und Bilder sind zum Offline-Lernen gespeichert.",
+    "notReady": "Noch nicht offline bereit. Öffne diese App online und warte, bis die Offline-Vorbereitung abgeschlossen ist."
   }
 }

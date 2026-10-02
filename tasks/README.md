@@ -117,7 +117,7 @@ each outcome is verified.
 | 16 ✓  | [Question list page](16-question-list-page.md)               | 04, 06        | Browse/filter all 310 questions.                                             |
 | 17 ✓  | [Question history page](17-question-history-page.md)         | 04–06, 08     | Latest and earlier attempts, study entry.                                    |
 | 18 ✓  | [Progress page](18-progress-page.md)                         | 06, 13, 15–17 | Question and mock history overview with backup access.                       |
-| 19    | [Installation page](19-installation-page.md)                 | 03–04         | iPhone/iPad steps and progress transfer guidance.                            |
+| 19 ✓  | [Installation page](19-installation-page.md)                 | 03–04         | iPhone/iPad steps and progress transfer guidance.                            |
 | 20    | [PWA and release integration](20-pwa.md)                     | 01–19         | Standalone launch, complete offline cache, safe updates, final verification. |
 
 The sequence puts content and durable facts before UI routes, then delivers study, group

@@ -243,5 +243,27 @@
     "back": "Back to all questions",
     "sourceStudy": "Study",
     "sourceMock": "Completed mock test"
+  },
+  "installation": {
+    "context": "SETTINGS / INSTALLATION",
+    "title": "Study from your Home Screen.",
+    "description": "Install on your iPhone or iPad, then open the installed app online to prepare all questions and images for offline study.",
+    "stepsTitle": "How to install from Safari",
+    "safariTitle": "Open this app in Safari",
+    "safariHelp": "If you’re using another browser, open this page in Safari first.",
+    "shareTitle": "Tap Share",
+    "shareHelp": "The Share icon may be at the top or bottom of the screen.",
+    "homeTitle": "Add to Home Screen",
+    "homeHelp": "If needed, scroll the Share menu to find this option.",
+    "addTitle": "Add",
+    "addHelp": "Confirm the app name to finish installation.",
+    "transferTitle": "Copy your Safari progress",
+    "transferHelp": "The installed app has separate storage from Safari. Progress does not transfer automatically. Export a backup in Safari, then import it in the installed app. Review the backup and confirm before replacing data.",
+    "separatePreparation": "The installed app also needs its own online preparation. Keep it open until it says it is ready offline; preparing Safari does not prepare the installed copy.",
+    "backup": "Open Settings & backup",
+    "installed": "You’re using the installed app.",
+    "offlineTitle": "Offline readiness on this device",
+    "ready": "Ready offline. All questions and images are saved for offline study.",
+    "notReady": "Not ready offline yet. Open this copy online and wait for offline preparation to finish."
   }
 }
