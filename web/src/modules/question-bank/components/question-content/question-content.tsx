@@ -13,7 +13,7 @@ import {
 } from '../../domain/question-answer'
 import { QuestionImage } from '../question-image/question-image'
 import { AnswerFeedback } from './components/answer-feedback/answer-feedback'
-import { questionTitle, translationText } from './question-content.styles'
+import { questionTitle, reviewTitle, translationText } from './question-content.styles'
 
 type QuestionInteraction =
   | Readonly<{
@@ -93,7 +93,7 @@ export const QuestionContent = ({
 
   return (
     <Stack gap="16" minWidth="0">
-      <h2 lang="de" className={questionTitle}>
+      <h2 lang="de" className={isReadOnly ? reviewTitle : questionTitle}>
         {question.question_de}
       </h2>
       {hasTranslation ? (
@@ -120,6 +120,7 @@ export const QuestionContent = ({
         />
       )}
       <ChoiceGroup
+        density="compact"
         aria-label={question.question_de}
         value={selectedOption ?? ''}
         readOnly={isLocked || isPending}

@@ -265,5 +265,25 @@
     "offlineTitle": "Offline readiness on this device",
     "ready": "Ready offline. All questions and images are saved for offline study.",
     "notReady": "Not ready offline yet. Open this copy online and wait for offline preparation to finish."
+  },
+  "offline": {
+    "not-ready": "Not ready offline yet.",
+    "preparing": "Preparing all questions and images for offline use…",
+    "ready": "Ready offline",
+    "error": "Offline preparation could not finish.",
+    "unsupported": "Offline preparation is unavailable in this browser. Open the installed app or use a supported browser over a secure connection.",
+    "failureHelp": "Some resources could not be saved. Check your connection and available device storage, then try again. Your learning progress is unchanged.",
+    "missing": "Missing resources: {{resources}}",
+    "update": "An update is downloaded. Finish any live mock test, close all app windows, then reopen to use it."
+  },
+  "startupRecovery": {
+    "title": "Saved data cannot be loaded",
+    "body": "This app requires a version-2 profile. The saved data is from an unsupported version or is damaged. It has not been changed.",
+    "backupHelp": "Download a copy before starting fresh. This app cannot import unsupported or damaged data, but you can keep the file for recovery.",
+    "download": "Download saved data",
+    "startFresh": "Start with a fresh profile",
+    "resetTitle": "Reset saved data?",
+    "resetBody": "This permanently removes the saved progress and settings from this browser and starts a fresh profile. Download a copy first if you want to keep the original data.",
+    "reset": "Reset saved data"
   }
 }

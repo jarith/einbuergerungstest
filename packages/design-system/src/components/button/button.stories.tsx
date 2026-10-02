@@ -16,6 +16,10 @@ export const Solid = {} satisfies Story
 
 export const Outline = { args: { appearance: 'outline' } } satisfies Story
 
+export const Danger = {
+  args: { appearance: 'danger', children: 'Delete device data' },
+} satisfies Story
+
 export const Disabled = { args: { disabled: true } } satisfies Story
 
 export const Ghost = { args: { appearance: 'ghost' } } satisfies Story

@@ -32,7 +32,10 @@ export const MockDialogs = reatomComponent(({ model }: MockDialogsProps) => {
           <p>{t('dialogs.submitBody')}</p>
           {model.mock.error() === null ? null : (
             <InlineNotice intent="danger" role="alert">
-              {t('errors.storage')}
+              {t(model.hasConflict() ? 'errors.storageConflict' : 'errors.storage')}
+              {model.hasConflict() ? (
+                <Button onClick={wrap(model.reload)}>{t('common.reload')}</Button>
+              ) : null}
             </InlineNotice>
           )}
           <Wrap gap="8">

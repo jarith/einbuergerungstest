@@ -3,6 +3,7 @@ import { Grid, Stack } from '@einbuergerungstest/design-system/jsx'
 import { reatomComponent } from '@reatom/react'
 
 import type { PageProps } from '../../../../app/routing'
+import { OfflineStatus } from '../../../../app/offline'
 import { InstallationSteps } from './components/installation-steps/installation-steps'
 import { ProgressTransfer } from './components/progress-transfer/progress-transfer'
 import { styles } from './installation-page.styles'
@@ -26,9 +27,7 @@ export const InstallationPage = reatomComponent(({ data }: PageProps) => {
         <h2 id="offline-title" className={styles.heading}>
           {t('installation.offlineTitle')}
         </h2>
-        <output>
-          {t(data.offline() === 'ready' ? 'installation.ready' : 'installation.notReady')}
-        </output>
+        <OfflineStatus offline={data.offline} localization={data.localization} />
       </Stack>
     </Stack>
   )

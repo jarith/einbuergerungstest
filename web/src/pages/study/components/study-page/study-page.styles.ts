@@ -3,6 +3,8 @@ import { css } from '@einbuergerungstest/design-system'
 export const styles = {
   root: css.raw({ overflowWrap: 'anywhere', hyphens: 'auto' }),
   scope: css.raw({ textStyle: 'overline', textTransform: 'uppercase' }),
+  scopeLabel: css({ minWidth: '0', flex: '1' }),
+  position: css({ flexShrink: '0', whiteSpace: 'nowrap' }),
   columns: css.raw({
     gap: '32',
     gridTemplateColumns: 'minmax(0, 1fr)',

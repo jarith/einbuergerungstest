@@ -26,10 +26,11 @@ export const StudySession = reatomComponent(({ model }: StudySessionProps) => {
       ) : (
         <>
           <Flex justify="space-between" gap="16" css={{ ...styles.scope }}>
-            <span>
+            <span className={styles.scopeLabel}>
               {t(model.isGroup ? 'navigation.groups' : 'navigation.study')} / {model.scope()}
             </span>
             <span
+              className={styles.position}
               aria-label={t('common.questionPosition', {
                 current: current.index + 1,
                 total: current.total,

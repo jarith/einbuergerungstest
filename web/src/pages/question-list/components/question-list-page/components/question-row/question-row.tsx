@@ -12,7 +12,7 @@ export const QuestionRow = ({ row, t }: QuestionRowProps) => (
   <li>
     <a href={row.href} className={styles.link}>
       <span className={styles.number}>{row.question.number}</span>
-      <Stack gap="8" minWidth="0">
+      <Stack css={styles.content}>
         <span lang="de" className={styles.prompt}>
           {row.question.question_de}
         </span>
@@ -28,9 +28,9 @@ export const QuestionRow = ({ row, t }: QuestionRowProps) => (
               <span className={styles.muted}>{t('questions.hasImage')}</span>
             </Wrap>
           )}
-          <QuestionStatusBadge status={row.history.status} t={t} />
         </Wrap>
       </Stack>
+      <QuestionStatusBadge status={row.history.status} t={t} />
     </a>
   </li>
 )

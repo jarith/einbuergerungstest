@@ -4,6 +4,8 @@ import { css } from '@einbuergerungstest/design-system'
 export const shellStyles = {
   root: css.raw({
     minHeight: 'dvh',
+    paddingBlock: '[env(safe-area-inset-top) env(safe-area-inset-bottom)]',
+    paddingInline: '[env(safe-area-inset-left) env(safe-area-inset-right)]',
     grid: 'auto 1fr auto / 1fr',
     gap: '0',
     '@media (min-width: 48rem)': { grid: 'auto auto 1fr / 1fr' },

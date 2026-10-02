@@ -38,3 +38,10 @@ Feature: Choose an interface language while keeping exam content in German
     And I start a mock test
     And I submit the mock test with unanswered questions
     Then the translation control is absent
+
+  Scenario: Language-neutral choices are valid German mock content
+    Given the mock sampler selects a question with language-neutral choices first
+    When I start a mock test
+    Then the mock question includes a language-neutral choice
+    And the live mock question and choices are in German
+    And English translation is unavailable in the live mock

@@ -1,7 +1,7 @@
 /* oxlint-disable app/no-runtime-typeof -- Validate untrusted backup and IndexedDB data at the I/O boundary. */
-import type { JsonValue, QuestionKey, OptionLabel } from '../../question-bank/domain/question-bank'
+import type { JsonValue, QuestionKey, OptionLabel } from '../../question-bank/domain'
 import type { LearnerSnapshot, MockSitting, StudyPosition } from '../domain/learner-state'
-import { isJsonValue } from '../../question-bank/domain/question-bank'
+import { isJsonValue } from '../../question-bank/domain'
 
 type JsonRecord = Readonly<{ [key: string]: JsonValue | undefined }>
 
@@ -162,14 +162,23 @@ const mock = (value: JsonValue): MockSitting => {
     return invalid('mock.endedAt')
   }
 
-  return { ...paper, status, endedAt }
+  if (status === 'unfinished') {
+    return { ...paper, status, endedAt }
+  }
+  const finishReason = entry['finishReason']
+
+  if (finishReason !== 'submitted' && finishReason !== 'timeout') {
+    return invalid('mock.finishReason')
+  }
+
+  return { ...paper, status, endedAt, finishReason }
 }
 
 export const parseLearnerSnapshot = (value: JsonValue): LearnerSnapshot => {
   const root = record(value, 'snapshot')
 
-  if (root['version'] !== 1) {
-    return invalid('version (only version 1 is supported; no implicit migration)')
+  if (root['version'] !== 2) {
+    return invalid('version (only version 2 is supported; no implicit migration)')
   }
   const preferences = record(root['preferences'], 'preferences')
   const language = preferences['language']
@@ -223,7 +232,7 @@ export const parseLearnerSnapshot = (value: JsonValue): LearnerSnapshot => {
   }
 
   return {
-    version: 1,
+    version: 2,
     preferences: {
       language,
       studyTranslation,

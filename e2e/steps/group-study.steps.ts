@@ -23,7 +23,11 @@ const groupCount = (id: string) =>
   questionBank.questions.filter((question) => question.group_id === id).length
 
 const groupProgress = (page: Page, title: string) =>
-  page.getByRole('region', { name: title, exact: true })
+  page
+    .locator('div')
+    .filter({ has: page.getByRole('progressbar', { name: title, exact: true }) })
+    .filter({ has: page.getByText(title, { exact: true }) })
+    .last()
 
 const expectGroupProgress = async (
   page: Page,
@@ -35,15 +39,18 @@ const expectGroupProgress = async (
   const progress = groupProgress(page, title)
 
   await expect(progress).toBeVisible()
-  await expect(progress).toContainText(new RegExp(`\\b${contributing}\\s*/\\s*${total}\\b`))
-  await expect(progress).toContainText(new RegExp(`\\b${percent}\\s*%`))
+  await expect(progress).toContainText(
+    new RegExp(`\\b${contributing}\\s*(?:of|von)\\s*${total}\\b`),
+    { useInnerText: true },
+  )
+  await expect(progress).toContainText(new RegExp(`\\b${percent}\\s*%`), { useInnerText: true })
 }
 
 When('I open group study', async ({ page }) => {
   await page
-    .getByRole('button', {
-      name: /^(Study by group|Study groups|Learn by topic|Gruppen lernen|Nach Themen lernen)$/,
-    })
+    .getByRole('main')
+    .getByRole('link', { name: /^(Study by group|Nach Themen lernen)$/ })
+    .first()
     .click()
 })
 
@@ -51,7 +58,9 @@ Then(
   'the group picker lists every question group with its description and question count',
   async ({ page }) => {
     for (const group of questionBank.groups) {
-      const option = page.getByRole('button', { name: new RegExp(group.title, 'i') })
+      const option = page
+        .getByRole('listitem')
+        .filter({ has: page.getByRole('heading', { name: group.title, exact: true }) })
 
       await expect(option).toBeVisible()
       await expect(option).toContainText(group.description)
@@ -63,20 +72,22 @@ Then(
 When('I choose the {string} group', async ({ page }, title: string) => {
   groupByTitle(title)
 
-  await page.getByRole('button', { name: new RegExp(title, 'i') }).click()
+  await page
+    .getByRole('listitem')
+    .filter({ has: page.getByRole('heading', { name: title, exact: true }) })
+    .getByRole('link')
+    .click()
 })
 
 Then('source question {int} is shown in group study', async ({ page }, number: number) => {
-  await expect(page.getByRole('heading', { level: 2 })).toHaveText(
-    sourceQuestion(number).question_de,
-  )
+  await expect(page.locator('h2[lang=de]')).toHaveText(sourceQuestion(number).question_de)
 })
 
 When('I answer and advance through the Berlin group to its final question', async ({ page }) => {
   for (let number = 301; number < 310; number += 1) {
     const question = sourceQuestion(number)
 
-    await expect(page.getByRole('heading', { level: 2 })).toHaveText(question.question_de)
+    await expect(page.locator('h2[lang=de]')).toHaveText(question.question_de)
 
     await studyAnswer(page, question.correct_option).click()
 
@@ -85,9 +96,7 @@ When('I answer and advance through the Berlin group to its final question', asyn
 })
 
 When('I finish the group', async ({ page }) => {
-  await page
-    .getByRole('button', { name: /^(Next|Weiter|Finish group|Gruppe abschließen)$/ })
-    .click()
+  await page.getByRole('button', { name: /^(Finish study|Lernen abschließen)$/ }).click()
 })
 
 Then('group study shows completion without another question', async ({ page }) => {

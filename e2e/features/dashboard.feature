@@ -73,3 +73,28 @@ Feature: See learning progress and a planned test date on the dashboard
     And I open dashboard
     Then German interface controls are visible
     And the dashboard shows 5 days until the test
+
+  Scenario: An open dashboard refreshes at local midnight before the UTC day changes
+    Given I open the app on local date "2026-10-02"
+    When I open settings
+    And I set the test date to "2026-10-03"
+    And I open dashboard
+    And the app resumes at "2026-10-02T23:59:00+02:00"
+    Then the dashboard shows 1 days until the test
+    When 1 minute passes on the dashboard
+    Then the dashboard says the test is today
+    When the app resumes at "2026-10-04T08:00:00+02:00"
+    Then the dashboard has no test date message
+    When I open settings
+    Then the test date remains "2026-10-03"
+    When I reload the app
+    Then the test date is empty
+
+  Scenario: Resuming across the autumn timezone change refreshes the local calendar day
+    Given I open the app on local date "2026-10-24"
+    When I open settings
+    And I set the test date to "2026-10-25"
+    And I open dashboard
+    Then the dashboard shows 1 days until the test
+    When the app resumes at "2026-10-25T08:00:00+01:00"
+    Then the dashboard says the test is today

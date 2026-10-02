@@ -19,7 +19,16 @@ export const styles = {
     '@media (min-width: 64rem)': { gridColumn: '1', gridRow: '1' },
   }),
   eyebrow: css({ textStyle: 'overline', textTransform: 'uppercase' }),
-  score: css({ textStyle: 'title' }),
-  heading: css({ textStyle: 'heading' }),
+  score: css({ textStyle: 'compactScore', '@media (min-width: 48rem)': { textStyle: 'title' } }),
+  heading: css({
+    fontSize: '22',
+    fontWeight: 'bold',
+    lineHeight: '22',
+    '@media (min-width: 48rem)': {
+      fontSize: '20',
+      fontWeight: 'semibold',
+      lineHeight: '20',
+    },
+  }),
   muted: css({ textStyle: 'caption', color: 'content.muted' }),
 }

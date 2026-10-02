@@ -2,9 +2,9 @@ import { computed, effect, wrap } from '@reatom/core'
 import { createInstance } from 'i18next'
 
 import type { createLearnerState } from '../../modules/learner-state'
-import type { QuestionMode } from '../../modules/question-bank/domain/question-answer'
-import type { Question, QuestionGroup } from '../../modules/question-bank/domain/question-bank'
-import { isQuestionTranslationAvailable } from '../../modules/question-bank/domain/question-answer'
+import type { QuestionMode } from '../../modules/question-bank/domain'
+import type { Question, QuestionGroup } from '../../modules/question-bank/domain'
+import { isQuestionTranslationAvailable } from '../../modules/question-bank/domain'
 import de from './de.json'
 import en from './en.json'
 

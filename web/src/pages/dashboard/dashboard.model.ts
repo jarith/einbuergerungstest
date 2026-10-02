@@ -2,20 +2,23 @@ import { computed, onLineAtom } from '@reatom/core'
 
 import type { AppResources } from '../../app/bootstrap.model'
 import { getCalendarDaysUntil } from './lib/calendar-days'
+import { createLocalDay } from './local-day.model'
 
 export const createDashboardModel = (resources: AppResources) => {
   const { learner, localization, questions } = resources
+  const localDay = createLocalDay()
 
   return computed(() => learner.progress.totals(), 'dashboard').extend(() => ({
     localization,
     online: onLineAtom,
+    offline: resources.offline,
     date: computed(() => {
       const date = learner()?.preferences.plannedTestDate
 
       if (date === undefined || date === null) {
         return null
       }
-      const days = getCalendarDaysUntil(date, new Date())
+      const days = getCalendarDaysUntil(date, localDay())
 
       return days < 0 ? null : { days, label: localization.formatPlannedDate(date) }
     }, 'dashboard.date'),

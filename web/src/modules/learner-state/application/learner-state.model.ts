@@ -1,19 +1,14 @@
 import { action, atom, computed, withAsync, wrap } from '@reatom/core'
 
-import type {
-  QuestionBank,
-  QuestionKey,
-  OptionLabel,
-} from '../../question-bank/domain/question-bank'
+import type { QuestionBank, QuestionKey, OptionLabel } from '../../question-bank/domain'
 import type {
   LearnerSnapshot,
   MockSitting,
   Preferences,
   StudyPosition,
 } from '../domain/learner-state'
-import { finalizeMockSitting } from '../../mock-test/domain/mock-test'
-import { selectQuestionOption } from '../../question-bank/domain/question-answer'
-import { getQuestionKey } from '../../question-bank/domain/question-bank'
+import { finalizeMockSitting } from '../../mock-test/domain'
+import { selectQuestionOption, getQuestionKey } from '../../question-bank/domain'
 import {
   createLearnerSnapshot,
   getLocalDate,
@@ -264,11 +259,14 @@ export const createLearnerState = (bank: QuestionBank) => {
               throw new Error('Only questions in the active mock can be answered.')
             }
 
-            if (Date.now() >= sitting.deadline) {
+            const now = Date.now()
+
+            if (now >= sitting.deadline) {
               return finalizeMockSitting(
                 sitting,
                 'completed',
-                getNextAttemptTime(current, Date.now()),
+                now,
+                getNextAttemptTime(current, now),
               )
             }
 
@@ -295,12 +293,10 @@ export const createLearnerState = (bank: QuestionBank) => {
             throw new Error('Only an active mock can be navigated.')
           }
 
-          if (Date.now() >= sitting.deadline) {
-            return finalizeMockSitting(
-              sitting,
-              'completed',
-              getNextAttemptTime(current, Date.now()),
-            )
+          const now = Date.now()
+
+          if (now >= sitting.deadline) {
+            return finalizeMockSitting(sitting, 'completed', now, getNextAttemptTime(current, now))
           }
 
           return { ...sitting, currentQuestion }
@@ -312,9 +308,11 @@ export const createLearnerState = (bank: QuestionBank) => {
   const finishMock = action(async (id: string, status: 'completed' | 'unfinished') => {
     await wrap(
       mutate((current) =>
-        updateMock(current, id, (sitting) =>
-          finalizeMockSitting(sitting, status, getNextAttemptTime(current, Date.now())),
-        ),
+        updateMock(current, id, (sitting) => {
+          const now = Date.now()
+
+          return finalizeMockSitting(sitting, status, now, getNextAttemptTime(current, now))
+        }),
       ),
     )
   }, 'learnerState.finishMock').extend(withAsync())
@@ -322,11 +320,13 @@ export const createLearnerState = (bank: QuestionBank) => {
   const expireMock = action(async (id: string) => {
     await wrap(
       mutate((current) =>
-        updateMock(current, id, (sitting) =>
-          Date.now() >= sitting.deadline
-            ? finalizeMockSitting(sitting, 'completed', getNextAttemptTime(current, Date.now()))
-            : sitting,
-        ),
+        updateMock(current, id, (sitting) => {
+          const now = Date.now()
+
+          return now >= sitting.deadline
+            ? finalizeMockSitting(sitting, 'completed', now, getNextAttemptTime(current, now))
+            : sitting
+        }),
       ),
     )
   }, 'learnerState.expireMock').extend(withAsync())

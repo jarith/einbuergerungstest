@@ -2,6 +2,7 @@ import { Button, Dialog, InlineNotice } from '@einbuergerungstest/design-system'
 import { Stack, Wrap } from '@einbuergerungstest/design-system/jsx'
 import { wrap } from '@reatom/core'
 import { reatomComponent } from '@reatom/react'
+import { Trash2 } from 'lucide-react'
 
 import type { BackupControlsProps } from '../../backup-controls'
 
@@ -40,7 +41,8 @@ export const ReplacementDialog = reatomComponent(({ localization, model }: Backu
             {t('common.cancel')}
           </Button>
           <Button
-            appearance="outline"
+            appearance={isReset ? 'danger' : 'outline'}
+            leftSection={isReset ? <Trash2 aria-hidden="true" /> : undefined}
             disabled={isPending}
             onClick={wrap(() => {
               void model.confirm()

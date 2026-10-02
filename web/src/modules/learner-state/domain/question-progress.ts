@@ -1,7 +1,6 @@
-import type { Question, QuestionBank, QuestionKey } from '../../question-bank/domain/question-bank'
+import type { Question, QuestionBank, QuestionKey } from '../../question-bank/domain'
 import type { QuestionAttempt } from './learner-state'
-import { isCorrectAnswer } from '../../question-bank/domain/question-answer'
-import { getQuestionKey } from '../../question-bank/domain/question-bank'
+import { isCorrectAnswer, getQuestionKey } from '../../question-bank/domain'
 
 export type LearningStatus = 'not-started' | 'needs-review' | 'learning' | 'learned'
 

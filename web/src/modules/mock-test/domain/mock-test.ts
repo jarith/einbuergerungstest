@@ -1,6 +1,6 @@
-import type { MockSitting } from '../../learner-state/domain/learner-state'
-import type { QuestionBank, QuestionKey } from '../../question-bank/domain/question-bank'
-import { getQuestionKey } from '../../question-bank/domain/question-bank'
+import type { MockSitting } from '../../learner-state/domain'
+import type { QuestionBank, QuestionKey } from '../../question-bank/domain'
+import { getQuestionKey } from '../../question-bank/domain'
 
 const sample = (keys: readonly QuestionKey[], count: number, random: () => number) => {
   const remaining = [...keys]
@@ -38,20 +38,24 @@ export const getRemainingSeconds = (sitting: MockSitting, now: number): number =
 export const finalizeMockSitting = (
   sitting: MockSitting,
   status: 'completed' | 'unfinished',
+  now: number,
   endedAt: number,
-): MockSitting =>
-  sitting.status === 'active'
-    ? {
-        ...sitting,
-        status: endedAt >= sitting.deadline ? 'completed' : status,
-        endedAt: Math.max(endedAt, sitting.startedAt),
-      }
-    : sitting
+): MockSitting => {
+  if (sitting.status !== 'active') {
+    return sitting
+  }
+  const hasExpired = now >= sitting.deadline
+  const finished = { ...sitting, endedAt: Math.max(endedAt, sitting.startedAt) }
+
+  return hasExpired || status === 'completed'
+    ? { ...finished, status: 'completed', finishReason: hasExpired ? 'timeout' : 'submitted' }
+    : { ...finished, status: 'unfinished' }
+}
 
 export const getMockFinishReason = (sitting: MockSitting) => {
   if (sitting.status !== 'completed') {
     return null
   }
 
-  return sitting.endedAt >= sitting.deadline ? 'timeout' : 'submitted'
+  return sitting.finishReason
 }

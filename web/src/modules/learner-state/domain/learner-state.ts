@@ -1,4 +1,4 @@
-import type { OptionLabel, QuestionKey } from '../../question-bank/domain/question-bank'
+import type { OptionLabel, QuestionKey } from '../../question-bank/domain'
 
 export type Preferences = Readonly<{
   language: 'en' | 'de'
@@ -37,14 +37,16 @@ type MockPaper = Readonly<{
   answers: readonly MockAnswer[]
 }>
 
+// endedAt orders terminal history; finishReason records the observed deadline decision.
 export type MockSitting = MockPaper &
   (
     | Readonly<{ status: 'active' }>
-    | Readonly<{ status: 'completed' | 'unfinished'; endedAt: number }>
+    | Readonly<{ status: 'completed'; endedAt: number; finishReason: 'submitted' | 'timeout' }>
+    | Readonly<{ status: 'unfinished'; endedAt: number }>
   )
 
 export type LearnerSnapshot = Readonly<{
-  version: 1
+  version: 2
   preferences: Preferences
   positions: StudyPositions
   studyAttempts: readonly StudyAttempt[]
@@ -52,7 +54,7 @@ export type LearnerSnapshot = Readonly<{
 }>
 
 export const createLearnerSnapshot = (): LearnerSnapshot => ({
-  version: 1,
+  version: 2,
   preferences: {
     language: 'en',
     studyTranslation: false,

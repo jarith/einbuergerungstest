@@ -1,18 +1,19 @@
+import type { TFunction } from 'i18next'
 import { Button, FileInput, InlineNotice, Panel } from '@einbuergerungstest/design-system'
 import { Grid, Stack } from '@einbuergerungstest/design-system/jsx'
 import { wrap } from '@reatom/core'
 import { reatomComponent } from '@reatom/react'
 import { Download } from 'lucide-react'
 
-import type { AppResources } from '../../../../app/bootstrap.model'
 import type { createBackupModel } from '../../application/backup.model'
+import type { createLearnerState } from '../../application/learner-state.model'
 import { styles } from './backup-controls.styles'
 import { BackupPreview } from './components/backup-preview/backup-preview'
 import { ReplacementDialog } from './components/replacement-dialog/replacement-dialog'
 
 export type BackupControlsProps = Readonly<{
-  learner: AppResources['learner']
-  localization: AppResources['localization']
+  learner: ReturnType<typeof createLearnerState>
+  localization: Readonly<{ t: () => TFunction; formatPlannedDate: (date: string) => string }>
   model: ReturnType<typeof createBackupModel>
 }>
 

@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react'
 import { reatomRoute } from '@reatom/core'
 
+import { createStartupRecovery } from '../modules/learner-state'
 import { createDashboardRoute } from '../pages/dashboard'
 import { createInstallationRoute } from '../pages/installation'
 import { createMockTestRoutes } from '../pages/mock-test'
@@ -19,10 +20,16 @@ export const appRoute = reatomRoute(
   {
     layout: true,
     loader: loadAppResources,
-    render: (self): ReactElement => <AppLayout route={self} routes={routes} title={pageTitle} />,
+    render: (self): ReactElement => (
+      <AppLayout route={self} routes={routes} title={pageTitle} recovery={startupRecovery} />
+    ),
   },
   'appRoute',
 )
+
+const startupRecovery = createStartupRecovery(appRoute.loader.error, () => {
+  void appRoute.loader.retry()
+})
 
 export const routes = {
   dashboard: createDashboardRoute(appRoute),

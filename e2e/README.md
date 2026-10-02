@@ -29,4 +29,7 @@ output. The HTML report includes retained failure traces and screenshots. Root l
 format and type checks include this workspace's authored steps and configuration.
 
 Use accessible names for locators and observable outcomes for assertions. Keep component
-visual states in the design system's Storybook tests and model logic in unit tests.
+visual states in the design system's Storybook tests. Application unit tests are outside
+this project's scope; verify domain outcomes through the acceptance flows. Mock questions
+must be identified by their key and full content because some prompts occur more than
+once.

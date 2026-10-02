@@ -41,6 +41,8 @@ type Story = StoryObj<typeof meta>
 
 export const Unanswered = {} satisfies Story
 
+export const Compact = { args: { density: 'compact' } } satisfies Story
+
 export const Selected = { args: { defaultValue: 'b' } } satisfies Story
 
 export const Feedback = {

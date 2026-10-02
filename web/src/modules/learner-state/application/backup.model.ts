@@ -1,6 +1,7 @@
 import { action, atom, computed, withAsync, wrap } from '@reatom/core'
 
 import type { createLearnerState } from './learner-state.model'
+import { downloadJson } from '../../../shared/files/download-json'
 import { isLearnerStateConflict } from '../infrastructure/learner-state-conflict-error'
 
 export const createBackupModel = (learner: ReturnType<typeof createLearnerState>) => {
@@ -78,14 +79,8 @@ export const createBackupModel = (learner: ReturnType<typeof createLearnerState>
     download: action(async () => {
       try {
         const source = await wrap(learner.exportBackup())
-        const url = URL.createObjectURL(new Blob([source], { type: 'application/json' }))
-        const link = document.createElement('a')
-        link.href = url
-        link.download = 'berlin-progress.json'
 
-        link.click()
-
-        setTimeout(() => URL.revokeObjectURL(url), 0)
+        downloadJson(source, 'berlin-progress.json')
 
         message.set('exported')
       } catch {

@@ -3,6 +3,7 @@ import { reatomComponent } from '@reatom/react'
 import { Database } from 'lucide-react'
 
 import type { DashboardSectionProps } from '../../dashboard-page'
+import { OfflineStatus } from '../../../../../../app/offline'
 import { styles } from '../../dashboard-page.styles'
 
 export const ProgressSummary = reatomComponent(({ model }: DashboardSectionProps) => {
@@ -29,6 +30,7 @@ export const ProgressSummary = reatomComponent(({ model }: DashboardSectionProps
         <h2 className={styles.heading}>{t('dashboard.savedTitle')}</h2>
         <p>{t('dashboard.savedHelp')}</p>
         <output>{model.online() ? null : t('dashboard.offline')}</output>
+        <OfflineStatus offline={model.offline} localization={model.localization} />
       </Stack>
     </Grid>
   )

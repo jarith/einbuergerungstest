@@ -2,6 +2,7 @@ import { action, atom, computed, effect, urlAtom, withAsync, wrap } from '@reato
 
 import type { AppResources } from '../../app/bootstrap.model'
 import type { QuestionKey } from '../../modules/question-bank'
+import { isLearnerStateConflict } from '../../modules/learner-state'
 import { browserNavigationAtom } from '../../shared/navigation/browser-navigation.model'
 
 export const createMockPageModel = (
@@ -24,6 +25,11 @@ export const createMockPageModel = (
 
   return current.extend(() => ({
     mock,
+    hasConflict: computed(
+      () => isLearnerStateConflict(mock.error() ?? undefined),
+      'mockPage.hasConflict',
+    ),
+    reload: action(() => window.location.reload(), 'mockPage.reload'),
     localization,
     picker,
     openPicker: action(() => picker.set(true), 'mockPage.openPicker'),

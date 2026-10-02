@@ -1,13 +1,9 @@
 import { action, atom, computed, withAsync, wrap } from '@reatom/core'
 
-import type {
-  OptionLabel,
-  QuestionBank,
-  QuestionKey,
-} from '../../question-bank/domain/question-bank'
+import type { OptionLabel, QuestionBank, QuestionKey } from '../../question-bank/domain'
 import type { StudyPosition } from '../domain/learner-state'
 import type { createLearnerState } from './learner-state.model'
-import { getQuestionKey } from '../../question-bank/domain/question-bank'
+import { getQuestionKey } from '../../question-bank/domain'
 
 export type StudyMode = 'sequential' | 'inspection'
 

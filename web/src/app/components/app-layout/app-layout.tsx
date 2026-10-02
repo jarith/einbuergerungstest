@@ -4,20 +4,31 @@ import { BookOpen, ChartNoAxesColumn, ClipboardCheck, House, Settings } from 'lu
 
 import type { AppRoutes } from '../../app.route'
 import type { AppRoute } from '../../routing'
+import type { StartupRecoveryProps } from '../startup-recovery/startup-recovery'
 import { pageNotFound, RouteStatus } from '../../routing'
 import { AppShell } from '../app-shell/app-shell'
+import { StartupRecovery } from '../startup-recovery/startup-recovery'
 
 type AppLayoutProps = Readonly<{
   route: Pick<AppRoute, 'loader' | 'outlet'>
   routes: AppRoutes
   title: Computed<string>
+  recovery: StartupRecoveryProps['model']
 }>
 
-export const AppLayout = reatomComponent(({ route, routes, title }: AppLayoutProps) => {
+export const AppLayout = reatomComponent(({ route, routes, title, recovery }: AppLayoutProps) => {
   void route.loader()
 
   const data = route.loader.data()
   const error = route.loader.error()
+
+  if (recovery() !== null) {
+    return (
+      <Container as="main" paddingBlock="layout.section">
+        <StartupRecovery model={recovery} />
+      </Container>
+    )
+  }
 
   if (!route.loader.ready() || data === undefined || error !== undefined) {
     return (
@@ -36,12 +47,15 @@ export const AppLayout = reatomComponent(({ route, routes, title }: AppLayoutPro
 
   return (
     <AppShell
+      offline={data.offline}
       localization={data.localization}
       title={title()}
       isTitleHidden={
         routes.dashboard.exact() ||
         routes.study.entry.exact() ||
         routes.study.study.exact() ||
+        routes.study.groupEntry.exact() ||
+        routes.study.groupStudy.exact() ||
         routes.groups.exact() ||
         routes.mock.entry.match() ||
         routes.testReview.exact() ||

@@ -4,7 +4,7 @@ import { reatomComponent } from '@reatom/react'
 import { Check, X } from 'lucide-react'
 
 import type { QuestionHistoryModel } from '../../../../question-history.model'
-import { styles } from '../../question-history-page.styles'
+import { styles } from './latest-attempt.styles'
 
 type LatestAttemptProps = Readonly<{ model: QuestionHistoryModel }>
 
@@ -38,7 +38,7 @@ export const LatestAttempt = reatomComponent(({ model }: LatestAttemptProps) => 
                 {t(attempt.isCorrect ? 'study.correct' : 'study.mistaken')}
               </StatusBadge>
             </Wrap>
-            <p className={styles.muted}>
+            <p className={styles.date}>
               <time dateTime={new Date(attempt.answeredAt).toISOString()}>
                 {model.localization.formatDate(new Date(attempt.answeredAt), {
                   dateStyle: 'medium',
@@ -47,7 +47,7 @@ export const LatestAttempt = reatomComponent(({ model }: LatestAttemptProps) => 
               </time>{' '}
               · {t(attempt.source === 'study' ? 'history.sourceStudy' : 'history.sourceMock')}
             </p>
-            <p>
+            <p className={styles.answer}>
               {t('mock.yourChoice')}{' '}
               <span lang="de">
                 {attempt.selectedOption} · {model.getOption(attempt.selectedOption)?.text_de}
@@ -55,7 +55,7 @@ export const LatestAttempt = reatomComponent(({ model }: LatestAttemptProps) => 
             </p>
           </>
         )}
-        <p>
+        <p className={styles.answer}>
           {t('study.correctAnswer', { answer: correctOption.label })} —{' '}
           <span lang="de">{correctOption.text_de}</span>
         </p>

@@ -39,11 +39,11 @@ jobs:
     with:
       script: format:check
 
-  unit-tests:
-    name: Unit tests
+  tooling-tests:
+    name: Tooling regression tests
     uses: ./.github/workflows/run-check.yml
     with:
-      script: test
+      script: test:tooling
 
   e2e-tests:
     name: E2E tests

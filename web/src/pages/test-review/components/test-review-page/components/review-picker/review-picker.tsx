@@ -9,7 +9,7 @@ import type { TestReviewModel } from '../../../../test-review.model'
 type ReviewPickerProps = Readonly<{ model: TestReviewModel }>
 
 export const ReviewPicker = reatomComponent(({ model }: ReviewPickerProps) => {
-  const { sitting, index: current } = model()
+  const { index: current } = model()
   const t = model.localization.t()
 
   return (
@@ -20,24 +20,26 @@ export const ReviewPicker = reatomComponent(({ model }: ReviewPickerProps) => {
       closeButtonProps={{ 'aria-label': t('common.close') }}
     >
       <Stack gap="8">
-        {sitting.answers.map((answer, index) => {
-          const loaded = model.getQuestion(answer.questionKey)
-          const isCorrect = answer.selectedOption === loaded?.question.correct_option
-
-          const result =
-            sitting.status === 'completed'
-              ? t(isCorrect ? 'study.correct' : 'study.mistaken')
-              : t(answer.selectedOption === null ? 'mock.unanswered' : 'mock.answered')
+        {model.entries().map(({ key, index, feedback, isAnswered }) => {
+          const result = t(
+            feedback === 'correct'
+              ? 'study.correct'
+              : feedback === 'incorrect'
+                ? 'study.mistaken'
+                : feedback === 'unanswered' || !isAnswered
+                  ? 'mock.unanswered'
+                  : 'mock.answered',
+          )
 
           return (
             <Button
-              key={answer.questionKey}
+              key={key}
               appearance={index === current ? 'solid' : 'outline'}
               aria-current={index === current ? 'step' : undefined}
               onClick={wrap(() => model.go(index))}
               leftSection={
-                sitting.status === 'completed' ? (
-                  isCorrect ? (
+                feedback !== 'hidden' ? (
+                  feedback === 'correct' ? (
                     <Check size={16} aria-hidden="true" />
                   ) : (
                     <X size={16} aria-hidden="true" />

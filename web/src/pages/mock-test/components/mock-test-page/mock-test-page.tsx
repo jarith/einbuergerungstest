@@ -16,7 +16,10 @@ export const MockTestPage = reatomComponent(({ data }: PageProps<MockTestData>) 
     <Stack gap="24" css={styles.root} ref={wrap(model.connect)}>
       {model.mock.error() === null ? null : (
         <InlineNotice intent="danger" role="alert">
-          {t('errors.storage')}
+          {t(model.hasConflict() ? 'errors.storageConflict' : 'errors.storage')}
+          {model.hasConflict() ? (
+            <Button onClick={wrap(model.reload)}>{t('common.reload')}</Button>
+          ) : null}
         </InlineNotice>
       )}
       {model().sitting === null ? (

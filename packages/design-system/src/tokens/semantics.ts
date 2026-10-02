@@ -11,6 +11,9 @@ export const colorRoles = {
   'action.solid.bg': 'accent',
   'action.solid.fg': 'accent-foreground',
   'action.solid.border': 'accent',
+  'action.danger.bg': 'danger',
+  'action.danger.fg': 'bg',
+  'action.danger.border': 'danger',
   'action.outline.bg': 'surface',
   'action.outline.fg': 'text',
   'action.outline.border': 'border',
@@ -37,7 +40,7 @@ export const colorRoles = {
   'badge.success.bg': 'dim-green',
   'badge.success.fg': 'success',
   'badge.warning.bg': 'dim-yellow',
-  'badge.warning.fg': 'warning',
+  'badge.warning.fg': 'text',
   'badge.danger.bg': 'dim-red',
   'badge.danger.fg': 'danger',
   'badge.info.bg': 'dim-blue',
@@ -102,6 +105,14 @@ export const elevation = {
 } as const
 
 export const colorStates = {
+  'action.danger.hover': {
+    light: 'color-mix(in srgb, {colors.danger} 90%, black)',
+    dark: 'color-mix(in srgb, {colors.danger} 90%, white)',
+  },
+  'action.danger.pressed': {
+    light: 'color-mix(in srgb, {colors.danger} 82%, black)',
+    dark: 'color-mix(in srgb, {colors.danger} 82%, white)',
+  },
   'action.solid.hover': {
     light: 'color-mix(in srgb, {colors.accent} 90%, black)',
     dark: 'color-mix(in srgb, {colors.accent} 90%, white)',

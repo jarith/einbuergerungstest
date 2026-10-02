@@ -1,6 +1,9 @@
 /* oxlint-disable app/no-runtime-typeof -- IndexedDB returns untrusted persisted values. */
 import type { LearnerSnapshot } from '../domain/learner-state'
+import type { SavedLearnerDataError } from './saved-learner-data-error'
+import { createLearnerSnapshot } from '../domain/learner-state'
 import { createLearnerStateConflictError } from './learner-state-conflict-error'
+import { createSavedLearnerDataError } from './saved-learner-data-error'
 import { decodeLearnerSnapshot } from './snapshot-codec'
 
 type TransactionOutcome = { failure: Error | undefined }
@@ -98,11 +101,7 @@ export const createLearnerRepository = () => {
             try {
               resolve(decodeLearnerSnapshot(value))
             } catch (error: unknown) {
-              reject(
-                error instanceof Error
-                  ? error
-                  : new Error('Saved learner data could not be read.', { cause: error }),
-              )
+              reject(createSavedLearnerDataError(value, error))
             }
           } else {
             reject(new Error('Saved learner data is invalid. Existing storage has been preserved.'))
@@ -114,12 +113,8 @@ export const createLearnerRepository = () => {
     }
   }
 
-  const replace = async (
-    snapshot: LearnerSnapshot,
-    expected: LearnerSnapshot | null,
-  ): Promise<void> => {
+  const write = async (snapshot: LearnerSnapshot, previous: string | undefined): Promise<void> => {
     const serialized = JSON.stringify(decodeLearnerSnapshot(JSON.stringify(snapshot)))
-    const previous = expected === null ? undefined : JSON.stringify(expected)
     const database = await openDatabase()
     try {
       await new Promise<void>((resolve, reject) => {
@@ -165,5 +160,11 @@ export const createLearnerRepository = () => {
     }
   }
 
-  return { read, replace }
+  return {
+    read,
+    replace: (snapshot: LearnerSnapshot, expected: LearnerSnapshot | null) =>
+      write(snapshot, expected === null ? undefined : JSON.stringify(expected)),
+    resetRejected: (expected: SavedLearnerDataError) =>
+      write(createLearnerSnapshot(), expected.source),
+  }
 }

@@ -22,9 +22,9 @@ export const InstallationSteps = reatomComponent(({ localization }: Installation
             <span className={styles.number} aria-hidden="true">
               {index + 1}
             </span>
-            <Stack gap="8" minWidth="0">
+            <Stack gap="2" minWidth="0">
               <h3 className={styles.stepTitle}>{t(`installation.${step}Title`)}</h3>
-              <p className={styles.helper}>{t(`installation.${step}Help`)}</p>
+              <p className={styles.stepHelp}>{t(`installation.${step}Help`)}</p>
             </Stack>
           </HStack>
         ))}

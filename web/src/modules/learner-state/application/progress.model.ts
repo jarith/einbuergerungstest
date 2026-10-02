@@ -1,6 +1,6 @@
 import { computed } from '@reatom/core'
 
-import type { QuestionBank } from '../../question-bank/domain/question-bank'
+import type { QuestionBank } from '../../question-bank/domain'
 import type { LearnerSnapshot } from '../domain/learner-state'
 import { getQuestionAttempts } from '../domain/learner-state'
 import { getMockSummaries, getMockTotals } from '../domain/mock-progress'

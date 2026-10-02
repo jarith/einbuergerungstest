@@ -59,6 +59,19 @@ export const choiceGroupRecipe = defineSlotRecipe({
     },
   },
   variants: {
+    density: {
+      regular: {},
+      compact: {
+        label: {
+          textStyle: 'compactChoiceLabel',
+          '@media (min-width: 48rem)': { textStyle: 'body', fontWeight: 'medium' },
+        },
+        description: {
+          textStyle: 'compactChoiceDescription',
+          '@media (min-width: 48rem)': { textStyle: 'choiceDescription' },
+        },
+      },
+    },
     result: {
       none: {},
       correct: {
@@ -83,5 +96,5 @@ export const choiceGroupRecipe = defineSlotRecipe({
       },
     },
   },
-  defaultVariants: { result: 'none' },
+  defaultVariants: { density: 'regular', result: 'none' },
 })

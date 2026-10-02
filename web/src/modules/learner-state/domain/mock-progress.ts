@@ -1,7 +1,6 @@
-import type { QuestionBank } from '../../question-bank/domain/question-bank'
+import type { QuestionBank } from '../../question-bank/domain'
 import type { MockSitting } from './learner-state'
-import { isCorrectAnswer } from '../../question-bank/domain/question-answer'
-import { getQuestionKey } from '../../question-bank/domain/question-bank'
+import { isCorrectAnswer, getQuestionKey } from '../../question-bank/domain'
 
 export type MockSummary = Readonly<{
   id: string

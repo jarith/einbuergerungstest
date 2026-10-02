@@ -9,6 +9,7 @@ export type {
 
 export { getQuestionAttempts } from './domain/learner-state'
 export { createLearnerState } from './application/learner-state.model'
+export { createStartupRecovery } from './application/startup-recovery.model'
 export { isLearnerStateConflict } from './infrastructure/learner-state-conflict-error'
 
 export type {

@@ -24,9 +24,12 @@ export const ReviewQuestion = reatomComponent(({ model }: ReviewQuestionProps) =
         {t('mock.review')} ·{' '}
         {t('common.questionPosition', { current: index + 1, total: sitting.answers.length })}
       </p>
-      {model.error() ? (
+      {model.error() !== null ? (
         <InlineNotice intent="danger" role="alert">
-          {t('errors.storage')}
+          {t(model.error() === 'storageConflict' ? 'errors.storageConflict' : 'errors.storage')}
+          {model.error() === 'storageConflict' ? (
+            <Button onClick={wrap(model.reload)}>{t('common.reload')}</Button>
+          ) : null}
         </InlineNotice>
       ) : null}
       <QuestionContent

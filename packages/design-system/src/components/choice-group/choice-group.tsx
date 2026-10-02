@@ -17,11 +17,17 @@ export type ChoiceOption = Readonly<{
 }>
 
 export type ChoiceGroupProps = Omit<PrimitiveProps<RadioGroupProps>, 'children'> &
-  Readonly<{ options: readonly ChoiceOption[]; readOnly?: boolean; ref?: Ref<HTMLDivElement> }>
+  Readonly<{
+    options: readonly ChoiceOption[]
+    density?: 'regular' | 'compact'
+    readOnly?: boolean
+    ref?: Ref<HTMLDivElement>
+  }>
 
 /** A keyboard-operable single choice list, with optional answer feedback. */
 export const ChoiceGroup = ({
   options,
+  density = 'regular',
   readOnly = false,
   onChange,
   ref,
@@ -39,7 +45,7 @@ export const ChoiceGroup = ({
   >
     <Stack gap="layout.inline">
       {options.map((option) => {
-        const classes = choiceGroup({ result: option.result ?? 'none' })
+        const classes = choiceGroup({ density, result: option.result ?? 'none' })
 
         return (
           <Radio.Card

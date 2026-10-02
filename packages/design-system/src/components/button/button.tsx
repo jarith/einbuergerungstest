@@ -7,7 +7,7 @@ import { button } from './button.styles'
 
 export type ButtonProps = PrimitiveProps<MantineProps> &
   Omit<ComponentPropsWithoutRef<'button'>, keyof MantineProps> &
-  Readonly<{ appearance?: Appearance; ref?: Ref<HTMLButtonElement> }>
+  Readonly<{ appearance?: Appearance | 'danger'; ref?: Ref<HTMLButtonElement> }>
 
 export const Button = ({ appearance = 'solid', ref, ...props }: ButtonProps) => (
   <MantineButton {...props} ref={ref} classNames={button({ appearance })} />

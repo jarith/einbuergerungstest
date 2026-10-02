@@ -265,5 +265,25 @@
     "offlineTitle": "Offline-Bereitschaft auf diesem Gerät",
     "ready": "Offline bereit. Alle Fragen und Bilder sind zum Offline-Lernen gespeichert.",
     "notReady": "Noch nicht offline bereit. Öffne diese App online und warte, bis die Offline-Vorbereitung abgeschlossen ist."
+  },
+  "offline": {
+    "not-ready": "Noch nicht offline bereit.",
+    "preparing": "Alle Fragen und Bilder werden für die Offline-Nutzung vorbereitet …",
+    "ready": "Offline bereit",
+    "error": "Die Offline-Vorbereitung konnte nicht abgeschlossen werden.",
+    "unsupported": "Die Offline-Vorbereitung ist in diesem Browser nicht verfügbar. Öffne die installierte App oder nutze einen unterstützten Browser über eine sichere Verbindung.",
+    "failureHelp": "Einige Dateien konnten nicht gespeichert werden. Prüfe deine Verbindung und den freien Gerätespeicher und versuche es erneut. Dein Lernfortschritt bleibt erhalten.",
+    "missing": "Fehlende Dateien: {{resources}}",
+    "update": "Ein Update ist heruntergeladen. Beende deinen laufenden Probetest, schließe alle App-Fenster und öffne die App erneut, um es zu verwenden."
+  },
+  "startupRecovery": {
+    "title": "Gespeicherte Daten können nicht geladen werden",
+    "body": "Diese App benötigt ein Profil der Version 2. Die gespeicherten Daten stammen aus einer nicht unterstützten Version oder sind beschädigt. Sie wurden nicht verändert.",
+    "backupHelp": "Lade eine Kopie herunter, bevor du neu beginnst. Diese App kann nicht unterstützte oder beschädigte Daten nicht importieren. Du kannst die Datei aber für eine Wiederherstellung aufbewahren.",
+    "download": "Gespeicherte Daten herunterladen",
+    "startFresh": "Mit einem neuen Profil starten",
+    "resetTitle": "Gespeicherte Daten zurücksetzen?",
+    "resetBody": "Dadurch werden die gespeicherten Fortschritte und Einstellungen in diesem Browser endgültig entfernt und ein neues Profil angelegt. Lade zuerst eine Kopie herunter, wenn du die ursprünglichen Daten behalten möchtest.",
+    "reset": "Gespeicherte Daten zurücksetzen"
   }
 }

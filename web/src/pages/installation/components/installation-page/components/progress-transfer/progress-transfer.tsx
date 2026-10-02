@@ -13,7 +13,7 @@ export const ProgressTransfer = reatomComponent(({ localization }: ProgressTrans
   return (
     <Panel tone="muted">
       <Download className={styles.icon} aria-hidden="true" />
-      <h2 className={styles.heading}>{t('installation.transferTitle')}</h2>
+      <h2 className={styles.transferHeading}>{t('installation.transferTitle')}</h2>
       <p>{t('installation.transferHelp')}</p>
       <p className={styles.helper}>{t('installation.separatePreparation')}</p>
       <ButtonLink href="/settings" appearance="outline">
