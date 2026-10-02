@@ -18,7 +18,9 @@ export const runOxlint = async (
   filePath: string,
   args: readonly string[] = [],
 ): Promise<LintResult> => {
+  // Run the real project configuration, not plugins' internal NODE_ENV=test fixtures.
   const env = { ...process.env }
+  env['NODE_ENV'] = 'development'
   delete env['GITHUB_ACTIONS']
 
   try {

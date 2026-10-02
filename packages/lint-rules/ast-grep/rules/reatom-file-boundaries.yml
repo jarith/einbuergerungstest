@@ -1,0 +1,27 @@
+id: reatom-file-boundaries-ts
+language: TypeScript
+severity: error
+message: reatomRoute() calls are only allowed in *.route.ts(x) files.
+ignores:
+  - '**/*.route.ts'
+  - '**/*.route.tsx'
+  - '**/*.test.ts'
+  - '**/*.test.tsx'
+  - '**/test-setup.ts'
+  - '**/packages/server/src/**/*.ts'
+rule:
+  pattern: reatomRoute($$$ARGS)
+---
+id: reatom-file-boundaries-tsx
+language: Tsx
+severity: error
+message: reatomRoute() calls are only allowed in *.route.ts(x) files.
+ignores:
+  - '**/*.route.ts'
+  - '**/*.route.tsx'
+  - '**/*.test.ts'
+  - '**/*.test.tsx'
+  - '**/test-setup.ts'
+  - '**/packages/server/src/**/*.ts'
+rule:
+  pattern: reatomRoute($$$ARGS)

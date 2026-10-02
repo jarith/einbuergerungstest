@@ -1,4 +1,4 @@
-import type { SystemStyleObject } from '@pandacss/dev'
+import type { SystemStyleObject } from '@pandacss/types'
 
 export const interactive = {
   boxSizing: 'border-box',

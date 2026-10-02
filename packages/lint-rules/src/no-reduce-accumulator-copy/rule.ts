@@ -10,42 +10,43 @@ import {
   unwrapArrayExpression,
 } from '../anti-slop/shared/array-method.ts'
 
-function enclosingReducer(node: ESTree.Node) {
-  let parent = node.parent
-  while (parent !== null) {
+const enclosingReducer = (node: ESTree.Node) => {
+  for (let parent = node.parent; parent !== null; parent = parent.parent) {
     if (parent.type === 'FunctionDeclaration') return null
     if (parent.type === 'ArrowFunctionExpression' || parent.type === 'FunctionExpression') {
       const callback = parent
-      let owner: ESTree.Node | null = callback.parent
-      while (owner !== null && unwrapArrayExpression(owner) === callback) owner = owner.parent
-      if (owner?.type !== 'CallExpression') return null
-      const method = arrayMethodTarget(owner.callee)
-      const firstArgument = owner.arguments[0]
-      if (
-        method === null ||
-        (method.name !== 'reduce' && method.name !== 'reduceRight') ||
-        owner.arguments.length > 2 ||
-        firstArgument === undefined ||
-        unwrapArrayExpression(firstArgument) !== callback
-      )
-        return null
-      const firstParameter = callback.params[0]
-      const accumulator =
-        firstParameter?.type === 'AssignmentPattern' ? firstParameter.left : firstParameter
-      if (accumulator?.type !== 'Identifier') return null
-      return { callback, accumulator, initialValue: owner.arguments[1] }
+      for (let owner: ESTree.Node | null = callback.parent; owner !== null; owner = owner.parent) {
+        if (unwrapArrayExpression(owner) !== callback) {
+          if (owner.type !== 'CallExpression') return null
+          const method = arrayMethodTarget(owner.callee)
+          const firstArgument = owner.arguments[0]
+          if (
+            method === null ||
+            (method.name !== 'reduce' && method.name !== 'reduceRight') ||
+            owner.arguments.length > 2 ||
+            firstArgument === undefined ||
+            unwrapArrayExpression(firstArgument) !== callback
+          )
+            return null
+          const firstParameter = callback.params[0]
+          const accumulator =
+            firstParameter?.type === 'AssignmentPattern' ? firstParameter.left : firstParameter
+          if (accumulator?.type !== 'Identifier') return null
+          return { callback, accumulator, initialValue: owner.arguments[1] }
+        }
+      }
+      return null
     }
-    parent = parent.parent
   }
   return null
 }
 
-function referencesAccumulator(
+const referencesAccumulator = (
   sourceCode: SourceCode,
   node: ESTree.Node,
   accumulator: Variable,
   visited = new Set<Variable>(),
-): boolean {
+): boolean => {
   const variable = resolveArrayBinding(sourceCode, node)
   if (variable === null || visited.has(variable)) return false
   if (variable === accumulator) return true
@@ -66,7 +67,7 @@ function referencesAccumulator(
   return false
 }
 
-function isGlobalCopyOwner(sourceCode: SourceCode, node: ESTree.Node, name: string) {
+const isGlobalCopyOwner = (sourceCode: SourceCode, node: ESTree.Node, name: string) => {
   node = unwrapArrayExpression(node)
   if (node.type !== 'Identifier' || node.name !== name) return false
   const variable = resolveArrayBinding(sourceCode, node)
@@ -103,31 +104,27 @@ export const rule = defineRule({
         if (accumulator === undefined) return
         const isAccumulator = (expression: ESTree.Node) =>
           referencesAccumulator(context.sourceCode, expression, accumulator)
-        let copiesAccumulator = false
-        if (
+        const copiesByAssign =
           method.name === 'assign' &&
-          isGlobalCopyOwner(context.sourceCode, method.object, 'Object')
-        ) {
-          const target = node.arguments[0]
-          copiesAccumulator =
-            target !== undefined &&
-            unwrapArrayExpression(target).type === 'ObjectExpression' &&
-            node.arguments.slice(1).some(isAccumulator)
-        } else if (
+          isGlobalCopyOwner(context.sourceCode, method.object, 'Object') &&
+          node.arguments[0] !== undefined &&
+          unwrapArrayExpression(node.arguments[0]).type === 'ObjectExpression' &&
+          node.arguments.slice(1).some(isAccumulator)
+        const copiesByFrom =
           method.name === 'from' &&
-          isGlobalCopyOwner(context.sourceCode, method.object, 'Array')
-        ) {
-          const source = node.arguments[0]
-          copiesAccumulator = source !== undefined && isAccumulator(source)
-        } else if (
-          ['concat', 'slice', 'toSpliced', 'toSorted', 'toReversed', 'with'].includes(method.name)
-        ) {
-          const initialValue = reducer.initialValue
-          const arrayAccumulator =
-            initialValue !== undefined && isKnownArrayExpression(context.sourceCode, initialValue)
-          copiesAccumulator = arrayAccumulator && isAccumulator(method.object)
+          isGlobalCopyOwner(context.sourceCode, method.object, 'Array') &&
+          node.arguments[0] !== undefined &&
+          isAccumulator(node.arguments[0])
+        const copiesByArrayMethod =
+          ['concat', 'slice', 'toSpliced', 'toSorted', 'toReversed', 'with'].includes(
+            method.name,
+          ) &&
+          reducer.initialValue !== undefined &&
+          isKnownArrayExpression(context.sourceCode, reducer.initialValue) &&
+          isAccumulator(method.object)
+        if (copiesByAssign || copiesByFrom || copiesByArrayMethod) {
+          context.report({ node, messageId: 'accumulatorCopy' })
         }
-        if (copiesAccumulator) context.report({ node, messageId: 'accumulatorCopy' })
       },
     }
   },

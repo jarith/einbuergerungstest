@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { MantineProvider } from '@mantine/core'
+// oxlint-disable-next-line eslint/no-restricted-imports -- The design system provider intentionally uses Mantine's SSR-safe effect.
 import { useIsomorphicEffect } from '@mantine/hooks'
 
 import { cssVariablesResolver, mantineTheme } from '../foundation/mantine/mantine-theme'

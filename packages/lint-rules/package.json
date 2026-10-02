@@ -1,12 +1,14 @@
 {
-  "name": "@app/lint-rules",
+  "name": "@einbuergerungstest/lint-rules",
   "private": true,
   "type": "module",
   "scripts": {
     "ts:compile": "yarn run -T tsc -p tsconfig.json",
-    "lint": "yarn run -T oxlint -c ../../.oxlintrc.json --ignore-pattern '**/fixtures/**' src",
+    "build": "yarn ts:compile",
+    "lint": "yarn run -T oxlint -c ../../oxlint.config.ts --ignore-pattern '**/fixtures/**' src",
     "format": "yarn run -T oxfmt -c ../../.oxfmtrc.json --write src package.json tsconfig.json",
     "format:check": "yarn run -T oxfmt -c ../../.oxfmtrc.json --check src package.json tsconfig.json",
-    "test": "yarn run -T vitest run --passWithNoTests"
+    "test": "yarn run -T vitest run --passWithNoTests && yarn run -T ast-grep test -c ../../sgconfig.yml --skip-snapshot-tests",
+    "test:browser": "echo"
   }
 }

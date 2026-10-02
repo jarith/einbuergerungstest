@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { Stack, Toolbar, Wrap } from '@einbuergerungstest/design-system/jsx'
 
 import { Button } from '../../../components/button/button'
 import { ChoiceGroup } from '../../../components/choice-group/choice-group'
@@ -31,11 +32,11 @@ type Story = StoryObj<typeof meta>
 export const Composition = {} satisfies Story
 
 const StudyQuestionExamples = () => (
-  <section className={studyStyles.root} aria-label="Study question example">
-    <div className={studyStyles.status}>
+  <Stack as="section" maxWidth="content" aria-label="Study question example">
+    <Wrap align="center">
       <StatusBadge>Question 1 of 310</StatusBadge>
       <StatusBadge intent="danger">Latest answer: incorrect</StatusBadge>
-    </div>
+    </Wrap>
     <h2 className={studyStyles.heading}>
       In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil …
     </h2>
@@ -56,11 +57,11 @@ const StudyQuestionExamples = () => (
       Your latest answer was saved. Try again to update this question’s status.
     </InlineNotice>
     <ProgressBar aria-label="Questions solved" value={4} />
-    <div className={studyStyles.actions}>
+    <Toolbar placeContent="normal space-between">
       <Button appearance="outline">Previous question</Button>
       <Button>Next question</Button>
-    </div>
-  </section>
+    </Toolbar>
+  </Stack>
 )
 
 export const StudyQuestion = { render: () => <StudyQuestionExamples /> } satisfies Story

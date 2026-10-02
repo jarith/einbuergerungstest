@@ -8,6 +8,13 @@ const toRem = (value: number) => `${value / 16}rem`
 
 const toPx = (value: number) => `${value}px`
 
+// Derive from theme geometry: Panda cannot resolve flat dotted keys in token-to-token references.
+const shellPadding = (panel: number, inline: number) => ({
+  'shell.pagePadding': `${toRem(panel)} max(env(safe-area-inset-right), ${toRem(panel)}) ${toRem(panel)} max(env(safe-area-inset-left), ${toRem(panel)})`,
+  'shell.headerPadding': `max(env(safe-area-inset-top), ${toRem(panel)}) max(env(safe-area-inset-right), ${toRem(panel)}) ${toRem(panel)} max(env(safe-area-inset-left), ${toRem(panel)})`,
+  'shell.navigationPadding': `${toRem(inline)} max(env(safe-area-inset-right), ${toRem(inline)}) max(env(safe-area-inset-bottom), ${toRem(inline)}) max(env(safe-area-inset-left), ${toRem(inline)})`,
+})
+
 const project = <T extends string | number>(
   base: Readonly<Record<string, T>>,
   alternate: Readonly<Record<string, T>>,
@@ -66,6 +73,17 @@ export const pandaTheme = {
     spacing: {
       ...project(baselineTheme.spacing, alternateTheme.spacing, toRem),
       ...project(baselineTheme.geometry.spacing, alternateTheme.geometry.spacing, toRem),
+      ...project(
+        shellPadding(
+          baselineTheme.geometry.spacing['panel.padding'],
+          baselineTheme.geometry.spacing['layout.inline'],
+        ),
+        shellPadding(
+          alternateTheme.geometry.spacing['panel.padding'],
+          alternateTheme.geometry.spacing['layout.inline'],
+        ),
+        String,
+      ),
     },
     fontSizes: project(baselineTheme.fontSizes, alternateTheme.fontSizes, toRem),
     lineHeights: project(baselineTheme.lineHeights, alternateTheme.lineHeights, String),
@@ -125,6 +143,8 @@ export const pandaTheme = {
 }
 
 export const globalStyles = defineGlobalStyles({
+  // Reset native text margins once; layout primitives own spacing between elements.
+  ':where(h1, h2, p)': { margin: 0 },
   body: { textStyle: 'body', backgroundColor: 'canvas', color: 'content.primary' },
   ':where(:focus-visible), .ds-focus:focus-visible': { layerStyle: 'focus' },
   '*, *::before, *::after': {

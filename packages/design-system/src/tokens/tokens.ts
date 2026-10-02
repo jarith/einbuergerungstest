@@ -7,6 +7,7 @@ export const designTokens = {
   colors,
   spacing: { '0': 0, '4': 4, '8': 8, '12': 12, '16': 16, '24': 24, '32': 32 },
   fontSizes: {
+    '11': 11,
     '12': 12,
     '13': 13,
     '14': 14,
@@ -28,7 +29,7 @@ export const designTokens = {
     '28': 1.22,
     '32': 1.25,
   },
-  fontWeights: { regular: 400, medium: 500, semibold: 600, bold: 700 },
+  fontWeights: { regular: 400, medium: 500, semibold: 600, emphasized: 650, bold: 700 },
   fonts: {
     ui: '"Inter Variable", Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
     mono: 'ui-monospace, SFMono-Regular, Consolas, monospace',

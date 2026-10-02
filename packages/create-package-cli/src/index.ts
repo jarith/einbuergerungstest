@@ -10,7 +10,9 @@ try {
 
   await createPackage(root, name)
 
-  console.log(`Created @app/${name} in packages/${name}. Run yarn install to link the workspace.`)
+  console.log(
+    `Created @einbuergerungstest/${name} in packages/${name}. Run yarn install to link the workspace.`,
+  )
 } catch (error) {
   console.error(error instanceof Error ? error.message : String(error))
 

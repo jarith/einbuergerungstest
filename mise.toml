@@ -1,0 +1,13 @@
+[tool_alias]
+yarn = "aqua:yarnpkg/berry"
+
+[tools]
+node = "26.10.0"
+yarn = "4.18.1"
+actionlint = "1.7.12"
+jq = "1.8.2"
+shellcheck = "0.11.0"
+
+[settings]
+idiomatic_version_file_enable_tools = []
+lockfile = true

@@ -17,6 +17,10 @@ export const navigationItemRecipe = defineSlotRecipe({
     },
     label: { textStyle: 'controlLabel' },
     description: { textStyle: 'caption', color: 'content.muted' },
-    section: { color: 'content.muted', '[data-active] &': { color: 'navigation.current.icon' } },
+    section: {
+      margin: 0,
+      color: 'content.muted',
+      '[data-active] &': { color: 'navigation.current.icon' },
+    },
   },
 })

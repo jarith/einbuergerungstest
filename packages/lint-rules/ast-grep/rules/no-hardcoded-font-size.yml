@@ -1,0 +1,47 @@
+id: no-hardcoded-font-size-ts
+language: TypeScript
+severity: error
+message: Use a typography token (xs, sm, md, lg, xl, 2xl) instead of a hardcoded font size.
+rule:
+  all:
+    - kind: string
+    - regex: "^['\"]\\d+(?:\\.\\d+)?(?:px|em|rem|%)['\"]$"
+    - any:
+        - inside:
+            kind: pair
+            has:
+              field: key
+              regex: '^(?:fontSize|[''"]fontSize[''"])$'
+        - inside:
+            kind: pair
+            inside:
+              kind: object
+              inside:
+                kind: pair
+                has:
+                  field: key
+                  regex: '^(?:fontSize|[''"]fontSize[''"])$'
+---
+id: no-hardcoded-font-size-tsx
+language: Tsx
+severity: error
+message: Use a typography token (xs, sm, md, lg, xl, 2xl) instead of a hardcoded font size.
+rule:
+  all:
+    - kind: string
+    - regex: "^['\"]\\d+(?:\\.\\d+)?(?:px|em|rem|%)['\"]$"
+    - any:
+        - inside:
+            kind: pair
+            has:
+              field: key
+              regex: '^(?:fontSize|[''"]fontSize[''"])$'
+        - inside:
+            kind: pair
+            inside:
+              kind: object
+              inside:
+                kind: pair
+                has:
+                  field: key
+                  regex: '^(?:fontSize|[''"]fontSize[''"])$'

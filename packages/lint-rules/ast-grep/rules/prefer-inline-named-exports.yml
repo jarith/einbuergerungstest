@@ -1,0 +1,31 @@
+id: prefer-inline-named-exports-ts
+language: TypeScript
+severity: error
+message: Use inline named exports instead of exporting local declarations later.
+rule:
+  all:
+    - kind: export_statement
+    - has:
+        kind: export_clause
+        has:
+          kind: export_specifier
+    - not:
+        has:
+          kind: string
+          field: source
+---
+id: prefer-inline-named-exports-tsx
+language: Tsx
+severity: error
+message: Use inline named exports instead of exporting local declarations later.
+rule:
+  all:
+    - kind: export_statement
+    - has:
+        kind: export_clause
+        has:
+          kind: export_specifier
+    - not:
+        has:
+          kind: string
+          field: source

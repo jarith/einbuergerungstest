@@ -37,17 +37,22 @@ but the test cannot be resumed.
 completed mock test. A blank mock-test answer and a selection in an unfinished mock test
 do not count as question attempts.
 
-**Question status**: The result of the latest question attempt: correct, mistaken, or
-untried when there has been no attempt. Earlier attempts remain part of the learner's
-history.
+**Question status**: The current learning state derived from chronological question
+attempts: Not started (no attempts, gray), Needs review (latest answer wrong, red),
+Learning (one consecutive correct answer, orange), or Learned (at least two consecutive
+correct answers, green). Any wrong answer resets the consecutive-correct count to zero.
+Earlier attempts remain in history. See the
+[transition rules](requirements.md#question-learning-status).
 
-**Solved question**: A question whose latest attempt is correct. A later mistaken attempt
-returns it to unsolved status without removing its earlier history.
+**Question contributing to progress**: A question in Learning or Learned status. Each
+counts once, with equal weight. A wrong answer removes its contribution until the next
+correct answer. This replaces the earlier term “solved question.”
 
-**Dashboard progress**: The share of the 310-question bank currently made up of solved
-questions.
+**Dashboard progress**: The share of the 310-question bank currently in Learning or
+Learned status, rounded to the nearest whole percent.
 
-**Group progress**: The share of a question group currently made up of solved questions.
+**Group progress**: The share of a question group currently in Learning or Learned status,
+rounded to the nearest whole percent.
 
 **Test date**: The learner's optional planned date for taking the real Einbürgerungstest,
 distinct from a mock-test sitting.

@@ -34,17 +34,17 @@ const BUILT_INS = new Set([
 ])
 const TRANSPARENT_WRAPPERS = new Set(['Readonly', 'Partial', 'Required', 'NonNullable'])
 
-function declaredStatement(statement: ESTree.Program['body'][number]) {
+const declaredStatement = (statement: ESTree.Program['body'][number]) => {
   return statement.type === 'ExportNamedDeclaration' ||
     statement.type === 'ExportDefaultDeclaration'
     ? (statement.declaration ?? null)
     : statement
 }
 
-export function createTypeEnvironment(
+export const createTypeEnvironment = (
   program: ESTree.Program,
   visitorKeys: SourceCode['visitorKeys'],
-): TypeEnvironment {
+): TypeEnvironment => {
   const interfaces = new Map<string, ESTree.TSInterfaceDeclaration[]>()
 
   for (const statement of program.body) {
@@ -61,15 +61,15 @@ export function createTypeEnvironment(
   }
 }
 
-function typeReferenceName(type: ESTree.TSTypeReference) {
+const typeReferenceName = (type: ESTree.TSTypeReference) => {
   return type.typeName.type === 'Identifier' ? type.typeName.name : null
 }
 
-function isBuiltIn(name: string, use: ESTree.Node, environment: TypeEnvironment) {
+const isBuiltIn = (name: string, use: ESTree.Node, environment: TypeEnvironment) => {
   return BUILT_INS.has(name) && !hasVisibleTypeBinding(name, use, environment.typeAliases)
 }
 
-function isUnappliedReferenceTo(type: ESTree.TSType, name: string) {
+const isUnappliedReferenceTo = (type: ESTree.TSType, name: string) => {
   const unwrapped = unwrapTransparentType(type)
   return (
     unwrapped.type === 'TSTypeReference' &&
@@ -80,22 +80,23 @@ function isUnappliedReferenceTo(type: ESTree.TSType, name: string) {
   )
 }
 
-function unwrapTransparentType(type: ESTree.TSType) {
-  let current = type
-  while (
-    current.type === 'TSParenthesizedType' ||
-    (current.type === 'TSTypeOperator' && current.operator === 'readonly')
-  ) {
+const unwrapTransparentType = (type: ESTree.TSType) => {
+  for (let current = type; ;) {
+    if (
+      current.type !== 'TSParenthesizedType' &&
+      (current.type !== 'TSTypeOperator' || current.operator !== 'readonly')
+    ) {
+      return current
+    }
     current = current.typeAnnotation
   }
-  return current
 }
 
-function isNeverType(type: ESTree.TSType) {
+const isNeverType = (type: ESTree.TSType) => {
   return unwrapTransparentType(type).type === 'TSNeverKeyword'
 }
 
-function isEffectivelyEmptyMember(member: ESTree.TSSignature) {
+const isEffectivelyEmptyMember = (member: ESTree.TSSignature) => {
   return (
     member.type === 'TSPropertySignature' &&
     member.optional === true &&
@@ -105,11 +106,11 @@ function isEffectivelyEmptyMember(member: ESTree.TSSignature) {
   )
 }
 
-function isEffectivelyEmptyTypeLiteral(type: ESTree.TSTypeLiteral) {
+const isEffectivelyEmptyTypeLiteral = (type: ESTree.TSTypeLiteral) => {
   return type.members.length === 0 || type.members.every(isEffectivelyEmptyMember)
 }
 
-function isEffectivelyEmptyInterface(declarations: ESTree.TSInterfaceDeclaration[]) {
+const isEffectivelyEmptyInterface = (declarations: ESTree.TSInterfaceDeclaration[]) => {
   if (declarations.length !== 1) return false
   const [type] = declarations
   return (
@@ -119,11 +120,11 @@ function isEffectivelyEmptyInterface(declarations: ESTree.TSInterfaceDeclaration
   )
 }
 
-function resolvedSubstitutionArgument(
+const resolvedSubstitutionArgument = (
   type: ESTree.TSType,
   base: Map<string, ESTree.TSType>,
   resolving = new Set<string>(),
-): ESTree.TSType {
+): ESTree.TSType => {
   const unwrapped = unwrapTransparentType(type)
   if (unwrapped.type !== 'TSTypeReference') return type
   const name = typeReferenceName(unwrapped)
@@ -135,11 +136,11 @@ function resolvedSubstitutionArgument(
   return resolvedSubstitutionArgument(substitution, base, nextResolving)
 }
 
-function aliasSubstitution(
+const aliasSubstitution = (
   alias: ESTree.TSTypeAliasDeclaration,
   type: ESTree.TSTypeReference,
   base: Map<string, ESTree.TSType>,
-) {
+) => {
   const parameters = alias.typeParameters?.params ?? []
   const arguments_ = type.typeArguments?.params ?? []
   const next = new Map(base)
@@ -151,12 +152,12 @@ function aliasSubstitution(
   return next
 }
 
-function unsafeDirectValue(
+const unsafeDirectValue = (
   type: ESTree.TSType,
   environment: TypeEnvironment,
   substitutions: Map<string, ESTree.TSType>,
   resolvingAliases: Set<string>,
-): UnsafeValue | null {
+): UnsafeValue | null => {
   const unwrapped = unwrapTransparentType(type)
   if (unwrapped.type === 'TSUnknownKeyword') return 'unknown'
   if (unwrapped.type === 'TSAnyKeyword') return 'any'
@@ -207,12 +208,12 @@ function unsafeDirectValue(
   return unsafeDirectValue(alias.typeAnnotation, environment, nextSubstitutions, nextResolving)
 }
 
-function dictionaryValueTypes(
+const dictionaryValueTypes = (
   type: ESTree.TSType,
   environment: TypeEnvironment,
   substitutions: Map<string, ESTree.TSType>,
   resolvingAliases: Set<string>,
-): DictionaryValue[] {
+): DictionaryValue[] => {
   const unwrapped = unwrapTransparentType(type)
 
   if (unwrapped.type === 'TSTypeLiteral') {
@@ -268,15 +269,15 @@ function dictionaryValueTypes(
   return dictionaryValueTypes(alias.typeAnnotation, environment, nextSubstitutions, nextResolving)
 }
 
-export function classifyUnsafeDictionaryValue(
+export const classifyUnsafeDictionaryValue = (
   valueType: ESTree.TSType,
   environment: TypeEnvironment,
-) {
+) => {
   const unsafeValue = unsafeDirectValue(valueType, environment, new Map(), new Set())
   return unsafeValue === null ? null : { kind: 'unsafe-dictionary', unsafeValue }
 }
 
-export function classifyUnsafeDictionary(type: ESTree.TSType, environment: TypeEnvironment) {
+export const classifyUnsafeDictionary = (type: ESTree.TSType, environment: TypeEnvironment) => {
   for (const valueType of dictionaryValueTypes(type, environment, new Map(), new Set())) {
     const unsafeValue = unsafeDirectValue(
       valueType.type,
@@ -289,10 +290,10 @@ export function classifyUnsafeDictionary(type: ESTree.TSType, environment: TypeE
   return null
 }
 
-export function classifyWideningTarget(
+export const classifyWideningTarget = (
   type: ESTree.TSType,
   environment: TypeEnvironment,
-): WideningTarget | null {
+): WideningTarget | null => {
   const unwrapped = unwrapTransparentType(type)
   if (unwrapped.type === 'TSUnknownKeyword') return { kind: 'unknown' }
   if (unwrapped.type === 'TSObjectKeyword') return { kind: 'object' }
@@ -340,21 +341,21 @@ export function classifyWideningTarget(
   return resolved
 }
 
-function hasBroadRecordKey(
+const hasBroadRecordKey = (
   type: ESTree.TSTypeReference,
   environment: TypeEnvironment,
   substitutions: Map<string, ESTree.TSType>,
-): boolean {
+): boolean => {
   const key = type.typeArguments?.params[0]
   return key === undefined || isBroadMappedKey(key, environment, substitutions)
 }
 
-function isBroadMappedKey(
+const isBroadMappedKey = (
   type: ESTree.TSType,
   environment: TypeEnvironment,
   substitutions: Map<string, ESTree.TSType>,
   visitedAliases = new Set<string>(),
-): boolean {
+): boolean => {
   const unwrapped = unwrapTransparentType(type)
   if (
     unwrapped.type === 'TSStringKeyword' ||
@@ -389,12 +390,12 @@ function isBroadMappedKey(
   return isBroadMappedKey(alias.typeAnnotation, environment, substitutions, nextVisited)
 }
 
-function classifyAliasBroadTarget(
+const classifyAliasBroadTarget = (
   type: ESTree.TSType,
   environment: TypeEnvironment,
   substitutions: Map<string, ESTree.TSType>,
   resolvingAliases: Set<string>,
-): WideningTarget | null {
+): WideningTarget | null => {
   const unwrapped = unwrapTransparentType(type)
   if (unwrapped.type === 'TSUnknownKeyword') return { kind: 'unknown' }
   if (unwrapped.type === 'TSObjectKeyword') return { kind: 'object' }
@@ -442,39 +443,41 @@ function classifyAliasBroadTarget(
   )
 }
 
-export function isPopulatedObjectExpression(expression: ESTree.Node) {
-  let current = expression
-  while (
-    current.type === 'ParenthesizedExpression' ||
-    current.type === 'TSAsExpression' ||
-    current.type === 'TSTypeAssertion' ||
-    current.type === 'TSNonNullExpression'
-  ) {
+export const isPopulatedObjectExpression = (expression: ESTree.Node) => {
+  for (let current = expression; ;) {
+    if (
+      current.type !== 'ParenthesizedExpression' &&
+      current.type !== 'TSAsExpression' &&
+      current.type !== 'TSTypeAssertion' &&
+      current.type !== 'TSNonNullExpression'
+    ) {
+      return current.type === 'ObjectExpression' && current.properties.length > 0
+    }
     current = current.expression
   }
-  return current.type === 'ObjectExpression' && current.properties.length > 0
 }
 
-export function isKnownEvidenceExpression(expression: ESTree.Node) {
-  let current = expression
-  while (
-    current.type === 'ParenthesizedExpression' ||
-    current.type === 'TSAsExpression' ||
-    current.type === 'TSTypeAssertion' ||
-    current.type === 'TSNonNullExpression' ||
-    current.type === 'TSSatisfiesExpression'
-  ) {
+export const isKnownEvidenceExpression = (expression: ESTree.Node) => {
+  for (let current = expression; ;) {
+    if (
+      current.type !== 'ParenthesizedExpression' &&
+      current.type !== 'TSAsExpression' &&
+      current.type !== 'TSTypeAssertion' &&
+      current.type !== 'TSNonNullExpression' &&
+      current.type !== 'TSSatisfiesExpression'
+    ) {
+      if (current.type === 'ObjectExpression') return true
+      return (
+        current.type === 'ArrayExpression' ||
+        current.type === 'ArrowFunctionExpression' ||
+        current.type === 'ClassExpression' ||
+        current.type === 'FunctionExpression' ||
+        current.type === 'NewExpression' ||
+        current.type === 'Literal' ||
+        current.type === 'TemplateLiteral' ||
+        current.type === 'UnaryExpression'
+      )
+    }
     current = current.expression
   }
-  if (current.type === 'ObjectExpression') return true
-  return (
-    current.type === 'ArrayExpression' ||
-    current.type === 'ArrowFunctionExpression' ||
-    current.type === 'ClassExpression' ||
-    current.type === 'FunctionExpression' ||
-    current.type === 'NewExpression' ||
-    current.type === 'Literal' ||
-    current.type === 'TemplateLiteral' ||
-    current.type === 'UnaryExpression'
-  )
 }

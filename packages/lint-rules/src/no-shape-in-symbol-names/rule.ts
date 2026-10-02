@@ -5,12 +5,12 @@ import { defineRule } from '@oxlint/plugins'
 
 const FORBIDDEN_SYMBOL_NAME = 'shape'
 
-function containsForbiddenSymbolName(name: string) {
+const containsForbiddenSymbolName = (name: string) => {
   return name.toLowerCase().includes(FORBIDDEN_SYMBOL_NAME)
 }
 
 /** Return whether an identifier names a statically accessed member owned by another value. */
-function isBorrowedMemberName(node: ESTree.Node) {
+const isBorrowedMemberName = (node: ESTree.Node) => {
   const parent = node.parent
   if (parent === null || parent.type !== 'MemberExpression') return false
   return parent.property === node && parent.computed === false

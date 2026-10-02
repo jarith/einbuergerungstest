@@ -51,24 +51,26 @@ const typeNodeKinds = new Set([
   'TSVoidKeyword',
 ])
 
-function isTypeNode(node: ESTree.Node): node is ESTree.TSType {
+const isTypeNode = (node: ESTree.Node): node is ESTree.TSType => {
   return typeNodeKinds.has(node.type)
 }
 
-function typeReferenceName(type: ESTree.TSTypeReference) {
+const typeReferenceName = (type: ESTree.TSTypeReference) => {
   return type.typeName.type === 'Identifier' ? type.typeName.name : null
 }
 
-function isInsideTypeAliasDeclaration(node: ESTree.Node) {
-  let current = node.parent
-  while (current !== null && current.type !== 'Program') {
-    if (current.type === 'TSTypeAliasDeclaration') return true
+const isInsideTypeAliasDeclaration = (node: ESTree.Node) => {
+  for (
+    let current = node.parent;
+    current !== null && current.type !== 'Program';
     current = current.parent
+  ) {
+    if (current.type === 'TSTypeAliasDeclaration') return true
   }
   return false
 }
 
-function isPlainAliasConsumerUse(node: ESTree.TSType, environment: TypeEnvironment) {
+const isPlainAliasConsumerUse = (node: ESTree.TSType, environment: TypeEnvironment) => {
   if (node.type !== 'TSTypeReference' || node.typeArguments?.params.length) return false
   const name = typeReferenceName(node)
   return (
@@ -78,25 +80,27 @@ function isPlainAliasConsumerUse(node: ESTree.TSType, environment: TypeEnvironme
   )
 }
 
-function isInsideTypeParameterConstraint(node: ESTree.Node) {
-  let child = node
-  let parent = child.parent
-  while (parent !== null && parent.type !== 'Program') {
+const isInsideTypeParameterConstraint = (node: ESTree.Node) => {
+  for (
+    let child: ESTree.Node = node, parent = child.parent;
+    parent !== null && parent.type !== 'Program';
+    child = parent, parent = child.parent
+  ) {
     if (parent.type === 'TSTypeParameter' && parent.constraint === child) return true
-    child = parent
-    parent = child.parent
   }
   return false
 }
 
-function shouldReportType(node: ESTree.TSType, environment: TypeEnvironment) {
+const shouldReportType = (node: ESTree.TSType, environment: TypeEnvironment) => {
   if (isInsideTypeParameterConstraint(node)) return false
   if (isPlainAliasConsumerUse(node, environment)) return false
   if (classifyUnsafeDictionary(node, environment) === null) return false
-  let current = node.parent
-  while (current !== null && current.type !== 'Program') {
-    if (isTypeNode(current) && classifyUnsafeDictionary(current, environment) !== null) return false
+  for (
+    let current = node.parent;
+    current !== null && current.type !== 'Program';
     current = current.parent
+  ) {
+    if (isTypeNode(current) && classifyUnsafeDictionary(current, environment) !== null) return false
   }
   return true
 }
@@ -115,34 +119,34 @@ export const rule = defineRule({
     },
   },
   createOnce(context) {
-    let environment: TypeEnvironment | null = null
+    const state: { environment: TypeEnvironment | null } = { environment: null }
     const report = (node: ESTree.Node, value: string) => {
       context.report({ node, messageId: 'unsafeDictionary', data: { value } })
     }
     const reportIfUnsafe = (node: ESTree.TSType) => {
-      if (environment === null || !shouldReportType(node, environment)) return
-      const unsafe = classifyUnsafeDictionary(node, environment)
+      if (state.environment === null || !shouldReportType(node, state.environment)) return
+      const unsafe = classifyUnsafeDictionary(node, state.environment)
       if (unsafe === null) return
       report(node, unsafe.unsafeValue)
     }
 
     return {
       Program(node) {
-        environment = createTypeEnvironment(node, context.sourceCode.visitorKeys)
+        state.environment = createTypeEnvironment(node, context.sourceCode.visitorKeys)
       },
       TSTypeReference: reportIfUnsafe,
       TSTypeLiteral: reportIfUnsafe,
       TSMappedType: reportIfUnsafe,
       TSIndexSignature(node) {
         if (
-          environment === null ||
+          state.environment === null ||
           node.typeAnnotation === null ||
           node.parent.type === 'TSTypeLiteral'
         )
           return
         const unsafe = classifyUnsafeDictionaryValue(
           node.typeAnnotation.typeAnnotation,
-          environment,
+          state.environment,
         )
         if (unsafe !== null) report(node, unsafe.unsafeValue)
       },

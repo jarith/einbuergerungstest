@@ -1,0 +1,59 @@
+id: required-workspace-scripts
+language: Json
+severity: error
+message: 'Every workspace package.json must declare ts:compile, lint, build, format, format:check, test, and test:browser scripts.'
+files:
+  - web/package.json
+  - e2e/package.json
+  - packages/*/package.json
+rule:
+  all:
+    - kind: document
+    - not:
+        has:
+          kind: object
+          has:
+            kind: pair
+            all:
+              - has:
+                  field: key
+                  regex: '^"scripts"$'
+              - has:
+                  field: value
+                  kind: object
+                  all:
+                    - has:
+                        kind: pair
+                        has:
+                          field: key
+                          regex: '^"ts:compile"$'
+                    - has:
+                        kind: pair
+                        has:
+                          field: key
+                          regex: '^"lint"$'
+                    - has:
+                        kind: pair
+                        has:
+                          field: key
+                          regex: '^"build"$'
+                    - has:
+                        kind: pair
+                        has:
+                          field: key
+                          regex: '^"format"$'
+                    - has:
+                        kind: pair
+                        has:
+                          field: key
+                          regex: '^"format:check"$'
+                    - has:
+                        kind: pair
+                        has:
+                          field: key
+                          regex: '^"test"$'
+                    - has:
+                        kind: pair
+                        has:
+                          field: key
+                          regex: '^"test:browser"$'

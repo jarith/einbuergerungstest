@@ -66,13 +66,13 @@ components specific to that page. Repeat this structure inside a complex compone
 in `<page>.model.ts` and page-local pure helpers in `lib/` when needed. Optional files and
 subfolders are created when implementation needs them; the initial directory skeleton is
 tracked by `.gitkeep` files. The page's `index.ts` is its public interface, and
-`<page>.route.ts` defines its route.
+`<page>.route.ts` (or `.route.tsx` when its render callback uses JSX) defines its route.
 
 The application root under `web/src/app/` composes the page routes, responsive shell, UI
 localization, and offline lifecycle. `web/src/shared/` holds only small,
 domain-independent code with multiple consumers, such as route path builders. The authored
-bank and images stay in `web/resources/`; build-time resource tooling stays in
-`web/scripts/`.
+bank and images stay in `web/public/`, which Vite serves directly. Build-time resource
+tooling, if needed, belongs in `web/scripts/`.
 
 Pages must never import another page, including a page's internal component. They navigate
 through shared route paths and obtain reusable behavior through module public interfaces.

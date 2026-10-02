@@ -1,8 +1,0 @@
-{
-  "categories": {},
-  "plugins": [],
-  "jsPlugins": ["../../../plugin.ts"],
-  "rules": {
-    "app/no-module-scope-listeners": "error"
-  }
-}

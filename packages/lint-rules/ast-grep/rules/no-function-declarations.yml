@@ -1,0 +1,17 @@
+id: no-function-declarations-ts
+language: TypeScript
+severity: error
+message: Function declarations are not allowed. Use arrow function expressions instead.
+rule:
+  any:
+    - kind: function_declaration
+    - kind: generator_function_declaration
+---
+id: no-function-declarations-tsx
+language: Tsx
+severity: error
+message: Function declarations are not allowed. Use arrow function expressions instead.
+rule:
+  any:
+    - kind: function_declaration
+    - kind: generator_function_declaration

@@ -3,7 +3,8 @@ import type { ReactNode, Ref } from 'react'
 import { Radio } from '@mantine/core'
 
 import type { PrimitiveProps } from '../../foundation/mantine/props'
-import { choiceField, choiceGroup, choiceStack } from './choice-group.styles'
+import { Stack } from '../../../styled-system/jsx'
+import { choiceField, choiceGroup } from './choice-group.styles'
 
 export type ChoiceOption = Readonly<{
   value: string
@@ -20,7 +21,7 @@ export type ChoiceGroupProps = Omit<PrimitiveProps<RadioGroupProps>, 'children'>
 /** A keyboard-operable single choice list, with optional answer feedback. */
 export const ChoiceGroup = ({ options, ref, ...props }: ChoiceGroupProps) => (
   <Radio.Group {...props} ref={ref} classNames={choiceField()}>
-    <div className={choiceStack}>
+    <Stack gap="layout.inline">
       {options.map((option) => {
         const classes = choiceGroup({ result: option.result ?? 'none' })
 
@@ -48,6 +49,6 @@ export const ChoiceGroup = ({ options, ref, ...props }: ChoiceGroupProps) => (
           </Radio.Card>
         )
       })}
-    </div>
+    </Stack>
   </Radio.Group>
 )

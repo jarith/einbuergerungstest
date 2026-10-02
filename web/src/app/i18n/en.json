@@ -1,0 +1,110 @@
+{
+  "app": {
+    "title": "Einbürgerungstest",
+    "description": "Prepare for the Berlin citizenship test.",
+    "brand": "Citizenship test",
+    "context": "BERLIN  /  CITIZENSHIP TEST",
+    "deviceLocal": "Progress on this device"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "study": "Study",
+    "groups": "Study by group",
+    "mockTest": "Mock test",
+    "progress": "Progress",
+    "settings": "Settings & backup",
+    "installation": "Install the app",
+    "main": "Main navigation",
+    "skip": "Skip to content",
+    "questions": "All questions",
+    "home": "Home",
+    "settingsShort": "Settings",
+    "questionHistory": "Question history",
+    "testReview": "Test review",
+    "notFound": "Page not found"
+  },
+  "common": {
+    "back": "Back",
+    "next": "Next",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "close": "Close",
+    "retry": "Try again",
+    "loading": "Loading…",
+    "save": "Save",
+    "clear": "Clear",
+    "question_one": "{{count, number}} question",
+    "question_other": "{{count, number}} questions",
+    "attempt_one": "{{count, number}} attempt",
+    "attempt_other": "{{count, number}} attempts",
+    "questionPosition": "Question {{current, number}} of {{total, number}}",
+    "loadingSlow": "Loading is taking longer than expected. You can reload the app to try again.",
+    "reload": "Reload app",
+    "saving": "Saving…",
+    "savingSlow": "Saving is taking longer than expected. Keep this page open. If the save cannot finish, you can try again."
+  },
+  "settings": {
+    "language": "Interface language",
+    "english": "English",
+    "german": "German",
+    "appearance": "Appearance",
+    "light": "Light",
+    "dark": "Dark",
+    "studyTranslation": "Show English translation",
+    "plannedDate": "Planned test date",
+    "export": "Export backup",
+    "import": "Import backup",
+    "reset": "Reset local progress"
+  },
+  "study": {
+    "correct": "Correct",
+    "mistaken": "Incorrect",
+    "untried": "Untried",
+    "checkAnswer": "Check answer",
+    "tryAgain": "Try again",
+    "completed": "Study complete",
+    "correctAnswer": "Correct answer: {{answer}}",
+    "zoomImage": "Enlarge question image",
+    "imageAlt": "Illustration for question {{number, number}}",
+    "imageError": "The question image could not be loaded. Try again."
+  },
+  "dashboard": {
+    "solved": "{{solved, number}} of {{total, number}} solved",
+    "testToday": "Your test is today",
+    "daysUntilTest_one": "{{count, number}} day until your test",
+    "daysUntilTest_other": "{{count, number}} days until your test"
+  },
+  "mock": {
+    "start": "Start mock test",
+    "submit": "Submit test",
+    "exit": "Exit test",
+    "timeRemaining": "Time remaining",
+    "passed": "Passed",
+    "failed": "Not passed",
+    "unfinished": "Unfinished",
+    "review": "Review test",
+    "unanswered": "Unanswered",
+    "score": "{{correct, number}} of {{total, number}} correct"
+  },
+  "dialogs": {
+    "submitTitle": "Submit this test?",
+    "submitBody": "Unanswered questions score zero. You cannot change your answers after submitting.",
+    "exitTitle": "Leave this test?",
+    "exitBody": "This test will be saved as unfinished and cannot be resumed.",
+    "importTitle": "Replace local data?",
+    "importBody": "This backup will replace all history and settings on this device.",
+    "resetTitle": "Reset local progress?",
+    "resetBody": "This removes all history and restores default settings on this device. Export a backup first if you want to keep your data."
+  },
+  "validation": {
+    "plannedDate": "Choose today or a future test date.",
+    "invalidBackup": "This backup is invalid or unsupported. Choose a valid exported backup.",
+    "selectAnswer": "Select an answer before continuing."
+  },
+  "errors": {
+    "startup": "The app could not load. Try again.",
+    "storage": "Your changes could not be saved. Try again before leaving this page.",
+    "storageConflict": "Your data changed in another app window. Reload to use the latest saved data.",
+    "notFound": "This page could not be found. Return to the dashboard."
+  }
+}

@@ -2,17 +2,17 @@
 
 import type { ESTree, SourceCode } from '@oxlint/plugins'
 
-function isNode(value: unknown): value is ESTree.Node {
+const isNode = (value: unknown): value is ESTree.Node => {
   return (
     typeof value === 'object' && value !== null && 'type' in value && typeof value.type === 'string'
   )
 }
 
-function collectInferTypeParameterNames(
+const collectInferTypeParameterNames = (
   node: ESTree.Node,
   visitorKeys: SourceCode['visitorKeys'],
   names: Set<string>,
-): void {
+): void => {
   if (node.type === 'TSInferType') names.add(node.typeParameter.name.name)
   // SAFETY: Visitor keys select AST child fields, which are narrowed before traversal.
   const record = node as ESTree.Node & Record<string, unknown>
@@ -30,14 +30,16 @@ function collectInferTypeParameterNames(
 }
 
 /** Collect type binders that are in scope at a node and can shadow module aliases. */
-export function lexicalTypeParameterNames(
+export const lexicalTypeParameterNames = (
   node: ESTree.Node,
   visitorKeys: SourceCode['visitorKeys'],
-) {
+) => {
   const names = new Set<string>()
-  let descendant = node
-  let current: ESTree.Node | null = node
-  while (current !== null && current.type !== 'Program') {
+  for (
+    let current: ESTree.Node | null = node, descendant: ESTree.Node = node;
+    current !== null && current.type !== 'Program';
+    descendant = current, current = current.parent
+  ) {
     if ('typeParameters' in current) {
       for (const parameter of current.typeParameters?.params ?? []) {
         names.add(parameter.name.name)
@@ -52,8 +54,6 @@ export function lexicalTypeParameterNames(
     if (current.type === 'TSConditionalType' && descendant === current.trueType) {
       collectInferTypeParameterNames(current.extendsType, visitorKeys, names)
     }
-    descendant = current
-    current = current.parent
   }
   return names
 }

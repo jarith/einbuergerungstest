@@ -1,8 +1,0 @@
-{
-  "categories": {},
-  "plugins": [],
-  "jsPlugins": ["../../../plugin.ts"],
-  "rules": {
-    "app/no-deep-slice-imports": "error"
-  }
-}

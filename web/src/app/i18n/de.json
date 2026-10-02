@@ -1,0 +1,110 @@
+{
+  "app": {
+    "title": "Einbürgerungstest",
+    "description": "Bereite dich auf den Berliner Einbürgerungstest vor.",
+    "brand": "Einbürgerungstest",
+    "context": "BERLIN  /  EINBÜRGERUNGSTEST",
+    "deviceLocal": "Fortschritt auf diesem Gerät"
+  },
+  "navigation": {
+    "dashboard": "Übersicht",
+    "study": "Lernen",
+    "groups": "Nach Themen lernen",
+    "mockTest": "Probetest",
+    "progress": "Fortschritt",
+    "settings": "Einstellungen & Sicherung",
+    "installation": "App installieren",
+    "main": "Hauptnavigation",
+    "skip": "Zum Inhalt springen",
+    "questions": "Alle Fragen",
+    "home": "Start",
+    "settingsShort": "Daten",
+    "questionHistory": "Fragenverlauf",
+    "testReview": "Testauswertung",
+    "notFound": "Seite nicht gefunden"
+  },
+  "common": {
+    "back": "Zurück",
+    "next": "Weiter",
+    "cancel": "Abbrechen",
+    "confirm": "Bestätigen",
+    "close": "Schließen",
+    "retry": "Erneut versuchen",
+    "loading": "Wird geladen…",
+    "save": "Speichern",
+    "clear": "Löschen",
+    "question_one": "{{count, number}} Frage",
+    "question_other": "{{count, number}} Fragen",
+    "attempt_one": "{{count, number}} Versuch",
+    "attempt_other": "{{count, number}} Versuche",
+    "questionPosition": "Frage {{current, number}} von {{total, number}}",
+    "loadingSlow": "Das Laden dauert länger als erwartet. Lade die App neu, um es erneut zu versuchen.",
+    "reload": "App neu laden",
+    "saving": "Wird gespeichert…",
+    "savingSlow": "Das Speichern dauert länger als erwartet. Lass diese Seite geöffnet. Falls das Speichern fehlschlägt, kannst du es erneut versuchen."
+  },
+  "settings": {
+    "language": "Sprache der Benutzeroberfläche",
+    "english": "Englisch",
+    "german": "Deutsch",
+    "appearance": "Darstellung",
+    "light": "Hell",
+    "dark": "Dunkel",
+    "studyTranslation": "Englische Übersetzung anzeigen",
+    "plannedDate": "Geplanter Prüfungstermin",
+    "export": "Sicherung exportieren",
+    "import": "Sicherung importieren",
+    "reset": "Lokalen Fortschritt zurücksetzen"
+  },
+  "study": {
+    "correct": "Richtig",
+    "mistaken": "Falsch",
+    "untried": "Unbeantwortet",
+    "checkAnswer": "Antwort prüfen",
+    "tryAgain": "Erneut versuchen",
+    "completed": "Lerndurchgang abgeschlossen",
+    "correctAnswer": "Richtige Antwort: {{answer}}",
+    "zoomImage": "Fragebild vergrößern",
+    "imageAlt": "Abbildung zu Frage {{number, number}}",
+    "imageError": "Das Fragebild konnte nicht geladen werden. Versuche es erneut."
+  },
+  "dashboard": {
+    "solved": "{{solved, number}} von {{total, number}} gelöst",
+    "testToday": "Deine Prüfung ist heute",
+    "daysUntilTest_one": "Noch {{count, number}} Tag bis zur Prüfung",
+    "daysUntilTest_other": "Noch {{count, number}} Tage bis zur Prüfung"
+  },
+  "mock": {
+    "start": "Probetest starten",
+    "submit": "Test abgeben",
+    "exit": "Test verlassen",
+    "timeRemaining": "Verbleibende Zeit",
+    "passed": "Bestanden",
+    "failed": "Nicht bestanden",
+    "unfinished": "Nicht abgeschlossen",
+    "review": "Test ansehen",
+    "unanswered": "Unbeantwortet",
+    "score": "{{correct, number}} von {{total, number}} richtig"
+  },
+  "dialogs": {
+    "submitTitle": "Diesen Test abgeben?",
+    "submitBody": "Unbeantwortete Fragen zählen null Punkte. Nach der Abgabe kannst du deine Antworten nicht mehr ändern.",
+    "exitTitle": "Diesen Test verlassen?",
+    "exitBody": "Dieser Test wird als nicht abgeschlossen gespeichert und kann nicht fortgesetzt werden.",
+    "importTitle": "Lokale Daten ersetzen?",
+    "importBody": "Diese Sicherung ersetzt den gesamten Verlauf und alle Einstellungen auf diesem Gerät.",
+    "resetTitle": "Lokalen Fortschritt zurücksetzen?",
+    "resetBody": "Dadurch wird der gesamte Verlauf gelöscht und die Standardeinstellungen auf diesem Gerät werden wiederhergestellt. Exportiere vorher eine Sicherung, wenn du deine Daten behalten möchtest."
+  },
+  "validation": {
+    "plannedDate": "Wähle heute oder ein zukünftiges Prüfungsdatum.",
+    "invalidBackup": "Diese Sicherung ist ungültig oder wird nicht unterstützt. Wähle eine gültige exportierte Sicherung.",
+    "selectAnswer": "Wähle eine Antwort, bevor du fortfährst."
+  },
+  "errors": {
+    "startup": "Die App konnte nicht geladen werden. Versuche es erneut.",
+    "storage": "Deine Änderungen konnten nicht gespeichert werden. Versuche es erneut, bevor du diese Seite verlässt.",
+    "storageConflict": "Deine Daten wurden in einem anderen App-Fenster geändert. Lade die App neu, um die zuletzt gespeicherten Daten zu verwenden.",
+    "notFound": "Diese Seite wurde nicht gefunden. Kehre zur Übersicht zurück."
+  }
+}

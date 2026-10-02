@@ -1,0 +1,4 @@
+ruleDirs:
+  - packages/lint-rules/ast-grep/rules
+testConfigs:
+  - testDir: packages/lint-rules/ast-grep/tests
