@@ -149,7 +149,19 @@
     "unfinished": "Unfinished",
     "review": "Review test",
     "unanswered": "Unanswered",
-    "score": "{{correct, number}} of {{total, number}} correct"
+    "score": "{{correct, number}} of {{total, number}} correct",
+    "introduction": "33 questions · 60 minutes · 17 correct answers to pass",
+    "rules": "Use German exam content only. You can change answers until you submit or time runs out. Leaving early saves an unfinished test that cannot be resumed.",
+    "yourTest": "Your test",
+    "paper": "30 general + 3 Berlin questions",
+    "answered": "Answered",
+    "answeredCount": "{{count}} of {{total}} answered",
+    "counts": "{{answered}} answered · {{unanswered}} unanswered",
+    "changeHelp": "Change answers until the test ends. Results appear afterward.",
+    "questionList": "All 33 questions",
+    "blanks_one": "{{count}} unanswered question",
+    "blanks_other": "{{count}} unanswered questions",
+    "backToQuestions": "Back to questions"
   },
   "dialogs": {
     "submitTitle": "Submit this test?",

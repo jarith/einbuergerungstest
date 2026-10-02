@@ -149,7 +149,19 @@
     "unfinished": "Nicht abgeschlossen",
     "review": "Test ansehen",
     "unanswered": "Unbeantwortet",
-    "score": "{{correct, number}} von {{total, number}} richtig"
+    "score": "{{correct, number}} von {{total, number}} richtig",
+    "introduction": "33 Fragen · 60 Minuten · 17 richtige Antworten zum Bestehen",
+    "rules": "Nur deutsche Prüfungsfragen. Du kannst Antworten bis zur Abgabe oder zum Zeitablauf ändern. Beim vorzeitigen Verlassen wird der Test als unvollständig gespeichert und kann nicht fortgesetzt werden.",
+    "yourTest": "Dein Test",
+    "paper": "30 allgemeine + 3 Berliner Fragen",
+    "answered": "Beantwortet",
+    "answeredCount": "{{count}} von {{total}} beantwortet",
+    "counts": "{{answered}} beantwortet · {{unanswered}} unbeantwortet",
+    "changeHelp": "Du kannst Antworten bis zum Testende ändern. Ergebnisse erscheinen danach.",
+    "questionList": "Alle 33 Fragen",
+    "blanks_one": "{{count}} unbeantwortete Frage",
+    "blanks_other": "{{count}} unbeantwortete Fragen",
+    "backToQuestions": "Zurück zu den Fragen"
   },
   "dialogs": {
     "submitTitle": "Diesen Test abgeben?",
