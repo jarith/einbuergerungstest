@@ -48,6 +48,9 @@ export const choiceGroupRecipe = defineSlotRecipe({
     label: { textStyle: 'body', fontWeight: 'medium' },
     description: { textStyle: 'choiceDescription', color: 'content.muted' },
     result: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '4',
       textStyle: 'caption',
       fontWeight: 'semibold',
       flexShrink: 0,

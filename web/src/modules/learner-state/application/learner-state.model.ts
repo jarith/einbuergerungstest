@@ -11,6 +11,7 @@ import type {
   Preferences,
   StudyPosition,
 } from '../domain/learner-state'
+import { selectQuestionOption } from '../../question-bank/domain/question-answer'
 import { getQuestionKey } from '../../question-bank/domain/question-bank'
 import {
   createLearnerSnapshot,
@@ -42,6 +43,16 @@ export const createLearnerState = (bank: QuestionBank) => {
   const confirmationAtom = atom<Confirmation>(null, 'learnerState.confirmationAtom')
   const questions = new Map(bank.questions.map((question) => [getQuestionKey(question), question]))
   const operations = { queue: Promise.resolve() }
+
+  const validateSelection = (key: QuestionKey, selection: OptionLabel) => {
+    const question = questions.get(key)
+
+    if (question === undefined) {
+      throw new Error(`Unknown question ${key} in the question bank.`)
+    }
+
+    return selectQuestionOption(question, selection)
+  }
 
   const requireSnapshot = () => {
     const current = snapshotAtom()
@@ -173,6 +184,7 @@ export const createLearnerState = (bank: QuestionBank) => {
 
   const recordStudyAnswer = action(
     async (questionKey: QuestionKey, selectedOption: OptionLabel) => {
+      const selection = validateSelection(questionKey, selectedOption)
       const id = crypto.randomUUID()
 
       await wrap(
@@ -183,7 +195,7 @@ export const createLearnerState = (bank: QuestionBank) => {
             {
               id,
               questionKey,
-              selectedOption,
+              selectedOption: selection,
               answeredAt: getNextAttemptTime(current, Date.now()),
             },
           ],
@@ -237,6 +249,9 @@ export const createLearnerState = (bank: QuestionBank) => {
 
   const selectMockAnswer = action(
     async (id: string, questionKey: QuestionKey, selectedOption: OptionLabel | null) => {
+      const selection =
+        selectedOption === null ? null : validateSelection(questionKey, selectedOption)
+
       await wrap(
         mutate((current) =>
           updateMock(current, id, (sitting) => {
@@ -250,7 +265,9 @@ export const createLearnerState = (bank: QuestionBank) => {
             return {
               ...sitting,
               answers: sitting.answers.map((answer) =>
-                answer.questionKey === questionKey ? { ...answer, selectedOption } : answer,
+                answer.questionKey === questionKey
+                  ? { ...answer, selectedOption: selection }
+                  : answer,
               ),
             }
           }),

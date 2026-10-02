@@ -66,7 +66,11 @@
     "correctAnswer": "Correct answer: {{answer}}",
     "zoomImage": "Enlarge question image",
     "imageAlt": "Illustration for question {{number, number}}",
-    "imageError": "The question image could not be loaded. Try again."
+    "imageError": "The question image could not be loaded. Try again.",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "imageViewport": "Enlarged question image",
+    "imageHelp": "Zoom in to inspect details. Scroll the image with touch, a trackpad, or arrow keys when the image is focused."
   },
   "dashboard": {
     "solved": "{{solved, number}} of {{total, number}} solved",

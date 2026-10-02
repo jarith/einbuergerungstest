@@ -3,9 +3,10 @@
     "Resources and question bank",
     "Learner state and IndexedDB",
     "Localization and preferences model",
-    "Router and app shell"
+    "Router and app shell",
+    "Core question and answer rules"
   ],
-  "nextTask": "Core question and answer rules",
+  "nextTask": "Progress projections",
   "dependencies": {
     "Resources and question bank": [],
     "Learner state and IndexedDB": [
