@@ -11,6 +11,7 @@ import type {
   Preferences,
   StudyPosition,
 } from '../domain/learner-state'
+import { finalizeMockSitting } from '../../mock-test/domain/mock-test'
 import { selectQuestionOption } from '../../question-bank/domain/question-answer'
 import { getQuestionKey } from '../../question-bank/domain/question-bank'
 import {
@@ -263,6 +264,14 @@ export const createLearnerState = (bank: QuestionBank) => {
               throw new Error('Only questions in the active mock can be answered.')
             }
 
+            if (Date.now() >= sitting.deadline) {
+              return finalizeMockSitting(
+                sitting,
+                'completed',
+                getNextAttemptTime(current, Date.now()),
+              )
+            }
+
             return {
               ...sitting,
               answers: sitting.answers.map((answer) =>
@@ -286,6 +295,14 @@ export const createLearnerState = (bank: QuestionBank) => {
             throw new Error('Only an active mock can be navigated.')
           }
 
+          if (Date.now() >= sitting.deadline) {
+            return finalizeMockSitting(
+              sitting,
+              'completed',
+              getNextAttemptTime(current, Date.now()),
+            )
+          }
+
           return { ...sitting, currentQuestion }
         }),
       ),
@@ -296,17 +313,23 @@ export const createLearnerState = (bank: QuestionBank) => {
     await wrap(
       mutate((current) =>
         updateMock(current, id, (sitting) =>
-          sitting.status === 'active'
-            ? {
-                ...sitting,
-                status,
-                endedAt: Math.max(getNextAttemptTime(current, Date.now()), sitting.startedAt),
-              }
-            : sitting,
+          finalizeMockSitting(sitting, status, getNextAttemptTime(current, Date.now())),
         ),
       ),
     )
   }, 'learnerState.finishMock').extend(withAsync())
+
+  const expireMock = action(async (id: string) => {
+    await wrap(
+      mutate((current) =>
+        updateMock(current, id, (sitting) =>
+          Date.now() >= sitting.deadline
+            ? finalizeMockSitting(sitting, 'completed', getNextAttemptTime(current, Date.now()))
+            : sitting,
+        ),
+      ),
+    )
+  }, 'learnerState.expireMock').extend(withAsync())
 
   const previewImport = action((source: string) => {
     confirmationAtom.set(null)
@@ -375,6 +398,7 @@ export const createLearnerState = (bank: QuestionBank) => {
     selectMockAnswer,
     navigateMock,
     finishMock,
+    expireMock,
     previewImport,
     confirmReplacement,
     requestReset: action(
