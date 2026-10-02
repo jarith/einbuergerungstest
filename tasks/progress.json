@@ -5,14 +5,16 @@
     "Localization and preferences model",
     "Router and app shell",
     "Core question and answer rules",
-    "Progress projections"
+    "Progress projections",
+    "Settings page",
+    "Ordered study flow",
+    "Study page",
+    "Dashboard page"
   ],
-  "nextTask": "Settings page",
+  "nextTask": "Group study flow",
   "dependencies": {
     "Resources and question bank": [],
-    "Learner state and IndexedDB": [
-      "Resources and question bank"
-    ],
+    "Learner state and IndexedDB": ["Resources and question bank"],
     "Localization and preferences model": [
       "Resources and question bank",
       "Learner state and IndexedDB"
@@ -36,15 +38,8 @@
       "Localization and preferences model",
       "Router and app shell"
     ],
-    "Ordered study flow": [
-      "Core question and answer rules",
-      "Progress projections"
-    ],
-    "Study page": [
-      "Router and app shell",
-      "Core question and answer rules",
-      "Ordered study flow"
-    ],
+    "Ordered study flow": ["Core question and answer rules", "Progress projections"],
+    "Study page": ["Router and app shell", "Core question and answer rules", "Ordered study flow"],
     "Dashboard page": [
       "Router and app shell",
       "Progress projections",
@@ -80,10 +75,7 @@
       "Core question and answer rules",
       "Mock test domain"
     ],
-    "Question list page": [
-      "Router and app shell",
-      "Progress projections"
-    ],
+    "Question list page": ["Router and app shell", "Progress projections"],
     "Question history page": [
       "Router and app shell",
       "Core question and answer rules",
@@ -97,10 +89,7 @@
       "Question list page",
       "Question history page"
     ],
-    "Installation page": [
-      "Localization and preferences model",
-      "Router and app shell"
-    ],
+    "Installation page": ["Localization and preferences model", "Router and app shell"],
     "PWA and release integration": [
       "Resources and question bank",
       "Learner state and IndexedDB",

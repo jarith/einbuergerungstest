@@ -1,16 +1,17 @@
 import { action, atom, computed, withAsync, wrap } from '@reatom/core'
 
 import type { createLearnerState } from './learner-state.model'
+import { isLearnerStateConflict } from '../infrastructure/learner-state-conflict-error'
 
 export const createBackupModel = (learner: ReturnType<typeof createLearnerState>) => {
   const file = atom<File | null>(null, 'backup.file')
 
-  const message = atom<'invalid' | 'storage' | 'exported' | 'replaced' | null>(
+  const message = atom<'invalid' | 'storage' | 'conflict' | 'exported' | 'replaced' | null>(
     null,
     'backup.message',
   )
 
-  const isConfirming = atom(false, 'backup.isConfirming')
+  const confirmationKind = atom<'import' | 'reset' | null>(null, 'backup.confirmationKind')
 
   const selectFile = action(async (selected: File | null) => {
     file.set(selected)
@@ -38,7 +39,7 @@ export const createBackupModel = (learner: ReturnType<typeof createLearnerState>
   const cancel = action(() => {
     file.set(null)
 
-    isConfirming.set(false)
+    confirmationKind.set(null)
 
     learner.cancelReplacement()
   }, 'backup.cancel')
@@ -48,9 +49,10 @@ export const createBackupModel = (learner: ReturnType<typeof createLearnerState>
     message,
     selectFile,
     cancel,
-    isConfirming,
+    confirmationKind,
+    isConfirming: computed(() => confirmationKind() !== null, 'backup.isConfirming'),
     pending: computed(() => learner.pending() > 0 || selectFile.pending() > 0, 'backup.pending'),
-    requestImport: action(() => isConfirming.set(true), 'backup.requestImport'),
+    requestImport: action(() => confirmationKind.set('import'), 'backup.requestImport'),
     requestReset: action(() => {
       file.set(null)
 
@@ -58,7 +60,7 @@ export const createBackupModel = (learner: ReturnType<typeof createLearnerState>
 
       learner.requestReset()
 
-      isConfirming.set(true)
+      confirmationKind.set('reset')
     }, 'backup.requestReset'),
     confirm: action(async () => {
       try {
@@ -67,8 +69,10 @@ export const createBackupModel = (learner: ReturnType<typeof createLearnerState>
         cancel()
 
         message.set('replaced')
-      } catch {
-        message.set('storage')
+      } catch (cause) {
+        message.set(
+          cause instanceof Error && isLearnerStateConflict(cause) ? 'conflict' : 'storage',
+        )
       }
     }, 'backup.confirm').extend(withAsync()),
     download: action(async () => {

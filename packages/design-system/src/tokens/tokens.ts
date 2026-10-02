@@ -14,10 +14,14 @@ export const designTokens = {
     '15': 15,
     '16': 16,
     '20': 20,
+    '22': 22,
     '23': 23,
     '28': 28,
+    '29': 29,
     '30': 30,
     '32': 32,
+    '42': 42,
+    '47': 47,
   },
   lineHeights: {
     '12': 1.45,
@@ -30,6 +34,8 @@ export const designTokens = {
     '28': 1.22,
     '30': 1.25,
     '32': 1.25,
+    '42': 1.14,
+    '47': 1.13,
   },
   fontWeights: { regular: 400, medium: 500, semibold: 600, emphasized: 650, bold: 700 },
   fonts: {

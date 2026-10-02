@@ -2,10 +2,14 @@ import { action, atom, computed, reatomField, withAsync, withComputed, wrap } fr
 
 import type { AppResources } from '../../app/bootstrap.model'
 import type { Preferences } from '../../modules/learner-state'
-import { createBackupModel, getLocalDate } from '../../modules/learner-state'
+import {
+  createBackupModel,
+  getLocalDate,
+  isLearnerStateConflict,
+} from '../../modules/learner-state'
 
 export const createSettingsModel = ({ learner }: AppResources) => {
-  const error = atom(false, 'settings.error')
+  const error = atom<'storage' | 'conflict' | null>(null, 'settings.error')
 
   const savedDate = computed(
     () => learner()?.preferences.plannedTestDate ?? '',
@@ -20,14 +24,14 @@ export const createSettingsModel = ({ learner }: AppResources) => {
   }).extend(withComputed(() => savedDate()))
 
   const save = action(async (patch: Partial<Preferences>) => {
-    error.set(false)
+    error.set(null)
 
     try {
       await wrap(learner.updatePreferences(patch))
 
       return true
-    } catch {
-      error.set(true)
+    } catch (cause) {
+      error.set(cause instanceof Error && isLearnerStateConflict(cause) ? 'conflict' : 'storage')
 
       return false
     }
@@ -49,9 +53,13 @@ export const createSettingsModel = ({ learner }: AppResources) => {
       }
     }, 'settings.setAppearance'),
     saveDate: action(async () => {
+      if (learner.pending() > 0) {
+        return
+      }
+
       await wrap(date.validation.trigger())
 
-      if (date.validation().error === undefined) {
+      if (date.validation().error === undefined && date() !== savedDate()) {
         await wrap(save({ plannedTestDate: date() === '' ? null : date() }))
       }
     }, 'settings.saveDate').extend(withAsync()),

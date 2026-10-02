@@ -1,6 +1,7 @@
 import { css } from '@einbuergerungstest/design-system'
 
 export const styles = {
+  root: css.raw({ overflowWrap: 'anywhere', hyphens: 'auto' }),
   link: css({ color: 'content.primary' }),
   columns: css.raw({
     gridTemplateColumns: 'minmax(0, 1fr)',

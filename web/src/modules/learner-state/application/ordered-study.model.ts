@@ -9,38 +9,36 @@ import type { StudyPosition } from '../domain/learner-state'
 import type { createLearnerState } from './learner-state.model'
 import { getQuestionKey } from '../../question-bank/domain/question-bank'
 
+export type StudyMode = 'sequential' | 'inspection'
+
 export const createOrderedStudy = (
   bank: QuestionBank,
   learner: ReturnType<typeof createLearnerState>,
-  target?: QuestionKey,
+  target: QuestionKey,
+  mode: StudyMode,
 ) => {
   const ordered = bank.questions.toSorted((left, right) => left.number - right.number)
   const first = ordered[0]
 
-  if (
-    first === undefined ||
-    (target !== undefined && !ordered.some((question) => getQuestionKey(question) === target))
-  ) {
+  if (first === undefined || !ordered.some((question) => getQuestionKey(question) === target)) {
     throw new Error('Choose a question in the ordered question bank.')
   }
-  const initialKey = target ?? getQuestionKey(first)
+  const savedPosition = learner()?.positions.all
 
-  const inspection = atom<StudyPosition>(
-    { questionKey: initialKey, status: 'in-progress' },
-    'orderedStudy.inspection',
+  const position = atom<StudyPosition>(
+    {
+      questionKey: target,
+      status:
+        mode === 'sequential' && savedPosition?.questionKey === target
+          ? savedPosition.status
+          : 'in-progress',
+    },
+    'orderedStudy.position',
   )
 
   const retryKey = atom<QuestionKey | null>(null, 'orderedStudy.retryKey')
   const error = atom<Error | null>(null, 'orderedStudy.error')
   const busy = atom(false, 'orderedStudy.busy')
-
-  const position = computed(() => {
-    if (target !== undefined) {
-      return inspection()
-    }
-
-    return learner()?.positions.all ?? { questionKey: initialKey, status: 'in-progress' as const }
-  }, 'orderedStudy.position')
 
   const current = computed(() => {
     const saved = position()
@@ -62,7 +60,7 @@ export const createOrderedStudy = (
         retryKey() === key
           ? null
           : (learner.progress.questions().get(key)?.lastAttempt?.selectedOption ?? null),
-      isInspection: target !== undefined,
+      isInspection: mode === 'inspection',
     }
   }, 'orderedStudy.current')
 
@@ -87,11 +85,11 @@ export const createOrderedStudy = (
   }, 'orderedStudy.run').extend(withAsync())
 
   const savePosition = async (next: StudyPosition) => {
-    if (target === undefined) {
+    if (mode === 'sequential') {
       await wrap(learner.setStudyPosition(null, next))
-    } else {
-      inspection.set(next)
     }
+
+    position.set(next)
 
     retryKey.set(null)
   }

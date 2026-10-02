@@ -14,6 +14,10 @@ export const Dialog = (props: DialogProps) => (
     closeButtonProps={{ 'aria-label': 'Close dialog' }}
     centered
     {...props}
+    attributes={{
+      ...props.attributes,
+      header: { ...props.attributes?.header, role: 'presentation' },
+    }}
     size={token.var('sizes.dialog.default')}
     transitionProps={{ duration: 0 }}
     overlayProps={{ backgroundOpacity: 1 }}

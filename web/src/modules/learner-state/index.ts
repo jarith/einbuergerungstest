@@ -30,3 +30,5 @@ export { getLocalDate } from './domain/learner-state'
 export { createBackupModel } from './application/backup.model'
 export { BackupControls } from './components/backup-controls/backup-controls'
 export { createOrderedStudy } from './application/ordered-study.model'
+
+export type { StudyMode } from './application/ordered-study.model'

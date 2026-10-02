@@ -24,4 +24,11 @@ export const toggleSwitchRecipe = defineSlotRecipe({
     description: { textStyle: 'caption', color: 'content.muted' },
     error: { textStyle: 'caption', color: 'danger' },
   },
+  variants: {
+    layout: {
+      compact: {},
+      spread: { body: { justifyContent: 'space-between' } },
+    },
+  },
+  defaultVariants: { layout: 'compact' },
 })

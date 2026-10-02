@@ -1,0 +1,85 @@
+import { css } from '@einbuergerungstest/design-system'
+
+export const styles = {
+  root: css.raw({ overflowWrap: 'anywhere', hyphens: 'auto' }),
+  introGrid: css.raw({
+    gap: '24',
+    gridTemplateAreas: '"intro" "date" "exam"',
+    gridTemplateColumns: 'minmax(0, 1fr)',
+    '@media (min-width: 64rem)': {
+      gridTemplateAreas: '"intro exam" "date date"',
+      gridTemplateColumns: 'minmax(0, 2.23fr) minmax(0, 1fr)',
+      gridTemplateRows: 'minmax(24.25rem, auto) auto',
+      columnGap: '[2.875rem]',
+      alignItems: 'center',
+    },
+  }),
+  intro: css.raw({ gridArea: 'intro', alignItems: 'start', paddingBlock: '24' }),
+  title: css({
+    textStyle: 'title',
+    fontSize: '30',
+    lineHeight: '47',
+    maxWidth: '[min(100%, 24ch)]',
+    overflowWrap: 'anywhere',
+    hyphens: 'auto',
+    '@media (min-width: 48rem)': { fontSize: '42', lineHeight: '42' },
+    '@media (min-width: 64rem)': { fontSize: '47', lineHeight: '47' },
+  }),
+  heading: css({ textStyle: 'heading' }),
+  actions: css.raw({
+    gap: '12',
+    width: '[100%]',
+    '& a': { width: '[100%]' },
+    '@media (min-width: 48rem)': { '& a': { width: 'auto' } },
+  }),
+  exam: css({ gridArea: 'exam', alignSelf: 'center' }),
+  examDescription: css({
+    display: 'none',
+    textStyle: 'caption',
+    '@media (min-width: 64rem)': { display: 'block' },
+  }),
+  facts: css.raw({
+    gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, {sizes.control.action}), 1fr))',
+    gap: '16',
+    '@media (min-width: 64rem)': { gridTemplateColumns: 'minmax(0, 1fr)' },
+  }),
+  fact: css.raw({
+    flexDirection: 'column',
+    gap: '8',
+    textStyle: 'caption',
+    '@media (min-width: 64rem)': { flexDirection: 'row', alignItems: 'center' },
+  }),
+  factValue: css({ fontSize: '28', fontWeight: 'bold', color: 'accent' }),
+  countdown: css.raw({
+    gridArea: 'date',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: '12',
+    background: 'surface-muted',
+    borderRadius: 'field',
+    padding: '16',
+  }),
+  icon: css({ width: 'icon.action', height: 'icon.action', color: 'accent', flexShrink: '0' }),
+  caption: css({ textStyle: 'choiceDescription', color: 'content.muted' }),
+  link: css({ color: 'content.primary', textStyle: 'caption' }),
+  summary: css.raw({
+    gridTemplateColumns: 'minmax(0, 1fr)',
+    gap: '24',
+    '@media (min-width: 64rem)': {
+      gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 1fr)',
+      gap: '32',
+    },
+  }),
+  total: css({ fontSize: '30', fontWeight: 'semibold' }),
+  groups: css.raw({
+    gridTemplateColumns: 'minmax(0, 1fr)',
+    gap: '24',
+    '@media (min-width: 48rem)': {
+      gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+      gridTemplateRows: 'repeat(7, auto)',
+      gridAutoFlow: 'column',
+    },
+  }),
+  group: css({ minWidth: '0' }),
+  groupTitle: css({ textStyle: 'caption', fontWeight: 'medium' }),
+}

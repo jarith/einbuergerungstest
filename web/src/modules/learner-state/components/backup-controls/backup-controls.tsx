@@ -69,9 +69,15 @@ export const BackupControls = reatomComponent((props: BackupControlsProps) => {
         {message === 'exported' ? t('settings.exported') : null}
         {message === 'replaced' ? t('settings.replaced') : null}
       </output>
-      {message === 'invalid' || message === 'storage' ? (
+      {message === 'invalid' || message === 'storage' || message === 'conflict' ? (
         <InlineNotice intent="danger">
-          {t(message === 'invalid' ? 'validation.invalidBackup' : 'errors.storage')}
+          {t(
+            message === 'invalid'
+              ? 'validation.invalidBackup'
+              : message === 'conflict'
+                ? 'errors.storageConflict'
+                : 'errors.storage',
+          )}
         </InlineNotice>
       ) : null}
       <ReplacementDialog {...props} />

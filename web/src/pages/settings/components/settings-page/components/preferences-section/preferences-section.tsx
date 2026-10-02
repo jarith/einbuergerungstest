@@ -58,6 +58,7 @@ export const PreferencesSection = reatomComponent(({ data }: PageProps<SettingsD
                 aria-label={t('common.clear')}
                 appearance="ghost"
                 disabled={settings.pending()}
+                onPointerDown={(event) => event.preventDefault()}
                 onClick={wrap(() => {
                   void settings.clearDate()
                 })}
@@ -91,7 +92,11 @@ export const PreferencesSection = reatomComponent(({ data }: PageProps<SettingsD
         </Stack>
       </Grid>
       <output>{settings.pending() ? t('common.saving') : null}</output>
-      {settings.error() ? <InlineNotice intent="danger">{t('errors.storage')}</InlineNotice> : null}
+      {settings.error() !== null ? (
+        <InlineNotice intent="danger">
+          {t(settings.error() === 'conflict' ? 'errors.storageConflict' : 'errors.storage')}
+        </InlineNotice>
+      ) : null}
     </Panel>
   )
 }, 'PreferencesSection')

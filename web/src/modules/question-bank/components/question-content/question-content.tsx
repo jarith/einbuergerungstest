@@ -100,6 +100,8 @@ export const QuestionContent = ({
         <ToggleSwitch
           label={t('settings.studyTranslation')}
           labelPosition="left"
+          layout="spread"
+          disabled={isPending}
           checked={translationEnabled}
           onChange={(event) => onTranslationChange(event.currentTarget.checked)}
         />

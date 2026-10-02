@@ -1,11 +1,17 @@
-import { action, computed, urlAtom, withAsync, wrap } from '@reatom/core'
+import { action, computed, withAsync, wrap } from '@reatom/core'
 
 import type { AppResources } from '../../app/bootstrap.model'
+import type { StudyMode } from '../../modules/learner-state'
 import type { QuestionKey } from '../../modules/question-bank'
 import { createOrderedStudy } from '../../modules/learner-state'
 
-export const createStudyModel = (resources: AppResources, target?: QuestionKey) => {
-  const flow = createOrderedStudy(resources.questions.bank, resources.learner, target)
+export const createStudyModel = (
+  resources: AppResources,
+  target: QuestionKey,
+  mode: StudyMode,
+  navigate: (key: QuestionKey) => void,
+) => {
+  const flow = createOrderedStudy(resources.questions.bank, resources.learner, target, mode)
 
   return computed(() => {
     const current = flow()
@@ -26,17 +32,24 @@ export const createStudyModel = (resources: AppResources, target?: QuestionKey) 
     previous: action(async () => {
       await wrap(flow.previous())
 
-      if (target !== undefined && flow.error() === null) {
-        urlAtom.go(`/study/${encodeURIComponent(flow().key)}`, true)
+      if (flow.error() === null && flow().key !== target) {
+        navigate(flow().key)
       }
     }, 'study.previous').extend(withAsync()),
     next: action(async () => {
       await wrap(flow.next())
 
-      if (target !== undefined && flow.error() === null && !flow().isCompleted) {
-        urlAtom.go(`/study/${encodeURIComponent(flow().key)}`, true)
+      if (flow.error() === null && !flow().isCompleted && flow().key !== target) {
+        navigate(flow().key)
       }
     }, 'study.next').extend(withAsync()),
+    restart: action(async () => {
+      await wrap(flow.restart())
+
+      if (flow.error() === null && flow().key !== target) {
+        navigate(flow().key)
+      }
+    }, 'study.restart').extend(withAsync()),
     localization: resources.localization,
     translation: resources.localization.translation,
     scope: computed(() => resources.localization.t()('study.allQuestions'), 'study.scopeLabel'),

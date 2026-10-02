@@ -5,7 +5,10 @@ export const styles = {
   columns: css.raw({
     gap: '32',
     gridTemplateColumns: 'minmax(0, 1fr)',
-    '@media (min-width: 64rem)': { gridTemplateColumns: 'minmax(0, 3fr) minmax(0, 1fr)' },
+    '@media (min-width: 64rem)': {
+      gridTemplateColumns: 'minmax(0, 2.8fr) minmax(0, 1fr)',
+      gap: '[3.5rem]',
+    },
   }),
   help: css({ display: 'none', '@media (min-width: 64rem)': { display: 'block' } }),
   heading: css({ textStyle: 'heading' }),

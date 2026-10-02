@@ -7,7 +7,7 @@ import type { BackupControlsProps } from '../../backup-controls'
 
 export const ReplacementDialog = reatomComponent(({ localization, model }: BackupControlsProps) => {
   const t = localization.t()
-  const isReset = model()?.kind === 'reset'
+  const isReset = model.confirmationKind() === 'reset'
   const isPending = model.pending()
 
   return (
@@ -25,8 +25,10 @@ export const ReplacementDialog = reatomComponent(({ localization, model }: Backu
     >
       <Stack gap="layout.section">
         <p>{t(isReset ? 'dialogs.resetBody' : 'dialogs.importBody')}</p>
-        {model.message() === 'storage' ? (
-          <InlineNotice intent="danger">{t('errors.storage')}</InlineNotice>
+        {model.message() === 'storage' || model.message() === 'conflict' ? (
+          <InlineNotice intent="danger">
+            {t(model.message() === 'conflict' ? 'errors.storageConflict' : 'errors.storage')}
+          </InlineNotice>
         ) : null}
         <Wrap gap="8">
           <Button

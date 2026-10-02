@@ -23,7 +23,7 @@ export const StudyCompletion = reatomComponent(({ model }: StudySessionProps) =>
         <Wrap gap="12">
           <Button
             onClick={wrap(() => {
-              void model.flow.restart()
+              void model.restart()
             })}
             disabled={model.flow.pending()}
           >

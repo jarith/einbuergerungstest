@@ -1,8 +1,9 @@
 import { css } from '@einbuergerungstest/design-system'
 
 export const questionTitle = css({
-  fontSize: '23',
-  '@media (min-width: 48rem)': { fontSize: '30' },
+  fontSize: '22',
+  '@media (min-width: 48rem)': { fontSize: '29' },
+  '@media (min-width: 64rem)': { fontSize: '30' },
   fontWeight: 'emphasized',
   lineHeight: '32',
   color: 'content.primary',
