@@ -71,6 +71,15 @@ remain available. Mantine visual props such as `color`, `variant`, `size`, `radi
 `classNames`, and `vars` stay private. `className` and `style` remain deliberate escape
 hatches.
 
+Use `Calendar` for themed date entry instead of `TextInput type="date"`, whose browser
+popup cannot inherit the design-system styles. It wraps Mantine `DateInput`, sharing the
+field recipes and styling the calendar and portaled popup through Mantine's
+[Styles API](https://mantine.dev/styles/styles-api/). Values and `minDate`/`maxDate` use
+calendar-date strings (`YYYY-MM-DD`); the field displays `DD.MM.YYYY` and accepts either
+format when typed. Pass `locale` and translated `ariaLabels` from the application and
+import the corresponding Day.js locale there. Handle `onChange` to persist calendar
+selections, since picking a day keeps focus in the input and does not trigger blur.
+
 `NavigationItem` requires an `href` and renders a native link. Use route-generated
 destinations in the application so ordinary clicks can be guarded while new-tab and
 link-copy behavior remains native. Disabled items expose `aria-disabled`, have no

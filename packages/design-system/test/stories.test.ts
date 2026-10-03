@@ -6,14 +6,14 @@ const themes = [
     colorScheme: 'light',
     skin: 'baseline',
     accent: 'rgb(63, 91, 23)',
-    actionHeight: '46px',
+    actionHeight: '48px',
     fieldHeight: '44px',
   },
   {
     colorScheme: 'dark',
     skin: 'baseline',
     accent: 'rgb(167, 192, 128)',
-    actionHeight: '46px',
+    actionHeight: '48px',
     fieldHeight: '44px',
   },
   {

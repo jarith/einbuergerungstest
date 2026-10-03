@@ -6,7 +6,7 @@ import questionBank from '../../web/public/questionbank-berlin.json' with { type
 export const sourceQuestion = (number: number) => {
   const question = questionBank.questions[number - 1]
 
-  if (!question || question.number !== number) {
+  if (!question || question.order !== number) {
     throw new Error(`Question ${number} is missing from the source bank.`)
   }
 
@@ -32,10 +32,8 @@ export const sourceQuestionOnPage = async (page: Page) => {
   const routeKey = decodeURIComponent(new URL(page.url()).pathname.split('/').at(-1) ?? '')
 
   const question =
-    candidates.find(
-      (candidate) => `${candidate.section}:${candidate.source_question_id}` === routeKey,
-    ) ??
-    candidates.find((candidate) => imageAlt?.endsWith(` ${candidate.number}`) ?? false) ??
+    candidates.find((candidate) => candidate.id === routeKey) ??
+    candidates.find((candidate) => imageAlt?.endsWith(` ${candidate.order}`) ?? false) ??
     (candidates.length === 1 ? candidates[0] : undefined)
 
   if (!question) {
@@ -107,7 +105,7 @@ export const questionRow = async (page: Page, number: number) => {
     .click()
 
   const question = sourceQuestion(number)
-  const key = encodeURIComponent(`${question.section}:${question.source_question_id}`)
+  const key = question.id
   const row = page.getByRole('link').and(page.locator(`a[href="/progress/questions/${key}"]`))
 
   // Sequentially reveal the requested row through the learner-facing pagination.

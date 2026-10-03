@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "yarn panda:prepare && yarn dev:serve",
-    "dev:serve": "yarn run -T vite --host 127.0.0.1",
+    "dev:serve": "yarn run -T vite --host 0.0.0.0 --port 5173 --strictPort",
     "ts:compile": "yarn run -T tsc -p tsconfig.json",
     "lint": "yarn run -T oxlint -c ../oxlint.config.ts .",
     "format": "yarn run -T oxfmt --write .",

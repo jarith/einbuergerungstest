@@ -9,7 +9,7 @@ export type {
 } from './question-bank'
 export type { QuestionMode, AnswerFeedback } from './question-answer'
 
-export { getQuestionKey, isJsonValue } from './question-bank'
+export { getQuestionKey, isQuestionKey, isJsonValue } from './question-bank'
 export {
   selectQuestionOption,
   isCorrectAnswer,

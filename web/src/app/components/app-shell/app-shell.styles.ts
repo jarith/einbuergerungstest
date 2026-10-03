@@ -34,15 +34,28 @@ export const shellStyles = {
   main: css.raw({
     gap: 'layout.section',
     minWidth: '0',
-    padding: 'shell.pagePadding',
+    paddingBlock: '[1.5rem calc(6rem + env(safe-area-inset-bottom))]',
+    paddingInline: '20',
     gridRow: '2',
-    '@media (min-width: 48rem)': { gridRow: '3' },
+    '@media (min-width: 48rem)': { gridRow: '3', paddingBlock: '32', paddingInline: '36' },
     '@media (min-width: 64rem)': {
       gridColumn: '2',
       gridRow: '1',
       paddingBlock: 'shell.contentBlock',
       paddingInline: 'shell.contentInline',
       gap: '24',
+    },
+  }),
+  content: css.raw({
+    display: 'contents',
+    '@media (min-width: 64rem)': {
+      '&[data-centered]': {
+        display: 'flex',
+        width: '[50vw]',
+        maxWidth: '[100%]',
+        alignSelf: 'center',
+        gap: '24',
+      },
     },
   }),
   skip: css({

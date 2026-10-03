@@ -42,10 +42,11 @@ export const ExitConfirmationDialog = reatomComponent(
         <Wrap gap="layout.inline">
           <Button
             appearance="outline"
+            data-autofocus
             disabled={isPending}
             onClick={wrap(() => browserNavigationAtom.cancel())}
           >
-            {t('common.cancel')}
+            {t('mock.stay')}
           </Button>
           <Button
             disabled={isPending}

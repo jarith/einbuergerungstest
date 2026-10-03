@@ -12,8 +12,8 @@ export const TestCountdown = reatomComponent(({ model }: DashboardSectionProps) 
   return (
     <Flex css={{ ...styles.countdown }}>
       <CalendarDays aria-hidden="true" className={styles.icon} />
-      <Stack gap="4" flex="1" minWidth="0">
-        <strong>
+      <Stack gap="4" css={{ ...styles.countdownCopy }}>
+        <strong className={styles.countdownTitle}>
           {date === null
             ? t('dashboard.noDate')
             : date.days === 0

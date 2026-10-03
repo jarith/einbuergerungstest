@@ -8,6 +8,7 @@ import type { StartupRecoveryProps } from '../startup-recovery/startup-recovery'
 import { pageNotFound, RouteStatus } from '../../routing'
 import { AppShell } from '../app-shell/app-shell'
 import { StartupRecovery } from '../startup-recovery/startup-recovery'
+import { recoveryLayoutCss } from './app-layout.styles'
 
 type AppLayoutProps = Readonly<{
   route: Pick<AppRoute, 'loader' | 'outlet'>
@@ -24,9 +25,9 @@ export const AppLayout = reatomComponent(({ route, routes, title, recovery }: Ap
 
   if (recovery() !== null) {
     return (
-      <Container as="main" paddingBlock="layout.section">
+      <Center as="main" css={recoveryLayoutCss} padding="layout.section">
         <StartupRecovery model={recovery} />
-      </Container>
+      </Center>
     )
   }
 
@@ -50,13 +51,15 @@ export const AppLayout = reatomComponent(({ route, routes, title, recovery }: Ap
       offline={data.offline}
       localization={data.localization}
       title={title()}
+      isContentCentered={
+        routes.study.entry.match() || routes.mock.entry.match() || routes.settings.exact()
+      }
       isTitleHidden={
         routes.dashboard.exact() ||
         routes.study.entry.exact() ||
         routes.study.study.exact() ||
         routes.study.groupEntry.exact() ||
         routes.study.groupStudy.exact() ||
-        routes.groups.exact() ||
         routes.mock.entry.match() ||
         routes.testReview.exact() ||
         routes.installation.exact()
@@ -95,7 +98,7 @@ export const AppLayout = reatomComponent(({ route, routes, title, recovery }: Ap
       ]}
       links={[
         ...(routes.progress.exact()
-          ? [{ label: t('navigation.questions'), href: routes.questions.path() }]
+          ? [{ label: t('progress.backupAction'), href: routes.settings.path() }]
           : []),
       ]}
     >
@@ -104,4 +107,4 @@ export const AppLayout = reatomComponent(({ route, routes, title, recovery }: Ap
   )
 }, 'AppLayout')
 import type { Computed } from '@reatom/core'
-import { Container } from '@einbuergerungstest/design-system/jsx'
+import { Center, Container } from '@einbuergerungstest/design-system/jsx'

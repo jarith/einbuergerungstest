@@ -10,7 +10,6 @@ import { createQuestionHistoryRoute } from '../pages/question-history'
 import { createQuestionListRoute } from '../pages/question-list'
 import { createSettingsRoute } from '../pages/settings'
 import { createStudyRoutes } from '../pages/study'
-import { createStudyGroupsRoute } from '../pages/study-groups'
 import { createTestReviewRoute } from '../pages/test-review'
 import { loadAppResources } from './bootstrap.model'
 import { AppLayout } from './components/app-layout/app-layout'
@@ -34,7 +33,6 @@ const startupRecovery = createStartupRecovery(appRoute.loader.error, () => {
 export const routes = {
   dashboard: createDashboardRoute(appRoute),
   study: createStudyRoutes(appRoute),
-  groups: createStudyGroupsRoute(appRoute),
   mock: createMockTestRoutes(appRoute),
   progress: createProgressRoute(appRoute),
   questions: createQuestionListRoute(appRoute),

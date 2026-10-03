@@ -41,6 +41,7 @@ export const MockDialogs = reatomComponent(({ model }: MockDialogsProps) => {
           <Wrap gap="8">
             <Button
               appearance="outline"
+              data-autofocus
               disabled={isPending}
               onClick={wrap(model.returnToQuestions)}
             >

@@ -1,4 +1,5 @@
 import { buttonRecipe } from '../../components/button/button.recipe'
+import { calendarRecipe } from '../../components/calendar/calendar.recipe'
 import { choiceGroupRecipe } from '../../components/choice-group/choice-group.recipe'
 import { dialogRecipe } from '../../components/dialog/dialog.recipe'
 import { dividerRecipe } from '../../components/divider/divider.recipe'
@@ -16,6 +17,7 @@ import { inputRecipe } from '../../recipes/input/input.recipe'
 /** Keep configuration pure: register recipe definitions, never render modules. */
 export const slotRecipes = {
   button: buttonRecipe,
+  calendar: calendarRecipe,
   choiceGroup: choiceGroupRecipe,
   dialog: dialogRecipe,
   separator: dividerRecipe,

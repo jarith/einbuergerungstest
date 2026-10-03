@@ -5,5 +5,7 @@ export const styles = {
     textStyle: 'compactTitle',
     '@media (min-width: 48rem)': { textStyle: 'title' },
   }),
-  reached: css({ fontSize: '24', fontWeight: 'bold', lineHeight: '24' }),
+  reached: css({ fontSize: '18', fontWeight: 'semibold', lineHeight: '18' }),
+  explanation: css({ textStyle: 'caption', color: 'content.muted' }),
+  check: css({ color: 'success', flexShrink: '0' }),
 }

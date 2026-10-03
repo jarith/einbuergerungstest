@@ -4,7 +4,7 @@ export type QuestionSection = 'general' | 'berlin'
 
 export type OptionLabel = 'A' | 'B' | 'C' | 'D'
 
-export type QuestionKey = `${QuestionSection}:${number}`
+export type QuestionKey = string
 
 export type QuestionGroup = Readonly<{
   id: string
@@ -23,9 +23,9 @@ export type AnswerOption = Readonly<{
 export type ImageVariant = Readonly<{ width: number; resource: string }>
 
 export type Question = Readonly<{
-  number: number
+  id: QuestionKey
+  order: number
   section: QuestionSection
-  source_question_id: number
   group_id: string
   question_de: string
   question_en: string
@@ -145,9 +145,9 @@ const requireResource = (value: JsonValue | undefined, place: string): string =>
   return resource
 }
 
-export const getQuestionKey = (
-  question: Pick<Question, 'section' | 'source_question_id'>,
-): QuestionKey => `${question.section}:${question.source_question_id}`
+export const isQuestionKey = (value: string): boolean => /^[a-z0-9]{5}$/.test(value)
+
+export const getQuestionKey = (question: Pick<Question, 'id'>): QuestionKey => question.id
 
 export const getImageMetadata = (bank: QuestionBank): ReadonlyMap<string, ImageMetadata> => {
   const entries = bank.questions.flatMap(
@@ -255,23 +255,17 @@ const parseImage = (entry: JsonObject, place: string) => {
 const parseQuestion = (raw: JsonValue, index: number): Question => {
   const place = `questions[${index}]`
   const entry = requireRecord(raw, place)
-  const number = requirePositiveInteger(entry['number'], `${place}.number`)
+  const id = requireText(entry['id'], `${place}.id`)
 
-  if (number > 310) {
-    return fail(`${place}.number`, 'expected 1 to 310')
+  if (!isQuestionKey(id)) {
+    return fail(`${place}.id`, 'expected 5 lowercase letters or digits')
+  }
+  const order = requirePositiveInteger(entry['order'], `${place}.order`)
+
+  if (order > 310) {
+    return fail(`${place}.order`, 'expected 1 to 310')
   }
   const section = requireSection(entry['section'], `${place}.section`)
-
-  const source_question_id = requirePositiveInteger(
-    entry['source_question_id'],
-    `${place}.source_question_id`,
-  )
-
-  const maxSourceId = section === 'general' ? 300 : 10
-
-  if (source_question_id > maxSourceId) {
-    return fail(`${place}.source_question_id`, `expected 1 to ${maxSourceId}`)
-  }
 
   const answer_options: AnswerOption[] = requireArray(
     entry['answer_options'],
@@ -294,9 +288,9 @@ const parseQuestion = (raw: JsonValue, index: number): Question => {
   })
 
   return {
-    number,
+    id,
+    order,
     section,
-    source_question_id,
     group_id: requireText(entry['group_id'], `${place}.group_id`),
     question_de: requireText(entry['question_de'], `${place}.question_de`),
     question_en: requireText(entry['question_en'], `${place}.question_en`),
@@ -317,7 +311,11 @@ export const parseQuestionBank = (value: JsonValue): QuestionBank => {
     return fail('question_count', 'expected 310')
   }
   const groups = requireArray(root['groups'], 'groups', 13).map(parseGroup)
-  const questions = requireArray(root['questions'], 'questions', 310).map(parseQuestion)
+
+  const questions = requireArray(root['questions'], 'questions', 310)
+    .map(parseQuestion)
+    .toSorted((left, right) => left.order - right.order)
+
   const groupIds = new Set(groups.map((group) => group.id))
 
   if (groupIds.size !== groups.length) {
@@ -328,20 +326,7 @@ export const parseQuestionBank = (value: JsonValue): QuestionBank => {
     return fail('groups', 'missing Berlin group')
   }
   const keys = questions.map(getQuestionKey)
-  const numbers = questions.map((question) => question.number)
-
-  const sourceIds = {
-    general: new Set(
-      questions
-        .filter((question) => question.section === 'general')
-        .map((question) => question.source_question_id),
-    ),
-    berlin: new Set(
-      questions
-        .filter((question) => question.section === 'berlin')
-        .map((question) => question.source_question_id),
-    ),
-  }
+  const orders = questions.map((question) => question.order)
 
   for (const question of questions) {
     const key = getQuestionKey(question)
@@ -350,8 +335,8 @@ export const parseQuestionBank = (value: JsonValue): QuestionBank => {
       return fail(`questions.${key}`, 'duplicate stable key')
     }
 
-    if (numbers.indexOf(question.number) !== numbers.lastIndexOf(question.number)) {
-      return fail(`questions.${key}`, 'duplicate display number')
+    if (orders.indexOf(question.order) !== orders.lastIndexOf(question.order)) {
+      return fail(`questions.${key}`, 'duplicate order')
     }
 
     if (!groupIds.has(question.group_id)) {
@@ -367,8 +352,11 @@ export const parseQuestionBank = (value: JsonValue): QuestionBank => {
     }
   }
 
-  if (sourceIds.general.size !== 300 || sourceIds.berlin.size !== 10) {
-    return fail('questions', 'expected source IDs 1–300 general and 1–10 Berlin')
+  if (
+    questions.filter((question) => question.section === 'general').length !== 300 ||
+    questions.filter((question) => question.section === 'berlin').length !== 10
+  ) {
+    return fail('questions', 'expected 300 general and 10 Berlin questions')
   }
 
   for (const group of groups) {

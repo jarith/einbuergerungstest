@@ -50,7 +50,7 @@ shared/
 Place every page in its own folder directly under `web/src/pages/`:
 
 ```text
-dashboard/       study/           study-groups/    mock-test/
+dashboard/       study/           mock-test/
 test-review/     progress/        question-list/   question-history/
 settings/        installation/
 ```

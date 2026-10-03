@@ -9,7 +9,7 @@ export const selectQuestionOption = (question: Question, value: string): OptionL
   const option = question.answer_options.find((candidate) => candidate.label === value)
 
   if (option === undefined) {
-    throw new Error(`Question ${question.number} has no option ${value}. Choose A, B, C, or D.`)
+    throw new Error(`Question ${question.order} has no option ${value}. Choose A, B, C, or D.`)
   }
 
   return option.label

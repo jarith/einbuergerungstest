@@ -7,26 +7,15 @@ export const styles = {
     gap: '32',
     '@media (min-width: 64rem)': { gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 1fr)' },
   }),
-  totals: css.raw({
-    gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-    gap: '12',
-    '@media (min-width: 48rem)': { gridTemplateColumns: 'repeat(4, minmax(0, 1fr))' },
-  }),
   panel: css({ padding: '12', gap: '8' }),
-  count: css({
-    fontSize: '23',
-    fontWeight: 'bold',
-    '@media (min-width: 48rem)': { fontSize: '30', fontWeight: 'semibold' },
-  }),
   heading: css({
     textStyle: 'compactHeading',
     '@media (min-width: 48rem)': { textStyle: 'heading' },
   }),
   muted: css({
     textStyle: 'caption',
-    fontSize: '12',
+    fontSize: '14',
     color: 'content.muted',
-    '@media (min-width: 48rem)': { fontSize: '14' },
   }),
   list: css.raw({ listStyle: 'none', padding: '0', gap: '0' }),
   row: css({
@@ -37,7 +26,7 @@ export const styles = {
     paddingBlock: '12',
     color: 'content.primary',
     textDecoration: 'none',
-    fontSize: '12',
+    fontSize: '14',
     '@media (min-width: 48rem)': { fontSize: '16' },
     borderBlockEnd: '{borderWidths.control} solid {colors.panel.border}',
     _hover: { backgroundColor: 'surface-muted' },
@@ -48,10 +37,10 @@ export const styles = {
   }),
   prompt: css({
     textStyle: 'controlLabel',
-    fontSize: '12',
+    fontSize: '14',
     lineClamp: 2,
-    '@media (min-width: 48rem)': { fontSize: '14' },
   }),
+  backup: css({ maxWidth: '[47.5rem]' }),
   link: css({
     color: 'content.primary',
     minHeight: '[2.75rem]',

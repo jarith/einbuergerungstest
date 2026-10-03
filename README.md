@@ -27,7 +27,11 @@ To update a tool, change its version in `mise.toml`, regenerate `mise.lock` with
 `mise install --locked`. For Yarn, record the SHA-256 of the published `yarn.js` in each
 platform entry of `mise.lock`; its Aqua recipe does not supply a checksum.
 
-The application runs at `http://127.0.0.1:5173`. Run `yarn storybook` in another terminal
+The application listens on all network interfaces at port `5173` and fails if that port
+is already in use. Open the Network URL printed by Vite on both your computer and iPhone
+while connected to the same Wi-Fi, or use `http://127.0.0.1:5173` on the computer.
+Offline PWA testing requires a production build over HTTPS; development does not register
+a service worker. Run `yarn storybook` in another terminal
 for the component workbench at `http://localhost:6006`. Both commands generate Panda
 assets before starting and watch styles during development. Stop the command to stop its
 processes.
@@ -122,9 +126,13 @@ resource updates do not interrupt a sitting. Service-worker caches never store o
 learner IndexedDB data. The existing learner model supports one writing window at a time;
 reopening an active sitting treats it as unfinished under the documented storage policy.
 
-Learner snapshots and exported backups use version 2, with an explicit finish reason for
-completed tests. This MVP does not migrate version-1 local data or backups; use a fresh
-learner profile for this version. Unsupported data is preserved and rejected.
+Questions use stable five-character lowercase alphanumeric IDs in URLs and saved history.
+The bank's `order` field controls display numbering and study order; question IDs do not
+include a section prefix.
+
+Learner snapshots and exported backups use version 3 with these question IDs and an explicit
+finish reason for completed tests. This MVP does not migrate older local data or backups;
+use a fresh learner profile for this version. Unsupported data is preserved and rejected.
 
 If startup shows “Saved data cannot be loaded”, use **Download saved data** to
 keep the original snapshot, then **Start with a fresh profile** and confirm the

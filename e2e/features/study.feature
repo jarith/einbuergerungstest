@@ -14,10 +14,10 @@ Feature: Study the Berlin question bank in order
     Then question 1 has status "needs-review"
     And the question totals are 309 not started, 1 needing review, 0 learning, and 0 learned
 
-  Scenario: A later attempt changes the latest status but retains the mistake
+  Scenario: A new study session allows another attempt and retains the mistake
     When I start studying
     And I select study answer "A"
-    And I retry the study question
+    And I resume studying
     And I select study answer "D"
     Then study answer "D" is marked correct
     And I see immediate correct feedback
@@ -37,7 +37,7 @@ Feature: Study the Berlin question bank in order
     And I resume studying
     Then German and English text for study question 2 and its options are visible
 
-  Scenario: An answered question can be revisited from navigation and progress
+  Scenario: Navigation preserves feedback and opening from Progress allows a fresh answer
     When I start studying
     And I select study answer "A"
     And I go to the next study question
@@ -46,10 +46,30 @@ Feature: Study the Berlin question bank in order
     When I open progress
     And I open question 1 from progress
     Then study question 1 of 310 is shown
-    And study answer "A" is marked wrong
+    When I select study answer "D"
+    Then study answer "D" is marked correct
+    When I open progress
+    Then question 1 has status "learning"
+    And question 1 has 2 recorded attempts
 
   Scenario: An illustrated question displays its embedded picture
     When I open progress
     And I open question 21 from progress
     Then study question 21 of 310 is shown
     And the study question illustration is visible
+
+  Scenario Outline: Study help is accessible without losing an answer
+    Given the browser viewport is <width> by 844
+    When I choose <language> as UI language
+    And I start studying
+    And I select study answer "A"
+    And I open and close study help with the keyboard
+    Then study question 1 of 310 is shown
+    And study answer "A" is marked wrong
+    And I see immediate incorrect feedback
+    And the application fits the viewport width
+
+    Examples:
+      | language | width |
+      | English  | 390   |
+      | German   | 1440  |

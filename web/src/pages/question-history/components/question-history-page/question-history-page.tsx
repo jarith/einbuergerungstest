@@ -21,7 +21,7 @@ export const QuestionHistoryPage = reatomComponent(({ data }: PageProps<Question
       <Stack gap="16">
         <Wrap gap="8" alignItems="center" justifyContent="space-between">
           <p className={styles.eyebrow}>
-            {t('history.context', { number: selected.question.number })}
+            {t('history.context', { number: selected.question.order })}
           </p>
           <QuestionStatusBadge status={model().progress.status} t={t} />
         </Wrap>
@@ -31,7 +31,7 @@ export const QuestionHistoryPage = reatomComponent(({ data }: PageProps<Question
         {selected.image === undefined ? null : (
           <QuestionImage
             image={selected.image}
-            alt={t('study.imageAlt', { number: selected.question.number })}
+            alt={t('study.imageAlt', { number: selected.question.order })}
             t={t}
           />
         )}

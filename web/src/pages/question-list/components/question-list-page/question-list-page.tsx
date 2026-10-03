@@ -17,12 +17,6 @@ export const QuestionListPage = reatomComponent(({ data }: PageProps<QuestionLis
 
   return (
     <Stack gap="16" css={styles.root}>
-      <Toolbar placeContent="normal space-between">
-        <h2 className={styles.heading}>{t('questions.bank')}</h2>
-        <span className={styles.muted}>
-          {t('questions.total', { count: model.totals().total })}
-        </span>
-      </Toolbar>
       <QuestionFilters model={model} />
       <output className={styles.muted}>
         {t('questions.showing', { count: rows.length, total: model.total() })}

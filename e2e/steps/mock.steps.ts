@@ -6,6 +6,7 @@ import {
   mockAnswer,
   questionStatusLabel,
   sourceQuestionOnPage,
+  sourceQuestion,
   questionRow,
   openNavigation,
   expectHighlight,
@@ -43,7 +44,7 @@ Given('I import a study attempt dated tomorrow', async ({ page }) => {
     mimeType: 'application/json',
     buffer: Buffer.from(
       JSON.stringify({
-        version: 2,
+        version: 3,
         preferences: {
           language: 'de',
           studyTranslation: false,
@@ -54,7 +55,7 @@ Given('I import a study attempt dated tomorrow', async ({ page }) => {
         studyAttempts: [
           {
             id: 'future-study',
-            questionKey: 'general:1',
+            questionKey: sourceQuestion(1).id,
             selectedOption: 'D',
             answeredAt: new Date('2026-01-02T10:00:00Z').getTime(),
           },
@@ -125,9 +126,9 @@ Then('the mock contains 30 general and 3 Berlin questions without repeats', asyn
 
     const question = await sourceQuestionOnPage(page)
 
-    expect(seen.has(question.number)).toBe(false)
+    expect(seen.has(question.order)).toBe(false)
 
-    seen.add(question.number)
+    seen.add(question.order)
 
     if (question.section === 'general') {
       counts.general += 1
@@ -225,7 +226,9 @@ Then(
     await expect(page).toHaveURL(/\/progress\/tests\//)
 
     await expect(summary.getByRole('heading', { name: `${score} / 33`, exact: true })).toBeVisible()
-    await expect(summary).toContainText(result === 'passed' ? 'Bestanden' : 'Nicht bestanden')
+    await expect(summary).toContainText(
+      result === 'passed' ? 'Probetest bestanden' : 'Nicht bestanden',
+    )
   },
 )
 
@@ -250,9 +253,9 @@ Then('the completed test review shows every question and correct answer', async 
 
     const question = await sourceQuestionOnPage(page)
 
-    expect(seen.has(question.number)).toBe(false)
+    expect(seen.has(question.order)).toBe(false)
 
-    seen.add(question.number)
+    seen.add(question.order)
 
     const correct = mockAnswer(page, question.correct_option)
 
@@ -320,7 +323,7 @@ When(
 When('I answer the first mock question correctly', async ({ page }) => {
   const question = await sourceQuestionOnPage(page)
 
-  firstAnsweredQuestion.set(page, question.number)
+  firstAnsweredQuestion.set(page, question.order)
 
   await mockAnswer(page, question.correct_option).click()
 
@@ -360,7 +363,7 @@ Then('I see an exit confirmation', async ({ page }) => {
 When('I stay in the mock test', async ({ page }) => {
   await page
     .getByRole('dialog', { name: 'Diesen Test verlassen?' })
-    .getByRole('button', { name: 'Abbrechen' })
+    .getByRole('button', { name: 'Im Test bleiben', exact: true })
     .click()
 })
 

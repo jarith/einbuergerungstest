@@ -10,7 +10,6 @@ export const createPageTitleAtom = (appRoute: AppRoute, routes: AppRoutes) => {
     { route: routes.study.study, title: 'navigation.study' },
     { route: routes.study.groupEntry, title: 'navigation.groups' },
     { route: routes.study.groupStudy, title: 'navigation.groups' },
-    { route: routes.groups, title: 'navigation.groups' },
     { route: routes.mock.entry, title: 'navigation.mockTest' },
     { route: routes.mock.question, title: 'navigation.mockTest' },
     { route: routes.progress, title: 'navigation.progress' },

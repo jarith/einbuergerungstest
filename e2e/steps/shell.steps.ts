@@ -23,16 +23,18 @@ Then('the navigation appears beside the main content', async ({ page }) => {
   await expect(main).toHaveCSS('padding-inline-start', '46px')
 })
 
-Then('the navigation appears below the main content', async ({ page }) => {
+Then('the navigation stays at the bottom of the viewport', async ({ page }) => {
   const navigation = page.getByRole('navigation', { name: 'Main navigation' })
   const navigationBounds = await navigation.boundingBox()
-  const mainBounds = await page.getByRole('main').boundingBox()
+  const viewport = page.viewportSize()
 
-  if (navigationBounds === null || mainBounds === null) {
-    throw new Error('Navigation and main content must be visible')
+  if (navigationBounds === null || viewport === null) {
+    throw new Error('Navigation and browser viewport must be available')
   }
 
-  expect(navigationBounds.y).toBeGreaterThanOrEqual(mainBounds.y + mainBounds.height)
+  expect(navigationBounds.y).toBeGreaterThanOrEqual(0)
+  expect(navigationBounds.y + navigationBounds.height).toBeCloseTo(viewport.height, 0)
+  await expect(navigation).toHaveCSS('position', 'fixed')
 })
 
 Then('the application fits the viewport width', async ({ page }) => {

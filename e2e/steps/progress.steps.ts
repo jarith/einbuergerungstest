@@ -19,23 +19,19 @@ Then('question {int} has status {string}', async ({ page }, number: number, stat
 Then(
   'the question totals are {int} not started, {int} needing review, {int} learning, and {int} learned',
   async ({ page }, notStarted: number, needsReview: number, learning: number, learned: number) => {
-    const progress = page.getByRole('main')
+    await expect(page.getByText(/^(All|Alle) · 310$/)).toBeVisible()
 
-    await expect(progress).toContainText(
-      new RegExp(`${notStarted}\\s+${questionStatusLabel('not-started')}`, 'i'),
-      { useInnerText: true },
-    )
-    await expect(progress).toContainText(
-      new RegExp(`${needsReview}\\s+${questionStatusLabel('needs-review')}`, 'i'),
-      { useInnerText: true },
-    )
-    await expect(progress).toContainText(
-      new RegExp(`${learning}\\s+${questionStatusLabel('learning')}`, 'i'),
-      { useInnerText: true },
-    )
-    await expect(progress).toContainText(
-      new RegExp(`${learned}\\s+${questionStatusLabel('learned')}`, 'i'),
-      { useInnerText: true },
+    await Promise.all(
+      [
+        ['not-started', notStarted],
+        ['needs-review', needsReview],
+        ['learning', learning],
+        ['learned', learned],
+      ].map(([status, count]) =>
+        expect(
+          page.getByText(new RegExp(`^${questionStatusLabel(String(status))} · ${count}$`)),
+        ).toBeVisible(),
+      ),
     )
   },
 )
@@ -75,7 +71,7 @@ When('I export my progress', async ({ page }) => {
 
   const downloadPromise = page.waitForEvent('download')
 
-  await page.getByRole('button', { name: /^(Export backup|Sicherung exportieren)$/ }).click()
+  await page.getByRole('button', { name: /^(Download backup|Sicherung herunterladen)$/ }).click()
 
   const download = await downloadPromise
   const path = await download.path()
@@ -182,4 +178,24 @@ When('I reset progress after confirmation', async ({ page }) => {
     .click()
 
   await expect(page.getByRole('dialog')).toHaveCount(0)
+})
+
+When('I filter questions by {string}', async ({ page }, status: string) => {
+  const filter = page.getByRole('radio', { name: new RegExp(`^${questionStatusLabel(status)} ·`) })
+
+  await page.getByText(new RegExp(`^${questionStatusLabel(status)} ·`)).click()
+
+  await expect(filter).toBeChecked()
+})
+
+Then('there are no questions in this status', async ({ page }) => {
+  await expect(
+    page.getByText(/No questions have this status yet|Noch keine Fragen mit diesem Status/),
+  ).toBeVisible()
+})
+
+When('I browse all questions', async ({ page }) => {
+  await page
+    .getByRole('link', { name: /^(Browse all 310 questions|Alle 310 Fragen ansehen)/ })
+    .click()
 })

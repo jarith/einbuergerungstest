@@ -1,4 +1,4 @@
-import { Button, ButtonLink, Panel, ProgressBar } from '@einbuergerungstest/design-system'
+import { Button, ButtonLink, Panel } from '@einbuergerungstest/design-system'
 import { Stack } from '@einbuergerungstest/design-system/jsx'
 import { wrap } from '@reatom/core'
 import { reatomComponent } from '@reatom/react'
@@ -20,12 +20,6 @@ export const MockSummary = reatomComponent(({ model }: MockSummaryProps) => {
         <Stack gap="16">
           <h2 className={styles.desktop}>{t('mock.yourTest')}</h2>
           <p className={styles.desktop}>{t('mock.paper')}</p>
-          <ProgressBar
-            className={styles.desktop}
-            aria-label={t('mock.answered')}
-            value={((33 - unanswered) / 33) * 100}
-          />
-          <p>{t('mock.counts', { answered: 33 - unanswered, unanswered })}</p>
           <p className={styles.muted}>{t('mock.changeHelp')}</p>
           <Button
             appearance="outline"
@@ -34,6 +28,7 @@ export const MockSummary = reatomComponent(({ model }: MockSummaryProps) => {
           >
             {t('mock.questionList')}
           </Button>
+          <p>{t('mock.counts', { answered: 33 - unanswered, unanswered })}</p>
           <Button
             appearance="outline"
             disabled={isPending || model.mock.remaining() === 0}

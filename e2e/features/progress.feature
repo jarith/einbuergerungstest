@@ -19,7 +19,6 @@ Feature: Keep and move learning progress on this device
     And I open progress
     And I export my progress
     And I open question 1 from progress
-    And I retry the study question
     And I select study answer "D"
     And I open progress
     And I import the exported progress
@@ -63,3 +62,23 @@ Feature: Keep and move learning progress on this device
     When I reset progress after confirmation
     Then the question totals are 310 not started, 0 needing review, 0 learning, and 0 learned
     And the mock totals are 0 completed, 0 passed, 0 failed, and 0 unfinished
+
+  Scenario Outline: Filter counts describe the entire bank on both progress screens
+    Given the browser viewport is 320 by 844
+    When I choose <language> as UI language
+    And I start studying
+    And I select study answer "D"
+    And I open progress
+    And I filter questions by "learned"
+    Then there are no questions in this status
+    And the question totals are 309 not started, 0 needing review, 1 learning, and 0 learned
+    And the application fits the viewport width
+    When I browse all questions
+    And I filter questions by "learning"
+    Then the question totals are 309 not started, 0 needing review, 1 learning, and 0 learned
+    And the application fits the viewport width
+
+    Examples:
+      | language |
+      | English  |
+      | German   |

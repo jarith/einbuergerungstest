@@ -6,7 +6,7 @@ export const styles = {
     '@media (min-width: 48rem)': { textStyle: 'heading' },
   }),
   date: css({
-    textStyle: 'compactCaption',
+    textStyle: 'caption',
     color: 'content.muted',
     '@media (min-width: 48rem)': { textStyle: 'caption' },
   }),

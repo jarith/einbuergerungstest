@@ -95,5 +95,5 @@ When('1 minute passes on the dashboard', async ({ page }) => {
 })
 
 Then('the test date remains {string}', async ({ page }, date: string) => {
-  await expect(testDateInput(page)).toHaveValue(date)
+  await expect(testDateInput(page)).toHaveValue(date.split('-').toReversed().join('.'))
 })

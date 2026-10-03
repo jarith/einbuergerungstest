@@ -19,6 +19,7 @@ type AppShellProps = Readonly<{
   offline: AppResources['offline']
   title: string
   isTitleHidden?: boolean
+  isContentCentered?: boolean
   destinations: readonly Destination[]
   links: readonly PageLink[]
   children?: ReactNode
@@ -33,6 +34,7 @@ export const AppShell = reatomComponent(
     links,
     children,
     isTitleHidden = false,
+    isContentCentered = false,
   }: AppShellProps) => {
     const t = localization.t()
 
@@ -49,16 +51,13 @@ export const AppShell = reatomComponent(
             <StorageFooter label={t(offline() === 'ready' ? 'offline.ready' : 'app.deviceLocal')} />
           </div>
           <Stack as="main" id="main" tabIndex={-1} css={{ ...shellStyles.main }}>
-            <PageHeader
-              context={t('app.context')}
-              title={title}
-              links={links}
-              isTitleHidden={isTitleHidden}
-            />
-            {offline() === 'error' || offline() === 'preparing' || offline.update() ? (
-              <OfflineStatus offline={offline} localization={localization} />
-            ) : null}
-            {children}
+            <Stack css={{ ...shellStyles.content }} data-centered={isContentCentered || undefined}>
+              <PageHeader title={title} links={links} isTitleHidden={isTitleHidden} />
+              {offline() === 'error' || offline() === 'preparing' || offline.update() ? (
+                <OfflineStatus offline={offline} localization={localization} />
+              ) : null}
+              {children}
+            </Stack>
           </Stack>
         </Grid>
         <ExitConfirmationDialog localization={localization} />

@@ -1,18 +1,21 @@
 import type { ReactElement } from 'react'
-import { wrap } from '@reatom/core'
+import { withChangeHook, wrap } from '@reatom/core'
 
 import type { AppRoute } from '../../app/routing'
 import type { StudyMode } from '../../modules/learner-state'
 import { pageNotFound, RoutePage } from '../../app/routing'
 import { getQuestionKey } from '../../modules/question-bank'
 import { StudyPage } from './components/study-page/study-page'
-import { createStudyModel } from './study.model'
+import { createStudyModel, createStudySessionScope } from './study.model'
 
 type StudySearchInput = Readonly<{ mode?: string }>
 
 type StudySearch = Readonly<{ mode: StudyMode }>
 
 export const createStudyRoutes = (parent: AppRoute) => {
+  const session = createStudySessionScope()
+  const groupSession = createStudySessionScope()
+
   const load = async (
     questionKey: string | undefined,
     groupId?: string,
@@ -57,13 +60,24 @@ export const createStudyRoutes = (parent: AppRoute) => {
       ordered,
       model:
         groupId === undefined
-          ? createStudyModel(resources, selected.key, mode, (key) => {
-              const current = study()
+          ? createStudyModel(
+              resources,
+              selected.key,
+              mode,
+              (key) => {
+                const current = study()
 
-              if (study.exact() && current?.questionKey === selected.key && current.mode === mode) {
-                study.go({ questionKey: key, mode })
-              }
-            })
+                if (
+                  study.exact() &&
+                  current?.questionKey === selected.key &&
+                  current.mode === mode
+                ) {
+                  study.go({ questionKey: key, mode })
+                }
+              },
+              null,
+              session().answers,
+            )
           : createStudyModel(
               resources,
               selected.key,
@@ -80,55 +94,72 @@ export const createStudyRoutes = (parent: AppRoute) => {
                 }
               },
               groupId,
+              groupSession().answers,
             ),
     }
   }
 
-  const study = parent.reatomRoute(
-    {
-      path: 'study/:questionKey',
-      params: (params) => (params.questionKey === 'groups' ? null : params),
-      search: {
-        decode: (input: StudySearchInput): StudySearch => {
-          if (
-            input.mode !== undefined &&
-            input.mode !== 'sequential' &&
-            input.mode !== 'inspection'
-          ) {
-            throw pageNotFound()
-          }
+  const study = parent
+    .reatomRoute(
+      {
+        path: 'study/:questionKey',
+        params: (params) => (params.questionKey === 'groups' ? null : params),
+        search: {
+          decode: (input: StudySearchInput): StudySearch => {
+            if (
+              input.mode !== undefined &&
+              input.mode !== 'sequential' &&
+              input.mode !== 'inspection'
+            ) {
+              throw pageNotFound()
+            }
 
-          return { mode: input.mode ?? 'inspection' }
+            return { mode: input.mode ?? 'inspection' }
+          },
+          encode: ({ mode }: StudySearch): StudySearchInput =>
+            mode === 'sequential' ? { mode } : {},
         },
-        encode: ({ mode }: StudySearch): StudySearchInput =>
-          mode === 'sequential' ? { mode } : {},
+        loader: async ({ questionKey, mode }) => await wrap(load(questionKey, undefined, mode)),
+        render: (self): ReactElement => (
+          <RoutePage
+            loader={self.loader}
+            page={StudyPage}
+            language={parent.loader.data()?.localization.language()}
+          />
+        ),
       },
-      loader: async ({ questionKey, mode }) => await wrap(load(questionKey, undefined, mode)),
-      render: (self): ReactElement => (
-        <RoutePage
-          loader={self.loader}
-          page={StudyPage}
-          language={parent.loader.data()?.localization.language()}
-        />
-      ),
-    },
-    'studyQuestionRoute',
-  )
+      'studyQuestionRoute',
+    )
+    .extend(
+      withChangeHook((current, previous) => {
+        if (previous !== null && previous?.mode !== current?.mode) {
+          session.start()
+        }
+      }),
+    )
 
-  const groupStudy = parent.reatomRoute(
-    {
-      path: 'study/groups/:groupId/:questionKey',
-      loader: async ({ groupId, questionKey }) => await wrap(load(questionKey, groupId)),
-      render: (self): ReactElement => (
-        <RoutePage
-          loader={self.loader}
-          page={StudyPage}
-          language={parent.loader.data()?.localization.language()}
-        />
-      ),
-    },
-    'groupStudyQuestionRoute',
-  )
+  const groupStudy = parent
+    .reatomRoute(
+      {
+        path: 'study/groups/:groupId/:questionKey',
+        loader: async ({ groupId, questionKey }) => await wrap(load(questionKey, groupId)),
+        render: (self): ReactElement => (
+          <RoutePage
+            loader={self.loader}
+            page={StudyPage}
+            language={parent.loader.data()?.localization.language()}
+          />
+        ),
+      },
+      'groupStudyQuestionRoute',
+    )
+    .extend(
+      withChangeHook((current, previous) => {
+        if (previous !== null && previous?.groupId !== current?.groupId) {
+          groupSession.start()
+        }
+      }),
+    )
 
   const entry = parent.reatomRoute(
     {

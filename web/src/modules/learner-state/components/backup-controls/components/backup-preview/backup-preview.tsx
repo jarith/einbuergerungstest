@@ -56,7 +56,7 @@ export const BackupPreview = reatomComponent(
     return (
       <Panel tone="muted">
         <p className={styles.helper}>{t('settings.validBackup')}</p>
-        <h2 className={styles.heading}>{t('settings.preview')}</h2>
+        <h3 className={styles.heading}>{t('settings.preview')}</h3>
         <p>{t('settings.previewHelp')}</p>
         <table className={styles.table}>
           <thead>
