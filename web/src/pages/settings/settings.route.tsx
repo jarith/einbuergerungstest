@@ -4,12 +4,17 @@ import { wrap } from '@reatom/core'
 import type { AppRoute } from '../../app/routing'
 import { RoutePage } from '../../app/routing'
 import { SettingsPage } from './components/settings-page/settings-page'
+import { createSettingsModel } from './settings.model'
 
 export const createSettingsRoute = (parent: AppRoute) =>
   parent.reatomRoute(
     {
       path: 'settings',
-      loader: async () => await wrap(parent.loader()),
+      loader: async () => {
+        const resources = await wrap(parent.loader())
+
+        return { ...resources, settings: createSettingsModel(resources) }
+      },
       render: (self): ReactElement => (
         <RoutePage
           loader={self.loader}

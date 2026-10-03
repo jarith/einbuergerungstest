@@ -12,24 +12,47 @@ export type ChoiceOption = Readonly<{
   description?: ReactNode
   marker?: string
   result?: 'correct' | 'incorrect'
+  resultLabel?: ReactNode
   disabled?: boolean
 }>
 
 export type ChoiceGroupProps = Omit<PrimitiveProps<RadioGroupProps>, 'children'> &
-  Readonly<{ options: readonly ChoiceOption[]; ref?: Ref<HTMLDivElement> }>
+  Readonly<{
+    options: readonly ChoiceOption[]
+    density?: 'regular' | 'compact'
+    readOnly?: boolean
+    ref?: Ref<HTMLDivElement>
+  }>
 
 /** A keyboard-operable single choice list, with optional answer feedback. */
-export const ChoiceGroup = ({ options, ref, ...props }: ChoiceGroupProps) => (
-  <Radio.Group {...props} ref={ref} classNames={choiceField()}>
+export const ChoiceGroup = ({
+  options,
+  density = 'regular',
+  readOnly = false,
+  onChange,
+  ref,
+  ...props
+}: ChoiceGroupProps) => (
+  <Radio.Group
+    {...props}
+    onChange={(value) => {
+      if (!readOnly) {
+        onChange?.(value)
+      }
+    }}
+    ref={ref}
+    classNames={choiceField()}
+  >
     <Stack gap="layout.inline">
       {options.map((option) => {
-        const classes = choiceGroup({ result: option.result ?? 'none' })
+        const classes = choiceGroup({ density, result: option.result ?? 'none' })
 
         return (
           <Radio.Card
             key={option.value}
             value={option.value}
             disabled={option.disabled}
+            aria-disabled={readOnly || option.disabled}
             className={classes.card}
           >
             {option.marker !== undefined && option.marker !== '' && (
@@ -43,7 +66,7 @@ export const ChoiceGroup = ({ options, ref, ...props }: ChoiceGroupProps) => (
             </span>
             {option.result && (
               <span className={classes.result}>
-                {option.result === 'correct' ? 'Correct' : 'Incorrect'}
+                {option.resultLabel ?? (option.result === 'correct' ? 'Correct' : 'Incorrect')}
               </span>
             )}
           </Radio.Card>

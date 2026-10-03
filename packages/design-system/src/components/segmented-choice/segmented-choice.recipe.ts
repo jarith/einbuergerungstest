@@ -12,7 +12,7 @@ export const segmentedChoiceRecipe = defineSlotRecipe({
       backgroundColor: 'transparent',
       overflow: 'visible',
     },
-    control: { border: 'none', flexGrow: 0 },
+    control: { border: 'none', flexGrow: 0, flexBasis: 'auto' },
     indicator: { display: 'none' },
     label: {
       display: 'flex',

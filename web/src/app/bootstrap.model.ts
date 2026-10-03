@@ -1,8 +1,10 @@
 import { abortVar, wrap } from '@reatom/core'
 
 import { createLearnerState } from '../modules/learner-state'
+import { createMockTest } from '../modules/mock-test'
 import { fetchQuestionBank } from '../modules/question-bank'
 import { createLocalization } from './i18n/localization.model'
+import { createOfflineModel } from './offline'
 
 export const loadAppResources = async () => {
   const subscription = abortVar.subscribe()
@@ -15,7 +17,13 @@ export const loadAppResources = async () => {
 
     const localization = await wrap(createLocalization(learner))
 
-    return { questions, learner, localization }
+    return {
+      questions,
+      learner,
+      localization,
+      offline: createOfflineModel(),
+      mock: createMockTest(questions.bank, learner),
+    }
   } finally {
     subscription.unsubscribe()
   }

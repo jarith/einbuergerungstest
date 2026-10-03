@@ -17,7 +17,8 @@ export const RoutePage = reatomComponent(
     // Keep the active loader connected so parent retries refresh its data.
     void loader()
 
-    const error = loader.error()
+    // A parent retry can fulfill this loader while its previous error is still retained.
+    const error = loader.status().isRejected ? loader.error() : undefined
     const data = loader.data()
 
     if (error !== undefined || !loader.ready() || data === undefined) {

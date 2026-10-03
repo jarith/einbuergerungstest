@@ -2,11 +2,11 @@ import { computed, effect, wrap } from '@reatom/core'
 import { createInstance } from 'i18next'
 
 import type { createLearnerState } from '../../modules/learner-state'
-import type { Question, QuestionGroup } from '../../modules/question-bank/domain/question-bank'
+import type { QuestionMode } from '../../modules/question-bank/domain'
+import type { Question, QuestionGroup } from '../../modules/question-bank/domain'
+import { isQuestionTranslationAvailable } from '../../modules/question-bank/domain'
 import de from './de.json'
 import en from './en.json'
-
-type ContentContext = 'study' | 'completed-review' | 'live-mock' | 'unfinished-review'
 
 export const createLocalization = async (learner: ReturnType<typeof createLearnerState>) => {
   const preferencesAtom = computed(() => {
@@ -47,8 +47,8 @@ export const createLocalization = async (learner: ReturnType<typeof createLearne
       ?.setAttribute('content', i18n.t('app.description'))
   }, 'localization.synchronize')
 
-  const canTranslate = (context: ContentContext) =>
-    languageAtom() === 'en' && (context === 'study' || context === 'completed-review')
+  const canTranslate = (context: QuestionMode) =>
+    isQuestionTranslationAvailable(context, languageAtom())
 
   const localizationAtom = preferencesAtom.extend(() => ({
     i18n,
@@ -65,7 +65,7 @@ export const createLocalization = async (learner: ReturnType<typeof createLearne
       title: languageAtom() === 'de' ? group.title_de : group.title,
       description: languageAtom() === 'de' ? group.description_de : group.description,
     }),
-    getQuestion: (question: Question, context: ContentContext) => {
+    getQuestion: (question: Question, context: QuestionMode) => {
       const showTranslation = canTranslate(context) && preferencesAtom().studyTranslation
 
       return {

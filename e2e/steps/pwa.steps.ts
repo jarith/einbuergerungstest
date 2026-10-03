@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test'
 import { createBdd } from 'playwright-bdd'
 
-import { studyAnswer } from './helpers'
+import { studyAnswer, openNavigation } from './helpers'
 
 const { Given, When, Then } = createBdd()
 
@@ -25,11 +25,13 @@ Then('the app manifest supports a standalone launch with icons', async ({ page }
 })
 
 When('I open installation guidance', async ({ page }) => {
-  await page.getByRole('button', { name: 'App installieren' }).click()
+  await openNavigation(page, '/settings')
+
+  await page.getByRole('link', { name: /Installationsanleitung für iPhone & iPad/ }).click()
 })
 
 Then('I see iPhone and iPad installation steps', async ({ page }) => {
-  const guidance = page.getByRole('dialog', { name: 'App installieren' })
+  const guidance = page.getByRole('main')
 
   await expect(guidance).toContainText('iPhone')
   await expect(guidance).toContainText('iPad')
@@ -53,6 +55,8 @@ When('the app has been prepared for offline use', async ({ page }) => {
     .toBe(true)
 
   await page.reload()
+
+  await expect(page.getByText('Offline bereit', { exact: true }).first()).toBeVisible()
 
   await expect
     .poll(() => page.evaluate(() => Boolean(navigator.serviceWorker.controller)))

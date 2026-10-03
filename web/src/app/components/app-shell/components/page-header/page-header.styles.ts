@@ -1,6 +1,7 @@
 import { css } from '@einbuergerungstest/design-system'
 
 export const styles = {
+  hiddenHeading: css({ srOnly: true }),
   context: css.raw({
     display: 'none',
     '@media (min-width: 64rem)': {
@@ -11,7 +12,12 @@ export const styles = {
       color: 'content.muted',
     },
   }),
-  heading: css({ textStyle: 'title', overflowWrap: 'anywhere', hyphens: 'auto' }),
+  heading: css({
+    textStyle: 'compactTitle',
+    '@media (min-width: 48rem)': { textStyle: 'title' },
+    overflowWrap: 'anywhere',
+    hyphens: 'auto',
+  }),
   secondary: css.raw({
     gap: 'layout.section',
     '& a': { color: 'content.primary', textUnderlineOffset: '0.2em' },

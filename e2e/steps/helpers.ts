@@ -14,30 +14,39 @@ export const sourceQuestion = (number: number) => {
 }
 
 export const sourceQuestionOnPage = async (page: Page) => {
-  const text = (await page.getByRole('heading', { level: 2 }).innerText()).trim()
-  const question = questionBank.questions.find((candidate) => candidate.question_de === text)
+  const text = (await page.locator('h2[lang=de]').innerText()).trim()
+  const options = await page.getByRole('radio').locator('span[lang=de]').allTextContents()
 
-  if (!question) {
-    throw new Error(`Visible question is not in the source bank: ${text}`)
-  }
+  const image = await page
+    .getByRole('img', { name: /Illustration for question|Abbildung zu Frage/ })
+    .all()
 
-  return question
-}
+  const imageAlt = image[0] === undefined ? null : await image[0].getAttribute('alt')
 
-export const sourceQuestionInText = (visibleText: string) => {
-  const question = questionBank.questions.find((candidate) =>
-    visibleText.includes(candidate.question_de),
+  const candidates = questionBank.questions.filter(
+    (candidate) =>
+      candidate.question_de === text &&
+      candidate.answer_options.every((option, index) => option.text_de === options[index]),
   )
 
+  const routeKey = decodeURIComponent(new URL(page.url()).pathname.split('/').at(-1) ?? '')
+
+  const question =
+    candidates.find(
+      (candidate) => `${candidate.section}:${candidate.source_question_id}` === routeKey,
+    ) ??
+    candidates.find((candidate) => imageAlt?.endsWith(` ${candidate.number}`) ?? false) ??
+    (candidates.length === 1 ? candidates[0] : undefined)
+
   if (!question) {
-    throw new Error('Reviewed question is not in the source bank.')
+    throw new Error(`Visible question is not uniquely identified in the source bank: ${text}`)
   }
 
   return question
 }
 
 export const studyAnswer = (page: Page, label: string) =>
-  page.getByRole('button', { name: new RegExp(`^${label}(?:\\b|[.:])`) })
+  page.getByRole('radio', { name: new RegExp(`^${label}(?:\\b|[.:])`) })
 
 export const mockAnswer = (page: Page, label: string) =>
   page.getByRole('radio', { name: new RegExp(`^${label}(?:\\b|[.:])`) })
@@ -69,4 +78,51 @@ export const expectHighlight = async (option: Locator, hue: 'red' | 'green') => 
   })
 
   expect(colors.some((color) => colorMatches(color, hue))).toBe(true)
+}
+
+export const questionStatusLabel = (status: string) => {
+  switch (status) {
+    case 'not-started':
+      return '(?:Not started|Nicht begonnen)'
+    case 'needs-review':
+      return '(?:Needs review|Wiederholen)'
+    case 'learning':
+      return '(?:Learning|In Bearbeitung)'
+    case 'learned':
+      return '(?:Learned|Gelernt)'
+    default:
+      throw new Error(`Unknown question status: ${status}`)
+  }
+}
+
+export const openNavigation = async (page: Page, href: string) => {
+  await page.getByRole('navigation').locator(`a[href="${href}"]`).click()
+}
+
+export const questionRow = async (page: Page, number: number) => {
+  await openNavigation(page, '/progress')
+
+  await page
+    .getByRole('link', { name: /^(Browse all 310 questions|Alle 310 Fragen ansehen)/ })
+    .click()
+
+  const question = sourceQuestion(number)
+  const key = encodeURIComponent(`${question.section}:${question.source_question_id}`)
+  const row = page.getByRole('link').and(page.locator(`a[href="/progress/questions/${key}"]`))
+
+  // Sequentially reveal the requested row through the learner-facing pagination.
+  // oxlint-disable-next-line app/prefer-array-methods
+  while ((await row.count()) === 0) {
+    await page.getByRole('button', { name: /^(Show next|Nächste) / }).click()
+  }
+
+  return row
+}
+
+export const openBackup = async (page: Page) => {
+  const disclosure = page.locator('details').filter({ has: page.locator('summary') })
+
+  if ((await disclosure.count()) && (await disclosure.getAttribute('open')) === null) {
+    await disclosure.locator('summary').click()
+  }
 }

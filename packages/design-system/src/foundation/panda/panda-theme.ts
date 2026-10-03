@@ -33,10 +33,25 @@ const textRoles = {
   actionLabel: ['15', 'semibold'],
   caption: ['14', 'regular'],
   choiceDescription: ['13', 'regular'],
+  compactChoiceLabel: ['14', 'medium'],
+  compactChoiceDescription: ['12', 'regular'],
+  compactBody: ['13', 'medium'],
+  compactCaption: ['12', 'medium'],
+  compactDetailHeading: ['16', 'emphasized'],
   overline: ['12', 'bold'],
   heading: ['20', 'semibold'],
   dialogTitle: ['28', 'bold'],
   title: ['32', 'bold'],
+  compactTitle: ['25', 'bold'],
+  compactHeading: ['18', 'semibold'],
+  compactSubheading: ['17', 'semibold'],
+  compactScore: ['26', 'bold'],
+  compactStepTitle: ['13', 'emphasized'],
+  compactStepHelp: ['11', 'regular'],
+  installationTitle: ['42', 'bold'],
+  installationHeading: ['24', 'emphasized'],
+  installationTransferHeading: ['22', 'emphasized'],
+  installationStepTitle: ['16', 'emphasized'],
 } as const
 
 const alternateColors: Readonly<Record<string, Readonly<Record<ColorScheme, string>>>> =
@@ -144,7 +159,7 @@ export const pandaTheme = {
 
 export const globalStyles = defineGlobalStyles({
   // Reset native text margins once; layout primitives own spacing between elements.
-  ':where(h1, h2, p)': { margin: 0 },
+  ':where(h1, h2, h3, p, ol)': { margin: 0 },
   body: { textStyle: 'body', backgroundColor: 'canvas', color: 'content.primary' },
   ':where(:focus-visible), .ds-focus:focus-visible': { layerStyle: 'focus' },
   '*, *::before, *::after': {

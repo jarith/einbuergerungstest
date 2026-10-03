@@ -2,12 +2,22 @@ import type { ReactElement } from 'react'
 import { wrap } from '@reatom/core'
 
 import type { AppRoute } from '../../app/routing'
+import type { StudyMode } from '../../modules/learner-state'
 import { pageNotFound, RoutePage } from '../../app/routing'
 import { getQuestionKey } from '../../modules/question-bank'
 import { StudyPage } from './components/study-page/study-page'
+import { createStudyModel } from './study.model'
+
+type StudySearchInput = Readonly<{ mode?: string }>
+
+type StudySearch = Readonly<{ mode: StudyMode }>
 
 export const createStudyRoutes = (parent: AppRoute) => {
-  const load = async (questionKey: string | undefined, groupId?: string) => {
+  const load = async (
+    questionKey: string | undefined,
+    groupId?: string,
+    mode: StudyMode = 'inspection',
+  ) => {
     const resources = await wrap(parent.loader())
     const { questions, learner } = resources
     const group = questions.bank.groups.find((item) => item.id === groupId)
@@ -40,14 +50,60 @@ export const createStudyRoutes = (parent: AppRoute) => {
       throw pageNotFound()
     }
 
-    return { ...resources, selected, group, ordered }
+    return {
+      ...resources,
+      selected,
+      group,
+      ordered,
+      model:
+        groupId === undefined
+          ? createStudyModel(resources, selected.key, mode, (key) => {
+              const current = study()
+
+              if (study.exact() && current?.questionKey === selected.key && current.mode === mode) {
+                study.go({ questionKey: key, mode })
+              }
+            })
+          : createStudyModel(
+              resources,
+              selected.key,
+              'sequential',
+              (key) => {
+                const current = groupStudy()
+
+                if (
+                  groupStudy.exact() &&
+                  current?.questionKey === selected.key &&
+                  current.groupId === groupId
+                ) {
+                  groupStudy.go({ groupId, questionKey: key })
+                }
+              },
+              groupId,
+            ),
+    }
   }
 
   const study = parent.reatomRoute(
     {
       path: 'study/:questionKey',
       params: (params) => (params.questionKey === 'groups' ? null : params),
-      loader: async ({ questionKey }) => await wrap(load(questionKey)),
+      search: {
+        decode: (input: StudySearchInput): StudySearch => {
+          if (
+            input.mode !== undefined &&
+            input.mode !== 'sequential' &&
+            input.mode !== 'inspection'
+          ) {
+            throw pageNotFound()
+          }
+
+          return { mode: input.mode ?? 'inspection' }
+        },
+        encode: ({ mode }: StudySearch): StudySearchInput =>
+          mode === 'sequential' ? { mode } : {},
+      },
+      loader: async ({ questionKey, mode }) => await wrap(load(questionKey, undefined, mode)),
       render: (self): ReactElement => (
         <RoutePage
           loader={self.loader}
@@ -79,10 +135,10 @@ export const createStudyRoutes = (parent: AppRoute) => {
       path: 'study',
       loader: async () => {
         const isEntry = entry.exact()
-        const data = await wrap(load(undefined))
+        const data = await wrap(load(undefined, undefined, 'sequential'))
 
         if (isEntry) {
-          study.go({ questionKey: data.selected.key }, true)
+          study.go({ questionKey: data.selected.key, mode: 'sequential' }, true)
         }
 
         return data
@@ -106,6 +162,15 @@ export const createStudyRoutes = (parent: AppRoute) => {
         const data = await wrap(load(undefined, groupId))
 
         if (isEntry) {
+          if (data.learner()?.positions.groups[groupId] === undefined) {
+            await wrap(
+              data.learner.setStudyPosition(groupId, {
+                questionKey: data.selected.key,
+                status: 'in-progress',
+              }),
+            )
+          }
+
           groupStudy.go({ groupId, questionKey: data.selected.key }, true)
         }
 

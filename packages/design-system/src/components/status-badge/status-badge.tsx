@@ -7,7 +7,7 @@ import { statusBadge } from './status-badge.styles'
 
 export type StatusBadgeProps = PrimitiveProps<BadgeProps> &
   Readonly<{
-    intent?: 'success' | 'warning' | 'danger' | 'info' | 'neutral'
+    intent?: 'success' | 'warning' | 'danger' | 'info' | 'neutral' | 'learning'
     ref?: Ref<HTMLDivElement>
   }>
 

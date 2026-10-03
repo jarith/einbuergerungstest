@@ -1,17 +1,14 @@
 import { action, atom, computed, withAsync, wrap } from '@reatom/core'
 
-import type {
-  QuestionBank,
-  QuestionKey,
-  OptionLabel,
-} from '../../question-bank/domain/question-bank'
+import type { QuestionBank, QuestionKey, OptionLabel } from '../../question-bank/domain'
 import type {
   LearnerSnapshot,
   MockSitting,
   Preferences,
   StudyPosition,
 } from '../domain/learner-state'
-import { getQuestionKey } from '../../question-bank/domain/question-bank'
+import { finalizeMockSitting } from '../../mock-test/domain'
+import { selectQuestionOption, getQuestionKey } from '../../question-bank/domain'
 import {
   createLearnerSnapshot,
   getLocalDate,
@@ -20,6 +17,7 @@ import {
 } from '../domain/learner-state'
 import { createLearnerRepository } from '../infrastructure/learner-repository'
 import { decodeLearnerSnapshot, parsePlannedDate } from '../infrastructure/snapshot-codec'
+import { createProgressModel } from './progress.model'
 
 type SnapshotMutation = (snapshot: LearnerSnapshot) => LearnerSnapshot
 
@@ -42,6 +40,16 @@ export const createLearnerState = (bank: QuestionBank) => {
   const confirmationAtom = atom<Confirmation>(null, 'learnerState.confirmationAtom')
   const questions = new Map(bank.questions.map((question) => [getQuestionKey(question), question]))
   const operations = { queue: Promise.resolve() }
+
+  const validateSelection = (key: QuestionKey, selection: OptionLabel) => {
+    const question = questions.get(key)
+
+    if (question === undefined) {
+      throw new Error(`Unknown question ${key} in the question bank.`)
+    }
+
+    return selectQuestionOption(question, selection)
+  }
 
   const requireSnapshot = () => {
     const current = snapshotAtom()
@@ -173,6 +181,7 @@ export const createLearnerState = (bank: QuestionBank) => {
 
   const recordStudyAnswer = action(
     async (questionKey: QuestionKey, selectedOption: OptionLabel) => {
+      const selection = validateSelection(questionKey, selectedOption)
       const id = crypto.randomUUID()
 
       await wrap(
@@ -183,7 +192,7 @@ export const createLearnerState = (bank: QuestionBank) => {
             {
               id,
               questionKey,
-              selectedOption,
+              selectedOption: selection,
               answeredAt: getNextAttemptTime(current, Date.now()),
             },
           ],
@@ -237,6 +246,9 @@ export const createLearnerState = (bank: QuestionBank) => {
 
   const selectMockAnswer = action(
     async (id: string, questionKey: QuestionKey, selectedOption: OptionLabel | null) => {
+      const selection =
+        selectedOption === null ? null : validateSelection(questionKey, selectedOption)
+
       await wrap(
         mutate((current) =>
           updateMock(current, id, (sitting) => {
@@ -247,10 +259,23 @@ export const createLearnerState = (bank: QuestionBank) => {
               throw new Error('Only questions in the active mock can be answered.')
             }
 
+            const now = Date.now()
+
+            if (now >= sitting.deadline) {
+              return finalizeMockSitting(
+                sitting,
+                'completed',
+                now,
+                getNextAttemptTime(current, now),
+              )
+            }
+
             return {
               ...sitting,
               answers: sitting.answers.map((answer) =>
-                answer.questionKey === questionKey ? { ...answer, selectedOption } : answer,
+                answer.questionKey === questionKey
+                  ? { ...answer, selectedOption: selection }
+                  : answer,
               ),
             }
           }),
@@ -268,6 +293,12 @@ export const createLearnerState = (bank: QuestionBank) => {
             throw new Error('Only an active mock can be navigated.')
           }
 
+          const now = Date.now()
+
+          if (now >= sitting.deadline) {
+            return finalizeMockSitting(sitting, 'completed', now, getNextAttemptTime(current, now))
+          }
+
           return { ...sitting, currentQuestion }
         }),
       ),
@@ -277,18 +308,28 @@ export const createLearnerState = (bank: QuestionBank) => {
   const finishMock = action(async (id: string, status: 'completed' | 'unfinished') => {
     await wrap(
       mutate((current) =>
-        updateMock(current, id, (sitting) =>
-          sitting.status === 'active'
-            ? {
-                ...sitting,
-                status,
-                endedAt: Math.max(getNextAttemptTime(current, Date.now()), sitting.startedAt),
-              }
-            : sitting,
-        ),
+        updateMock(current, id, (sitting) => {
+          const now = Date.now()
+
+          return finalizeMockSitting(sitting, status, now, getNextAttemptTime(current, now))
+        }),
       ),
     )
   }, 'learnerState.finishMock').extend(withAsync())
+
+  const expireMock = action(async (id: string) => {
+    await wrap(
+      mutate((current) =>
+        updateMock(current, id, (sitting) => {
+          const now = Date.now()
+
+          return now >= sitting.deadline
+            ? finalizeMockSitting(sitting, 'completed', now, getNextAttemptTime(current, now))
+            : sitting
+        }),
+      ),
+    )
+  }, 'learnerState.expireMock').extend(withAsync())
 
   const previewImport = action((source: string) => {
     confirmationAtom.set(null)
@@ -349,6 +390,7 @@ export const createLearnerState = (bank: QuestionBank) => {
 
   const learnerStateAtom = computed(() => snapshotAtom(), 'learnerState').extend(() => ({
     bootstrap,
+    progress: createProgressModel(bank, requireSnapshot),
     updatePreferences,
     setStudyPosition,
     recordStudyAnswer,
@@ -356,6 +398,7 @@ export const createLearnerState = (bank: QuestionBank) => {
     selectMockAnswer,
     navigateMock,
     finishMock,
+    expireMock,
     previewImport,
     confirmReplacement,
     requestReset: action(

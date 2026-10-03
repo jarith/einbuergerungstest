@@ -8,8 +8,8 @@ Feature: Keep and move learning progress on this device
     And I answer the first mock question correctly
     And I submit the mock test with unanswered questions
     And I open progress
-    Then that mock question has status "correct"
-    And the question totals are 1 correct, 0 mistaken, and 309 untried
+    Then that mock question has status "learning"
+    And the question totals are 309 not started, 0 needing review, 1 learning, and 0 learned
 
   Scenario: Export and import restore complete history after confirmation
     When I choose English as UI language
@@ -26,7 +26,7 @@ Feature: Keep and move learning progress on this device
     Then the import preview describes 1 study attempt
     When I confirm replacing local progress
     And I open progress
-    Then question 1 has status "mistaken"
+    Then question 1 has status "needs-review"
     And question 1 has 1 recorded attempt
     When I open question 1 from progress
     Then German and English text for study question 1 and its options are visible
@@ -50,7 +50,7 @@ Feature: Keep and move learning progress on this device
     And I import an invalid progress file
     Then I see a backup validation error
     When I open progress
-    Then question 1 has status "correct"
+    Then question 1 has status "learning"
 
   Scenario: Reset requires confirmation and erases progress
     When I start studying
@@ -59,7 +59,7 @@ Feature: Keep and move learning progress on this device
     And I try to reset progress
     Then I see a reset confirmation
     When I cancel the reset
-    Then question 1 has status "correct"
+    Then question 1 has status "learning"
     When I reset progress after confirmation
-    Then the question totals are 0 correct, 0 mistaken, and 310 untried
+    Then the question totals are 310 not started, 0 needing review, 0 learning, and 0 learned
     And the mock totals are 0 completed, 0 passed, 0 failed, and 0 unfinished

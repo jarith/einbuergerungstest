@@ -6,6 +6,7 @@ import { I18nextProvider } from 'react-i18next'
 import type { AppResources } from '../../bootstrap.model'
 import type { PageLink } from './components/page-header/page-header'
 import type { Destination } from './components/shell-navigation/shell-navigation'
+import { OfflineStatus } from '../../offline'
 import { shellStyles } from './app-shell.styles'
 import { ExitConfirmationDialog } from './components/exit-confirmation-dialog/exit-confirmation-dialog'
 import { PageHeader } from './components/page-header/page-header'
@@ -15,14 +16,24 @@ import { StorageFooter } from './components/storage-footer/storage-footer'
 
 type AppShellProps = Readonly<{
   localization: AppResources['localization']
+  offline: AppResources['offline']
   title: string
+  isTitleHidden?: boolean
   destinations: readonly Destination[]
   links: readonly PageLink[]
   children?: ReactNode
 }>
 
 export const AppShell = reatomComponent(
-  ({ localization, title, destinations, links, children }: AppShellProps) => {
+  ({
+    localization,
+    offline,
+    title,
+    destinations,
+    links,
+    children,
+    isTitleHidden = false,
+  }: AppShellProps) => {
     const t = localization.t()
 
     return (
@@ -35,10 +46,18 @@ export const AppShell = reatomComponent(
           <div className={shellStyles.sidebar}>
             <ShellHeader brand={t('app.brand')} />
             <ShellNavigation label={t('navigation.main')} destinations={destinations} />
-            <StorageFooter label={t('app.deviceLocal')} />
+            <StorageFooter label={t(offline() === 'ready' ? 'offline.ready' : 'app.deviceLocal')} />
           </div>
           <Stack as="main" id="main" tabIndex={-1} css={{ ...shellStyles.main }}>
-            <PageHeader context={t('app.context')} title={title} links={links} />
+            <PageHeader
+              context={t('app.context')}
+              title={title}
+              links={links}
+              isTitleHidden={isTitleHidden}
+            />
+            {offline() === 'error' || offline() === 'preparing' || offline.update() ? (
+              <OfflineStatus offline={offline} localization={localization} />
+            ) : null}
             {children}
           </Stack>
         </Grid>

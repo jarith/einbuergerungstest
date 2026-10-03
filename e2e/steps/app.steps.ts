@@ -1,6 +1,8 @@
 import { expect } from '@playwright/test'
 import { createBdd } from 'playwright-bdd'
 
+import { openNavigation } from './helpers'
+
 const { Given, When, Then } = createBdd()
 
 Given('I open the app with a fresh learner profile', async ({ page }) => {
@@ -10,15 +12,15 @@ Given('I open the app with a fresh learner profile', async ({ page }) => {
 })
 
 When('I open progress', async ({ page }) => {
-  await page.getByRole('button', { name: /^(Progress|Fortschritt)$/ }).click()
+  await openNavigation(page, '/progress')
 })
 
 When('I open settings', async ({ page }) => {
-  await page.getByRole('button', { name: /^(Settings|Einstellungen)$/ }).click()
+  await openNavigation(page, '/settings')
 })
 
 When('I open dashboard', async ({ page }) => {
-  await page.getByRole('button', { name: /^(Dashboard|Startseite)$/ }).click()
+  await openNavigation(page, '/')
 })
 
 When('I choose {word} as UI language', async ({ page }, language: string) => {
@@ -26,45 +28,36 @@ When('I choose {word} as UI language', async ({ page }, language: string) => {
     throw new Error(`Unsupported UI language: ${language}`)
   }
 
-  await page.getByRole('button', { name: /^(Settings|Einstellungen)$/ }).click()
+  await openNavigation(page, '/settings')
 
-  const optionName = language === 'German' ? /^(German|Deutsch)$/ : /^(English|Englisch)$/
-  const radio = page.getByRole('radio', { name: optionName })
+  const label = language === 'German' ? 'Deutsch' : 'English'
 
-  if (await radio.count()) {
-    await radio.check()
-  } else {
-    const selector = page.getByRole('combobox', { name: /^(UI language|App-Sprache)$/ })
-    const nativeOption = selector.locator('option').filter({ hasText: optionName })
+  await page
+    .getByRole('radiogroup', { name: /^(Interface language|Sprache der Benutzeroberfläche)$/ })
+    .getByText(label, { exact: true })
+    .click()
 
-    if (await nativeOption.count()) {
-      const label = (await nativeOption.textContent())?.trim()
+  await expect(page.getByRole('radio', { name: label, exact: true })).toBeChecked()
 
-      if (label === undefined || label === '') {
-        throw new Error(`No visible option for ${language}`)
-      }
+  await expect(page.locator('html')).toHaveAttribute('lang', language === 'German' ? 'de' : 'en')
 
-      await selector.selectOption({ label })
-    } else {
-      await selector.click()
-
-      await page.getByRole('option', { name: optionName }).click()
-    }
-  }
-
-  await page.getByRole('button', { name: /^(Dashboard|Startseite)$/ }).click()
+  await openNavigation(page, '/')
 })
 
 Then('English interface controls are visible', async ({ page }) => {
-  await expect(page.getByRole('button', { name: /^(Study|Resume studying)$/ })).toBeVisible()
-  await expect(page.getByRole('button', { name: 'Start test', exact: true })).toBeVisible()
-  await expect(page.getByRole('button', { name: 'Settings', exact: true })).toBeVisible()
+  await expect(page.getByRole('link', { name: 'Study all questions', exact: true })).toBeVisible()
+  await expect(page.getByRole('link', { name: 'Start mock test', exact: true })).toBeVisible()
+  await expect(
+    page.getByRole('navigation').getByRole('link', { name: 'Settings', exact: true }),
+  ).toBeVisible()
 })
 
 Then('German interface controls are visible', async ({ page }) => {
-  await expect(page.getByRole('button', { name: /^(Lernen|Lernen fortsetzen)$/ })).toBeVisible()
-  await expect(page.getByRole('button', { name: 'Test starten', exact: true })).toBeVisible()
-  await expect(page.getByRole('button', { name: 'Einstellungen', exact: true })).toBeVisible()
+  await expect(page.getByRole('link', { name: 'Alle Fragen lernen', exact: true })).toBeVisible()
+  await expect(page.getByRole('link', { name: 'Probetest starten', exact: true })).toBeVisible()
+  await expect(
+    page.getByRole('navigation').getByRole('link', { name: 'Daten', exact: true }),
+  ).toBeVisible()
 })
 
 When('I reload the app', async ({ page }) => {

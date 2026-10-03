@@ -4,5 +4,5 @@
     "allowJs": true,
     "checkJs": true
   },
-  "include": ["src", ".storybook/preview.tsx", "*.config.ts", "*.config.cts"]
+  "include": ["src", "scripts", ".storybook/preview.tsx", "*.config.ts", "*.config.cts"]
 }

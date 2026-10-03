@@ -19,6 +19,7 @@
     "format:check": "yarn workspaces foreach -Aptv run format:check && yarn oxfmt -c .oxfmtrc.json --check --no-error-on-unmatched-pattern docs oxlint.config.ts && sh -c 'test ! -d .smithers || node --experimental-strip-types .smithers/automation/check.ts format:check'",
     "create:package": "yarn workspace @einbuergerungstest/create-package-cli create:package",
     "panda:prepare": "yarn workspace @einbuergerungstest/design-system panda:prepare",
+    "test:tooling": "yarn workspace @einbuergerungstest/lint-rules test",
     "test": "yarn workspaces foreach -Apt run test",
     "test:browser": "yarn workspaces foreach -Apt run test:browser",
     "test:e2e": "yarn workspace @einbuergerungstest/e2e test:e2e",
@@ -75,6 +76,7 @@
     "typescript": "7.0.2",
     "vite": "8.3.1",
     "vitest": "5.0.3",
-    "vitest-browser-react": "2.3.0"
+    "vitest-browser-react": "2.3.0",
+    "workbox-build": "7.4.1"
   }
 }

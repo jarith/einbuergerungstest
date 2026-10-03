@@ -4,6 +4,7 @@ import { wrap } from '@reatom/core'
 import type { AppRoute } from '../../app/routing'
 import { pageNotFound, RoutePage } from '../../app/routing'
 import { MockTestPage } from './components/mock-test-page/mock-test-page'
+import { createMockPageModel } from './mock-test.model'
 
 export const createMockTestRoutes = (parent: AppRoute) => {
   const load = async (testId?: string, questionKey?: string) => {
@@ -15,7 +16,12 @@ export const createMockTestRoutes = (parent: AppRoute) => {
     )
 
     if (sitting === undefined && testId === undefined) {
-      return { ...resources, testId: undefined, selected: undefined }
+      return {
+        ...resources,
+        model: createMockPageModel(resources, undefined, undefined, (id, target) =>
+          question.go({ testId: id, questionKey: target }),
+        ),
+      }
     }
 
     if (sitting === undefined || sitting.status !== 'active') {
@@ -31,7 +37,14 @@ export const createMockTestRoutes = (parent: AppRoute) => {
       throw pageNotFound()
     }
 
-    return { ...resources, testId: sitting.id, selected }
+    await wrap(resources.mock.navigate(selected.key))
+
+    return {
+      ...resources,
+      model: createMockPageModel(resources, sitting.id, selected.key, (id, target) =>
+        question.go({ testId: id, questionKey: target }),
+      ),
+    }
   }
 
   const question = parent.reatomRoute(
@@ -57,8 +70,10 @@ export const createMockTestRoutes = (parent: AppRoute) => {
         const isEntry = entry.exact()
         const data = await wrap(load(testId))
 
-        if (isEntry && data.selected !== undefined && data.testId !== undefined) {
-          question.go({ testId: data.testId, questionKey: data.selected.key }, true)
+        const current = data.model()
+
+        if (isEntry && current.loaded !== undefined && current.sitting !== null) {
+          question.go({ testId: current.sitting.id, questionKey: current.loaded.key }, true)
         }
 
         return data

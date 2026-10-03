@@ -28,6 +28,23 @@ export const buttonRecipe = defineSlotRecipe({
       '--loader-color': 'currentColor',
     },
   },
-  variants: { appearance: appearances },
+  variants: {
+    appearance: {
+      ...appearances,
+      danger: {
+        root: {
+          backgroundColor: 'action.danger.bg',
+          color: 'action.danger.fg',
+          borderColor: 'action.danger.border',
+          '&:not(:disabled, [data-disabled], [data-loading]):hover': {
+            backgroundColor: 'action.danger.hover',
+          },
+          '&:not(:disabled, [data-disabled], [data-loading]):active': {
+            backgroundColor: 'action.danger.pressed',
+          },
+        },
+      },
+    },
+  },
   defaultVariants: { appearance: 'solid' },
 })

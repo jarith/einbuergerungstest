@@ -17,6 +17,7 @@ export const statusBadgeRecipe = defineSlotRecipe({
   },
   variants: {
     intent: {
+      learning: { root: { backgroundColor: 'badge.learning.bg', color: 'badge.learning.fg' } },
       success: { root: { backgroundColor: 'badge.success.bg', color: 'badge.success.fg' } },
       warning: { root: { backgroundColor: 'badge.warning.bg', color: 'badge.warning.fg' } },
       danger: { root: { backgroundColor: 'badge.danger.bg', color: 'badge.danger.fg' } },
