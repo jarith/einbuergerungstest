@@ -99,8 +99,10 @@ Given('I open the app with a {word} saved profile', async ({ page }, kind: strin
 })
 
 Then('startup explains that saved data cannot be loaded', async ({ page }) => {
-  await expect(page.getByRole('alert')).toContainText('Saved data cannot be loaded')
-  await expect(page.getByRole('alert')).toContainText('has not been changed')
+  await expect(page.getByRole('alert')).toContainText(
+    'Your saved data isn’t compatible with this version of the app.',
+  )
+  await expect(page.getByRole('main')).toContainText('Your saved data hasn’t been changed.')
   await expect(page.getByRole('link', { name: 'Study all questions', exact: true })).toHaveCount(0)
 })
 
@@ -151,7 +153,7 @@ When('another window replaces the rejected profile', async ({ page }) => {
 
   await other.goto('/')
 
-  await expect(other.getByRole('alert')).toContainText('Saved data cannot be loaded')
+  await expect(other.getByRole('alert')).toContainText('A fresh start is needed')
 
   await writeProfile(other, replacementProfile)
 

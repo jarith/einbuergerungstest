@@ -72,6 +72,14 @@ export const createLearnerState = (bank: QuestionBank) => {
 
     current.mockSittings.forEach((sitting) => {
       sitting.answers.forEach((answer) => requireQuestion(answer.questionKey))
+
+      const generalCount = sitting.answers.filter(
+        (answer) => questions.get(answer.questionKey)?.section === 'general',
+      ).length
+
+      if (generalCount !== 30) {
+        throw new Error(`Mock ${sitting.id} must contain 30 general and 3 Berlin questions.`)
+      }
     })
 
     if (current.positions.all !== null) {

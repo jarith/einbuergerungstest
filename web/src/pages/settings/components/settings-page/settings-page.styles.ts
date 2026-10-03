@@ -1,7 +1,12 @@
 import { css } from '@einbuergerungstest/design-system'
 
 export const styles = {
-  root: css.raw({ overflowWrap: 'anywhere', hyphens: 'auto' }),
+  root: css.raw({
+    maxWidth: '[47.5rem]',
+    overflowWrap: 'anywhere',
+    hyphens: 'auto',
+    '@media (min-width: 64rem)': { maxWidth: '[none]' },
+  }),
   link: css({ color: 'content.primary' }),
   columns: css.raw({
     gridTemplateColumns: 'minmax(0, 1fr)',

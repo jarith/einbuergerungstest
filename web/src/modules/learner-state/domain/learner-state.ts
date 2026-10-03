@@ -46,7 +46,7 @@ export type MockSitting = MockPaper &
   )
 
 export type LearnerSnapshot = Readonly<{
-  version: 2
+  version: 3
   preferences: Preferences
   positions: StudyPositions
   studyAttempts: readonly StudyAttempt[]
@@ -54,7 +54,7 @@ export type LearnerSnapshot = Readonly<{
 }>
 
 export const createLearnerSnapshot = (): LearnerSnapshot => ({
-  version: 2,
+  version: 3,
   preferences: {
     language: 'en',
     studyTranslation: false,

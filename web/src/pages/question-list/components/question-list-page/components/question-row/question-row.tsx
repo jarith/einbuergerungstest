@@ -11,7 +11,7 @@ type QuestionRowProps = Readonly<{ row: ReturnType<QuestionListModel>[number]; t
 export const QuestionRow = ({ row, t }: QuestionRowProps) => (
   <li>
     <a href={row.href} className={styles.link}>
-      <span className={styles.number}>{row.question.number}</span>
+      <span className={styles.number}>{row.question.order}</span>
       <Stack css={styles.content}>
         <span lang="de" className={styles.prompt}>
           {row.question.question_de}

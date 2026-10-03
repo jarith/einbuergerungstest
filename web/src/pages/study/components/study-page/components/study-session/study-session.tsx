@@ -1,11 +1,14 @@
 import { InlineNotice } from '@einbuergerungstest/design-system'
-import { Flex, Grid, Stack } from '@einbuergerungstest/design-system/jsx'
+import { Flex, Stack } from '@einbuergerungstest/design-system/jsx'
 import { wrap } from '@reatom/core'
 import { reatomComponent } from '@reatom/react'
 
 import type { StudyModel } from '../../../../study.model'
 import { PendingNotice } from '../../../../../../app/components/pending-notice/pending-notice'
-import { isLearnerStateConflict } from '../../../../../../modules/learner-state'
+import {
+  isLearnerStateConflict,
+  QuestionStatusBadge,
+} from '../../../../../../modules/learner-state'
 import { QuestionContent } from '../../../../../../modules/question-bank'
 import { styles } from '../../study-page.styles'
 import { StudyCompletion } from '../study-completion/study-completion'
@@ -39,34 +42,36 @@ export const StudySession = reatomComponent(({ model }: StudySessionProps) => {
               {current.index + 1}/{current.total}
             </span>
           </Flex>
-          <Grid css={{ ...styles.columns }}>
-            <Stack gap="24" minWidth="0">
-              <QuestionContent
-                loaded={current.loaded}
-                selectedOption={current.selectedOption}
-                interaction={{
-                  mode: 'study',
-                  isPending: model.flow.pending(),
-                  onSelect: wrap((option) => {
-                    void model.flow.answer(option)
-                  }),
-                }}
-                language={model.localization.language()}
-                translationEnabled={model.translation().enabled}
-                onTranslationChange={wrap((enabled) => {
-                  void model.flow.setTranslation(enabled)
-                })}
-                t={t}
-              />
-              <StudyControls model={model} />
-              {model.isGroup ? (
-                <a className={styles.link} href={model.exitPath}>
-                  ← {t('study.backToGroups')}
-                </a>
-              ) : null}
-            </Stack>
+          <Stack gap="24" minWidth="0">
+            <QuestionStatusBadge status={model.status()} t={t} />
+            <QuestionContent
+              key={current.key}
+              loaded={current.loaded}
+              selectedOption={current.selectedOption}
+              interaction={{
+                mode: 'study',
+                hasJustLearned: current.hasJustLearned,
+                shouldAnnounceFeedback: model.flow.shouldAnnounceFeedback,
+                isPending: model.flow.pending(),
+                onSelect: wrap((option) => {
+                  void model.flow.answer(option)
+                }),
+              }}
+              language={model.localization.language()}
+              translationEnabled={model.translation().enabled}
+              onTranslationChange={wrap((enabled) => {
+                void model.flow.setTranslation(enabled)
+              })}
+              t={t}
+            />
+            <StudyControls model={model} />
+            {model.isGroup ? (
+              <a className={styles.link} href={model.exitPath}>
+                ← {t('study.backToDashboard')}
+              </a>
+            ) : null}
             <StudyHelp model={model} />
-          </Grid>
+          </Stack>
         </>
       )}
       <output>

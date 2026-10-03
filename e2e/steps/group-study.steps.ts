@@ -24,7 +24,7 @@ const groupCount = (id: string) =>
 
 const groupProgress = (page: Page, title: string) =>
   page
-    .locator('div')
+    .getByRole('listitem')
     .filter({ has: page.getByRole('progressbar', { name: title, exact: true }) })
     .filter({ has: page.getByText(title, { exact: true }) })
     .last()
@@ -46,16 +46,8 @@ const expectGroupProgress = async (
   await expect(progress).toContainText(new RegExp(`\\b${percent}\\s*%`), { useInnerText: true })
 }
 
-When('I open group study', async ({ page }) => {
-  await page
-    .getByRole('main')
-    .getByRole('link', { name: /^(Study by group|Nach Themen lernen)$/ })
-    .first()
-    .click()
-})
-
 Then(
-  'the group picker lists every question group with its description and question count',
+  'the dashboard lists every question group with its description and question count',
   async ({ page }) => {
     for (const group of questionBank.groups) {
       const option = page
@@ -101,7 +93,7 @@ When('I finish the group', async ({ page }) => {
 
 Then('group study shows completion without another question', async ({ page }) => {
   await expect(page.getByRole('main')).toContainText(
-    /group (?:complete|finished)|Gruppe abgeschlossen/i,
+    /You reached the end of this group\.|Du hast das Ende dieser Gruppe erreicht\./,
   )
   await expect(page.getByText(sourceQuestion(310).question_de, { exact: true })).toHaveCount(0)
 })

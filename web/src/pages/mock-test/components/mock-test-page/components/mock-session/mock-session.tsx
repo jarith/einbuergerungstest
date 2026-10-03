@@ -67,9 +67,6 @@ export const MockSession = reatomComponent(({ model }: MockSessionProps) => {
             >
               {t('study.previous')}
             </Button>
-            <span className={styles.count}>
-              {t('mock.answeredCount', { count: 33 - model.mock.unanswered(), total: 33 })}
-            </span>
             <Button
               disabled={isPending || index >= 32}
               rightSection={<ArrowRight size={16} aria-hidden="true" />}

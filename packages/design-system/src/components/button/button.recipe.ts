@@ -8,6 +8,9 @@ export const buttonRecipe = defineSlotRecipe({
   base: {
     root: {
       ...interactive,
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
       minHeight: 'control.action',
       maxWidth: '100%',
       minWidth: 0,

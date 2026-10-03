@@ -5,6 +5,7 @@ import { reatomComponent } from '@reatom/react'
 
 import type { PageProps } from '../../../../app/routing'
 import type { MockTestData } from '../../mock-test.route'
+import { MockIntro } from './components/mock-intro/mock-intro'
 import { MockSession } from './components/mock-session/mock-session'
 import { styles } from './mock-test-page.styles'
 
@@ -22,23 +23,7 @@ export const MockTestPage = reatomComponent(({ data }: PageProps<MockTestData>) 
           ) : null}
         </InlineNotice>
       )}
-      {model().sitting === null ? (
-        <Stack gap="24" alignItems="start">
-          <h1 className={styles.title}>{t('mock.start')}</h1>
-          <p>{t('mock.introduction')}</p>
-          <p>{t('mock.rules')}</p>
-          <Button
-            disabled={model.mock.pending()}
-            onClick={wrap(() => {
-              void model.start()
-            })}
-          >
-            {t('mock.start')}
-          </Button>
-        </Stack>
-      ) : (
-        <MockSession model={model} />
-      )}
+      {model().sitting === null ? <MockIntro model={model} /> : <MockSession model={model} />}
     </Stack>
   )
 }, 'MockTestPage')

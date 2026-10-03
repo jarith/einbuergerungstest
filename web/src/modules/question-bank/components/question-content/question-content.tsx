@@ -17,7 +17,14 @@ import { questionTitle, reviewTitle, translationText } from './question-content.
 
 type QuestionInteraction =
   | Readonly<{
-      mode: 'study' | 'live-mock'
+      mode: 'study'
+      hasJustLearned: boolean
+      shouldAnnounceFeedback: boolean
+      onSelect: (option: OptionLabel) => void
+      isPending?: boolean
+    }>
+  | Readonly<{
+      mode: 'live-mock'
       onSelect: (option: OptionLabel) => void
       isPending?: boolean
     }>
@@ -115,7 +122,7 @@ export const QuestionContent = ({
         <QuestionImage
           key={image.url}
           image={image}
-          alt={t('study.imageAlt', { number: question.number })}
+          alt={t('study.imageAlt', { number: question.order })}
           t={t}
         />
       )}
@@ -132,8 +139,19 @@ export const QuestionContent = ({
           }
         }}
       />
-      <div aria-live={interaction.mode === 'study' ? 'polite' : 'off'} aria-atomic="true">
-        <AnswerFeedback question={question} feedback={feedback} t={t} />
+      <div
+        aria-live={
+          interaction.mode === 'study' && interaction.shouldAnnounceFeedback ? 'polite' : 'off'
+        }
+        aria-atomic="true"
+      >
+        <AnswerFeedback
+          question={question}
+          feedback={feedback}
+          hasJustLearned={interaction.mode === 'study' && interaction.hasJustLearned}
+          showTranslation={interaction.mode === 'study' && showTranslation}
+          t={t}
+        />
       </div>
     </Stack>
   )

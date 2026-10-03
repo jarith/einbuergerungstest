@@ -1,25 +1,26 @@
-import { Panel } from '@einbuergerungstest/design-system'
+import { Stack } from '@einbuergerungstest/design-system/jsx'
 import { reatomComponent } from '@reatom/react'
+import { ChevronDown } from 'lucide-react'
 
 import type { StudySessionProps } from '../study-session/study-session'
-import { QuestionStatusBadge } from '../../../../../../modules/learner-state'
-import { styles } from '../../study-page.styles'
+import { styles as pageStyles } from '../../study-page.styles'
+import { styles } from './study-help.styles'
 
 export const StudyHelp = reatomComponent(({ model }: StudySessionProps) => {
   const t = model.localization.t()
 
   return (
-    <aside className={styles.help}>
-      <Panel>
-        <h2 className={styles.heading}>{t('study.helpTitle')}</h2>
+    <details className={styles.root}>
+      <summary className={styles.trigger}>
+        {t('study.helpTitle')}
+        <ChevronDown aria-hidden="true" className={styles.icon} />
+      </summary>
+      <Stack gap="12" paddingBlock="8">
         <p>{t('study.helpBody')}</p>
-        <p className={styles.label}>{t('study.status')}</p>
-        <QuestionStatusBadge status={model.status()} t={t} />
-        <p>{t('study.progressHelp')}</p>
-        <a className={styles.link} href="/progress">
+        <a className={pageStyles.link} href="/progress">
           {t('navigation.progress')} →
         </a>
-      </Panel>
-    </aside>
+      </Stack>
+    </details>
   )
 }, 'StudyHelp')

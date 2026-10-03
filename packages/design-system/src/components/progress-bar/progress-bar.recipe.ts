@@ -8,6 +8,7 @@ export const progressBarRecipe = defineSlotRecipe({
       height: 'progress.track',
       backgroundColor: 'progress.track',
       borderRadius: 'progress',
+      border: '{borderWidths.control} solid {colors.panel.border}',
       overflow: 'hidden',
     },
     section: { backgroundColor: 'progress.fill', borderRadius: 'progress' },

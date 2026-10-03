@@ -28,9 +28,13 @@ loads the illustrated question's image when needed. Validate the bank's question
 answer options, translations, and image metadata when loading it, and include the
 referenced image files in the deployment.
 
-Use a stable question key based on `section` and `source_question_id`, independent of its
-display position. The bank and images are fixed and will never change. Saved history
-references those keys directly; no content versioning or history migration is needed.
+Give each question a stable, randomly generated `id` of five lowercase letters or digits,
+unique within the bank. Use this URL-safe ID directly in all question routes and saved
+history, without a section prefix. Keep `section` for general/Berlin classification and
+mock sampling. Use `order` (1–310) for display numbering and traversal, independent of
+identity; sort by it when loading the bank. The previous `number` and `source_question_id`
+fields are removed. IDs are authored once and must not be regenerated when loading or
+reordering questions. No legacy ID mapping or history migration is provided.
 
 ### Offline access and updates
 

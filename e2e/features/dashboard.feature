@@ -9,7 +9,6 @@ Feature: See learning progress and a planned test date on the dashboard
     Then the dashboard shows 0 of 310 questions contributing to progress and 0 percent
     When I open progress
     And I open question 1 from progress
-    And I retry the study question
     And I select study answer "D"
     And I open dashboard
     Then the dashboard shows 1 of 310 questions contributing to progress and 0 percent
@@ -20,7 +19,6 @@ Feature: See learning progress and a planned test date on the dashboard
     Then the dashboard shows 2 of 310 questions contributing to progress and 1 percent
     When I open progress
     And I open question 1 from progress
-    And I retry the study question
     And I select study answer "A"
     And I open dashboard
     Then the dashboard shows 1 of 310 questions contributing to progress and 0 percent

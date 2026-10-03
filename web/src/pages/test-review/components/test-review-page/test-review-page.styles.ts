@@ -31,4 +31,6 @@ export const styles = {
     },
   }),
   muted: css({ textStyle: 'caption', color: 'content.muted' }),
+  reviewHelpBelow: css({ '@media (min-width: 64rem)': { display: 'none' } }),
+  reviewHelpBeside: css({ display: 'none', '@media (min-width: 64rem)': { display: 'block' } }),
 }

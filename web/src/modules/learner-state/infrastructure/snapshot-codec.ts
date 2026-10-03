@@ -1,7 +1,7 @@
 /* oxlint-disable app/no-runtime-typeof -- Validate untrusted backup and IndexedDB data at the I/O boundary. */
 import type { JsonValue, QuestionKey, OptionLabel } from '../../question-bank/domain'
 import type { LearnerSnapshot, MockSitting, StudyPosition } from '../domain/learner-state'
-import { isJsonValue } from '../../question-bank/domain'
+import { isJsonValue, isQuestionKey } from '../../question-bank/domain'
 
 type JsonRecord = Readonly<{ [key: string]: JsonValue | undefined }>
 
@@ -49,18 +49,11 @@ const integer = (value: JsonValue | undefined, place: string): number => {
 const key = (value: JsonValue | undefined): QuestionKey => {
   const result = text(value, 'questionKey')
 
-  if (!/^(general|berlin):[1-9]\d*$/.test(result)) {
+  if (!isQuestionKey(result)) {
     return invalid('questionKey')
   }
 
-  const [section, sourceId] = result.split(':')
-  const number = Number(sourceId)
-
-  if ((section !== 'general' && section !== 'berlin') || !Number.isSafeInteger(number)) {
-    return invalid('questionKey')
-  }
-
-  return `${section}:${number}`
+  return result
 }
 
 const option = (value: JsonValue | undefined): OptionLabel => {
@@ -128,7 +121,6 @@ const mock = (value: JsonValue): MockSitting => {
 
   if (
     answers.length !== 33 ||
-    answers.filter((answer) => answer.questionKey.startsWith('general:')).length !== 30 ||
     currentQuestion >= answers.length ||
     deadline !== startedAt + 60 * 60 * 1000
   ) {
@@ -177,8 +169,8 @@ const mock = (value: JsonValue): MockSitting => {
 export const parseLearnerSnapshot = (value: JsonValue): LearnerSnapshot => {
   const root = record(value, 'snapshot')
 
-  if (root['version'] !== 2) {
-    return invalid('version (only version 2 is supported; no implicit migration)')
+  if (root['version'] !== 3) {
+    return invalid('version (only version 3 is supported; no implicit migration)')
   }
   const preferences = record(root['preferences'], 'preferences')
   const language = preferences['language']
@@ -232,7 +224,7 @@ export const parseLearnerSnapshot = (value: JsonValue): LearnerSnapshot => {
   }
 
   return {
-    version: 2,
+    version: 3,
     preferences: {
       language,
       studyTranslation,

@@ -27,7 +27,13 @@ Then('study question {int} of 310 is shown', async ({ page }, number: number) =>
 })
 
 When('I select study answer {string}', async ({ page }, label: string) => {
+  await expect(studyAnswer(page, label)).toBeEnabled()
+
   await studyAnswer(page, label).click()
+
+  await expect(
+    page.getByRole('button', { name: /^(Retry question|Erneut versuchen)$/ }),
+  ).toHaveCount(0)
 })
 
 Then('study answer {string} is marked wrong', async ({ page }, label: string) => {
@@ -52,10 +58,6 @@ Then('I see immediate incorrect feedback', async ({ page }) => {
 
 Then('I see immediate correct feedback', async ({ page }) => {
   await expect(page.locator('[aria-live=polite]')).toContainText(/Richtig|Correct/)
-})
-
-When('I retry the study question', async ({ page }) => {
-  await page.getByRole('button', { name: /^(Retry question|Erneut versuchen)$/ }).click()
 })
 
 When('I enable English translation', async ({ page }) => {
@@ -128,4 +130,27 @@ Then('the study question illustration is visible', async ({ page }) => {
   await expect(
     page.getByRole('img', { name: /Illustration for question|Abbildung zu Frage/ }),
   ).toBeVisible()
+})
+
+When('I open and close study help with the keyboard', async ({ page }) => {
+  const help = page.locator('details').filter({ hasText: /How study works|So funktioniert Lernen/ })
+  const trigger = help.locator('summary')
+
+  const instructions = help.getByText(
+    /Earlier attempts and saved positions remain|Frühere Versuche und gespeicherte Positionen bleiben erhalten/,
+  )
+
+  await expect(instructions).toBeHidden()
+
+  await trigger.focus()
+
+  await trigger.press('Enter')
+
+  await expect(instructions).toBeVisible()
+  await expect(trigger).toBeFocused()
+
+  await trigger.press('Space')
+
+  await expect(instructions).toBeHidden()
+  await expect(trigger).toBeFocused()
 })

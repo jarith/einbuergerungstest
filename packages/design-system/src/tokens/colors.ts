@@ -36,6 +36,7 @@ export const colors = {
   danger: { light: '#9e3442', dark: '#eda0a1' },
   info: { light: '#1c5579', dark: '#86bfb7' },
   selection: { light: '#c3b9a0e0', dark: '#505a60e0' },
+  scrim: { light: '#18202466', dark: '#18202466' },
   shadow: { light: '#00000012', dark: '#00000070' },
   'control-border': { light: '#5a6358', dark: '#96a29c' },
   divider: { light: '#525b50', dark: '#909c96' },

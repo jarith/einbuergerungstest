@@ -4,8 +4,8 @@ Feature: Responsive application shell
     And I open the app with a fresh learner profile
     Then the navigation appears beside the main content
 
-  Scenario: Phone navigation stays below the page
+  Scenario: Phone navigation stays at the bottom of the viewport
     Given the browser viewport is 390 by 844
     And I open the app with a fresh learner profile
-    Then the navigation appears below the main content
+    Then the navigation stays at the bottom of the viewport
     And the application fits the viewport width

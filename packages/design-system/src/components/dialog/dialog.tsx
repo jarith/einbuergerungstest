@@ -8,7 +8,7 @@ import { dialog } from './dialog.styles'
 export type DialogProps = Omit<PrimitiveProps<ModalProps>, 'transitionProps' | 'overlayProps'> &
   Readonly<{ title: NonNullable<ModalProps['title']> }>
 
-/** Focus-trapped confirmation surface for the test and backup flows. */
+/** Focus-trapped dialog, including full-screen media viewers. */
 export const Dialog = (props: DialogProps) => (
   <Modal
     closeButtonProps={{ 'aria-label': 'Close dialog' }}
@@ -21,6 +21,6 @@ export const Dialog = (props: DialogProps) => (
     size={token.var('sizes.dialog.default')}
     transitionProps={{ duration: 0 }}
     overlayProps={{ backgroundOpacity: 1 }}
-    classNames={dialog()}
+    classNames={dialog({ fullScreen: props.fullScreen ?? false })}
   />
 )

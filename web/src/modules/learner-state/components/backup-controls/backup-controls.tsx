@@ -1,6 +1,6 @@
 import type { TFunction } from 'i18next'
-import { Button, FileInput, InlineNotice, Panel } from '@einbuergerungstest/design-system'
-import { Grid, Stack } from '@einbuergerungstest/design-system/jsx'
+import { Button, FileInput, InlineNotice } from '@einbuergerungstest/design-system'
+import { Stack } from '@einbuergerungstest/design-system/jsx'
 import { wrap } from '@reatom/core'
 import { reatomComponent } from '@reatom/react'
 import { Download } from 'lucide-react'
@@ -24,61 +24,54 @@ export const BackupControls = reatomComponent((props: BackupControlsProps) => {
 
   return (
     <Stack gap="layout.section">
-      <Grid css={{ ...styles.columns }}>
-        <Stack gap="layout.section">
-          <Panel>
-            <h2 className={styles.heading}>{t('settings.exportTitle')}</h2>
-            <p>{t('settings.exportHelp')}</p>
-            <Button
-              disabled={model.pending()}
-              leftSection={<Download aria-hidden="true" />}
-              onClick={wrap(() => {
-                void model.download()
-              })}
-            >
-              {t('settings.export')}
-            </Button>
-          </Panel>
-          <Panel>
-            <h2 className={styles.heading}>{t('settings.import')}</h2>
-            <FileInput
-              label={t('settings.importHelp')}
-              placeholder={t('settings.chooseFile')}
-              accept="application/json,.json"
-              value={model.file()}
-              disabled={model.pending()}
-              onChange={wrap((file) => {
-                void model.selectFile(file)
-              })}
-            />
-          </Panel>
-        </Stack>
-        <Stack gap="layout.section">
-          <BackupPreview {...props} />
+      <Stack as="section" gap="24" aria-labelledby="backup-title">
+        <h2 id="backup-title" className={styles.heading}>
+          {t('settings.backup')}
+        </h2>
+        <Stack gap="12" alignItems="start">
+          <p>{t('settings.exportHelp')}</p>
           <Button
             appearance="outline"
             disabled={model.pending()}
-            onClick={wrap(model.requestReset)}
+            leftSection={<Download aria-hidden="true" />}
+            onClick={wrap(() => {
+              void model.download()
+            })}
           >
-            {t('settings.reset')}
+            {t('settings.export')}
           </Button>
-          <p className={styles.helper}>{t('settings.resetHelp')}</p>
         </Stack>
-      </Grid>
+        <Stack gap="16">
+          <FileInput
+            label={t('settings.backupFile')}
+            placeholder={t('settings.chooseFile')}
+            accept="application/json,.json"
+            value={model.file()}
+            disabled={model.pending()}
+            onChange={wrap((file) => {
+              void model.selectFile(file)
+            })}
+          />
+          {message === 'invalid' ? (
+            <InlineNotice intent="danger">{t('validation.invalidBackup')}</InlineNotice>
+          ) : null}
+          <BackupPreview {...props} />
+        </Stack>
+      </Stack>
+      <Stack gap="12" alignItems="start">
+        <Button appearance="outline" disabled={model.pending()} onClick={wrap(model.requestReset)}>
+          {t('settings.reset')}
+        </Button>
+        <p className={styles.helper}>{t('settings.resetHelp')}</p>
+      </Stack>
       <output>
         {model.pending() ? t('common.saving') : null}
         {message === 'exported' ? t('settings.exported') : null}
         {message === 'replaced' ? t('settings.replaced') : null}
       </output>
-      {message === 'invalid' || message === 'storage' || message === 'conflict' ? (
+      {message === 'storage' || message === 'conflict' ? (
         <InlineNotice intent="danger">
-          {t(
-            message === 'invalid'
-              ? 'validation.invalidBackup'
-              : message === 'conflict'
-                ? 'errors.storageConflict'
-                : 'errors.storage',
-          )}
+          {t(message === 'conflict' ? 'errors.storageConflict' : 'errors.storage')}
         </InlineNotice>
       ) : null}
       <ReplacementDialog {...props} />

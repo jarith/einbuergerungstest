@@ -13,21 +13,18 @@ export type StartupRecoveryProps = Readonly<{
 
 export const StartupRecovery = reatomComponent(
   ({ model }: StartupRecoveryProps) => (
-    <Stack gap="layout.section">
+    <Stack gap="layout.section" maxWidth="dialog.default" textAlign="center">
       <InlineNotice intent="danger" role="alert">
         <h1>{en.startupRecovery.title}</h1>
         <p>{en.startupRecovery.body}</p>
       </InlineNotice>
       <p>{en.startupRecovery.backupHelp}</p>
-      <Wrap gap="8">
-        <Button appearance="outline" onClick={wrap(model.download)} disabled={model.pending()}>
-          {en.startupRecovery.download}
-        </Button>
+      <Wrap gap="8" justify="center">
         <Button onClick={wrap(model.requestReset)} disabled={model.pending()}>
           {en.startupRecovery.startFresh}
         </Button>
-        <Button appearance="outline" onClick={() => location.reload()} disabled={model.pending()}>
-          {en.common.reload}
+        <Button appearance="outline" onClick={wrap(model.download)} disabled={model.pending()}>
+          {en.startupRecovery.download}
         </Button>
       </Wrap>
       <StartupResetDialog model={model} />

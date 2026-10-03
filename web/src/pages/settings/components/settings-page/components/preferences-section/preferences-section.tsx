@@ -3,12 +3,14 @@ import {
   InlineNotice,
   Panel,
   SegmentedChoice,
-  TextInput,
+  Calendar,
 } from '@einbuergerungstest/design-system'
 import { Grid, Stack } from '@einbuergerungstest/design-system/jsx'
 import { wrap } from '@reatom/core'
 import { reatomComponent } from '@reatom/react'
 import { X } from 'lucide-react'
+// oxlint-disable-next-line import/no-unassigned-import -- Day.js registers locales through side-effect imports.
+import 'dayjs/locale/de'
 
 import type { PageProps } from '../../../../../../app/routing'
 import type { SettingsData } from '../../../../settings.model'
@@ -40,19 +42,33 @@ export const PreferencesSection = reatomComponent(({ data }: PageProps<SettingsD
           />
         </Stack>
         <Stack gap="8">
-          <TextInput
-            type="date"
+          <Calendar
             label={t('settings.plannedDate')}
             description={t('settings.dateHelp')}
-            min={getLocalDate(new Date())}
-            value={settings.date()}
+            excludeDate={(date) => date < getLocalDate(new Date())}
+            value={settings.date() || null}
+            locale={localization.language()}
+            ariaLabels={{
+              nextMonth: t('settings.calendar.nextMonth'),
+              previousMonth: t('settings.calendar.previousMonth'),
+              nextYear: t('settings.calendar.nextYear'),
+              previousYear: t('settings.calendar.previousYear'),
+              nextDecade: t('settings.calendar.nextDecade'),
+              previousDecade: t('settings.calendar.previousDecade'),
+              monthLevelControl: t('settings.calendar.chooseMonth'),
+              yearLevelControl: t('settings.calendar.chooseYear'),
+            }}
             disabled={settings.pending()}
             error={
               validation.triggered && validation.error !== undefined
                 ? t('validation.plannedDate')
                 : undefined
             }
-            onChange={wrap((event) => settings.date.change(event.currentTarget.value))}
+            onChange={wrap((value) => {
+              settings.date.change(value ?? '')
+
+              void settings.saveDate()
+            })}
             rightSection={
               <IconButton
                 aria-label={t('common.clear')}
@@ -78,7 +94,6 @@ export const PreferencesSection = reatomComponent(({ data }: PageProps<SettingsD
         </Stack>
         <Stack gap="8">
           <p className={styles.label}>{t('settings.appearance')}</p>
-          <p className={styles.helper}>{t('settings.appearanceHelp')}</p>
           <SegmentedChoice
             aria-label={t('settings.appearance')}
             value={preferences?.appearance ?? 'light'}

@@ -44,7 +44,7 @@ export const segmentedChoiceRecipe = defineSlotRecipe({
           minHeight: 'control.segmentCompact',
           paddingInline: '12',
           borderRadius: 'badge',
-          textStyle: 'caption',
+          textStyle: 'compactCaption',
         },
       },
     },

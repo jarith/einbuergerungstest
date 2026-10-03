@@ -1,9 +1,14 @@
-import { action, computed, withAsync, wrap } from '@reatom/core'
+import { action, atom, computed, withActions, withAsync, wrap } from '@reatom/core'
 
 import type { AppResources } from '../../app/bootstrap.model'
 import type { StudyMode } from '../../modules/learner-state'
 import type { QuestionKey } from '../../modules/question-bank'
-import { createOrderedStudy } from '../../modules/learner-state'
+import { createOrderedStudy, createStudySession } from '../../modules/learner-state'
+
+export const createStudySessionScope = () =>
+  atom({ answers: createStudySession() }, 'study.session').extend(
+    withActions((scope) => ({ start: () => scope.set({ answers: createStudySession() }) })),
+  )
 
 export const createStudyModel = (
   resources: AppResources,
@@ -11,6 +16,7 @@ export const createStudyModel = (
   mode: StudyMode,
   navigate: (key: QuestionKey) => void,
   groupId: string | null = null,
+  session: ReturnType<typeof createStudySession> = createStudySession(),
 ) => {
   const flow = createOrderedStudy(
     resources.questions.bank,
@@ -18,6 +24,7 @@ export const createStudyModel = (
     target,
     mode,
     groupId,
+    session,
   )
 
   const group = resources.questions.bank.groups.find((item) => item.id === groupId)
@@ -87,7 +94,7 @@ export const createStudyModel = (
       'study.completion',
     ),
     isGroup: group !== undefined,
-    exitPath: group === undefined ? '/' : '/study/groups',
+    exitPath: '/',
   }))
 }
 

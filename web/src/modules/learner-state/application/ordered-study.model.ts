@@ -7,12 +7,24 @@ import { getQuestionKey } from '../../question-bank/domain'
 
 export type StudyMode = 'sequential' | 'inspection'
 
+type StudySessionAnswer = Readonly<{
+  selectedOption: OptionLabel
+  hasJustLearned: boolean
+}>
+
+export const createStudySession = () =>
+  atom<ReadonlyMap<QuestionKey, StudySessionAnswer>>(
+    new Map<QuestionKey, StudySessionAnswer>(),
+    'studySession.answers',
+  )
+
 export const createOrderedStudy = (
   bank: QuestionBank,
   learner: ReturnType<typeof createLearnerState>,
   target: QuestionKey,
   mode: StudyMode,
   groupId: string | null = null,
+  session: ReturnType<typeof createStudySession> = createStudySession(),
 ) => {
   if (groupId !== null && !bank.groups.some((group) => group.id === groupId)) {
     throw new Error('Choose a group in the question bank.')
@@ -42,7 +54,6 @@ export const createOrderedStudy = (
     'orderedStudy.position',
   )
 
-  const retryKey = atom<QuestionKey | null>(null, 'orderedStudy.retryKey')
   const error = atom<Error | null>(null, 'orderedStudy.error')
   const busy = atom(false, 'orderedStudy.busy')
 
@@ -62,10 +73,8 @@ export const createOrderedStudy = (
       index,
       total: ordered.length,
       isCompleted: saved.status === 'completed',
-      selectedOption:
-        retryKey() === key
-          ? null
-          : (learner.progress.questions().get(key)?.lastAttempt?.selectedOption ?? null),
+      selectedOption: session().get(key)?.selectedOption ?? null,
+      hasJustLearned: session().get(key)?.hasJustLearned ?? false,
       isInspection: mode === 'inspection',
     }
   }, 'orderedStudy.current')
@@ -96,12 +105,11 @@ export const createOrderedStudy = (
     }
 
     position.set(next)
-
-    retryKey.set(null)
   }
 
   return current.extend(() => ({
     error,
+    shouldAnnounceFeedback: !session().has(target),
     pending: computed(() => busy() || learner.pending() > 0, 'orderedStudy.pending'),
     answer: action(async (selection: OptionLabel) => {
       await wrap(
@@ -112,19 +120,20 @@ export const createOrderedStudy = (
             return
           }
 
+          const previousStatus = learner.progress.questions().get(question.key)?.status
+
           await wrap(learner.recordStudyAnswer(question.key, selection))
 
-          retryKey.set(null)
+          const hasJustLearned =
+            previousStatus === 'learning' &&
+            learner.progress.questions().get(question.key)?.status === 'learned'
+
+          session.set((answers) =>
+            new Map(answers).set(question.key, { selectedOption: selection, hasJustLearned }),
+          )
         }),
       )
     }, 'orderedStudy.answer').extend(withAsync()),
-    retry: action(() => {
-      if (!busy() && !current().isCompleted) {
-        retryKey.set(current().key)
-
-        error.set(null)
-      }
-    }, 'orderedStudy.retry'),
     previous: action(async () => {
       await wrap(
         run(async () => {
@@ -161,7 +170,11 @@ export const createOrderedStudy = (
     }, 'orderedStudy.next').extend(withAsync()),
     restart: action(async () => {
       await wrap(
-        run(() => savePosition({ questionKey: getQuestionKey(first), status: 'in-progress' })),
+        run(async () => {
+          await wrap(savePosition({ questionKey: getQuestionKey(first), status: 'in-progress' }))
+
+          session.set(new Map<QuestionKey, StudySessionAnswer>())
+        }),
       )
     }, 'orderedStudy.restart').extend(withAsync()),
     setTranslation: action(async (studyTranslation: boolean) => {

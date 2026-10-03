@@ -96,9 +96,9 @@
   ],
   "questions": [
     {
-      "number": 1,
+      "id": "tg3ei",
+      "order": 1,
       "section": "general",
-      "source_question_id": 1,
       "group_id": "constitution-rights",
       "question_de": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil …",
       "question_en": "In Germany, people can openly say something against the government because …",
@@ -127,9 +127,9 @@
       "correct_option": "D"
     },
     {
-      "number": 2,
+      "id": "uz0sv",
+      "order": 2,
       "section": "general",
-      "source_question_id": 2,
       "group_id": "family-education",
       "question_de": "In Deutschland können Eltern bis zum 14. Lebensjahr ihres Kindes entscheiden, ob es in der Schule am …",
       "question_en": "In Germany, parents can decide until their child is 14 years old if they participate in school …",
@@ -158,9 +158,9 @@
       "correct_option": "B"
     },
     {
-      "number": 3,
+      "id": "wm7f3",
+      "order": 3,
       "section": "general",
-      "source_question_id": 3,
       "group_id": "constitution-rights",
       "question_de": "Deutschland ist ein Rechtsstaat. Was ist damit gemeint?",
       "question_en": "Germany is a constitutional state. What does that mean?",
@@ -189,9 +189,9 @@
       "correct_option": "A"
     },
     {
-      "number": 4,
+      "id": "s7qjo",
+      "order": 4,
       "section": "general",
-      "source_question_id": 4,
       "group_id": "constitution-rights",
       "question_de": "Welches Recht gehört zu den Grundrechten in Deutschland?",
       "question_en": "Which right is one of the fundamental rights in Germany?",
@@ -220,9 +220,9 @@
       "correct_option": "C"
     },
     {
-      "number": 5,
+      "id": "jjjub",
+      "order": 5,
       "section": "general",
-      "source_question_id": 5,
       "group_id": "elections-participation",
       "question_de": "Wahlen in Deutschland sind frei. Was bedeutet das?",
       "question_en": "Elections in Germany are free. What does that mean?",
@@ -251,9 +251,9 @@
       "correct_option": "C"
     },
     {
-      "number": 6,
+      "id": "9ofx2",
+      "order": 6,
       "section": "general",
-      "source_question_id": 6,
       "group_id": "constitution-rights",
       "question_de": "Wie heißt die deutsche Verfassung?",
       "question_en": "What is the name of the German constitution?",
@@ -282,9 +282,9 @@
       "correct_option": "D"
     },
     {
-      "number": 7,
+      "id": "0eu29",
+      "order": 7,
       "section": "general",
-      "source_question_id": 7,
       "group_id": "constitution-rights",
       "question_de": "Welches Recht gehört zu den Grundrechten, die nach der deutschen Verfassung garantiert werden? Das Recht auf …",
       "question_en": "Which right is one of the fundamental rights guaranteed by the German constitution? The right to …",
@@ -313,9 +313,9 @@
       "correct_option": "A"
     },
     {
-      "number": 8,
+      "id": "y35tp",
+      "order": 8,
       "section": "general",
-      "source_question_id": 8,
       "group_id": "constitution-rights",
       "question_de": "Was steht nicht im Grundgesetz von Deutschland?",
       "question_en": "What is not stated in the Basic Law of Germany?",
@@ -344,9 +344,9 @@
       "correct_option": "B"
     },
     {
-      "number": 9,
+      "id": "m10sc",
+      "order": 9,
       "section": "general",
-      "source_question_id": 9,
       "group_id": "constitution-rights",
       "question_de": "Welches Grundrecht gilt in Deutschland nur für Ausländerinnen/Ausländer? Das Grundrecht auf …",
       "question_en": "Which fundamental right in Germany applies only to foreigners? The right to …",
@@ -375,9 +375,9 @@
       "correct_option": "C"
     },
     {
-      "number": 10,
+      "id": "a0aox",
+      "order": 10,
       "section": "general",
-      "source_question_id": 10,
       "group_id": "constitution-rights",
       "question_de": "Was ist mit dem deutschen Grundgesetz vereinbar?",
       "question_en": "What is compatible with the German Basic Law?",
@@ -406,9 +406,9 @@
       "correct_option": "D"
     },
     {
-      "number": 11,
+      "id": "xeklj",
+      "order": 11,
       "section": "general",
-      "source_question_id": 11,
       "group_id": "constitution-rights",
       "question_de": "Wie wird die Verfassung der Bundesrepublik Deutschland genannt?",
       "question_en": "What is the constitution of the Federal Republic of Germany called?",
@@ -437,9 +437,9 @@
       "correct_option": "A"
     },
     {
-      "number": 12,
+      "id": "vr25u",
+      "order": 12,
       "section": "general",
-      "source_question_id": 12,
       "group_id": "constitution-rights",
       "question_de": "Eine Partei im Deutschen Bundestag will die Pressefreiheit abschaffen. Ist das möglich?",
       "question_en": "A party in the German Bundestag wants to abolish freedom of the press. Is that possible?",
@@ -468,9 +468,9 @@
       "correct_option": "C"
     },
     {
-      "number": 13,
+      "id": "bd195",
+      "order": 13,
       "section": "general",
-      "source_question_id": 13,
       "group_id": "elections-participation",
       "question_de": "Im Parlament steht der Begriff \"Opposition\" für …",
       "question_en": "In parliament, the term \"opposition\" refers to …",
@@ -499,9 +499,9 @@
       "correct_option": "D"
     },
     {
-      "number": 14,
+      "id": "qu8sg",
+      "order": 14,
       "section": "general",
-      "source_question_id": 14,
       "group_id": "constitution-rights",
       "question_de": "Meinungsfreiheit in Deutschland heißt, dass ich …",
       "question_en": "Freedom of expression in Germany means, for example, that I …",
@@ -530,9 +530,9 @@
       "correct_option": "B"
     },
     {
-      "number": 15,
+      "id": "f4xrz",
+      "order": 15,
       "section": "general",
-      "source_question_id": 15,
       "group_id": "constitution-rights",
       "question_de": "Was verbietet das deutsche Grundgesetz?",
       "question_en": "What does the German Basic Law prohibit?",
@@ -561,9 +561,9 @@
       "correct_option": "B"
     },
     {
-      "number": 16,
+      "id": "pdzh7",
+      "order": 16,
       "section": "general",
-      "source_question_id": 16,
       "group_id": "constitution-rights",
       "question_de": "Wann ist die Meinungsfreiheit in Deutschland eingeschränkt?",
       "question_en": "When is freedom of expression limited in Germany?",
@@ -592,9 +592,9 @@
       "correct_option": "A"
     },
     {
-      "number": 17,
+      "id": "uoznm",
+      "order": 17,
       "section": "general",
-      "source_question_id": 17,
       "group_id": "constitution-rights",
       "question_de": "Die deutschen Gesetze verbieten …",
       "question_en": "German laws prohibit …",
@@ -623,9 +623,9 @@
       "correct_option": "D"
     },
     {
-      "number": 18,
+      "id": "3yy2u",
+      "order": 18,
       "section": "general",
-      "source_question_id": 18,
       "group_id": "constitution-rights",
       "question_de": "Welches Grundrecht ist in Artikel 1 des Grundgesetzes der Bundesrepublik Deutschland garantiert?",
       "question_en": "Which fundamental right is guaranteed in Article 1 of the Basic Law of the Federal Republic of Germany?",
@@ -654,9 +654,9 @@
       "correct_option": "A"
     },
     {
-      "number": 19,
+      "id": "ey99i",
+      "order": 19,
       "section": "general",
-      "source_question_id": 19,
       "group_id": "constitution-rights",
       "question_de": "Was versteht man unter dem Recht der \"Freizügigkeit\" in Deutschland?",
       "question_en": "What is meant by the right of \"freedom of movement\" in Germany?",
@@ -685,9 +685,9 @@
       "correct_option": "A"
     },
     {
-      "number": 20,
+      "id": "7z5qu",
+      "order": 20,
       "section": "general",
-      "source_question_id": 20,
       "group_id": "constitution-rights",
       "question_de": "Eine Partei in Deutschland verfolgt das Ziel, eine Diktatur zu errichten. Sie ist dann …",
       "question_en": "A party in Germany aims to establish a dictatorship. It is then …",
@@ -716,9 +716,9 @@
       "correct_option": "D"
     },
     {
-      "number": 21,
+      "id": "t2k2o",
+      "order": 21,
       "section": "general",
-      "source_question_id": 21,
       "group_id": "federalism-state-symbols",
       "question_de": "Welches ist das Wappen der Bundesrepublik Deutschland?",
       "question_en": "Which is the coat of arms of the Federal Republic of Germany?",
@@ -726,22 +726,22 @@
         {
           "label": "A",
           "text_de": "Bild 1",
-          "text_en": "1"
+          "text_en": "Image 1"
         },
         {
           "label": "B",
           "text_de": "Bild 2",
-          "text_en": "2"
+          "text_en": "Image 2"
         },
         {
           "label": "C",
           "text_de": "Bild 3",
-          "text_en": "3"
+          "text_en": "Image 3"
         },
         {
           "label": "D",
           "text_de": "Bild 4",
-          "text_en": "4"
+          "text_en": "Image 4"
         }
       ],
       "correct_option": "A",
@@ -764,9 +764,9 @@
       ]
     },
     {
-      "number": 22,
+      "id": "3noee",
+      "order": 22,
       "section": "general",
-      "source_question_id": 22,
       "group_id": "federalism-state-symbols",
       "question_de": "Was für eine Staatsform hat Deutschland?",
       "question_en": "What form of government does Germany have?",
@@ -795,9 +795,9 @@
       "correct_option": "C"
     },
     {
-      "number": 23,
+      "id": "1ljzi",
+      "order": 23,
       "section": "general",
-      "source_question_id": 23,
       "group_id": "economy-social-security",
       "question_de": "In Deutschland sind die meisten Erwerbstätigen …",
       "question_en": "In Germany, most employed people are …",
@@ -826,9 +826,9 @@
       "correct_option": "D"
     },
     {
-      "number": 24,
+      "id": "vk95m",
+      "order": 24,
       "section": "general",
-      "source_question_id": 24,
       "group_id": "federalism-state-symbols",
       "question_de": "Wie viele Bundesländer hat die Bundesrepublik Deutschland?",
       "question_en": "How many federal states does the Federal Republic of Germany have?",
@@ -857,9 +857,9 @@
       "correct_option": "C"
     },
     {
-      "number": 25,
+      "id": "nxzgn",
+      "order": 25,
       "section": "general",
-      "source_question_id": 25,
       "group_id": "federalism-state-symbols",
       "question_de": "Was ist kein Bundesland der Bundesrepublik Deutschland?",
       "question_en": "Which is not a federal state of the Federal Republic of Germany?",
@@ -888,9 +888,9 @@
       "correct_option": "A"
     },
     {
-      "number": 26,
+      "id": "q95tz",
+      "order": 26,
       "section": "general",
-      "source_question_id": 26,
       "group_id": "federalism-state-symbols",
       "question_de": "Deutschland ist …",
       "question_en": "Germany is …",
@@ -919,9 +919,9 @@
       "correct_option": "B"
     },
     {
-      "number": 27,
+      "id": "pvt5q",
+      "order": 27,
       "section": "general",
-      "source_question_id": 27,
       "group_id": "federalism-state-symbols",
       "question_de": "Deutschland ist …",
       "question_en": "Germany is …",
@@ -950,9 +950,9 @@
       "correct_option": "B"
     },
     {
-      "number": 28,
+      "id": "r37m9",
+      "order": 28,
       "section": "general",
-      "source_question_id": 28,
       "group_id": "elections-participation",
       "question_de": "Wer wählt in Deutschland die Abgeordneten zum Bundestag?",
       "question_en": "Who elects the members of the Bundestag in Germany?",
@@ -981,9 +981,9 @@
       "correct_option": "C"
     },
     {
-      "number": 29,
+      "id": "z1tdn",
+      "order": 29,
       "section": "general",
-      "source_question_id": 29,
       "group_id": "federalism-state-symbols",
       "question_de": "Welches Tier ist das Wappentier der Bundesrepublik Deutschland?",
       "question_en": "Which animal is the emblem of the Federal Republic of Germany?",
@@ -1012,9 +1012,9 @@
       "correct_option": "B"
     },
     {
-      "number": 30,
+      "id": "ayow1",
+      "order": 30,
       "section": "general",
-      "source_question_id": 30,
       "group_id": "constitution-rights",
       "question_de": "Was ist kein Merkmal unserer Demokratie?",
       "question_en": "What is not a feature of our democracy?",
@@ -1043,9 +1043,9 @@
       "correct_option": "B"
     },
     {
-      "number": 31,
+      "id": "somjo",
+      "order": 31,
       "section": "general",
-      "source_question_id": 31,
       "group_id": "elections-participation",
       "question_de": "Die Zusammenarbeit von Parteien zur Bildung einer Regierung nennt man in Deutschland …",
       "question_en": "The cooperation of parties to form a government in Germany is called …",
@@ -1074,9 +1074,9 @@
       "correct_option": "B"
     },
     {
-      "number": 32,
+      "id": "x26qf",
+      "order": 32,
       "section": "general",
-      "source_question_id": 32,
       "group_id": "constitution-rights",
       "question_de": "Was ist keine staatliche Gewalt in Deutschland?",
       "question_en": "What is not a state power in Germany?",
@@ -1105,9 +1105,9 @@
       "correct_option": "C"
     },
     {
-      "number": 33,
+      "id": "pbl9i",
+      "order": 33,
       "section": "general",
-      "source_question_id": 33,
       "group_id": "equality-religion-migration",
       "question_de": "Welche Aussage ist richtig? In Deutschland …",
       "question_en": "Which statement is correct? In Germany …",
@@ -1136,9 +1136,9 @@
       "correct_option": "A"
     },
     {
-      "number": 34,
+      "id": "q0ju9",
+      "order": 34,
       "section": "general",
-      "source_question_id": 34,
       "group_id": "constitution-rights",
       "question_de": "Was ist Deutschland nicht?",
       "question_en": "What is Germany not?",
@@ -1167,9 +1167,9 @@
       "correct_option": "C"
     },
     {
-      "number": 35,
+      "id": "n5on9",
+      "order": 35,
       "section": "general",
-      "source_question_id": 35,
       "group_id": "economy-social-security",
       "question_de": "Womit finanziert der deutsche Staat die Sozialversicherung?",
       "question_en": "How does the German state finance social insurance?",
@@ -1198,9 +1198,9 @@
       "correct_option": "B"
     },
     {
-      "number": 36,
+      "id": "wl24j",
+      "order": 36,
       "section": "general",
-      "source_question_id": 36,
       "group_id": "economy-social-security",
       "question_de": "Welche Maßnahme schafft in Deutschland soziale Sicherheit?",
       "question_en": "Which measure creates social security in Germany?",
@@ -1229,9 +1229,9 @@
       "correct_option": "A"
     },
     {
-      "number": 37,
+      "id": "71t6p",
+      "order": 37,
       "section": "general",
-      "source_question_id": 37,
       "group_id": "federalism-state-symbols",
       "question_de": "Wie werden die Regierungschefinnen/Regierungschefs der meisten Bundesländer in Deutschland genannt?",
       "question_en": "What are the heads of government of most federal states in Germany called?",
@@ -1260,9 +1260,9 @@
       "correct_option": "D"
     },
     {
-      "number": 38,
+      "id": "5gzei",
+      "order": 38,
       "section": "general",
-      "source_question_id": 38,
       "group_id": "constitution-rights",
       "question_de": "Die Bundesrepublik Deutschland ist ein demokratischer und sozialer …",
       "question_en": "The Federal Republic of Germany is a democratic and social …",
@@ -1291,9 +1291,9 @@
       "correct_option": "B"
     },
     {
-      "number": 39,
+      "id": "r9yb4",
+      "order": 39,
       "section": "general",
-      "source_question_id": 39,
       "group_id": "federalism-state-symbols",
       "question_de": "Was hat jedes deutsche Bundesland?",
       "question_en": "What does every German federal state have?",
@@ -1322,9 +1322,9 @@
       "correct_option": "D"
     },
     {
-      "number": 40,
+      "id": "zw44v",
+      "order": 40,
       "section": "general",
-      "source_question_id": 40,
       "group_id": "federalism-state-symbols",
       "question_de": "Mit welchen Worten beginnt die deutsche Nationalhymne?",
       "question_en": "With which words does the German national anthem begin?",
@@ -1353,9 +1353,9 @@
       "correct_option": "B"
     },
     {
-      "number": 41,
+      "id": "wlcdo",
+      "order": 41,
       "section": "general",
-      "source_question_id": 41,
       "group_id": "elections-participation",
       "question_de": "Warum gibt es in einer Demokratie mehr als eine Partei?",
       "question_en": "Why are there more than one party in a democracy?",
@@ -1384,9 +1384,9 @@
       "correct_option": "A"
     },
     {
-      "number": 42,
+      "id": "fe8r7",
+      "order": 42,
       "section": "general",
-      "source_question_id": 42,
       "group_id": "government-institutions",
       "question_de": "Wer beschließt in Deutschland ein neues Gesetz?",
       "question_en": "Who passes a new law in Germany?",
@@ -1415,9 +1415,9 @@
       "correct_option": "B"
     },
     {
-      "number": 43,
+      "id": "9maw6",
+      "order": 43,
       "section": "general",
-      "source_question_id": 43,
       "group_id": "elections-participation",
       "question_de": "Wann kann in Deutschland eine Partei verboten werden?",
       "question_en": "When can a party be banned in Germany?",
@@ -1446,9 +1446,9 @@
       "correct_option": "B"
     },
     {
-      "number": 44,
+      "id": "uum3s",
+      "order": 44,
       "section": "general",
-      "source_question_id": 44,
       "group_id": "elections-participation",
       "question_de": "Wen kann man als Bürgerin/Bürger in Deutschland nicht direkt wählen?",
       "question_en": "Whom can citizens in Germany not elect directly?",
@@ -1477,9 +1477,9 @@
       "correct_option": "B"
     },
     {
-      "number": 45,
+      "id": "hnjoh",
+      "order": 45,
       "section": "general",
-      "source_question_id": 45,
       "group_id": "economy-social-security",
       "question_de": "Zu welcher Versicherung gehört die Pflegeversicherung?",
       "question_en": "Which type of insurance includes long-term care insurance?",
@@ -1508,9 +1508,9 @@
       "correct_option": "A"
     },
     {
-      "number": 46,
+      "id": "gbkfc",
+      "order": 46,
       "section": "general",
-      "source_question_id": 46,
       "group_id": "government-institutions",
       "question_de": "Der deutsche Staat hat viele Aufgaben. Welche Aufgabe gehört dazu?",
       "question_en": "The German state has many responsibilities. Which one is included?",
@@ -1539,9 +1539,9 @@
       "correct_option": "A"
     },
     {
-      "number": 47,
+      "id": "4p9ai",
+      "order": 47,
       "section": "general",
-      "source_question_id": 47,
       "group_id": "government-institutions",
       "question_de": "Der deutsche Staat hat viele Aufgaben. Welche Aufgabe gehört nicht dazu?",
       "question_en": "The German state has many responsibilities. Which one is not included?",
@@ -1570,9 +1570,9 @@
       "correct_option": "A"
     },
     {
-      "number": 48,
+      "id": "t3tqk",
+      "order": 48,
       "section": "general",
-      "source_question_id": 48,
       "group_id": "government-institutions",
       "question_de": "Welches Organ gehört nicht zu den Verfassungsorganen Deutschlands?",
       "question_en": "Which body is not one of the constitutional organs of Germany?",
@@ -1601,9 +1601,9 @@
       "correct_option": "C"
     },
     {
-      "number": 49,
+      "id": "04341",
+      "order": 49,
       "section": "general",
-      "source_question_id": 49,
       "group_id": "federalism-state-symbols",
       "question_de": "Wer bestimmt in Deutschland die Schulpolitik?",
       "question_en": "Who determines school policy in Germany?",
@@ -1632,9 +1632,9 @@
       "correct_option": "B"
     },
     {
-      "number": 50,
+      "id": "wyqzh",
+      "order": 50,
       "section": "general",
-      "source_question_id": 50,
       "group_id": "economy-social-security",
       "question_de": "Die Wirtschaftsform in Deutschland nennt man …",
       "question_en": "The economic system in Germany is called …",
@@ -1663,9 +1663,9 @@
       "correct_option": "B"
     },
     {
-      "number": 51,
+      "id": "0w172",
+      "order": 51,
       "section": "general",
-      "source_question_id": 51,
       "group_id": "constitution-rights",
       "question_de": "Zu einem demokratischen Rechtsstaat gehört es nicht, dass …",
       "question_en": "In a democratic constitutional state, it is not the case that …",
@@ -1694,9 +1694,9 @@
       "correct_option": "C"
     },
     {
-      "number": 52,
+      "id": "2yw11",
+      "order": 52,
       "section": "general",
-      "source_question_id": 52,
       "group_id": "constitution-rights",
       "question_de": "Was bedeutet \"Volkssouveränität\"? Alle Staatsgewalt geht vom ...",
       "question_en": "What does \"popular sovereignty\" mean? All state power emanates from the ...",
@@ -1725,9 +1725,9 @@
       "correct_option": "A"
     },
     {
-      "number": 53,
+      "id": "8fzr8",
+      "order": 53,
       "section": "general",
-      "source_question_id": 53,
       "group_id": "constitution-rights",
       "question_de": "Was bedeutet \"Rechtsstaat\" in Deutschland?",
       "question_en": "What does \"rule of law\" mean in Germany?",
@@ -1756,9 +1756,9 @@
       "correct_option": "D"
     },
     {
-      "number": 54,
+      "id": "fyvxi",
+      "order": 54,
       "section": "general",
-      "source_question_id": 54,
       "group_id": "constitution-rights",
       "question_de": "Was ist keine staatliche Gewalt in Deutschland?",
       "question_en": "Which is not a branch of government in Germany?",
@@ -1787,9 +1787,9 @@
       "correct_option": "D"
     },
     {
-      "number": 55,
+      "id": "edrom",
+      "order": 55,
       "section": "general",
-      "source_question_id": 55,
       "group_id": "government-institutions",
       "question_de": "Was zeigt dieses Bild?",
       "question_en": "What does this picture show?",
@@ -1835,9 +1835,9 @@
       ]
     },
     {
-      "number": 56,
+      "id": "e1fs8",
+      "order": 56,
       "section": "general",
-      "source_question_id": 56,
       "group_id": "federalism-state-symbols",
       "question_de": "Welches Amt gehört in Deutschland zur Gemeindeverwaltung?",
       "question_en": "Which office is part of municipal administration in Germany?",
@@ -1866,9 +1866,9 @@
       "correct_option": "B"
     },
     {
-      "number": 57,
+      "id": "k29al",
+      "order": 57,
       "section": "general",
-      "source_question_id": 57,
       "group_id": "government-institutions",
       "question_de": "Wer wird meistens zur Präsidentin/zum Präsidenten des Deutschen Bundestages gewählt?",
       "question_en": "Who is usually elected as President of the German Bundestag?",
@@ -1897,9 +1897,9 @@
       "correct_option": "D"
     },
     {
-      "number": 58,
+      "id": "4g4u3",
+      "order": 58,
       "section": "general",
-      "source_question_id": 58,
       "group_id": "government-institutions",
       "question_de": "Wer ernennt in Deutschland die Ministerinnen/die Minister der Bundesregierung?",
       "question_en": "Who appoints the ministers of the German federal government?",
@@ -1928,9 +1928,9 @@
       "correct_option": "B"
     },
     {
-      "number": 59,
+      "id": "nu5v9",
+      "order": 59,
       "section": "general",
-      "source_question_id": 59,
       "group_id": "jewish-life-nazi-history",
       "question_de": "Vor wie vielen Jahren gab es erstmals eine jüdische Gemeinde auf dem Gebiet des heutigen Deutschlands?",
       "question_en": "How many years ago was there a Jewish community on the territory of present-day Germany for the first time?",
@@ -1959,9 +1959,9 @@
       "correct_option": "D"
     },
     {
-      "number": 60,
+      "id": "mo7z3",
+      "order": 60,
       "section": "general",
-      "source_question_id": 60,
       "group_id": "government-institutions",
       "question_de": "In Deutschland gehören der Bundestag und der Bundesrat zur …",
       "question_en": "In Germany, the Bundestag and Bundesrat belong to the …",
@@ -1990,9 +1990,9 @@
       "correct_option": "B"
     },
     {
-      "number": 61,
+      "id": "mtkwa",
+      "order": 61,
       "section": "general",
-      "source_question_id": 61,
       "group_id": "constitution-rights",
       "question_de": "Was bedeutet \"Volkssouveränität\"?",
       "question_en": "What does \"popular sovereignty\" mean?",
@@ -2021,9 +2021,9 @@
       "correct_option": "D"
     },
     {
-      "number": 62,
+      "id": "bhzql",
+      "order": 62,
       "section": "general",
-      "source_question_id": 62,
       "group_id": "elections-participation",
       "question_de": "Wenn das Parlament eines deutschen Bundeslandes gewählt wird, nennt man das …",
       "question_en": "When the parliament of a German federal state is elected, this is called …",
@@ -2052,9 +2052,9 @@
       "correct_option": "B"
     },
     {
-      "number": 63,
+      "id": "wbzx7",
+      "order": 63,
       "section": "general",
-      "source_question_id": 63,
       "group_id": "government-institutions",
       "question_de": "Was gehört in Deutschland nicht zur Exekutive?",
       "question_en": "What does not belong to the executive in Germany?",
@@ -2083,9 +2083,9 @@
       "correct_option": "B"
     },
     {
-      "number": 64,
+      "id": "wjyuf",
+      "order": 64,
       "section": "general",
-      "source_question_id": 64,
       "group_id": "federalism-state-symbols",
       "question_de": "Die Bundesrepublik Deutschland ist heute gegliedert in …",
       "question_en": "The Federal Republic of Germany is now structured into …",
@@ -2114,9 +2114,9 @@
       "correct_option": "D"
     },
     {
-      "number": 65,
+      "id": "4thpa",
+      "order": 65,
       "section": "general",
-      "source_question_id": 65,
       "group_id": "government-institutions",
       "question_de": "Es gehört nicht zu den Aufgaben des Deutschen Bundestages, …",
       "question_en": "It is not the task of the German Bundestag to …",
@@ -2145,9 +2145,9 @@
       "correct_option": "D"
     },
     {
-      "number": 66,
+      "id": "e8ts9",
+      "order": 66,
       "section": "general",
-      "source_question_id": 66,
       "group_id": "jewish-life-nazi-history",
       "question_de": "Welche Städte haben die größten jüdischen Gemeinden in Deutschland?",
       "question_en": "Which cities have the largest Jewish communities in Germany?",
@@ -2176,9 +2176,9 @@
       "correct_option": "A"
     },
     {
-      "number": 67,
+      "id": "d686l",
+      "order": 67,
       "section": "general",
-      "source_question_id": 67,
       "group_id": "federalism-state-symbols",
       "question_de": "Was ist in Deutschland vor allem eine Aufgabe der Bundesländer?",
       "question_en": "What is mainly a task of the federal states in Germany?",
@@ -2207,9 +2207,9 @@
       "correct_option": "D"
     },
     {
-      "number": 68,
+      "id": "6gvrr",
+      "order": 68,
       "section": "general",
-      "source_question_id": 68,
       "group_id": "federalism-state-symbols",
       "question_de": "Warum kontrolliert der Staat in Deutschland das Schulwesen?",
       "question_en": "Why does the state in Germany control the school system?",
@@ -2238,9 +2238,9 @@
       "correct_option": "D"
     },
     {
-      "number": 69,
+      "id": "vvpx1",
+      "order": 69,
       "section": "general",
-      "source_question_id": 69,
       "group_id": "federalism-state-symbols",
       "question_de": "Die Bundesrepublik Deutschland hat einen dreistufigen Verwaltungsaufbau. Wie heißt die unterste politische Stufe?",
       "question_en": "The Federal Republic of Germany has a three-tier administrative structure. What is the lowest political level called?",
@@ -2269,9 +2269,9 @@
       "correct_option": "C"
     },
     {
-      "number": 70,
+      "id": "pih12",
+      "order": 70,
       "section": "general",
-      "source_question_id": 70,
       "group_id": "government-institutions",
       "question_de": "Der deutsche Bundespräsident Gustav Heinemann gibt Helmut Schmidt 1974 die Ernennungsurkunde zum deutschen Bundeskanzler. Was gehört zu den Aufgaben der deutschen Bundespräsidentin/des deutschen Bundespräsidenten?",
       "question_en": "The German Federal President Gustav Heinemann gave Helmut Schmidt the certificate of appointment as German Chancellor in 1974. What are the duties of the German Federal President?",
@@ -2317,9 +2317,9 @@
       ]
     },
     {
-      "number": 71,
+      "id": "wb3yy",
+      "order": 71,
       "section": "general",
-      "source_question_id": 71,
       "group_id": "government-institutions",
       "question_de": "Wo hält sich die deutsche Bundeskanzlerin/der deutsche Bundeskanzler am häufigsten auf? Am häufigsten ist sie/er …",
       "question_en": "Where is the German Chancellor most often located? Most often he/she is …",
@@ -2348,9 +2348,9 @@
       "correct_option": "D"
     },
     {
-      "number": 72,
+      "id": "ee5bz",
+      "order": 72,
       "section": "general",
-      "source_question_id": 72,
       "group_id": "government-institutions",
       "question_de": "Wie heißt die jetzige Bundeskanzlerin/der jetzige Bundeskanzler von Deutschland?",
       "question_en": "What is the name of the current Chancellor of Germany?",
@@ -2379,9 +2379,9 @@
       "correct_option": "D"
     },
     {
-      "number": 73,
+      "id": "n5blt",
+      "order": 73,
       "section": "general",
-      "source_question_id": 73,
       "group_id": "elections-participation",
       "question_de": "Die beiden größten Fraktionen im Deutschen Bundestag heißen zurzeit …",
       "question_en": "The two largest parliamentary groups in the German Bundestag are currently called …",
@@ -2410,9 +2410,9 @@
       "correct_option": "A"
     },
     {
-      "number": 74,
+      "id": "grnzd",
+      "order": 74,
       "section": "general",
-      "source_question_id": 74,
       "group_id": "government-institutions",
       "question_de": "Wie heißt das Parlament für ganz Deutschland?",
       "question_en": "What is the name of the parliament for all of Germany?",
@@ -2441,9 +2441,9 @@
       "correct_option": "C"
     },
     {
-      "number": 75,
+      "id": "ia8dk",
+      "order": 75,
       "section": "general",
-      "source_question_id": 75,
       "group_id": "government-institutions",
       "question_de": "Wie heißt Deutschlands heutiges Staatsoberhaupt?",
       "question_en": "What is the name of Germany's current head of state?",
@@ -2472,9 +2472,9 @@
       "correct_option": "A"
     },
     {
-      "number": 76,
+      "id": "3x0yv",
+      "order": 76,
       "section": "general",
-      "source_question_id": 76,
       "group_id": "elections-participation",
       "question_de": "Was bedeutet die Abkürzung CDU in Deutschland?",
       "question_en": "What does the abbreviation CDU mean in Germany?",
@@ -2503,9 +2503,9 @@
       "correct_option": "D"
     },
     {
-      "number": 77,
+      "id": "8lwe0",
+      "order": 77,
       "section": "general",
-      "source_question_id": 77,
       "group_id": "government-institutions",
       "question_de": "Was ist die Bundeswehr?",
       "question_en": "What is the Bundeswehr?",
@@ -2534,9 +2534,9 @@
       "correct_option": "D"
     },
     {
-      "number": 78,
+      "id": "x6bnn",
+      "order": 78,
       "section": "general",
-      "source_question_id": 78,
       "group_id": "elections-participation",
       "question_de": "Was bedeutet die Abkürzung SPD?",
       "question_en": "What does the abbreviation SPD mean?",
@@ -2565,9 +2565,9 @@
       "correct_option": "C"
     },
     {
-      "number": 79,
+      "id": "32hza",
+      "order": 79,
       "section": "general",
-      "source_question_id": 79,
       "group_id": "elections-participation",
       "question_de": "Was bedeutet die Abkürzung FDP in Deutschland?",
       "question_en": "What does the abbreviation FDP mean in Germany?",
@@ -2596,9 +2596,9 @@
       "correct_option": "D"
     },
     {
-      "number": 80,
+      "id": "bncrp",
+      "order": 80,
       "section": "general",
-      "source_question_id": 80,
       "group_id": "justice-legal-system",
       "question_de": "Welches Gericht in Deutschland ist zuständig für die Auslegung des Grundgesetzes?",
       "question_en": "Which court in Germany is responsible for interpreting the Basic Law?",
@@ -2627,9 +2627,9 @@
       "correct_option": "C"
     },
     {
-      "number": 81,
+      "id": "vbkkn",
+      "order": 81,
       "section": "general",
-      "source_question_id": 81,
       "group_id": "government-institutions",
       "question_de": "Wer wählt die Bundeskanzlerin/den Bundeskanzler in Deutschland?",
       "question_en": "Who elects the Federal Chancellor in Germany?",
@@ -2658,9 +2658,9 @@
       "correct_option": "D"
     },
     {
-      "number": 82,
+      "id": "lbeku",
+      "order": 82,
       "section": "general",
-      "source_question_id": 82,
       "group_id": "government-institutions",
       "question_de": "Wer leitet das deutsche Bundeskabinett?",
       "question_en": "Who leads the German federal cabinet?",
@@ -2689,9 +2689,9 @@
       "correct_option": "D"
     },
     {
-      "number": 83,
+      "id": "64xcy",
+      "order": 83,
       "section": "general",
-      "source_question_id": 83,
       "group_id": "government-institutions",
       "question_de": "Wer wählt die deutsche Bundeskanzlerin/den deutschen Bundeskanzler?",
       "question_en": "Who elects the German Chancellor?",
@@ -2720,9 +2720,9 @@
       "correct_option": "C"
     },
     {
-      "number": 84,
+      "id": "s3vmk",
+      "order": 84,
       "section": "general",
-      "source_question_id": 84,
       "group_id": "government-institutions",
       "question_de": "Welche Hauptaufgabe hat die deutsche Bundespräsidentin/der deutsche Bundespräsident? Sie/Er …",
       "question_en": "What is the main task of the German Federal President? He/She …",
@@ -2751,9 +2751,9 @@
       "correct_option": "C"
     },
     {
-      "number": 85,
+      "id": "u0tqi",
+      "order": 85,
       "section": "general",
-      "source_question_id": 85,
       "group_id": "government-institutions",
       "question_de": "Wer bildet den deutschen Bundesrat?",
       "question_en": "Who forms the German Bundesrat?",
@@ -2782,9 +2782,9 @@
       "correct_option": "C"
     },
     {
-      "number": 86,
+      "id": "y1brb",
+      "order": 86,
       "section": "general",
-      "source_question_id": 86,
       "group_id": "government-institutions",
       "question_de": "Wer wählt in Deutschland die Bundespräsidentin/den Bundespräsidenten?",
       "question_en": "Who elects the Federal President in Germany?",
@@ -2813,9 +2813,9 @@
       "correct_option": "A"
     },
     {
-      "number": 87,
+      "id": "d6fik",
+      "order": 87,
       "section": "general",
-      "source_question_id": 87,
       "group_id": "government-institutions",
       "question_de": "Wer ist das Staatsoberhaupt der Bundesrepublik Deutschland?",
       "question_en": "Who is the head of state of the Federal Republic of Germany?",
@@ -2844,9 +2844,9 @@
       "correct_option": "B"
     },
     {
-      "number": 88,
+      "id": "s1cz8",
+      "order": 88,
       "section": "general",
-      "source_question_id": 88,
       "group_id": "elections-participation",
       "question_de": "Die parlamentarische Opposition im Deutschen Bundestag …",
       "question_en": "The parliamentary opposition in the German Bundestag …",
@@ -2875,9 +2875,9 @@
       "correct_option": "A"
     },
     {
-      "number": 89,
+      "id": "66ell",
+      "order": 89,
       "section": "general",
-      "source_question_id": 89,
       "group_id": "elections-participation",
       "question_de": "Wie nennt man in Deutschland die Vereinigung von Abgeordneten einer Partei im Parlament?",
       "question_en": "What is the name in Germany for a group of a party's members in parliament?",
@@ -2906,9 +2906,9 @@
       "correct_option": "C"
     },
     {
-      "number": 90,
+      "id": "cuf8f",
+      "order": 90,
       "section": "general",
-      "source_question_id": 90,
       "group_id": "federalism-state-symbols",
       "question_de": "Die deutschen Bundesländer wirken an der Gesetzgebung des Bundes mit durch …",
       "question_en": "The German federal states participate in federal legislation through …",
@@ -2937,9 +2937,9 @@
       "correct_option": "A"
     },
     {
-      "number": 91,
+      "id": "v2pid",
+      "order": 91,
       "section": "general",
-      "source_question_id": 91,
       "group_id": "federalism-state-symbols",
       "question_de": "In Deutschland kann ein Regierungswechsel in einem Bundesland Auswirkungen auf die Bundespolitik haben. Das Regieren wird …",
       "question_en": "In Germany, a change of government in a federal state can affect federal politics. Governing becomes …",
@@ -2968,9 +2968,9 @@
       "correct_option": "C"
     },
     {
-      "number": 92,
+      "id": "akvgh",
+      "order": 92,
       "section": "general",
-      "source_question_id": 92,
       "group_id": "elections-participation",
       "question_de": "Was bedeutet die Abkürzung CSU in Deutschland?",
       "question_en": "What does the abbreviation CSU mean in Germany?",
@@ -2999,9 +2999,9 @@
       "correct_option": "D"
     },
     {
-      "number": 93,
+      "id": "2kho8",
+      "order": 93,
       "section": "general",
-      "source_question_id": 93,
       "group_id": "elections-participation",
       "question_de": "Je mehr \"Zweitstimmen\" eine Partei bei einer Bundestagswahl bekommt, desto …",
       "question_en": "The more “second votes” a party receives in a federal election, the …",
@@ -3030,9 +3030,9 @@
       "correct_option": "D"
     },
     {
-      "number": 94,
+      "id": "j9fpr",
+      "order": 94,
       "section": "general",
-      "source_question_id": 94,
       "group_id": "elections-participation",
       "question_de": "Ab welchem Alter darf man in Deutschland an der Wahl zum Deutschen Bundestag teilnehmen?",
       "question_en": "At what age can you vote in federal elections in Germany?",
@@ -3061,9 +3061,9 @@
       "correct_option": "B"
     },
     {
-      "number": 95,
+      "id": "7pvhw",
+      "order": 95,
       "section": "general",
-      "source_question_id": 95,
       "group_id": "family-education",
       "question_de": "Was gilt für die meisten Kinder in Deutschland?",
       "question_en": "What applies to most children in Germany?",
@@ -3092,9 +3092,9 @@
       "correct_option": "B"
     },
     {
-      "number": 96,
+      "id": "n6we7",
+      "order": 96,
       "section": "general",
-      "source_question_id": 96,
       "group_id": "jewish-life-nazi-history",
       "question_de": "Wie kann jemand, der den Holocaust leugnet, bestraft werden?",
       "question_en": "How can someone who denies the Holocaust be punished?",
@@ -3123,9 +3123,9 @@
       "correct_option": "D"
     },
     {
-      "number": 97,
+      "id": "f21vu",
+      "order": 97,
       "section": "general",
-      "source_question_id": 97,
       "group_id": "economy-social-security",
       "question_de": "Was bezahlt man in Deutschland automatisch, wenn man fest angestellt ist?",
       "question_en": "What do you automatically pay in Germany when you are permanently employed?",
@@ -3154,9 +3154,9 @@
       "correct_option": "A"
     },
     {
-      "number": 98,
+      "id": "4ng3w",
+      "order": 98,
       "section": "general",
-      "source_question_id": 98,
       "group_id": "elections-participation",
       "question_de": "Wenn Abgeordnete im Deutschen Bundestag ihre Fraktion wechseln, …",
       "question_en": "If members of the German Bundestag change their parliamentary group, …",
@@ -3185,9 +3185,9 @@
       "correct_option": "B"
     },
     {
-      "number": 99,
+      "id": "23zl1",
+      "order": 99,
       "section": "general",
-      "source_question_id": 99,
       "group_id": "economy-social-security",
       "question_de": "Wer bezahlt in Deutschland die Sozialversicherungen?",
       "question_en": "Who pays for social insurance in Germany?",
@@ -3216,9 +3216,9 @@
       "correct_option": "A"
     },
     {
-      "number": 100,
+      "id": "nucjw",
+      "order": 100,
       "section": "general",
-      "source_question_id": 100,
       "group_id": "economy-social-security",
       "question_de": "Was gehört nicht zur gesetzlichen Sozialversicherung?",
       "question_en": "What is not part of the statutory social insurance?",
@@ -3247,9 +3247,9 @@
       "correct_option": "A"
     },
     {
-      "number": 101,
+      "id": "elf70",
+      "order": 101,
       "section": "general",
-      "source_question_id": 101,
       "group_id": "economy-social-security",
       "question_de": "Gewerkschaften sind Interessenverbände der …",
       "question_en": "Trade unions are interest groups for …",
@@ -3278,9 +3278,9 @@
       "correct_option": "B"
     },
     {
-      "number": 102,
+      "id": "2jl82",
+      "order": 102,
       "section": "general",
-      "source_question_id": 102,
       "group_id": "federalism-state-symbols",
       "question_de": "Womit kann man in der Bundesrepublik Deutschland geehrt werden, wenn man auf politischem, wirtschaftlichem, kulturellem, geistigem oder sozialem Gebiet eine besondere Leistung erbracht hat? Mit dem …",
       "question_en": "How can someone in Germany be honored for a special achievement in politics, economics, culture, intellectual or social fields? With the …",
@@ -3309,9 +3309,9 @@
       "correct_option": "A"
     },
     {
-      "number": 103,
+      "id": "wvupc",
+      "order": 103,
       "section": "general",
-      "source_question_id": 103,
       "group_id": "elections-participation",
       "question_de": "Was wird in Deutschland als \"Ampelkoalition\" bezeichnet? Die Zusammenarbeit …",
       "question_en": "What is referred to as the \"traffic light coalition\" in Germany? The cooperation …",
@@ -3340,9 +3340,9 @@
       "correct_option": "B"
     },
     {
-      "number": 104,
+      "id": "36lty",
+      "order": 104,
       "section": "general",
-      "source_question_id": 104,
       "group_id": "equality-religion-migration",
       "question_de": "Eine Frau in Deutschland verliert ihre Arbeit. Was darf nicht der Grund für diese Entlassung sein?",
       "question_en": "A woman in Germany loses her job. What must not be the reason for her dismissal?",
@@ -3371,9 +3371,9 @@
       "correct_option": "D"
     },
     {
-      "number": 105,
+      "id": "igzro",
+      "order": 105,
       "section": "general",
-      "source_question_id": 105,
       "group_id": "elections-participation",
       "question_de": "Was ist eine Aufgabe von Wahlhelferinnen/Wahlhelfern in Deutschland?",
       "question_en": "What is one task of election helpers in Germany?",
@@ -3402,9 +3402,9 @@
       "correct_option": "D"
     },
     {
-      "number": 106,
+      "id": "czjct",
+      "order": 106,
       "section": "general",
-      "source_question_id": 106,
       "group_id": "elections-participation",
       "question_de": "In Deutschland helfen ehrenamtliche Wahlhelferinnen und Wahlhelfer bei den Wahlen. Was ist eine Aufgabe von Wahlhelferinnen/Wahlhelfern?",
       "question_en": "In Germany, volunteer election helpers assist with elections. What is one of their tasks?",
@@ -3433,9 +3433,9 @@
       "correct_option": "D"
     },
     {
-      "number": 107,
+      "id": "3he25",
+      "order": 107,
       "section": "general",
-      "source_question_id": 107,
       "group_id": "elections-participation",
       "question_de": "Für wie viele Jahre wird der Bundestag in Deutschland gewählt?",
       "question_en": "For how many years is the Bundestag elected in Germany?",
@@ -3464,9 +3464,9 @@
       "correct_option": "B"
     },
     {
-      "number": 108,
+      "id": "x2ohd",
+      "order": 108,
       "section": "general",
-      "source_question_id": 108,
       "group_id": "elections-participation",
       "question_de": "Bei einer Bundestagswahl in Deutschland darf jede/jeder wählen, die/der …",
       "question_en": "In a federal election in Germany, anyone may vote who …",
@@ -3495,9 +3495,9 @@
       "correct_option": "B"
     },
     {
-      "number": 109,
+      "id": "t650i",
+      "order": 109,
       "section": "general",
-      "source_question_id": 109,
       "group_id": "elections-participation",
       "question_de": "Wie oft gibt es normalerweise Bundestagswahlen in Deutschland?",
       "question_en": "How often are federal elections usually held in Germany?",
@@ -3526,9 +3526,9 @@
       "correct_option": "B"
     },
     {
-      "number": 110,
+      "id": "jo08j",
+      "order": 110,
       "section": "general",
-      "source_question_id": 110,
       "group_id": "elections-participation",
       "question_de": "Für wie viele Jahre wird der Bundestag in Deutschland gewählt?",
       "question_en": "For how many years is the Bundestag elected in Germany?",
@@ -3557,9 +3557,9 @@
       "correct_option": "C"
     },
     {
-      "number": 111,
+      "id": "4fypm",
+      "order": 111,
       "section": "general",
-      "source_question_id": 111,
       "group_id": "jewish-life-nazi-history",
       "question_de": "Welche Handlungen mit Bezug auf den Staat Israel sind in Deutschland verboten?",
       "question_en": "Which actions related to the State of Israel are prohibited in Germany?",
@@ -3588,9 +3588,9 @@
       "correct_option": "D"
     },
     {
-      "number": 112,
+      "id": "gz9bt",
+      "order": 112,
       "section": "general",
-      "source_question_id": 112,
       "group_id": "elections-participation",
       "question_de": "Die Wahlen in Deutschland sind …",
       "question_en": "Elections in Germany are …",
@@ -3619,9 +3619,9 @@
       "correct_option": "B"
     },
     {
-      "number": 113,
+      "id": "9arym",
+      "order": 113,
       "section": "general",
-      "source_question_id": 113,
       "group_id": "elections-participation",
       "question_de": "Wahlen in Deutschland gewinnt die Partei, die …",
       "question_en": "The party that wins elections in Germany is the one that …",
@@ -3650,9 +3650,9 @@
       "correct_option": "A"
     },
     {
-      "number": 114,
+      "id": "nt4sq",
+      "order": 114,
       "section": "general",
-      "source_question_id": 114,
       "group_id": "elections-participation",
       "question_de": "An demokratischen Wahlen in Deutschland teilzunehmen ist …",
       "question_en": "Taking part in democratic elections in Germany is …",
@@ -3681,9 +3681,9 @@
       "correct_option": "B"
     },
     {
-      "number": 115,
+      "id": "p408h",
+      "order": 115,
       "section": "general",
-      "source_question_id": 115,
       "group_id": "elections-participation",
       "question_de": "Was bedeutet \"aktives Wahlrecht\" in Deutschland?",
       "question_en": "What does \"active suffrage\" mean in Germany?",
@@ -3712,9 +3712,9 @@
       "correct_option": "C"
     },
     {
-      "number": 116,
+      "id": "bxoel",
+      "order": 116,
       "section": "general",
-      "source_question_id": 116,
       "group_id": "elections-participation",
       "question_de": "Wenn Sie bei einer Bundestagswahl in Deutschland wählen dürfen, heißt das …",
       "question_en": "If you are allowed to vote in a federal election in Germany, it means …",
@@ -3743,9 +3743,9 @@
       "correct_option": "D"
     },
     {
-      "number": 117,
+      "id": "6yk4y",
+      "order": 117,
       "section": "general",
-      "source_question_id": 117,
       "group_id": "elections-participation",
       "question_de": "Wie viel Prozent der Zweitstimmen müssen Parteien mindestens bekommen, um in den Deutschen Bundestag gewählt zu werden?",
       "question_en": "What percentage of second votes must parties receive at least to be elected to the Bundestag?",
@@ -3774,9 +3774,9 @@
       "correct_option": "C"
     },
     {
-      "number": 118,
+      "id": "a2xcf",
+      "order": 118,
       "section": "general",
-      "source_question_id": 118,
       "group_id": "jewish-life-nazi-history",
       "question_de": "Wer darf bei den rund 40 jüdischen Makkabi-Sportvereinen Mitglied werden?",
       "question_en": "Who can become a member of the approximately 40 Jewish Maccabi sports clubs?",
@@ -3805,9 +3805,9 @@
       "correct_option": "D"
     },
     {
-      "number": 119,
+      "id": "n7hkj",
+      "order": 119,
       "section": "general",
-      "source_question_id": 119,
       "group_id": "elections-participation",
       "question_de": "Wahlen in Deutschland sind frei. Was bedeutet das?",
       "question_en": "Elections in Germany are free. What does that mean?",
@@ -3836,9 +3836,9 @@
       "correct_option": "C"
     },
     {
-      "number": 120,
+      "id": "p4ng4",
+      "order": 120,
       "section": "general",
-      "source_question_id": 120,
       "group_id": "elections-participation",
       "question_de": "Das Wahlsystem in Deutschland ist ein …",
       "question_en": "The electoral system in Germany is a …",
@@ -3867,9 +3867,9 @@
       "correct_option": "C"
     },
     {
-      "number": 121,
+      "id": "wmp66",
+      "order": 121,
       "section": "general",
-      "source_question_id": 121,
       "group_id": "elections-participation",
       "question_de": "Eine Partei möchte in den Deutschen Bundestag. Sie muss aber einen Mindestanteil an Wählerstimmen haben. Das heißt …",
       "question_en": "A party wants to enter the German Bundestag. But it needs a minimum percentage of votes. This is called …",
@@ -3898,9 +3898,9 @@
       "correct_option": "A"
     },
     {
-      "number": 122,
+      "id": "nrryf",
+      "order": 122,
       "section": "general",
-      "source_question_id": 122,
       "group_id": "elections-participation",
       "question_de": "Welchem Grundsatz unterliegen Wahlen in Deutschland? Wahlen in Deutschland sind …",
       "question_en": "Which principle applies to elections in Germany? Elections in Germany are …",
@@ -3929,9 +3929,9 @@
       "correct_option": "A"
     },
     {
-      "number": 123,
+      "id": "0hhoa",
+      "order": 123,
       "section": "general",
-      "source_question_id": 123,
       "group_id": "elections-participation",
       "question_de": "Was ist in Deutschland die \"5%-Hürde\"?",
       "question_en": "What is the \"5% hurdle\" in Germany?",
@@ -3960,9 +3960,9 @@
       "correct_option": "C"
     },
     {
-      "number": 124,
+      "id": "dhdxm",
+      "order": 124,
       "section": "general",
-      "source_question_id": 124,
       "group_id": "elections-participation",
       "question_de": "Die Bundestagswahl in Deutschland ist die Wahl …",
       "question_en": "The Bundestag election in Germany is the election of …",
@@ -3991,9 +3991,9 @@
       "correct_option": "C"
     },
     {
-      "number": 125,
+      "id": "mzjpj",
+      "order": 125,
       "section": "general",
-      "source_question_id": 125,
       "group_id": "elections-participation",
       "question_de": "In einer Demokratie ist eine Funktion von regelmäßigen Wahlen, …",
       "question_en": "In a democracy, one function of regular elections is to …",
@@ -4022,9 +4022,9 @@
       "correct_option": "B"
     },
     {
-      "number": 126,
+      "id": "bl0al",
+      "order": 126,
       "section": "general",
-      "source_question_id": 126,
       "group_id": "elections-participation",
       "question_de": "Was bekommen wahlberechtigte Bürgerinnen und Bürger in Deutschland vor einer Wahl?",
       "question_en": "What do eligible voters in Germany receive before an election?",
@@ -4053,9 +4053,9 @@
       "correct_option": "A"
     },
     {
-      "number": 127,
+      "id": "jvbit",
+      "order": 127,
       "section": "general",
-      "source_question_id": 127,
       "group_id": "elections-participation",
       "question_de": "Warum gibt es die 5%-Hürde im Wahlgesetz der Bundesrepublik Deutschland? Es gibt sie, weil …",
       "question_en": "Why does the 5% hurdle exist in the electoral law of Germany? It exists because …",
@@ -4084,9 +4084,9 @@
       "correct_option": "C"
     },
     {
-      "number": 128,
+      "id": "zrclh",
+      "order": 128,
       "section": "general",
-      "source_question_id": 128,
       "group_id": "elections-participation",
       "question_de": "Parlamentsmitglieder, die von den Bürgerinnen und Bürgern gewählt werden, nennt man …",
       "question_en": "Members of parliament elected by citizens are called …",
@@ -4115,9 +4115,9 @@
       "correct_option": "A"
     },
     {
-      "number": 129,
+      "id": "0vjzs",
+      "order": 129,
       "section": "general",
-      "source_question_id": 129,
       "group_id": "elections-participation",
       "question_de": "Vom Volk gewählt wird in Deutschland …",
       "question_en": "In Germany, the people elect …",
@@ -4146,9 +4146,9 @@
       "correct_option": "C"
     },
     {
-      "number": 130,
+      "id": "4jv0e",
+      "order": 130,
       "section": "general",
-      "source_question_id": 130,
       "group_id": "elections-participation",
       "question_de": "Welcher Stimmzettel wäre bei einer Bundestagswahl gültig?",
       "question_en": "Which ballot paper would be valid in a federal election?",
@@ -4194,9 +4194,9 @@
       ]
     },
     {
-      "number": 131,
+      "id": "mgm80",
+      "order": 131,
       "section": "general",
-      "source_question_id": 131,
       "group_id": "federalism-state-symbols",
       "question_de": "In Deutschland ist eine Bürgermeisterin/ein Bürgermeister …",
       "question_en": "In Germany, a mayor is …",
@@ -4225,9 +4225,9 @@
       "correct_option": "C"
     },
     {
-      "number": 132,
+      "id": "w6cyw",
+      "order": 132,
       "section": "general",
-      "source_question_id": 132,
       "group_id": "elections-participation",
       "question_de": "Viele Menschen in Deutschland arbeiten in ihrer Freizeit ehrenamtlich. Was bedeutet das?",
       "question_en": "Many people in Germany volunteer in their free time. What does that mean?",
@@ -4256,9 +4256,9 @@
       "correct_option": "B"
     },
     {
-      "number": 133,
+      "id": "t684o",
+      "order": 133,
       "section": "general",
-      "source_question_id": 133,
       "group_id": "elections-participation",
       "question_de": "Was ist bei Bundestags- und Landtagswahlen in Deutschland erlaubt?",
       "question_en": "What is allowed in federal and state elections in Germany?",
@@ -4287,9 +4287,9 @@
       "correct_option": "B"
     },
     {
-      "number": 134,
+      "id": "bnijx",
+      "order": 134,
       "section": "general",
-      "source_question_id": 134,
       "group_id": "elections-participation",
       "question_de": "Man will die Buslinie abschaffen, mit der Sie immer zur Arbeit fahren. Was können Sie machen, um die Buslinie zu erhalten?",
       "question_en": "They want to cancel the bus line you use to get to work. What can you do to keep it?",
@@ -4318,9 +4318,9 @@
       "correct_option": "A"
     },
     {
-      "number": 135,
+      "id": "tqf0g",
+      "order": 135,
       "section": "general",
-      "source_question_id": 135,
       "group_id": "economy-social-security",
       "question_de": "Wen vertreten die Gewerkschaften in Deutschland?",
       "question_en": "Whom do the trade unions in Germany represent?",
@@ -4349,9 +4349,9 @@
       "correct_option": "D"
     },
     {
-      "number": 136,
+      "id": "gjxix",
+      "order": 136,
       "section": "general",
-      "source_question_id": 136,
       "group_id": "justice-legal-system",
       "question_de": "Sie gehen in Deutschland zum Arbeitsgericht bei …",
       "question_en": "You go to the labor court in Germany in case of …",
@@ -4380,9 +4380,9 @@
       "correct_option": "B"
     },
     {
-      "number": 137,
+      "id": "cz4mf",
+      "order": 137,
       "section": "general",
-      "source_question_id": 137,
       "group_id": "justice-legal-system",
       "question_de": "Welches Gericht ist in Deutschland bei Konflikten in der Arbeitswelt zuständig?",
       "question_en": "Which court is responsible for conflicts in the workplace in Germany?",
@@ -4411,9 +4411,9 @@
       "correct_option": "C"
     },
     {
-      "number": 138,
+      "id": "0f9y9",
+      "order": 138,
       "section": "general",
-      "source_question_id": 138,
       "group_id": "justice-legal-system",
       "question_de": "Was kann ich in Deutschland machen, wenn mir meine Arbeitgeberin/mein Arbeitgeber zu Unrecht gekündigt hat?",
       "question_en": "What can I do in Germany if my employer has unjustly dismissed me?",
@@ -4442,9 +4442,9 @@
       "correct_option": "C"
     },
     {
-      "number": 139,
+      "id": "7uqov",
+      "order": 139,
       "section": "general",
-      "source_question_id": 139,
       "group_id": "justice-legal-system",
       "question_de": "Wann kommt es in Deutschland zu einem Prozess vor Gericht? Wenn jemand …",
       "question_en": "When does a trial occur in Germany? When someone …",
@@ -4473,9 +4473,9 @@
       "correct_option": "B"
     },
     {
-      "number": 140,
+      "id": "b9d9z",
+      "order": 140,
       "section": "general",
-      "source_question_id": 140,
       "group_id": "justice-legal-system",
       "question_de": "Was macht eine Schöffin/ein Schöffe in Deutschland? Sie/Er …",
       "question_en": "What does a lay judge do in Germany? She/He …",
@@ -4504,9 +4504,9 @@
       "correct_option": "A"
     },
     {
-      "number": 141,
+      "id": "2eq0k",
+      "order": 141,
       "section": "general",
-      "source_question_id": 141,
       "group_id": "justice-legal-system",
       "question_de": "Wer berät in Deutschland Personen bei Rechtsfragen und vertritt sie vor Gericht?",
       "question_en": "Who advises people on legal matters and represents them in court in Germany?",
@@ -4535,9 +4535,9 @@
       "correct_option": "A"
     },
     {
-      "number": 142,
+      "id": "epklc",
+      "order": 142,
       "section": "general",
-      "source_question_id": 142,
       "group_id": "justice-legal-system",
       "question_de": "Was ist die Hauptaufgabe einer Richterin/eines Richters in Deutschland? Eine Richterin/ein Richter …",
       "question_en": "What is the main task of a judge in Germany? A judge …",
@@ -4566,9 +4566,9 @@
       "correct_option": "B"
     },
     {
-      "number": 143,
+      "id": "icaht",
+      "order": 143,
       "section": "general",
-      "source_question_id": 143,
       "group_id": "justice-legal-system",
       "question_de": "Eine Richterin/ein Richter in Deutschland gehört zur …",
       "question_en": "A judge in Germany belongs to …",
@@ -4597,9 +4597,9 @@
       "correct_option": "A"
     },
     {
-      "number": 144,
+      "id": "ndlju",
+      "order": 144,
       "section": "general",
-      "source_question_id": 144,
       "group_id": "justice-legal-system",
       "question_de": "Eine Richterin/ein Richter gehört in Deutschland zur …",
       "question_en": "A judge in Germany belongs to …",
@@ -4628,9 +4628,9 @@
       "correct_option": "B"
     },
     {
-      "number": 145,
+      "id": "jkudx",
+      "order": 145,
       "section": "general",
-      "source_question_id": 145,
       "group_id": "justice-legal-system",
       "question_de": "In Deutschland wird die Staatsgewalt geteilt. Für welche Staatsgewalt arbeitet eine Richterin/ein Richter? Für die …",
       "question_en": "In Germany, state power is divided. For which branch of government does a judge work? For the …",
@@ -4659,9 +4659,9 @@
       "correct_option": "A"
     },
     {
-      "number": 146,
+      "id": "yj8ai",
+      "order": 146,
       "section": "general",
-      "source_question_id": 146,
       "group_id": "justice-legal-system",
       "question_de": "Wie nennt man in Deutschland ein Verfahren vor einem Gericht?",
       "question_en": "What is a trial in Germany called?",
@@ -4690,9 +4690,9 @@
       "correct_option": "D"
     },
     {
-      "number": 147,
+      "id": "b33j3",
+      "order": 147,
       "section": "general",
-      "source_question_id": 147,
       "group_id": "justice-legal-system",
       "question_de": "Was ist die Arbeit einer Richterin/eines Richters in Deutschland?",
       "question_en": "What is the work of a judge in Germany?",
@@ -4721,9 +4721,9 @@
       "correct_option": "B"
     },
     {
-      "number": 148,
+      "id": "3h9d5",
+      "order": 148,
       "section": "general",
-      "source_question_id": 148,
       "group_id": "justice-legal-system",
       "question_de": "Was ist eine Aufgabe der Polizei in Deutschland?",
       "question_en": "What is a task of the police in Germany?",
@@ -4752,9 +4752,9 @@
       "correct_option": "D"
     },
     {
-      "number": 149,
+      "id": "s5hka",
+      "order": 149,
       "section": "general",
-      "source_question_id": 149,
       "group_id": "jewish-life-nazi-history",
       "question_de": "Was ist ein Beispiel für antisemitisches Verhalten?",
       "question_en": "What is an example of antisemitic behavior?",
@@ -4783,9 +4783,9 @@
       "correct_option": "C"
     },
     {
-      "number": 150,
+      "id": "dj8z1",
+      "order": 150,
       "section": "general",
-      "source_question_id": 150,
       "group_id": "justice-legal-system",
       "question_de": "Eine Gerichtsschöffin/ein Gerichtsschöffe in Deutschland ist …",
       "question_en": "A lay judge in Germany is …",
@@ -4814,9 +4814,9 @@
       "correct_option": "B"
     },
     {
-      "number": 151,
+      "id": "lg3uw",
+      "order": 151,
       "section": "general",
-      "source_question_id": 151,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Wer baute die Mauer in Berlin?",
       "question_en": "Who built the wall in Berlin?",
@@ -4845,9 +4845,9 @@
       "correct_option": "B"
     },
     {
-      "number": 152,
+      "id": "3l58t",
+      "order": 152,
       "section": "general",
-      "source_question_id": 152,
       "group_id": "jewish-life-nazi-history",
       "question_de": "Wann waren die Nationalsozialisten mit Adolf Hitler in Deutschland an der Macht?",
       "question_en": "When were the National Socialists with Adolf Hitler in power in Germany?",
@@ -4876,9 +4876,9 @@
       "correct_option": "C"
     },
     {
-      "number": 153,
+      "id": "drkrq",
+      "order": 153,
       "section": "general",
-      "source_question_id": 153,
       "group_id": "jewish-life-nazi-history",
       "question_de": "Was war am 8. Mai 1945?",
       "question_en": "What happened on May 8, 1945?",
@@ -4907,9 +4907,9 @@
       "correct_option": "D"
     },
     {
-      "number": 154,
+      "id": "2fn3k",
+      "order": 154,
       "section": "general",
-      "source_question_id": 154,
       "group_id": "jewish-life-nazi-history",
       "question_de": "Wann war der Zweite Weltkrieg zu Ende?",
       "question_en": "When did World War II end?",
@@ -4938,9 +4938,9 @@
       "correct_option": "B"
     },
     {
-      "number": 155,
+      "id": "k7j70",
+      "order": 155,
       "section": "general",
-      "source_question_id": 155,
       "group_id": "jewish-life-nazi-history",
       "question_de": "Wann waren die Nationalsozialisten in Deutschland an der Macht?",
       "question_en": "When were the National Socialists in power in Germany?",
@@ -4969,9 +4969,9 @@
       "correct_option": "C"
     },
     {
-      "number": 156,
+      "id": "r9yze",
+      "order": 156,
       "section": "general",
-      "source_question_id": 156,
       "group_id": "jewish-life-nazi-history",
       "question_de": "In welchem Jahr wurde Hitler Reichskanzler?",
       "question_en": "In which year was Hitler appointed Reich Chancellor?",
@@ -5000,9 +5000,9 @@
       "correct_option": "C"
     },
     {
-      "number": 157,
+      "id": "syjqh",
+      "order": 157,
       "section": "general",
-      "source_question_id": 157,
       "group_id": "jewish-life-nazi-history",
       "question_de": "Die Nationalsozialisten mit Adolf Hitler errichteten 1933 in Deutschland …",
       "question_en": "The National Socialists with Adolf Hitler established in Germany in 1933 …",
@@ -5031,9 +5031,9 @@
       "correct_option": "A"
     },
     {
-      "number": 158,
+      "id": "neicf",
+      "order": 158,
       "section": "general",
-      "source_question_id": 158,
       "group_id": "jewish-life-nazi-history",
       "question_de": "Das \"Dritte Reich\" war eine …",
       "question_en": "The \"Third Reich\" was a …",
@@ -5062,9 +5062,9 @@
       "correct_option": "A"
     },
     {
-      "number": 159,
+      "id": "fhvan",
+      "order": 159,
       "section": "general",
-      "source_question_id": 159,
       "group_id": "jewish-life-nazi-history",
       "question_de": "Was gab es in Deutschland nicht während der Zeit des Nationalsozialismus?",
       "question_en": "What was not in Germany during the time of National Socialism?",
@@ -5093,9 +5093,9 @@
       "correct_option": "A"
     },
     {
-      "number": 160,
+      "id": "cis4x",
+      "order": 160,
       "section": "general",
-      "source_question_id": 160,
       "group_id": "jewish-life-nazi-history",
       "question_de": "Welcher Krieg dauerte von 1939 bis 1945?",
       "question_en": "Which war lasted from 1939 to 1945?",
@@ -5124,9 +5124,9 @@
       "correct_option": "B"
     },
     {
-      "number": 161,
+      "id": "wjuc7",
+      "order": 161,
       "section": "general",
-      "source_question_id": 161,
       "group_id": "jewish-life-nazi-history",
       "question_de": "Was kennzeichnete den NS-Staat? Eine Politik …",
       "question_en": "What characterized the Nazi state? A policy of …",
@@ -5155,9 +5155,9 @@
       "correct_option": "A"
     },
     {
-      "number": 162,
+      "id": "qye20",
+      "order": 162,
       "section": "general",
-      "source_question_id": 162,
       "group_id": "jewish-life-nazi-history",
       "question_de": "Claus Schenk Graf von Stauffenberg wurde bekannt durch …",
       "question_en": "Claus Schenk Graf von Stauffenberg became known for …",
@@ -5186,9 +5186,9 @@
       "correct_option": "D"
     },
     {
-      "number": 163,
+      "id": "2uefl",
+      "order": 163,
       "section": "general",
-      "source_question_id": 163,
       "group_id": "jewish-life-nazi-history",
       "question_de": "In welchem Jahr zerstörten die Nationalsozialisten Synagogen und jüdische Geschäfte in Deutschland?",
       "question_en": "In which year did the National Socialists destroy synagogues and Jewish businesses in Germany?",
@@ -5217,9 +5217,9 @@
       "correct_option": "C"
     },
     {
-      "number": 164,
+      "id": "sbr5b",
+      "order": 164,
       "section": "general",
-      "source_question_id": 164,
       "group_id": "jewish-life-nazi-history",
       "question_de": "Was passierte am 9. November 1938 in Deutschland?",
       "question_en": "What happened on November 9, 1938 in Germany?",
@@ -5248,9 +5248,9 @@
       "correct_option": "C"
     },
     {
-      "number": 165,
+      "id": "t2hsv",
+      "order": 165,
       "section": "general",
-      "source_question_id": 165,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Wie hieß der erste Bundeskanzler der Bundesrepublik Deutschland?",
       "question_en": "What was the name of the first Chancellor of the Federal Republic of Germany?",
@@ -5279,9 +5279,9 @@
       "correct_option": "A"
     },
     {
-      "number": 166,
+      "id": "94nz5",
+      "order": 166,
       "section": "general",
-      "source_question_id": 166,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Bei welchen Demonstrationen in Deutschland riefen die Menschen \"Wir sind das Volk\"?",
       "question_en": "At which demonstrations in Germany did people shout \"We are the people\"?",
@@ -5310,9 +5310,9 @@
       "correct_option": "D"
     },
     {
-      "number": 167,
+      "id": "8g61h",
+      "order": 167,
       "section": "general",
-      "source_question_id": 167,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Welche Länder wurden nach dem Zweiten Weltkrieg in Deutschland als \"Alliierte Besatzungsmächte\" bezeichnet?",
       "question_en": "Which countries were referred to as \"Allied Occupying Powers\" in Germany after World War II?",
@@ -5341,9 +5341,9 @@
       "correct_option": "D"
     },
     {
-      "number": 168,
+      "id": "k9z0j",
+      "order": 168,
       "section": "general",
-      "source_question_id": 168,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Welches Land war keine \"Alliierte Besatzungsmacht\" in Deutschland?",
       "question_en": "Which country was not an \"Allied Occupying Power\" in Germany?",
@@ -5372,9 +5372,9 @@
       "correct_option": "D"
     },
     {
-      "number": 169,
+      "id": "3fcte",
+      "order": 169,
       "section": "general",
-      "source_question_id": 169,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Wann wurde die Bundesrepublik Deutschland gegründet?",
       "question_en": "When was the Federal Republic of Germany founded?",
@@ -5403,9 +5403,9 @@
       "correct_option": "C"
     },
     {
-      "number": 170,
+      "id": "fegz0",
+      "order": 170,
       "section": "general",
-      "source_question_id": 170,
       "group_id": "jewish-life-nazi-history",
       "question_de": "Was gab es während der Zeit des Nationalsozialismus in Deutschland?",
       "question_en": "What existed during the time of National Socialism in Germany?",
@@ -5434,9 +5434,9 @@
       "correct_option": "A"
     },
     {
-      "number": 171,
+      "id": "p4gou",
+      "order": 171,
       "section": "general",
-      "source_question_id": 171,
       "group_id": "economy-social-security",
       "question_de": "Soziale Marktwirtschaft bedeutet, die Wirtschaft …",
       "question_en": "Social market economy means that the economy …",
@@ -5465,9 +5465,9 @@
       "correct_option": "D"
     },
     {
-      "number": 172,
+      "id": "b4yj4",
+      "order": 172,
       "section": "general",
-      "source_question_id": 172,
       "group_id": "postwar-ddr-reunification",
       "question_de": "In welcher Besatzungszone wurde die DDR gegründet? In der …",
       "question_en": "In which occupation zone was the GDR founded? In the …",
@@ -5496,9 +5496,9 @@
       "correct_option": "D"
     },
     {
-      "number": 173,
+      "id": "wjggu",
+      "order": 173,
       "section": "general",
-      "source_question_id": 173,
       "group_id": "europe-eu",
       "question_de": "Die Bundesrepublik Deutschland ist ein Gründungsmitglied …",
       "question_en": "The Federal Republic of Germany is a founding member of …",
@@ -5527,9 +5527,9 @@
       "correct_option": "C"
     },
     {
-      "number": 174,
+      "id": "8i9h2",
+      "order": 174,
       "section": "general",
-      "source_question_id": 174,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Wann wurde die DDR gegründet?",
       "question_en": "When was the GDR founded?",
@@ -5558,9 +5558,9 @@
       "correct_option": "B"
     },
     {
-      "number": 175,
+      "id": "t14ra",
+      "order": 175,
       "section": "general",
-      "source_question_id": 175,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Wie viele Besatzungszonen gab es in Deutschland nach dem Zweiten Weltkrieg?",
       "question_en": "How many occupation zones were there in Germany after World War II?",
@@ -5589,9 +5589,9 @@
       "correct_option": "B"
     },
     {
-      "number": 176,
+      "id": "4bwvv",
+      "order": 176,
       "section": "general",
-      "source_question_id": 176,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Wie waren die Besatzungszonen Deutschlands nach 1945 verteilt?",
       "question_en": "How were the occupation zones of Germany divided after 1945?",
@@ -5633,9 +5633,9 @@
       ]
     },
     {
-      "number": 177,
+      "id": "jksvk",
+      "order": 177,
       "section": "general",
-      "source_question_id": 177,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Welche deutsche Stadt wurde nach dem Zweiten Weltkrieg in vier Sektoren aufgeteilt?",
       "question_en": "Which German city was divided into four sectors after World War II?",
@@ -5664,9 +5664,9 @@
       "correct_option": "B"
     },
     {
-      "number": 178,
+      "id": "958vz",
+      "order": 178,
       "section": "general",
-      "source_question_id": 178,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Vom Juni 1948 bis zum Mai 1949 wurden die Bürgerinnen und Bürger von West-Berlin durch eine Luftbrücke versorgt. Welcher Umstand war dafür verantwortlich?",
       "question_en": "From June 1948 to May 1949, the citizens of West Berlin were supplied by an airlift. What was the reason for this?",
@@ -5695,9 +5695,9 @@
       "correct_option": "D"
     },
     {
-      "number": 179,
+      "id": "001wz",
+      "order": 179,
       "section": "general",
-      "source_question_id": 179,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Wie endete der Zweite Weltkrieg in Europa offiziell?",
       "question_en": "How did World War II officially end in Europe?",
@@ -5726,9 +5726,9 @@
       "correct_option": "B"
     },
     {
-      "number": 180,
+      "id": "i6epb",
+      "order": 180,
       "section": "general",
-      "source_question_id": 180,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Der erste Bundeskanzler der Bundesrepublik Deutschland war …",
       "question_en": "The first Chancellor of the Federal Republic of Germany was …",
@@ -5757,9 +5757,9 @@
       "correct_option": "C"
     },
     {
-      "number": 181,
+      "id": "sxw5q",
+      "order": 181,
       "section": "general",
-      "source_question_id": 181,
       "group_id": "jewish-life-nazi-history",
       "question_de": "Was wollte Willy Brandt mit seinem Kniefall 1970 im ehemaligen jüdischen Ghetto in Warschau ausdrücken?",
       "question_en": "What did Willy Brandt want to express with his kneeling in 1970 in the former Jewish ghetto in Warsaw?",
@@ -5805,9 +5805,9 @@
       ]
     },
     {
-      "number": 182,
+      "id": "5mg9j",
+      "order": 182,
       "section": "general",
-      "source_question_id": 182,
       "group_id": "jewish-life-nazi-history",
       "question_de": "Wie heißt das jüdische Gebetshaus?",
       "question_en": "What is the Jewish place of worship called?",
@@ -5836,9 +5836,9 @@
       "correct_option": "C"
     },
     {
-      "number": 183,
+      "id": "r36f9",
+      "order": 183,
       "section": "general",
-      "source_question_id": 183,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Wann war in der Bundesrepublik Deutschland das \"Wirtschaftswunder\"?",
       "question_en": "When was the \"Economic Miracle\" in the Federal Republic of Germany?",
@@ -5867,9 +5867,9 @@
       "correct_option": "B"
     },
     {
-      "number": 184,
+      "id": "7ytp2",
+      "order": 184,
       "section": "general",
-      "source_question_id": 184,
       "group_id": "jewish-life-nazi-history",
       "question_de": "Auf welcher rechtlichen Grundlage wurde der Staat Israel gegründet?",
       "question_en": "What was the legal basis for the founding of the State of Israel?",
@@ -5898,9 +5898,9 @@
       "correct_option": "A"
     },
     {
-      "number": 185,
+      "id": "sy10c",
+      "order": 185,
       "section": "general",
-      "source_question_id": 185,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Wofür stand der Ausdruck \"Eiserner Vorhang\"? Für die Abschottung …",
       "question_en": "What did the term \"Iron Curtain\" stand for? For the isolation …",
@@ -5929,9 +5929,9 @@
       "correct_option": "A"
     },
     {
-      "number": 186,
+      "id": "g75he",
+      "order": 186,
       "section": "general",
-      "source_question_id": 186,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Im Jahr 1953 gab es in der DDR einen Aufstand, an den lange Zeit in der Bundesrepublik Deutschland ein Feiertag erinnerte. Wann war das?",
       "question_en": "In 1953, there was an uprising in the GDR, which for a long time was remembered with a public holiday in the Federal Republic of Germany. When did this happen?",
@@ -5960,9 +5960,9 @@
       "correct_option": "B"
     },
     {
-      "number": 187,
+      "id": "qmtzl",
+      "order": 187,
       "section": "general",
-      "source_question_id": 187,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Welcher deutsche Staat hatte eine schwarz-rot-goldene Flagge mit Hammer, Zirkel und Ährenkranz?",
       "question_en": "Which German state had a black-red-gold flag with a hammer, compass and wreath of wheat?",
@@ -6008,9 +6008,9 @@
       ]
     },
     {
-      "number": 188,
+      "id": "yt08n",
+      "order": 188,
       "section": "general",
-      "source_question_id": 188,
       "group_id": "postwar-ddr-reunification",
       "question_de": "In welchem Jahr wurde die Mauer in Berlin gebaut?",
       "question_en": "In what year was the Berlin Wall built?",
@@ -6039,9 +6039,9 @@
       "correct_option": "D"
     },
     {
-      "number": 189,
+      "id": "rz88t",
+      "order": 189,
       "section": "general",
-      "source_question_id": 189,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Wann baute die DDR die Mauer in Berlin?",
       "question_en": "When did the GDR build the Berlin Wall?",
@@ -6070,9 +6070,9 @@
       "correct_option": "C"
     },
     {
-      "number": 190,
+      "id": "ovbh2",
+      "order": 190,
       "section": "general",
-      "source_question_id": 190,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Was bedeutet die Abkürzung DDR?",
       "question_en": "What does the abbreviation DDR stand for?",
@@ -6101,9 +6101,9 @@
       "correct_option": "D"
     },
     {
-      "number": 191,
+      "id": "1t7kl",
+      "order": 191,
       "section": "general",
-      "source_question_id": 191,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Wann wurde die Mauer in Berlin für alle geöffnet?",
       "question_en": "When was the Berlin Wall opened for everyone?",
@@ -6132,9 +6132,9 @@
       "correct_option": "B"
     },
     {
-      "number": 192,
+      "id": "zhipd",
+      "order": 192,
       "section": "general",
-      "source_question_id": 192,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Welches heutige deutsche Bundesland gehörte früher zum Gebiet der DDR?",
       "question_en": "Which current German federal state used to belong to the territory of the GDR?",
@@ -6163,9 +6163,9 @@
       "correct_option": "A"
     },
     {
-      "number": 193,
+      "id": "yl1px",
+      "order": 193,
       "section": "general",
-      "source_question_id": 193,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Von 1961 bis 1989 war Berlin …",
       "question_en": "From 1961 to 1989, Berlin was …",
@@ -6194,9 +6194,9 @@
       "correct_option": "C"
     },
     {
-      "number": 194,
+      "id": "htymn",
+      "order": 194,
       "section": "general",
-      "source_question_id": 194,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Am 3. Oktober feiert man in Deutschland den Tag der Deutschen …",
       "question_en": "On October 3rd, Germany celebrates the Day of German …",
@@ -6225,9 +6225,9 @@
       "correct_option": "A"
     },
     {
-      "number": 195,
+      "id": "et8tt",
+      "order": 195,
       "section": "general",
-      "source_question_id": 195,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Welches heutige deutsche Bundesland gehörte früher zum Gebiet der DDR?",
       "question_en": "Which current German federal state used to belong to the territory of the GDR?",
@@ -6256,9 +6256,9 @@
       "correct_option": "B"
     },
     {
-      "number": 196,
+      "id": "myjfo",
+      "order": 196,
       "section": "general",
-      "source_question_id": 196,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Warum nennt man die Zeit im Herbst 1989 in der DDR \"Die Wende\"? In dieser Zeit veränderte sich die DDR politisch …",
       "question_en": "Why is the period in the fall of 1989 in the GDR called \"The Turning Point\"? During this time, the GDR changed politically …",
@@ -6287,9 +6287,9 @@
       "correct_option": "A"
     },
     {
-      "number": 197,
+      "id": "zwhph",
+      "order": 197,
       "section": "general",
-      "source_question_id": 197,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Welches heutige deutsche Bundesland gehörte früher zum Gebiet der DDR?",
       "question_en": "Which current German federal state used to belong to the territory of the GDR?",
@@ -6318,9 +6318,9 @@
       "correct_option": "A"
     },
     {
-      "number": 198,
+      "id": "xusgu",
+      "order": 198,
       "section": "general",
-      "source_question_id": 198,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Welches heutige deutsche Bundesland gehörte früher zum Gebiet der DDR?",
       "question_en": "Which current German federal state used to belong to the territory of the GDR?",
@@ -6349,9 +6349,9 @@
       "correct_option": "C"
     },
     {
-      "number": 199,
+      "id": "rh55i",
+      "order": 199,
       "section": "general",
-      "source_question_id": 199,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Mit der Abkürzung \"Stasi\" meinte man in der DDR …",
       "question_en": "With the abbreviation \"Stasi,\" in the GDR, they meant …",
@@ -6380,9 +6380,9 @@
       "correct_option": "B"
     },
     {
-      "number": 200,
+      "id": "o370s",
+      "order": 200,
       "section": "general",
-      "source_question_id": 200,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Welches heutige deutsche Bundesland gehörte früher zum Gebiet der DDR?",
       "question_en": "Which current German federal state used to belong to the territory of the GDR?",
@@ -6411,9 +6411,9 @@
       "correct_option": "C"
     },
     {
-      "number": 201,
+      "id": "dzfe9",
+      "order": 201,
       "section": "general",
-      "source_question_id": 201,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Welche der folgenden Auflistungen enthält nur Bundesländer, die zum Gebiet der früheren DDR gehörten?",
       "question_en": "Which of the following lists only contains states that used to belong to the territory of the former GDR?",
@@ -6442,9 +6442,9 @@
       "correct_option": "B"
     },
     {
-      "number": 202,
+      "id": "1m1b2",
+      "order": 202,
       "section": "general",
-      "source_question_id": 202,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Zu wem gehörte die DDR im \"Kalten Krieg\"?",
       "question_en": "To whom did the GDR belong during the \"Cold War\"?",
@@ -6473,9 +6473,9 @@
       "correct_option": "B"
     },
     {
-      "number": 203,
+      "id": "p9iuk",
+      "order": 203,
       "section": "general",
-      "source_question_id": 203,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Wie hieß das Wirtschaftssystem der DDR?",
       "question_en": "What was the economic system of the GDR called?",
@@ -6504,9 +6504,9 @@
       "correct_option": "B"
     },
     {
-      "number": 204,
+      "id": "wuf2m",
+      "order": 204,
       "section": "general",
-      "source_question_id": 204,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Wie wurden die Bundesrepublik Deutschland und die DDR zu einem Staat?",
       "question_en": "How did the Federal Republic of Germany and the GDR become one state?",
@@ -6535,9 +6535,9 @@
       "correct_option": "B"
     },
     {
-      "number": 205,
+      "id": "i1ds0",
+      "order": 205,
       "section": "general",
-      "source_question_id": 205,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Mit dem Beitritt der DDR zur Bundesrepublik Deutschland gehören die neuen Bundesländer nun auch …",
       "question_en": "With the GDR's accession to the Federal Republic of Germany, the new federal states now also belong to …",
@@ -6566,9 +6566,9 @@
       "correct_option": "A"
     },
     {
-      "number": 206,
+      "id": "cbkby",
+      "order": 206,
       "section": "general",
-      "source_question_id": 206,
       "group_id": "jewish-life-nazi-history",
       "question_de": "Woran erinnern die sogenannten „Stolpersteine“ in Deutschland?",
       "question_en": "What do the so-called \"stumbling stones\" in Germany commemorate?",
@@ -6597,9 +6597,9 @@
       "correct_option": "B"
     },
     {
-      "number": 207,
+      "id": "mocfp",
+      "order": 207,
       "section": "general",
-      "source_question_id": 207,
       "group_id": "postwar-ddr-reunification",
       "question_de": "In welchem Militärbündnis war die DDR Mitglied?",
       "question_en": "In which military alliance was the GDR a member?",
@@ -6628,9 +6628,9 @@
       "correct_option": "C"
     },
     {
-      "number": 208,
+      "id": "yk8xa",
+      "order": 208,
       "section": "general",
-      "source_question_id": 208,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Was war die \"Stasi\"?",
       "question_en": "What was the \"Stasi\"?",
@@ -6659,9 +6659,9 @@
       "correct_option": "C"
     },
     {
-      "number": 209,
+      "id": "4iei3",
+      "order": 209,
       "section": "general",
-      "source_question_id": 209,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Welches war das Wappen der Deutschen Demokratischen Republik?",
       "question_en": "What was the coat of arms of the German Democratic Republic?",
@@ -6669,22 +6669,22 @@
         {
           "label": "A",
           "text_de": "Bild 1",
-          "text_en": "1"
+          "text_en": "Image 1"
         },
         {
           "label": "B",
           "text_de": "Bild 2",
-          "text_en": "2"
+          "text_en": "Image 2"
         },
         {
           "label": "C",
           "text_de": "Bild 3",
-          "text_en": "3"
+          "text_en": "Image 3"
         },
         {
           "label": "D",
           "text_de": "Bild 4",
-          "text_en": "4"
+          "text_en": "Image 4"
         }
       ],
       "correct_option": "D",
@@ -6707,9 +6707,9 @@
       ]
     },
     {
-      "number": 210,
+      "id": "6dfyb",
+      "order": 210,
       "section": "general",
-      "source_question_id": 210,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Was ereignete sich am 17. Juni 1953 in der DDR?",
       "question_en": "What happened on June 17, 1953, in the GDR?",
@@ -6738,9 +6738,9 @@
       "correct_option": "B"
     },
     {
-      "number": 211,
+      "id": "ckj56",
+      "order": 211,
       "section": "general",
-      "source_question_id": 211,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Welcher Politiker steht für die \"Ostverträge\"?",
       "question_en": "Which politician is associated with the \"Ostverträge\"?",
@@ -6769,9 +6769,9 @@
       "correct_option": "B"
     },
     {
-      "number": 212,
+      "id": "6wei5",
+      "order": 212,
       "section": "general",
-      "source_question_id": 212,
       "group_id": "federalism-state-symbols",
       "question_de": "Wie heißt Deutschland mit vollem Namen?",
       "question_en": "What is the full name of Germany?",
@@ -6800,9 +6800,9 @@
       "correct_option": "C"
     },
     {
-      "number": 213,
+      "id": "s9ast",
+      "order": 213,
       "section": "general",
-      "source_question_id": 213,
       "group_id": "federalism-state-symbols",
       "question_de": "Wie viele Einwohner hat Deutschland?",
       "question_en": "How many inhabitants does Germany have?",
@@ -6831,9 +6831,9 @@
       "correct_option": "C"
     },
     {
-      "number": 214,
+      "id": "huntb",
+      "order": 214,
       "section": "general",
-      "source_question_id": 214,
       "group_id": "federalism-state-symbols",
       "question_de": "Welche Farben hat die deutsche Flagge?",
       "question_en": "What are the colors of the German flag?",
@@ -6862,9 +6862,9 @@
       "correct_option": "A"
     },
     {
-      "number": 215,
+      "id": "aagvp",
+      "order": 215,
       "section": "general",
-      "source_question_id": 215,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Wer wird als \"Kanzler der Deutschen Einheit\" bezeichnet?",
       "question_en": "Who is referred to as the \"Chancellor of German Unity\"?",
@@ -6893,9 +6893,9 @@
       "correct_option": "B"
     },
     {
-      "number": 216,
+      "id": "rsa49",
+      "order": 216,
       "section": "general",
-      "source_question_id": 216,
       "group_id": "federalism-state-symbols",
       "question_de": "Welches Symbol ist im Plenarsaal des Deutschen Bundestages zu sehen?",
       "question_en": "Which symbol is visible in the plenary hall of the German Bundestag?",
@@ -6941,9 +6941,9 @@
       ]
     },
     {
-      "number": 217,
+      "id": "6aixi",
+      "order": 217,
       "section": "general",
-      "source_question_id": 217,
       "group_id": "postwar-ddr-reunification",
       "question_de": "In welchem Zeitraum gab es die Deutsche Demokratische Republik (DDR)?",
       "question_en": "In which period did the German Democratic Republic (GDR) exist?",
@@ -6972,9 +6972,9 @@
       "correct_option": "D"
     },
     {
-      "number": 218,
+      "id": "js83i",
+      "order": 218,
       "section": "general",
-      "source_question_id": 218,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Wie viele Bundesländer kamen bei der Wiedervereinigung 1990 zur Bundesrepublik Deutschland hinzu?",
       "question_en": "How many federal states joined the Federal Republic of Germany during reunification in 1990?",
@@ -7003,9 +7003,9 @@
       "correct_option": "B"
     },
     {
-      "number": 219,
+      "id": "kxymn",
+      "order": 219,
       "section": "general",
-      "source_question_id": 219,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Die Bundesrepublik Deutschland hat die Grenzen von heute seit …",
       "question_en": "The Federal Republic of Germany has had the borders of today since ...",
@@ -7034,9 +7034,9 @@
       "correct_option": "D"
     },
     {
-      "number": 220,
+      "id": "usxq3",
+      "order": 220,
       "section": "general",
-      "source_question_id": 220,
       "group_id": "jewish-life-nazi-history",
       "question_de": "Der 27. Januar ist in Deutschland ein offizieller Gedenktag. Woran erinnert dieser Tag?",
       "question_en": "January 27th is an official memorial day in Germany. What does this day commemorate?",
@@ -7065,9 +7065,9 @@
       "correct_option": "D"
     },
     {
-      "number": 221,
+      "id": "b7xb8",
+      "order": 221,
       "section": "general",
-      "source_question_id": 221,
       "group_id": "europe-eu",
       "question_de": "Deutschland ist Mitglied des Schengener Abkommens. Was bedeutet das?",
       "question_en": "Germany is a member of the Schengen Agreement. What does this mean?",
@@ -7096,9 +7096,9 @@
       "correct_option": "A"
     },
     {
-      "number": 222,
+      "id": "w9kdg",
+      "order": 222,
       "section": "general",
-      "source_question_id": 222,
       "group_id": "europe-eu",
       "question_de": "Welches Land ist ein Nachbarland von Deutschland?",
       "question_en": "Which country is a neighboring country of Germany?",
@@ -7127,9 +7127,9 @@
       "correct_option": "D"
     },
     {
-      "number": 223,
+      "id": "1zwny",
+      "order": 223,
       "section": "general",
-      "source_question_id": 223,
       "group_id": "europe-eu",
       "question_de": "Welches Land ist ein Nachbarland von Deutschland?",
       "question_en": "Which country is a neighboring country of Germany?",
@@ -7158,9 +7158,9 @@
       "correct_option": "C"
     },
     {
-      "number": 224,
+      "id": "kv4ps",
+      "order": 224,
       "section": "general",
-      "source_question_id": 224,
       "group_id": "europe-eu",
       "question_de": "Was bedeutet die Abkürzung EU?",
       "question_en": "What does the abbreviation EU stand for?",
@@ -7189,9 +7189,9 @@
       "correct_option": "B"
     },
     {
-      "number": 225,
+      "id": "hdy8l",
+      "order": 225,
       "section": "general",
-      "source_question_id": 225,
       "group_id": "europe-eu",
       "question_de": "In welchem anderen Land gibt es eine große deutschsprachige Bevölkerung?",
       "question_en": "In which other country is there a large German-speaking population?",
@@ -7220,9 +7220,9 @@
       "correct_option": "D"
     },
     {
-      "number": 226,
+      "id": "ii8gu",
+      "order": 226,
       "section": "general",
-      "source_question_id": 226,
       "group_id": "europe-eu",
       "question_de": "Welche ist die Flagge der Europäischen Union?",
       "question_en": "Which one is the flag of the European Union?",
@@ -7230,22 +7230,22 @@
         {
           "label": "A",
           "text_de": "Bild 1",
-          "text_en": "1"
+          "text_en": "Image 1"
         },
         {
           "label": "B",
           "text_de": "Bild 2",
-          "text_en": "2"
+          "text_en": "Image 2"
         },
         {
           "label": "C",
           "text_de": "Bild 3",
-          "text_en": "3"
+          "text_en": "Image 3"
         },
         {
           "label": "D",
           "text_de": "Bild 4",
-          "text_en": "4"
+          "text_en": "Image 4"
         }
       ],
       "correct_option": "B",
@@ -7268,9 +7268,9 @@
       ]
     },
     {
-      "number": 227,
+      "id": "n3cm1",
+      "order": 227,
       "section": "general",
-      "source_question_id": 227,
       "group_id": "europe-eu",
       "question_de": "Welches Land ist ein Nachbarland von Deutschland?",
       "question_en": "Which country is a neighboring country of Germany?",
@@ -7299,9 +7299,9 @@
       "correct_option": "B"
     },
     {
-      "number": 228,
+      "id": "zu6wu",
+      "order": 228,
       "section": "general",
-      "source_question_id": 228,
       "group_id": "postwar-ddr-reunification",
       "question_de": "Wie wird der Beitritt der DDR zur Bundesrepublik Deutschland im Jahr 1990 allgemein genannt?",
       "question_en": "What is the common term for the accession of the GDR to the Federal Republic of Germany in 1990?",
@@ -7330,9 +7330,9 @@
       "correct_option": "C"
     },
     {
-      "number": 229,
+      "id": "v4ky4",
+      "order": 229,
       "section": "general",
-      "source_question_id": 229,
       "group_id": "europe-eu",
       "question_de": "Welches Land ist ein Nachbarland von Deutschland?",
       "question_en": "Which country is a neighboring country of Germany?",
@@ -7361,9 +7361,9 @@
       "correct_option": "D"
     },
     {
-      "number": 230,
+      "id": "6fj73",
+      "order": 230,
       "section": "general",
-      "source_question_id": 230,
       "group_id": "europe-eu",
       "question_de": "Das Europäische Parlament wird regelmäßig gewählt, nämlich alle …",
       "question_en": "The European Parliament is regularly elected, namely every …",
@@ -7392,9 +7392,9 @@
       "correct_option": "A"
     },
     {
-      "number": 231,
+      "id": "4ahii",
+      "order": 231,
       "section": "general",
-      "source_question_id": 231,
       "group_id": "europe-eu",
       "question_de": "Was bedeutet der Begriff \"europäische Integration\"?",
       "question_en": "What does the term \"European Integration\" mean?",
@@ -7423,9 +7423,9 @@
       "correct_option": "D"
     },
     {
-      "number": 232,
+      "id": "f1w1j",
+      "order": 232,
       "section": "general",
-      "source_question_id": 232,
       "group_id": "europe-eu",
       "question_de": "Wer wird bei der Europawahl gewählt?",
       "question_en": "Who is elected in the European elections?",
@@ -7454,9 +7454,9 @@
       "correct_option": "C"
     },
     {
-      "number": 233,
+      "id": "9sgpe",
+      "order": 233,
       "section": "general",
-      "source_question_id": 233,
       "group_id": "europe-eu",
       "question_de": "Welches Land ist ein Nachbarland von Deutschland?",
       "question_en": "Which country is a neighboring country of Germany?",
@@ -7485,9 +7485,9 @@
       "correct_option": "A"
     },
     {
-      "number": 234,
+      "id": "stsbm",
+      "order": 234,
       "section": "general",
-      "source_question_id": 234,
       "group_id": "europe-eu",
       "question_de": "Wo ist ein Sitz des Europäischen Parlaments?",
       "question_en": "Where is a seat of the European Parliament?",
@@ -7516,9 +7516,9 @@
       "correct_option": "D"
     },
     {
-      "number": 235,
+      "id": "xvgrt",
+      "order": 235,
       "section": "general",
-      "source_question_id": 235,
       "group_id": "europe-eu",
       "question_de": "Der damalige französische Staatspräsident François Mitterrand und der damalige deutsche Bundeskanzler Helmut Kohl gedenken in Verdun gemeinsam der Toten beider Weltkriege. Welches Ziel der Europäischen Union wird bei diesem Treffen deutlich?",
       "question_en": "The then French President François Mitterrand and the then German Chancellor Helmut Kohl commemorate the victims of both world wars together in Verdun. Which goal of the European Union becomes clear during this meeting?",
@@ -7564,9 +7564,9 @@
       ]
     },
     {
-      "number": 236,
+      "id": "mxh9h",
+      "order": 236,
       "section": "general",
-      "source_question_id": 236,
       "group_id": "europe-eu",
       "question_de": "Wie viele Mitgliedstaaten hat die EU heute?",
       "question_en": "How many member states does the EU have today?",
@@ -7595,9 +7595,9 @@
       "correct_option": "D"
     },
     {
-      "number": 237,
+      "id": "hxz6s",
+      "order": 237,
       "section": "general",
-      "source_question_id": 237,
       "group_id": "europe-eu",
       "question_de": "2007 wurde das 50-jährige Jubiläum der \"Römischen Verträge\" gefeiert. Was war der Inhalt der Verträge?",
       "question_en": "In 2007, the 50th anniversary of the \"Roman Treaties\" was celebrated. What was the content of these treaties?",
@@ -7626,9 +7626,9 @@
       "correct_option": "B"
     },
     {
-      "number": 238,
+      "id": "c3ame",
+      "order": 238,
       "section": "general",
-      "source_question_id": 238,
       "group_id": "europe-eu",
       "question_de": "An welchen Orten arbeitet das Europäische Parlament?",
       "question_en": "Where does the European Parliament work?",
@@ -7657,9 +7657,9 @@
       "correct_option": "B"
     },
     {
-      "number": 239,
+      "id": "hqvoc",
+      "order": 239,
       "section": "general",
-      "source_question_id": 239,
       "group_id": "europe-eu",
       "question_de": "Durch welche Verträge schloss sich die Bundesrepublik Deutschland mit anderen Staaten zur Europäischen Wirtschaftsgemeinschaft zusammen?",
       "question_en": "Through which treaties did the Federal Republic of Germany join other countries to form the European Economic Community?",
@@ -7688,9 +7688,9 @@
       "correct_option": "B"
     },
     {
-      "number": 240,
+      "id": "34ee5",
+      "order": 240,
       "section": "general",
-      "source_question_id": 240,
       "group_id": "europe-eu",
       "question_de": "Seit wann bezahlt man in Deutschland mit dem Euro in bar?",
       "question_en": "Since when has cash been paid in Germany with the Euro?",
@@ -7719,9 +7719,9 @@
       "correct_option": "C"
     },
     {
-      "number": 241,
+      "id": "ltn7g",
+      "order": 241,
       "section": "general",
-      "source_question_id": 241,
       "group_id": "family-education",
       "question_de": "Frau Seger bekommt ein Kind. Was muss sie tun, um Elterngeld zu erhalten?",
       "question_en": "Mrs. Seger is having a baby. What does she need to do to receive parental allowance?",
@@ -7750,9 +7750,9 @@
       "correct_option": "B"
     },
     {
-      "number": 242,
+      "id": "rfj2f",
+      "order": 242,
       "section": "general",
-      "source_question_id": 242,
       "group_id": "family-education",
       "question_de": "Wer entscheidet, ob ein Kind in Deutschland in den Kindergarten geht?",
       "question_en": "Who decides whether a child goes to kindergarten in Germany?",
@@ -7781,9 +7781,9 @@
       "correct_option": "C"
     },
     {
-      "number": 243,
+      "id": "p4q7x",
+      "order": 243,
       "section": "general",
-      "source_question_id": 243,
       "group_id": "elections-participation",
       "question_de": "Maik und Sybille wollen mit Freunden an ihrem deutschen Wohnort eine Demonstration auf der Straße abhalten. Was müssen sie vorher tun?",
       "question_en": "Maik and Sybille want to hold a demonstration with friends in their German hometown. What do they need to do beforehand?",
@@ -7812,9 +7812,9 @@
       "correct_option": "A"
     },
     {
-      "number": 244,
+      "id": "ozjkq",
+      "order": 244,
       "section": "general",
-      "source_question_id": 244,
       "group_id": "family-education",
       "question_de": "Welchen Schulabschluss braucht man normalerweise, um an einer Universität in Deutschland ein Studium zu beginnen?",
       "question_en": "What school qualification is usually required to begin studies at a university in Germany?",
@@ -7843,9 +7843,9 @@
       "correct_option": "A"
     },
     {
-      "number": 245,
+      "id": "wxchj",
+      "order": 245,
       "section": "general",
-      "source_question_id": 245,
       "group_id": "family-education",
       "question_de": "Wer darf in Deutschland nicht als Paar zusammenleben?",
       "question_en": "Who is not allowed to live together as a couple in Germany?",
@@ -7874,9 +7874,9 @@
       "correct_option": "D"
     },
     {
-      "number": 246,
+      "id": "497e3",
+      "order": 246,
       "section": "general",
-      "source_question_id": 246,
       "group_id": "family-education",
       "question_de": "Ab welchem Alter ist man in Deutschland volljährig?",
       "question_en": "At what age is one considered an adult in Germany?",
@@ -7905,9 +7905,9 @@
       "correct_option": "B"
     },
     {
-      "number": 247,
+      "id": "reax2",
+      "order": 247,
       "section": "general",
-      "source_question_id": 247,
       "group_id": "family-education",
       "question_de": "Eine Frau ist schwanger. Sie ist kurz vor und nach der Geburt ihres Kindes vom Gesetz besonders beschützt. Wie heißt dieser Schutz?",
       "question_en": "A woman is pregnant. She is specially protected by law shortly before and after the birth of her child. What is this protection called?",
@@ -7936,9 +7936,9 @@
       "correct_option": "B"
     },
     {
-      "number": 248,
+      "id": "z6ghr",
+      "order": 248,
       "section": "general",
-      "source_question_id": 248,
       "group_id": "family-education",
       "question_de": "Die Erziehung der Kinder ist in Deutschland vor allem Aufgabe …",
       "question_en": "The upbringing of children in Germany is primarily the responsibility of …",
@@ -7967,9 +7967,9 @@
       "correct_option": "B"
     },
     {
-      "number": 249,
+      "id": "edunm",
+      "order": 249,
       "section": "general",
-      "source_question_id": 249,
       "group_id": "family-education",
       "question_de": "Wer ist in Deutschland hauptsächlich verantwortlich für die Kindererziehung?",
       "question_en": "Who is primarily responsible for child-rearing in Germany?",
@@ -7998,9 +7998,9 @@
       "correct_option": "B"
     },
     {
-      "number": 250,
+      "id": "zx4nl",
+      "order": 250,
       "section": "general",
-      "source_question_id": 250,
       "group_id": "family-education",
       "question_de": "In Deutschland hat man die besten Chancen auf einen gut bezahlten Arbeitsplatz, wenn man …",
       "question_en": "In Germany, you have the best chances for a well-paid job if you …",
@@ -8029,9 +8029,9 @@
       "correct_option": "B"
     },
     {
-      "number": 251,
+      "id": "4mwzn",
+      "order": 251,
       "section": "general",
-      "source_question_id": 251,
       "group_id": "family-education",
       "question_de": "Wenn man in Deutschland ein Kind schlägt, …",
       "question_en": "If you hit a child in Germany, …",
@@ -8060,9 +8060,9 @@
       "correct_option": "D"
     },
     {
-      "number": 252,
+      "id": "jhx3k",
+      "order": 252,
       "section": "general",
-      "source_question_id": 252,
       "group_id": "family-education",
       "question_de": "In Deutschland …",
       "question_en": "In Germany …",
@@ -8091,9 +8091,9 @@
       "correct_option": "A"
     },
     {
-      "number": 253,
+      "id": "qi1ll",
+      "order": 253,
       "section": "general",
-      "source_question_id": 253,
       "group_id": "everyday-administration",
       "question_de": "Wo müssen Sie sich anmelden, wenn Sie in Deutschland umziehen?",
       "question_en": "Where do you need to register when you move in Germany?",
@@ -8122,9 +8122,9 @@
       "correct_option": "A"
     },
     {
-      "number": 254,
+      "id": "jr8sf",
+      "order": 254,
       "section": "general",
-      "source_question_id": 254,
       "group_id": "family-education",
       "question_de": "In Deutschland dürfen Ehepaare sich scheiden lassen. Meistens müssen sie dazu das \"Trennungsjahr\" einhalten. Was bedeutet das?",
       "question_en": "In Germany, couples can get divorced. Usually, they must observe the \"separation year\". What does this mean?",
@@ -8153,9 +8153,9 @@
       "correct_option": "D"
     },
     {
-      "number": 255,
+      "id": "j1540",
+      "order": 255,
       "section": "general",
-      "source_question_id": 255,
       "group_id": "family-education",
       "question_de": "Bei Erziehungsproblemen können Eltern in Deutschland Hilfe erhalten vom …",
       "question_en": "If parents have parenting problems, they can get help from …",
@@ -8184,9 +8184,9 @@
       "correct_option": "C"
     },
     {
-      "number": 256,
+      "id": "dyp00",
+      "order": 256,
       "section": "general",
-      "source_question_id": 256,
       "group_id": "everyday-administration",
       "question_de": "Ein Ehepaar möchte in Deutschland ein Restaurant eröffnen. Was braucht es dazu unbedingt?",
       "question_en": "A couple wants to open a restaurant in Germany. What do they absolutely need for that?",
@@ -8215,9 +8215,9 @@
       "correct_option": "D"
     },
     {
-      "number": 257,
+      "id": "mmf2y",
+      "order": 257,
       "section": "general",
-      "source_question_id": 257,
       "group_id": "family-education",
       "question_de": "Eine erwachsene Frau möchte in Deutschland das Abitur nachholen. Das kann sie an …",
       "question_en": "An adult woman wants to complete the Abitur in Germany. She can do this at …",
@@ -8246,9 +8246,9 @@
       "correct_option": "B"
     },
     {
-      "number": 258,
+      "id": "ep1v6",
+      "order": 258,
       "section": "general",
-      "source_question_id": 258,
       "group_id": "family-education",
       "question_de": "Was darf das Jugendamt in Deutschland?",
       "question_en": "What is the Youth Welfare Office allowed to do in Germany?",
@@ -8277,9 +8277,9 @@
       "correct_option": "B"
     },
     {
-      "number": 259,
+      "id": "7xnt9",
+      "order": 259,
       "section": "general",
-      "source_question_id": 259,
       "group_id": "family-education",
       "question_de": "Das Berufsinformationszentrum BIZ bei der Bundesagentur für Arbeit in Deutschland hilft bei der …",
       "question_en": "The Career Information Center (BIZ) at the Federal Employment Agency in Germany helps with …",
@@ -8308,9 +8308,9 @@
       "correct_option": "B"
     },
     {
-      "number": 260,
+      "id": "s8vg3",
+      "order": 260,
       "section": "general",
-      "source_question_id": 260,
       "group_id": "family-education",
       "question_de": "In Deutschland hat ein Kind in der Schule …",
       "question_en": "In Germany, a child in school has …",
@@ -8339,9 +8339,9 @@
       "correct_option": "D"
     },
     {
-      "number": 261,
+      "id": "euryc",
+      "order": 261,
       "section": "general",
-      "source_question_id": 261,
       "group_id": "family-education",
       "question_de": "Ein Mann möchte mit 30 Jahren in Deutschland sein Abitur nachholen. Wo kann er das tun? An …",
       "question_en": "A man wants to complete his Abitur at the age of 30 in Germany. Where can he do this? At …",
@@ -8370,9 +8370,9 @@
       "correct_option": "B"
     },
     {
-      "number": 262,
+      "id": "wbfq4",
+      "order": 262,
       "section": "general",
-      "source_question_id": 262,
       "group_id": "equality-religion-migration",
       "question_de": "Was bedeutet in Deutschland der Grundsatz der Gleichbehandlung?",
       "question_en": "What does the principle of equal treatment mean in Germany?",
@@ -8401,9 +8401,9 @@
       "correct_option": "A"
     },
     {
-      "number": 263,
+      "id": "cc8lc",
+      "order": 263,
       "section": "general",
-      "source_question_id": 263,
       "group_id": "justice-legal-system",
       "question_de": "In Deutschland sind Jugendliche ab 14 Jahren strafmündig. Das bedeutet: Jugendliche, die 14 Jahre und älter sind und gegen Strafgesetze verstoßen, …",
       "question_en": "In Germany, minors from the age of 14 are criminally liable. This means: minors who are 14 years and older and violate criminal laws …",
@@ -8432,9 +8432,9 @@
       "correct_option": "A"
     },
     {
-      "number": 264,
+      "id": "9esx5",
+      "order": 264,
       "section": "general",
-      "source_question_id": 264,
       "group_id": "equality-religion-migration",
       "question_de": "Zu welchem Fest tragen Menschen in Deutschland bunte Kostüme und Masken?",
       "question_en": "At which festival do people in Germany wear colorful costumes and masks?",
@@ -8463,9 +8463,9 @@
       "correct_option": "A"
     },
     {
-      "number": 265,
+      "id": "kyoy6",
+      "order": 265,
       "section": "general",
-      "source_question_id": 265,
       "group_id": "family-education",
       "question_de": "Wohin muss man in Deutschland zuerst gehen, wenn man heiraten möchte?",
       "question_en": "Where do you need to go first in Germany if you want to get married?",
@@ -8494,9 +8494,9 @@
       "correct_option": "D"
     },
     {
-      "number": 266,
+      "id": "nj4gy",
+      "order": 266,
       "section": "general",
-      "source_question_id": 266,
       "group_id": "everyday-administration",
       "question_de": "Wann beginnt die gesetzliche Nachtruhe in Deutschland?",
       "question_en": "When does the legal night rest begin in Germany?",
@@ -8525,9 +8525,9 @@
       "correct_option": "D"
     },
     {
-      "number": 267,
+      "id": "6zb5x",
+      "order": 267,
       "section": "general",
-      "source_question_id": 267,
       "group_id": "family-education",
       "question_de": "Eine junge Frau in Deutschland, 22 Jahre alt, lebt mit ihrem Freund zusammen. Die Eltern der Frau finden das nicht gut, weil ihnen der Freund nicht gefällt. Was können die Eltern tun?",
       "question_en": "A young woman in Germany, 22 years old, lives with her boyfriend. Her parents don't like this because they don't like the boyfriend. What can the parents do?",
@@ -8556,9 +8556,9 @@
       "correct_option": "A"
     },
     {
-      "number": 268,
+      "id": "h9l5n",
+      "order": 268,
       "section": "general",
-      "source_question_id": 268,
       "group_id": "everyday-administration",
       "question_de": "Eine junge Frau will den Führerschein machen. Sie hat Angst vor der Prüfung, weil ihre Muttersprache nicht Deutsch ist. Was ist richtig?",
       "question_en": "A young woman wants to get a driver's license. She is afraid of the exam because her native language is not German. What is correct?",
@@ -8587,9 +8587,9 @@
       "correct_option": "D"
     },
     {
-      "number": 269,
+      "id": "fwayt",
+      "order": 269,
       "section": "general",
-      "source_question_id": 269,
       "group_id": "family-education",
       "question_de": "In Deutschland haben Kinder ab dem Alter von drei Jahren bis zur Ersteinschulung einen Anspruch auf …",
       "question_en": "In Germany, children from the age of three to the start of school have a right to …",
@@ -8618,9 +8618,9 @@
       "correct_option": "C"
     },
     {
-      "number": 270,
+      "id": "zebm8",
+      "order": 270,
       "section": "general",
-      "source_question_id": 270,
       "group_id": "family-education",
       "question_de": "Die Volkshochschule in Deutschland ist eine Einrichtung …",
       "question_en": "The adult education center in Germany is an institution …",
@@ -8649,9 +8649,9 @@
       "correct_option": "C"
     },
     {
-      "number": 271,
+      "id": "4qv3c",
+      "order": 271,
       "section": "general",
-      "source_question_id": 271,
       "group_id": "equality-religion-migration",
       "question_de": "Was ist in Deutschland ein Brauch zu Weihnachten?",
       "question_en": "What is a tradition in Germany at Christmas?",
@@ -8680,9 +8680,9 @@
       "correct_option": "B"
     },
     {
-      "number": 272,
+      "id": "7w2v9",
+      "order": 272,
       "section": "general",
-      "source_question_id": 272,
       "group_id": "family-education",
       "question_de": "Welche Lebensform ist in Deutschland nicht erlaubt?",
       "question_en": "Which lifestyle is not allowed in Germany?",
@@ -8711,9 +8711,9 @@
       "correct_option": "D"
     },
     {
-      "number": 273,
+      "id": "wn5pc",
+      "order": 273,
       "section": "general",
-      "source_question_id": 273,
       "group_id": "family-education",
       "question_de": "Bei Erziehungsproblemen gehen Sie in Deutschland …",
       "question_en": "If you have parenting problems in Germany, you go to …",
@@ -8742,9 +8742,9 @@
       "correct_option": "D"
     },
     {
-      "number": 274,
+      "id": "kmjow",
+      "order": 274,
       "section": "general",
-      "source_question_id": 274,
       "group_id": "constitution-rights",
       "question_de": "Sie haben in Deutschland absichtlich einen Brief geöffnet, der an eine andere Person adressiert ist. Was haben Sie nicht beachtet?",
       "question_en": "You have deliberately opened a letter in Germany that was addressed to another person. What have you overlooked?",
@@ -8773,9 +8773,9 @@
       "correct_option": "B"
     },
     {
-      "number": 275,
+      "id": "20297",
+      "order": 275,
       "section": "general",
-      "source_question_id": 275,
       "group_id": "family-education",
       "question_de": "Was braucht man in Deutschland für eine Ehescheidung?",
       "question_en": "What do you need for a divorce in Germany?",
@@ -8804,9 +8804,9 @@
       "correct_option": "D"
     },
     {
-      "number": 276,
+      "id": "484ai",
+      "order": 276,
       "section": "general",
-      "source_question_id": 276,
       "group_id": "everyday-administration",
       "question_de": "Was sollten Sie tun, wenn Sie von Ihrer Ansprechpartnerin/Ihrem Ansprechpartner in einer deutschen Behörde schlecht behandelt werden?",
       "question_en": "What should you do if you are treated badly by your contact person in a German authority?",
@@ -8835,9 +8835,9 @@
       "correct_option": "D"
     },
     {
-      "number": 277,
+      "id": "0r9pg",
+      "order": 277,
       "section": "general",
-      "source_question_id": 277,
       "group_id": "equality-religion-migration",
       "question_de": "Eine Frau, die ein zweijähriges Kind hat, bewirbt sich in Deutschland um eine Stelle. Was ist ein Beispiel für Diskriminierung? Sie bekommt die Stelle nur deshalb nicht, weil sie …",
       "question_en": "A woman with a two-year-old child is applying for a job in Germany. What is an example of discrimination? She doesn't get the job just because she …",
@@ -8866,9 +8866,9 @@
       "correct_option": "D"
     },
     {
-      "number": 278,
+      "id": "l0s2l",
+      "order": 278,
       "section": "general",
-      "source_question_id": 278,
       "group_id": "equality-religion-migration",
       "question_de": "Ein Mann im Rollstuhl hat sich auf eine Stelle als Buchhalter beworben. Was ist ein Beispiel für Diskriminierung? Er bekommt die Stelle nur deshalb nicht, weil er …",
       "question_en": "A man in a wheelchair applied for a job as an accountant. What is an example of discrimination? He doesn't get the job just because he …",
@@ -8897,9 +8897,9 @@
       "correct_option": "A"
     },
     {
-      "number": 279,
+      "id": "dfz9k",
+      "order": 279,
       "section": "general",
-      "source_question_id": 279,
       "group_id": "everyday-administration",
       "question_de": "In den meisten Mietshäusern in Deutschland gibt es eine \"Hausordnung\". Was steht in einer solchen \"Hausordnung\"? Sie nennt …",
       "question_en": "In most rental buildings in Germany, there is a \"house rule.\" What does a \"house rule\" say? It mentions …",
@@ -8928,9 +8928,9 @@
       "correct_option": "C"
     },
     {
-      "number": 280,
+      "id": "j8cgi",
+      "order": 280,
       "section": "general",
-      "source_question_id": 280,
       "group_id": "everyday-administration",
       "question_de": "Wenn Sie sich in Deutschland gegen einen falschen Steuerbescheid wehren wollen, müssen Sie …",
       "question_en": "If you want to challenge an incorrect tax assessment in Germany, you must …",
@@ -8959,9 +8959,9 @@
       "correct_option": "C"
     },
     {
-      "number": 281,
+      "id": "buq97",
+      "order": 281,
       "section": "general",
-      "source_question_id": 281,
       "group_id": "equality-religion-migration",
       "question_de": "Zwei Freunde wollen in ein öffentliches Schwimmbad in Deutschland. Beide haben eine dunkle Hautfarbe und werden deshalb nicht hineingelassen. Welches Recht wird in dieser Situation verletzt? Das Recht auf …",
       "question_en": "Two friends want to go to a public swimming pool in Germany. Both have dark skin and are therefore not allowed in. Which right is violated in this situation? The right to …",
@@ -8990,9 +8990,9 @@
       "correct_option": "B"
     },
     {
-      "number": 282,
+      "id": "ik6c1",
+      "order": 282,
       "section": "general",
-      "source_question_id": 282,
       "group_id": "elections-participation",
       "question_de": "Welches Ehrenamt müssen deutsche Staatsbürgerinnen und Staatsbürger übernehmen, wenn sie dazu aufgefordert werden?",
       "question_en": "Which volunteer work must German citizens take on if asked to do so?",
@@ -9021,9 +9021,9 @@
       "correct_option": "B"
     },
     {
-      "number": 283,
+      "id": "l35rh",
+      "order": 283,
       "section": "general",
-      "source_question_id": 283,
       "group_id": "everyday-administration",
       "question_de": "Was tun Sie, wenn Sie eine falsche Rechnung von einer deutschen Behörde bekommen?",
       "question_en": "What do you do if you receive an incorrect bill from a German authority?",
@@ -9052,9 +9052,9 @@
       "correct_option": "B"
     },
     {
-      "number": 284,
+      "id": "w950j",
+      "order": 284,
       "section": "general",
-      "source_question_id": 284,
       "group_id": "family-education",
       "question_de": "Was man für die Arbeit können muss, ändert sich in Zukunft sehr schnell. Was kann man tun?",
       "question_en": "What you need to know for work is changing very quickly in the future. What can you do?",
@@ -9083,9 +9083,9 @@
       "correct_option": "B"
     },
     {
-      "number": 285,
+      "id": "jorts",
+      "order": 285,
       "section": "general",
-      "source_question_id": 285,
       "group_id": "economy-social-security",
       "question_de": "Frau Frost arbeitet als fest angestellte Mitarbeiterin in einem Büro. Was muss sie nicht von ihrem Gehalt bezahlen?",
       "question_en": "Ms. Frost works as a permanent employee in an office. What does she not have to pay from her salary?",
@@ -9114,9 +9114,9 @@
       "correct_option": "D"
     },
     {
-      "number": 286,
+      "id": "584jk",
+      "order": 286,
       "section": "general",
-      "source_question_id": 286,
       "group_id": "economy-social-security",
       "question_de": "Welche Organisation in einer Firma hilft den Arbeitnehmerinnen und Arbeitnehmern bei Problemen mit der Arbeitgeberin/dem Arbeitgeber?",
       "question_en": "Which organization in a company helps employees with problems with the employer?",
@@ -9145,9 +9145,9 @@
       "correct_option": "A"
     },
     {
-      "number": 287,
+      "id": "mv5qr",
+      "order": 287,
       "section": "general",
-      "source_question_id": 287,
       "group_id": "economy-social-security",
       "question_de": "Sie möchten bei einer Firma in Deutschland ihr Arbeitsverhältnis beenden. Was müssen Sie beachten?",
       "question_en": "You want to terminate your employment with a company in Germany. What do you need to consider?",
@@ -9176,9 +9176,9 @@
       "correct_option": "C"
     },
     {
-      "number": 288,
+      "id": "4tdms",
+      "order": 288,
       "section": "general",
-      "source_question_id": 288,
       "group_id": "jewish-life-nazi-history",
       "question_de": "Woraus begründet sich Deutschlands besondere Verantwortung für Israel?",
       "question_en": "What is the basis of Germany's special responsibility for Israel?",
@@ -9207,9 +9207,9 @@
       "correct_option": "B"
     },
     {
-      "number": 289,
+      "id": "edayj",
+      "order": 289,
       "section": "general",
-      "source_question_id": 289,
       "group_id": "equality-religion-migration",
       "question_de": "Ein Mann mit dunkler Hautfarbe bewirbt sich um eine Stelle als Kellner in einem Restaurant in Deutschland. Was ist ein Beispiel für Diskriminierung? Er bekommt die Stelle nur deshalb nicht, weil …",
       "question_en": "A man with dark skin is applying for a position as a waiter in a restaurant in Germany. What is an example of discrimination? He doesn't get the job just because …",
@@ -9238,9 +9238,9 @@
       "correct_option": "C"
     },
     {
-      "number": 290,
+      "id": "1tmmp",
+      "order": 290,
       "section": "general",
-      "source_question_id": 290,
       "group_id": "everyday-administration",
       "question_de": "Sie haben in Deutschland einen Fernseher gekauft. Zu Hause packen Sie den Fernseher aus, doch er funktioniert nicht. Der Fernseher ist kaputt. Was können Sie machen?",
       "question_en": "You bought a TV in Germany. You unpack it at home, but it doesn't work. The TV is broken. What can you do?",
@@ -9269,9 +9269,9 @@
       "correct_option": "B"
     },
     {
-      "number": 291,
+      "id": "3rqic",
+      "order": 291,
       "section": "general",
-      "source_question_id": 291,
       "group_id": "equality-religion-migration",
       "question_de": "Warum muss man in Deutschland bei der Steuererklärung aufschreiben, ob man zu einer Kirche gehört oder nicht? Weil …",
       "question_en": "Why do you have to write down in the tax declaration in Germany whether you belong to a church or not? Because …",
@@ -9300,9 +9300,9 @@
       "correct_option": "A"
     },
     {
-      "number": 292,
+      "id": "u6b1i",
+      "order": 292,
       "section": "general",
-      "source_question_id": 292,
       "group_id": "equality-religion-migration",
       "question_de": "Die Menschen in Deutschland leben nach dem Grundsatz der religiösen Toleranz. Was bedeutet das?",
       "question_en": "People in Germany live according to the principle of religious tolerance. What does that mean?",
@@ -9331,9 +9331,9 @@
       "correct_option": "C"
     },
     {
-      "number": 293,
+      "id": "97qre",
+      "order": 293,
       "section": "general",
-      "source_question_id": 293,
       "group_id": "equality-religion-migration",
       "question_de": "Was ist in Deutschland ein Brauch zu Ostern?",
       "question_en": "What is a custom for Easter in Germany?",
@@ -9362,9 +9362,9 @@
       "correct_option": "C"
     },
     {
-      "number": 294,
+      "id": "dd2tp",
+      "order": 294,
       "section": "general",
-      "source_question_id": 294,
       "group_id": "equality-religion-migration",
       "question_de": "Pfingsten ist ein …",
       "question_en": "Whitsun is a …",
@@ -9393,9 +9393,9 @@
       "correct_option": "A"
     },
     {
-      "number": 295,
+      "id": "4r55k",
+      "order": 295,
       "section": "general",
-      "source_question_id": 295,
       "group_id": "equality-religion-migration",
       "question_de": "Welche Religion hat die europäische und deutsche Kultur geprägt?",
       "question_en": "Which religion has shaped European and German culture?",
@@ -9424,9 +9424,9 @@
       "correct_option": "B"
     },
     {
-      "number": 296,
+      "id": "0ec3m",
+      "order": 296,
       "section": "general",
-      "source_question_id": 296,
       "group_id": "equality-religion-migration",
       "question_de": "In Deutschland nennt man die letzten vier Wochen vor Weihnachten …",
       "question_en": "In Germany, the last four weeks before Christmas are called …",
@@ -9455,9 +9455,9 @@
       "correct_option": "C"
     },
     {
-      "number": 297,
+      "id": "7lf3m",
+      "order": 297,
       "section": "general",
-      "source_question_id": 297,
       "group_id": "equality-religion-migration",
       "question_de": "Aus welchem Land sind die meisten Migrantinnen und Migranten nach Deutschland gekommen?",
       "question_en": "From which country did most migrants come to Germany?",
@@ -9486,9 +9486,9 @@
       "correct_option": "D"
     },
     {
-      "number": 298,
+      "id": "tkfwy",
+      "order": 298,
       "section": "general",
-      "source_question_id": 298,
       "group_id": "equality-religion-migration",
       "question_de": "In der DDR lebten vor allem Migrantinnen und Migranten aus …",
       "question_en": "In the GDR, migrants mainly came from …",
@@ -9517,9 +9517,9 @@
       "correct_option": "A"
     },
     {
-      "number": 299,
+      "id": "fccy6",
+      "order": 299,
       "section": "general",
-      "source_question_id": 299,
       "group_id": "equality-religion-migration",
       "question_de": "Ausländische Arbeitnehmerinnen und Arbeitnehmer, die in den 50er und 60er Jahren von der Bundesrepublik Deutschland angeworben wurden, nannte man …",
       "question_en": "Foreign workers recruited by the Federal Republic of Germany in the 1950s and 1960s were called …",
@@ -9548,9 +9548,9 @@
       "correct_option": "B"
     },
     {
-      "number": 300,
+      "id": "srtdc",
+      "order": 300,
       "section": "general",
-      "source_question_id": 300,
       "group_id": "equality-religion-migration",
       "question_de": "Aus welchem Land kamen die ersten Gastarbeiterinnen und Gastarbeiter in die Bundesrepublik Deutschland?",
       "question_en": "From which country did the first guest workers come to the Federal Republic of Germany?",
@@ -9579,9 +9579,9 @@
       "correct_option": "A"
     },
     {
-      "number": 301,
+      "id": "nlvpo",
+      "order": 301,
       "section": "berlin",
-      "source_question_id": 1,
       "group_id": "berlin",
       "question_de": "Welches Wappen gehört zum Bundesland Berlin?",
       "question_en": "Which coat of arms belongs to the federal state of Berlin?",
@@ -9589,22 +9589,22 @@
         {
           "label": "A",
           "text_de": "Bild 1",
-          "text_en": "1"
+          "text_en": "Image 1"
         },
         {
           "label": "B",
           "text_de": "Bild 2",
-          "text_en": "2"
+          "text_en": "Image 2"
         },
         {
           "label": "C",
           "text_de": "Bild 3",
-          "text_en": "3"
+          "text_en": "Image 3"
         },
         {
           "label": "D",
           "text_de": "Bild 4",
-          "text_en": "4"
+          "text_en": "Image 4"
         }
       ],
       "correct_option": "D",
@@ -9627,9 +9627,9 @@
       ]
     },
     {
-      "number": 302,
+      "id": "7vge3",
+      "order": 302,
       "section": "berlin",
-      "source_question_id": 2,
       "group_id": "berlin",
       "question_de": "Welches ist ein Bezirk von Berlin?",
       "question_en": "Which is a district of Berlin?",
@@ -9658,9 +9658,9 @@
       "correct_option": "C"
     },
     {
-      "number": 303,
+      "id": "s05jx",
+      "order": 303,
       "section": "berlin",
-      "source_question_id": 3,
       "group_id": "berlin",
       "question_de": "Für wie viele Jahre wird das Landesparlament in Berlin gewählt?",
       "question_en": "For how many years is the state parliament in Berlin elected?",
@@ -9689,9 +9689,9 @@
       "correct_option": "C"
     },
     {
-      "number": 304,
+      "id": "uadza",
+      "order": 304,
       "section": "berlin",
-      "source_question_id": 4,
       "group_id": "berlin",
       "question_de": "Ab welchem Alter darf man in Berlin bei Kommunalwahlen (Wahl der Bezirksverordnetenversammlung) wählen?",
       "question_en": "From what age can one vote in local elections (district council) in Berlin?",
@@ -9720,9 +9720,9 @@
       "correct_option": "B"
     },
     {
-      "number": 305,
+      "id": "ufjgj",
+      "order": 305,
       "section": "berlin",
-      "source_question_id": 5,
       "group_id": "berlin",
       "question_de": "Welche Farben hat die Landesflagge von Berlin?",
       "question_en": "What are the colors of the state flag of Berlin?",
@@ -9751,9 +9751,9 @@
       "correct_option": "B"
     },
     {
-      "number": 306,
+      "id": "xjk15",
+      "order": 306,
       "section": "berlin",
-      "source_question_id": 6,
       "group_id": "berlin",
       "question_de": "Wo können Sie sich in Berlin über politische Themen informieren?",
       "question_en": "Where can you find information on political topics in Berlin?",
@@ -9782,9 +9782,9 @@
       "correct_option": "D"
     },
     {
-      "number": 307,
+      "id": "fu1oh",
+      "order": 307,
       "section": "berlin",
-      "source_question_id": 7,
       "group_id": "berlin",
       "question_de": "Welches Bundesland ist ein Stadtstaat?",
       "question_en": "Which federal state is a city-state?",
@@ -9813,9 +9813,9 @@
       "correct_option": "A"
     },
     {
-      "number": 308,
+      "id": "18kwu",
+      "order": 308,
       "section": "berlin",
-      "source_question_id": 8,
       "group_id": "berlin",
       "question_de": "Welches Bundesland ist Berlin?",
       "question_en": "Which federal state is Berlin?",
@@ -9861,9 +9861,9 @@
       ]
     },
     {
-      "number": 309,
+      "id": "rfccv",
+      "order": 309,
       "section": "berlin",
-      "source_question_id": 9,
       "group_id": "berlin",
       "question_de": "Wie nennt man die Regierungschefin/den Regierungschef des Stadtstaates Berlin?",
       "question_en": "What is the title of the head of government of the city-state of Berlin?",
@@ -9892,9 +9892,9 @@
       "correct_option": "D"
     },
     {
-      "number": 310,
+      "id": "n71rg",
+      "order": 310,
       "section": "berlin",
-      "source_question_id": 10,
       "group_id": "berlin",
       "question_de": "Welche Senatorin/welchen Senator hat Berlin nicht?",
       "question_en": "Which senator does Berlin not have?",
