@@ -144,13 +144,81 @@ test('public and learner HTML expose loadable browser and Apple icons', async ({
   ])
 })
 
-test('installation guidance explains the supported iPhone and iPad path', async ({ page }) => {
-  await page.goto('/dashboard')
+for (const language of ['English', 'Deutsch'] as const) {
+  test(
+    `Settings contains responsive numbered installation guides in ${language}`,
+    { tag: '@webkit' },
+    async ({ page }) => {
+      await page.goto('/settings')
 
-  await page.getByRole('navigation').getByRole('link', { name: 'Settings', exact: true }).click()
+      await page
+        .getByRole('radiogroup', { name: 'Interface language' })
+        .getByText(language, { exact: true })
+        .click()
 
-  await page.getByRole('link', { name: /iPhone.*iPad/ }).click()
+      const safari = page.getByRole('region', {
+        name:
+          language === 'English'
+            ? 'How to install from Safari'
+            : 'So installierst du die App aus Safari',
+        exact: true,
+      })
 
-  await expect(page.getByRole('main')).toContainText('Safari')
-  await expect(page.getByRole('main')).toContainText('Home Screen')
+      const chrome = page.getByRole('region', {
+        name:
+          language === 'English'
+            ? 'How to install from Chrome'
+            : 'So installierst du die App aus Chrome',
+        exact: true,
+      })
+
+      await expect(safari.getByRole('listitem')).toHaveCount(4)
+      await expect(chrome.getByRole('listitem')).toHaveCount(4)
+      await expect(page.getByRole('main')).toContainText(
+        language === 'English'
+          ? 'Copy your Safari progress'
+          : 'Übertrage deinen Safari-Fortschritt',
+      )
+      await expect(page.locator('a[href="/settings/installation"]')).toHaveCount(0)
+
+      await expect(page).toHaveURL(/\/settings$/)
+
+      for (const width of [360, 834, 1024, 1440]) {
+        await page.setViewportSize({ width, height: 900 })
+
+        await expect
+          .poll(async () => {
+            const ios = await safari.boundingBox()
+            const android = await chrome.boundingBox()
+
+            if (ios === null || android === null) {
+              throw new Error('Both installation guides must be rendered.')
+            }
+
+            return Math.abs(ios.y - android.y) < 1 && android.x > ios.x
+          })
+          .toBe(width === 834 || width === 1440)
+
+        expect(
+          await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth),
+        ).toBe(true)
+      }
+    },
+  )
+}
+
+test('the removed installation route returns 404 while Settings remains available', async ({
+  request,
+}) => {
+  for (const path of ['/settings/installation', '/settings/installation/']) {
+    const response = await request.get(path, { maxRedirects: 0 })
+
+    expect(response.status()).toBe(404)
+    expect(response.headers()['location']).toBeUndefined()
+  }
+
+  const settings = await request.get('/settings', { maxRedirects: 0 })
+
+  expect(settings.status()).toBe(200)
+  expect(settings.headers()['location']).toBeUndefined()
 })

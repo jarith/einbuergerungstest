@@ -52,13 +52,13 @@ Place every page in its own folder directly under `web/src/pages/`:
 ```text
 dashboard/       study/           mock-test/
 test-review/     progress/        question-history/
-settings/        installation/
+settings/
 ```
 
 All-question and group study use the `study` page. Completed and unfinished mock-test
 reviews use `test-review`. Feedback, study completion, image zoom, import preview, reset
 confirmation, and device-size variants are states or components of these pages rather than
-additional pages.
+additional pages. Installation guidance belongs to the Settings page.
 
 Every page folder has a `components/` folder containing its page component and all React
 components specific to that page. Repeat this structure inside a complex component:

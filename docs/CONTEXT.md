@@ -86,8 +86,10 @@ measuring 50% of the viewport width, centered within the main area beside naviga
 headings and content share this alignment. The live mock summary stacks below the
 questions. Mobile and tablet retain their existing widths.
 
-Mobile navigation stays fixed at the bottom of the viewport. The mock-test exit
-confirmation uses “Stay in test” / “Im Test bleiben” to retain the active attempt.
+Mobile navigation stays fixed at the bottom of the viewport, above page controls. The main
+content establishes its own stacking context so segmented controls cannot cover
+navigation. The mock-test exit confirmation uses “Stay in test” / “Im Test bleiben” to
+retain the active attempt.
 
 The calendar displays dates as `DD.MM.YYYY` while storing `YYYY-MM-DD`. Settings disables
 past popup dates with `excludeDate`, allowing typed past dates to reach the existing field
@@ -101,3 +103,12 @@ dashboard is `/dashboard`, including the installed app start URL. Only the two p
 pages are indexable; learner screens remain device-local, non-indexable app routes. The
 canonical origin is `https://einbuergerungstest.jarith.dev`. See [SEO](seo.md) for the
 deployment contract and outstanding launch checks.
+
+The landing page has one dashboard button and no other app links; language choices stay on
+the public routes. It omits the separate Berlin/translation sections and independent-tool
+notice. Installation help covers iOS Safari and Android Chrome. Both numbered guides live
+directly on `/settings`, alongside progress-transfer and offline-preparation guidance.
+They use two columns when the content container is at least 40rem wide and stack below
+that width. There is no separate installation route; `/settings/installation` returns 404
+and is excluded from both the Cloudflare rewrite allowlist and the service-worker
+navigation fallback.

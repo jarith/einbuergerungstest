@@ -4,33 +4,32 @@
 
 # Only learner routes receive the app shell. Keep this allowlist aligned with
 # getLearnerPathPattern in web/src/app/seo/site.ts, including trailing slashes.
+# Use the extensionless asset target: /app.html triggers Cloudflare’s HTML redirect.
 # The generated root 404.html handles everything else; do not add a /* fallback.
-/dashboard /app.html 200
-/dashboard/ /app.html 200
-/study /app.html 200
-/study/ /app.html 200
-/mock-test /app.html 200
-/mock-test/ /app.html 200
-/progress /app.html 200
-/progress/ /app.html 200
-/progress/questions /app.html 200
-/progress/questions/ /app.html 200
-/settings /app.html 200
-/settings/ /app.html 200
-/settings/installation /app.html 200
-/settings/installation/ /app.html 200
+/dashboard /app 200
+/dashboard/ /app 200
+/study /app 200
+/study/ /app 200
+/mock-test /app 200
+/mock-test/ /app 200
+/progress /app 200
+/progress/ /app 200
+/progress/questions /app 200
+/progress/questions/ /app 200
+/settings /app 200
+/settings/ /app 200
 
-/study/:question /app.html 200
-/study/:question/ /app.html 200
-/study/groups/:group /app.html 200
-/study/groups/:group/ /app.html 200
-/study/groups/:group/:question /app.html 200
-/study/groups/:group/:question/ /app.html 200
-/mock-test/:session /app.html 200
-/mock-test/:session/ /app.html 200
-/mock-test/:session/:screen /app.html 200
-/mock-test/:session/:screen/ /app.html 200
-/progress/questions/:question /app.html 200
-/progress/questions/:question/ /app.html 200
-/progress/tests/:session /app.html 200
-/progress/tests/:session/ /app.html 200
+/study/:question /app 200
+/study/:question/ /app 200
+/study/groups/:group /app 200
+/study/groups/:group/ /app 200
+/study/groups/:group/:question /app 200
+/study/groups/:group/:question/ /app 200
+/mock-test/:session /app 200
+/mock-test/:session/ /app 200
+/mock-test/:session/:screen /app 200
+/mock-test/:session/:screen/ /app 200
+/progress/questions/:question /app 200
+/progress/questions/:question/ /app 200
+/progress/tests/:session /app 200
+/progress/tests/:session/ /app 200

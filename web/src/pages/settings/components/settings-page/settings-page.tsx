@@ -4,6 +4,7 @@ import { reatomComponent } from '@reatom/react'
 import type { PageProps } from '../../../../app/routing'
 import type { SettingsData } from '../../settings.model'
 import { BackupControls } from '../../../../modules/learner-state'
+import { InstallationGuides } from './components/installation-guides/installation-guides'
 import { PreferencesSection } from './components/preferences-section/preferences-section'
 import { styles } from './settings-page.styles'
 
@@ -17,9 +18,7 @@ export const SettingsPage = reatomComponent(
         localization={data.localization}
         model={data.settings.backup}
       />
-      <a className={styles.link} href="/settings/installation">
-        {data.localization.t()('settings.installGuide')} →
-      </a>
+      <InstallationGuides localization={data.localization} offline={data.offline} />
     </Stack>
   ),
   'SettingsPage',

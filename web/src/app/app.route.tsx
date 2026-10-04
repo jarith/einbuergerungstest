@@ -3,7 +3,6 @@ import { reatomRoute } from '@reatom/core'
 
 import { createStartupRecovery } from '../modules/learner-state'
 import { createDashboardRoute } from '../pages/dashboard'
-import { createInstallationRoute } from '../pages/installation'
 import { createMockTestRoutes } from '../pages/mock-test'
 import { createProgressRoute } from '../pages/progress'
 import { createQuestionHistoryRoute } from '../pages/question-history'
@@ -37,7 +36,6 @@ export const routes = {
   questionHistory: createQuestionHistoryRoute(appRoute),
   testReview: createTestReviewRoute(appRoute),
   settings: createSettingsRoute(appRoute),
-  installation: createInstallationRoute(appRoute),
 }
 
 export type AppRoutes = typeof routes

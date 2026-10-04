@@ -118,11 +118,14 @@ publishing manually outside this workflow.
 ## Hosting and PWA behavior
 
 Vite copies `web/public/_redirects` and `web/public/_headers` into the deployment
-artifact. The redirects serve only the learner route allowlist through `app.html`,
-including trailing-slash variants. Keep them aligned with `getLearnerPathPattern` in
+artifact. The redirects serve only the learner route allowlist through the extensionless
+`/app` asset target (which serves `app.html`). Rewriting to `/app.html` instead triggers
+Cloudflare’s automatic 308 to `/app` and loses the requested learner URL. The allowlist
+includes trailing-slash variants. Keep it aligned with `getLearnerPathPattern` in
 `web/src/app/seo/site.ts` when routes change. `/` and `/en/` remain prerendered public
-pages. The generated top-level `404.html` preserves real errors for unknown public URLs
-and missing assets.
+pages. `/settings/installation` is removed from the allowlist and returns 404; both
+installation guides are part of `/settings`. The generated top-level `404.html` preserves
+real errors for unknown public URLs and missing assets.
 
 Network responses revalidate and request no content transformation. The service worker
 still supplies offline resources from its versioned cache. Headers also provide MIME

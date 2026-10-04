@@ -7,7 +7,6 @@ export const styles = {
     hyphens: 'auto',
     '@media (min-width: 64rem)': { maxWidth: '[none]' },
   }),
-  link: css({ color: 'content.primary' }),
   columns: css.raw({
     gridTemplateColumns: 'minmax(0, 1fr)',
     '@media (min-width: 48rem)': { gridTemplateColumns: 'repeat(2, minmax(0, 1fr))' },
