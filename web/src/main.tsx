@@ -2,6 +2,8 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
 import { App } from './app/app'
+import { startAppAnalytics } from './app/app.analytics'
+import { appRoute, routes } from './app/app.route'
 import { startNavigation, startPageMetadata } from './app/navigation.model'
 
 import '@einbuergerungstest/design-system/styles.css'
@@ -15,6 +17,12 @@ if (!container) {
 startNavigation()
 
 startPageMetadata()
+
+const stopAnalytics = startAppAnalytics(appRoute, routes)
+
+if (import.meta.hot) {
+  import.meta.hot.dispose(stopAnalytics)
+}
 
 createRoot(container).render(
   <StrictMode>

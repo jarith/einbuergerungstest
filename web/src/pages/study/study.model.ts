@@ -40,6 +40,7 @@ export const createStudyModel = (
     return { ...current, loaded }
   }, 'study.scope').extend(() => ({
     flow,
+    session,
     status: computed(
       () => resources.learner.progress.questions().get(flow().key)?.status ?? 'not-started',
       'study.status',

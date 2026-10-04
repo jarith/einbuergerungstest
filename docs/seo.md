@@ -17,12 +17,13 @@ SITE_INDEXABLE=true mise exec -- yarn workspace @einbuergerungstest/web build
 ```
 
 The build prerenders both language pages with React and the shared design system. The
-delivered public pages have no application JavaScript and do not initialize the question
-bank, learner storage, localization preferences, or service worker. Language links perform
-normal navigation and work with JavaScript disabled. Training links load the existing app.
-The renderer supplies one title, a language-specific description, absolute canonical,
-reciprocal `de`/`en`/`x-default` alternates, and Open Graph and Twitter metadata with a
-1200 × 630 PNG share image.
+delivered public pages load only a small analytics entry and the Umami tracker; they do
+not initialize the learner application, question bank, learner storage, localization
+preferences, or service worker. See [analytics coverage](analytics.md). Language links
+perform normal navigation and work with JavaScript disabled. Training links load the
+existing app. The renderer supplies one title, a language-specific description, absolute
+canonical, reciprocal `de`/`en`/`x-default` alternates, and Open Graph and Twitter
+metadata with a 1200 × 630 PNG share image.
 
 `app.html` contains `noindex, follow` before JavaScript runs. The app updates its existing
 HTML title on route/language changes. Learner routes, progress, settings, question
