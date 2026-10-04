@@ -239,7 +239,8 @@
     "filter": "Nach Lernstatus filtern",
     "showing": "{{count}} von {{total}} Fragen angezeigt",
     "empty": "Noch keine Fragen mit diesem Status. Wähle einen anderen Filter, um den Katalog zu durchsuchen.",
-    "showMore": "Nächste {{count}} Fragen anzeigen",
+    "showMore_one": "Nächste Frage anzeigen",
+    "showMore_other": "Nächste {{count}} Fragen anzeigen",
     "noAttempts": "Keine Versuche",
     "hasImage": "Frage enthält ein Bild",
     "filterCount": "{{status}} · {{count}}"
@@ -251,7 +252,7 @@
     "noAttempts": "Noch keine Antworten gespeichert. Lerne diese Frage, um deinen ersten Versuch zu starten.",
     "noEarlier": "Keine früheren Versuche.",
     "study": "Diese Frage lernen",
-    "back": "Zurück zu allen Fragen",
+    "back": "Zurück zum Fortschritt",
     "sourceStudy": "Lernen",
     "sourceMock": "Abgeschlossener Probetest"
   },

@@ -4,14 +4,11 @@ export const styles = {
   root: css.raw({
     overflowWrap: 'anywhere',
     gridTemplateColumns: 'minmax(0, 1fr)',
-    gridTemplateAreas: '"intro" "divider" "summary" "groups" "saved"',
+    gridTemplateAreas: '"intro" "divider" "summary" "groups"',
     gap: '24',
     '@media (min-width: 48rem)': {
-      gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 16.875rem)',
-      gridTemplateAreas: '"intro intro" "divider divider" "summary saved" "groups groups"',
       gap: '32',
     },
-    '@media (min-width: 64rem)': { gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 22.5rem)' },
   }),
   divider: css({ gridArea: 'divider' }),
   introGrid: css.raw({
@@ -89,8 +86,6 @@ export const styles = {
   }),
   inlineMeaning: css({ display: 'none', '@media (min-width: 48rem)': { display: 'inline' } }),
   percentage: css({ fontSize: '24', '@media (min-width: 48rem)': { fontSize: '28' } }),
-  saved: css.raw({ gridArea: 'saved', minWidth: '0', gap: '4' }),
-  savedTitle: css({ textStyle: 'controlLabel' }),
   groupSection: css.raw({ gridArea: 'groups', minWidth: '0' }),
   groups: css.raw({ listStyle: 'none', padding: '0', gap: '0' }),
 }

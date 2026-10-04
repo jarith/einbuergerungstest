@@ -29,7 +29,7 @@ export const RouteStatus = ({ error, retry, language = 'en' }: RouteStatusProps)
         <p>{error.name === 'PageNotFound' ? messages.errors.notFound : messages.errors.startup}</p>
       )}
       {error === undefined ? null : error.name === 'PageNotFound' ? (
-        <a href="/">{messages.navigation.dashboard}</a>
+        <a href="/dashboard">{messages.navigation.dashboard}</a>
       ) : (
         <Button onClick={retry}>{messages.common.retry}</Button>
       )}

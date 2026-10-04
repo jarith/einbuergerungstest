@@ -69,11 +69,17 @@ distinct from a mock-test sitting.
 ## Interface conventions
 
 The approved distill pass keeps all 13 groups, their complete descriptions, progress, and
-resume hints. Progress and All questions show bank-wide counts within the status filters;
-filtering or pagination must not change those counts. Study help is a collapsed disclosure
-below navigation on every screen size. Backup download, file selection, and the full
-comparison preview belong together, with replacement and reset confirmations preserved.
-These simplifications do not change learning, scoring, or persistence rules.
+resume hints. Progress shows bank-wide counts within the status filters; filtering or
+pagination must not change those counts. Study help is a collapsed disclosure below
+navigation on every screen size. Backup download, file selection, and the full comparison
+preview belong together, with replacement and reset confirmations preserved. Backup,
+import, and reset controls are available only in Settings, with no backup link or
+disclosure on Progress. The question browser lives on `/progress`; the separate
+`/progress/questions` list route is removed. It shows questions in bank order, initially
+previews 10 matching questions, and reveals 10 more on request; changing the status filter
+resets that limit. List separators appear only between items, and hoverable rows retain
+padding in every state. The dashboard omits the “Saved on this device” notice. These
+simplifications do not change learning, scoring, or persistence rules.
 
 At desktop widths (1024px and above), Study, Mock test, and Settings use a container
 measuring 50% of the viewport width, centered within the main area beside navigation. Page
@@ -86,3 +92,12 @@ confirmation uses “Stay in test” / “Im Test bleiben” to retain the activ
 The calendar displays dates as `DD.MM.YYYY` while storing `YYYY-MM-DD`. Settings disables
 past popup dates with `excludeDate`, allowing typed past dates to reach the existing field
 validation and show an error. Mantine's `minDate` silently suppresses those value changes.
+
+## Public website
+
+The public introduction uses fixed language URLs: `/` for German and `/en/` for English.
+It is readable without JavaScript, question-bank loading, or learner storage. The learner
+dashboard is `/dashboard`, including the installed app start URL. Only the two public
+pages are indexable; learner screens remain device-local, non-indexable app routes. The
+canonical origin is `https://einbuergerungstest.jarith.dev`. See [SEO](seo.md) for the
+deployment contract and outstanding launch checks.

@@ -239,7 +239,8 @@
     "filter": "Filter by learning status",
     "showing": "Showing {{count}} of {{total}} questions",
     "empty": "No questions have this status yet. Choose another filter to browse the bank.",
-    "showMore": "Show next {{count}} questions",
+    "showMore_one": "Show next question",
+    "showMore_other": "Show next {{count}} questions",
     "noAttempts": "No attempts",
     "hasImage": "Question includes an image",
     "filterCount": "{{status}} · {{count}}"
@@ -251,7 +252,7 @@
     "noAttempts": "No answers recorded yet. Study this question to make your first attempt.",
     "noEarlier": "No earlier attempts.",
     "study": "Study this question",
-    "back": "Back to all questions",
+    "back": "Back to progress",
     "sourceStudy": "Study",
     "sourceMock": "Completed mock test"
   },

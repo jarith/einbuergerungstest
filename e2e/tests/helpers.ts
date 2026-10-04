@@ -23,7 +23,7 @@ export const chooseLanguage = async (page: Page, language: 'English' | 'Deutsch'
 
   await expect(page.getByRole('radio', { name: language, exact: true })).toBeChecked()
 
-  await openNavigation(page, '/')
+  await openNavigation(page, '/dashboard')
 }
 
 export const waitForOfflineReady = async (page: Page) => {

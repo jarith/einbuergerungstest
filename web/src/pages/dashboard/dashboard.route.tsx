@@ -9,7 +9,7 @@ import { createDashboardModel } from './dashboard.model'
 export const createDashboardRoute = (parent: AppRoute) =>
   parent.reatomRoute(
     {
-      path: '',
+      path: 'dashboard',
       loader: async () => {
         const resources = await wrap(parent.loader())
 

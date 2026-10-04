@@ -1,0 +1,44 @@
+import { css } from '@einbuergerungstest/design-system'
+
+export const styles = {
+  page: css.raw({ maxWidth: '[68rem]', paddingInline: '24', gap: '48', paddingBlock: '32' }),
+  header: css.raw({
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: '16',
+  }),
+  navigation: css.raw({ gap: '20', alignItems: 'center', flexWrap: 'wrap' }),
+  brand: css({ textStyle: 'controlLabel', color: 'content.primary' }),
+  link: css({
+    color: 'content.primary',
+    textUnderlineOffset: '[0.2em]',
+    minHeight: 'control.field',
+    display: 'inline-flex',
+    alignItems: 'center',
+  }),
+  hero: css.raw({ gap: '24', maxWidth: '[48rem]', paddingBlock: '32' }),
+  eyebrow: css({ textStyle: 'controlLabel', color: 'content.muted' }),
+  title: css({ textStyle: 'compactTitle', '@media (min-width: 48rem)': { textStyle: 'title' } }),
+  lead: css({ fontSize: '24', fontWeight: 'emphasized' }),
+  copy: css({ textStyle: 'body', color: 'content.muted', maxWidth: '[65ch]' }),
+  actions: css.raw({ gap: '16', flexWrap: 'wrap', alignItems: 'center' }),
+  features: css.raw({
+    gap: '32',
+    gridTemplateColumns: 'minmax(0, 1fr)',
+    '@media (min-width: 48rem)': { gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '48' },
+  }),
+  section: css.raw({ gap: '12', minWidth: '0' }),
+  heading: css({ fontSize: '22', fontWeight: 'emphasized' }),
+  footer: css.raw({ gap: '8', color: 'content.muted', textStyle: 'caption' }),
+  skip: css({
+    position: 'absolute',
+    insetBlockStart: '8',
+    insetInlineStart: '8',
+    padding: '12',
+    background: 'surface-muted',
+    color: 'content.primary',
+    transform: '[translateY(-200%)]',
+    _focus: { transform: '[translateY(0)]' },
+  }),
+}

@@ -4,6 +4,8 @@ import { createHash } from 'node:crypto'
 import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
 
+import { getLearnerPathPattern } from '../src/app/seo/site.ts'
+
 const output = fileURLToPath(new URL('../dist/', import.meta.url))
 
 await mkdir(`${output}/locales`, { recursive: true })
@@ -23,7 +25,8 @@ const result = await generateSW({
   globIgnores: ['sw.js', 'workbox-*.js', 'offline-check.js'],
   swDest: `${output}/sw.js`,
   importScripts: ['offline-check.js'],
-  navigateFallback: '/index.html',
+  navigateFallback: '/app.html',
+  navigateFallbackAllowlist: [getLearnerPathPattern()],
   navigateFallbackDenylist: [/^\/images\//, /^\/assets\//, /^\/locales\//, /\.[^/]+$/],
   skipWaiting: false,
   clientsClaim: true,

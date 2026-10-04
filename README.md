@@ -105,9 +105,13 @@ visual states. Application unit tests remain outside the delivery scope. See the
 ## Offline build and deployment
 
 Run `yarn build` and deploy the entire `web/dist` directory at the root of an HTTPS
-origin. Use a same-origin SPA fallback to `index.html` for app routes; serve asset files
-with their correct MIME types and real errors for missing files. Serve `sw.js`,
-`offline-check.js`, `index.html` and the manifest with revalidation/no-cache headers;
+origin. Serve the prerendered public pages at `/` and `/en/`, and rewrite only learner
+routes to `app.html`. Unknown public paths must return `404.html` with status 404; serve
+asset files with their correct MIME types and real errors for missing files. Builds are
+non-indexable by default: set `SITE_INDEXABLE=true` only for custom-domain production.
+See the [SEO and hosting guide](docs/seo.md) for routing, redirects, previews, and launch
+verification. Serve `sw.js`, `offline-check.js`, all HTML and the manifest with
+revalidation/no-cache headers;
 content-hashed assets may use immutable caching. Publish the complete output atomically
 and retain older hashed assets while clients can still run them. Localhost preview is also
 a secure context.

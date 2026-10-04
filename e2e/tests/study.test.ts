@@ -10,7 +10,7 @@ for (const { width, height } of [
   test(`study controls fit ${width} × ${height} with touch-sized answers`, async ({ page }) => {
     await page.setViewportSize({ width, height })
 
-    await page.goto('/')
+    await page.goto('/dashboard')
 
     await chooseLanguage(page, 'Deutsch')
 
@@ -43,7 +43,7 @@ test(
 
     await studyAnswer(page, 'D').click()
 
-    await openNavigation(page, '/')
+    await openNavigation(page, '/dashboard')
 
     await page.getByRole('link', { name: 'Study all questions', exact: true }).click()
 
@@ -84,7 +84,7 @@ for (const { language, width } of [
   }) => {
     await page.setViewportSize({ width, height: 844 })
 
-    await page.goto('/')
+    await page.goto('/dashboard')
 
     await chooseLanguage(page, language)
 

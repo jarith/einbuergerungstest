@@ -51,7 +51,7 @@ for (const width of [320, 390]) {
   }) => {
     await page.setViewportSize({ width, height: 844 })
 
-    await page.goto('/')
+    await page.goto('/dashboard')
 
     await chooseLanguage(page, 'Deutsch')
 
@@ -104,7 +104,7 @@ for (const width of [320, 390]) {
   test(`German backup comparison and import action fit at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 844 })
 
-    await page.goto('/')
+    await page.goto('/dashboard')
 
     await chooseLanguage(page, 'Deutsch')
 

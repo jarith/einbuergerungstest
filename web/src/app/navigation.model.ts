@@ -1,5 +1,7 @@
+import { effect } from '@reatom/core'
+
 import { browserNavigationAtom } from '../shared/navigation/browser-navigation.model'
-import { appRoute, routes } from './app.route'
+import { appRoute, pageTitle, routes } from './app.route'
 
 export const startNavigation = () =>
   browserNavigationAtom.start((destination) => {
@@ -25,3 +27,8 @@ export const startNavigation = () =>
 
     return { leave: () => data.learner.finishMock(active.id, 'unfinished') }
   })
+
+export const startPageMetadata = () =>
+  effect(() => {
+    document.title = `${pageTitle() || 'Training'} · Einbürgerungstest Berlin`
+  }, 'app.pageMetadata')

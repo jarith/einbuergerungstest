@@ -51,7 +51,7 @@ export const MockSummary = reatomComponent(({ model }: MockSummaryProps) => {
           ) : null}
         </Stack>
       </Panel>
-      <ButtonLink href="/" appearance="ghost">
+      <ButtonLink href="/dashboard" appearance="ghost">
         {t('mock.exit')}
       </ButtonLink>
     </Stack>

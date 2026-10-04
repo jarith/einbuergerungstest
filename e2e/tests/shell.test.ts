@@ -5,7 +5,7 @@ import { expectViewportFit } from './helpers'
 test('desktop navigation sits beside the main content', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 })
 
-  await page.goto('/')
+  await page.goto('/dashboard')
 
   const navigation = page.getByRole('navigation', { name: 'Main navigation' })
   const main = page.getByRole('main')
@@ -29,7 +29,7 @@ test('desktop navigation sits beside the main content', async ({ page }) => {
 test('phone navigation stays fixed at the bottom without horizontal overflow', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 })
 
-  await page.goto('/')
+  await page.goto('/dashboard')
 
   const navigation = page.getByRole('navigation', { name: 'Main navigation' })
 

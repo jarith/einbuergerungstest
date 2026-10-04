@@ -5,7 +5,7 @@ import { mockAnswer } from '../support/browser'
 test('a stale submission shows conflict recovery inside its confirmation dialog', async ({
   page,
 }) => {
-  await page.goto('/')
+  await page.goto('/dashboard')
 
   await page.getByRole('link', { name: 'Start mock test', exact: true }).click()
 

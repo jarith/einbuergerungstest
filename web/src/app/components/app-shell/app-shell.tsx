@@ -40,7 +40,6 @@ export const AppShell = reatomComponent(
 
     return (
       <I18nextProvider i18n={localization.i18n}>
-        <title>{`${title} · ${t('app.title')}`}</title>
         <a className={shellStyles.skip} href="#main">
           {t('navigation.skip')}
         </a>

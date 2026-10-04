@@ -2,7 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
 import { App } from './app/app'
-import { startNavigation } from './app/navigation.model'
+import { startNavigation, startPageMetadata } from './app/navigation.model'
 
 import '@einbuergerungstest/design-system/styles.css'
 
@@ -13,6 +13,8 @@ if (!container) {
 }
 
 startNavigation()
+
+startPageMetadata()
 
 createRoot(container).render(
   <StrictMode>

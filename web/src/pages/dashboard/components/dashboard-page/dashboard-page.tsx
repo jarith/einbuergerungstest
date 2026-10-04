@@ -6,7 +6,6 @@ import type { DashboardData, DashboardModel } from '../../dashboard.model'
 import { DashboardIntro } from './components/dashboard-intro/dashboard-intro'
 import { GroupProgress } from './components/group-progress/group-progress'
 import { ProgressSummary } from './components/progress-summary/progress-summary'
-import { SavedProgress } from './components/saved-progress/saved-progress'
 import { TestCountdown } from './components/test-countdown/test-countdown'
 import { styles } from './dashboard-page.styles'
 
@@ -21,6 +20,5 @@ export const DashboardPage = ({ data }: PageProps<DashboardData>) => (
     <Divider className={styles.divider} />
     <ProgressSummary model={data.dashboard} />
     <GroupProgress model={data.dashboard} />
-    <SavedProgress model={data.dashboard} />
   </Grid>
 )

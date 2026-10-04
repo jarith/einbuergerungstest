@@ -7,7 +7,6 @@ import { createInstallationRoute } from '../pages/installation'
 import { createMockTestRoutes } from '../pages/mock-test'
 import { createProgressRoute } from '../pages/progress'
 import { createQuestionHistoryRoute } from '../pages/question-history'
-import { createQuestionListRoute } from '../pages/question-list'
 import { createSettingsRoute } from '../pages/settings'
 import { createStudyRoutes } from '../pages/study'
 import { createTestReviewRoute } from '../pages/test-review'
@@ -35,7 +34,6 @@ export const routes = {
   study: createStudyRoutes(appRoute),
   mock: createMockTestRoutes(appRoute),
   progress: createProgressRoute(appRoute),
-  questions: createQuestionListRoute(appRoute),
   questionHistory: createQuestionHistoryRoute(appRoute),
   testReview: createTestReviewRoute(appRoute),
   settings: createSettingsRoute(appRoute),
@@ -44,4 +42,4 @@ export const routes = {
 
 export type AppRoutes = typeof routes
 
-const pageTitle = createPageTitleAtom(appRoute, routes)
+export const pageTitle = createPageTitleAtom(appRoute, routes)

@@ -94,7 +94,7 @@ export const createStudyModel = (
       'study.completion',
     ),
     isGroup: group !== undefined,
-    exitPath: '/',
+    exitPath: '/dashboard',
   }))
 }
 
