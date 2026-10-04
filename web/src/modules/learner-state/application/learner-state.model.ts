@@ -15,6 +15,7 @@ import {
   getNextAttemptTime,
   normalizeLearnerLaunch,
 } from '../domain/learner-state'
+import { decodeLearnerBackup } from '../infrastructure/backup-validation'
 import { createLearnerRepository } from '../infrastructure/learner-repository'
 import { decodeLearnerSnapshot, parsePlannedDate } from '../infrastructure/snapshot-codec'
 import { createProgressModel } from './progress.model'
@@ -343,7 +344,7 @@ export const createLearnerState = (bank: QuestionBank) => {
     confirmationAtom.set(null)
 
     try {
-      const imported = decodeLearnerSnapshot(source)
+      const imported = decodeLearnerBackup(source, Date.now())
 
       validateReferences(imported)
 

@@ -143,6 +143,25 @@ hostname. Existing installed clients normally use their complete precache; if th
 is evicted, an old client may need to close and reopen online to install the current
 release. There is no cross-release asset retention mechanism in this deployment.
 
+## Content Security Policy
+
+The global policy in `web/public/_headers` restricts scripts to this origin and the
+existing Umami tracker, and connections to this origin and `https://gateway.umami.is`. It
+blocks inline scripts, script evaluation, plugins, framing, base-URL changes, and form
+submissions. Images, fonts, manifests, and workers use explicit source restrictions.
+Inline styles remain allowed because Mantine generates style elements and positioning
+attributes; this exception does not apply to scripts.
+
+Production preview reads the policy from the built `_headers` file, so browser checks
+exercise the same policy on public pages, learner routes, worker scripts, and cached
+offline HTML. Development's Vite/HMR server is unaffected. When changing the policy, first
+check `Content-Security-Policy-Report-Only`, then enforce `Content-Security-Policy` after
+the supported flows pass. The security browser tests check both allowed flows and blocked
+scripts/connections. Verify the actual Cloudflare headers after the first deploy.
+
+This policy still trusts the existing third-party tracker; it does not pin its content or
+isolate it from device-local data.
+
 ## Recovery
 
 For a transient deployment failure, rerun the failed job while the artifact is available.

@@ -201,7 +201,8 @@
   },
   "validation": {
     "plannedDate": "Choose today or a future test date.",
-    "invalidBackup": "This backup is invalid or unsupported. Choose a valid exported backup.",
+    "invalidBackup": "This backup is invalid or exceeds the supported limits. Choose another exported backup. If its history is dated in the future, check your device clock. Your saved progress is unchanged.",
+    "backupTooLarge": "This backup exceeds the 10 MiB import limit. Choose a smaller exported backup. Your saved progress is unchanged.",
     "selectAnswer": "Select an answer before continuing."
   },
   "errors": {

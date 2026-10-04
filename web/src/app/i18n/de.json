@@ -201,7 +201,8 @@
   },
   "validation": {
     "plannedDate": "Wähle heute oder ein zukünftiges Prüfungsdatum.",
-    "invalidBackup": "Diese Sicherung ist ungültig oder wird nicht unterstützt. Wähle eine gültige exportierte Sicherung.",
+    "invalidBackup": "Diese Sicherung ist ungültig oder überschreitet die unterstützten Grenzen. Wähle eine andere exportierte Sicherung. Liegen Einträge in der Zukunft, prüfe die Uhr deines Geräts. Dein gespeicherter Fortschritt bleibt unverändert.",
+    "backupTooLarge": "Diese Sicherung überschreitet die Importgrenze von 10 MiB. Wähle eine kleinere exportierte Sicherung. Dein gespeicherter Fortschritt bleibt unverändert.",
     "selectAnswer": "Wähle eine Antwort, bevor du fortfährst."
   },
   "errors": {
