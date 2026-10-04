@@ -1,0 +1,36 @@
+# Public canonical URLs. Cloudflare preserves the incoming query string.
+/en /en/ 301
+/index.html / 301
+
+# Only learner routes receive the app shell. Keep this allowlist aligned with
+# getLearnerPathPattern in web/src/app/seo/site.ts, including trailing slashes.
+# The generated root 404.html handles everything else; do not add a /* fallback.
+/dashboard /app.html 200
+/dashboard/ /app.html 200
+/study /app.html 200
+/study/ /app.html 200
+/mock-test /app.html 200
+/mock-test/ /app.html 200
+/progress /app.html 200
+/progress/ /app.html 200
+/progress/questions /app.html 200
+/progress/questions/ /app.html 200
+/settings /app.html 200
+/settings/ /app.html 200
+/settings/installation /app.html 200
+/settings/installation/ /app.html 200
+
+/study/:question /app.html 200
+/study/:question/ /app.html 200
+/study/groups/:group /app.html 200
+/study/groups/:group/ /app.html 200
+/study/groups/:group/:question /app.html 200
+/study/groups/:group/:question/ /app.html 200
+/mock-test/:session /app.html 200
+/mock-test/:session/ /app.html 200
+/mock-test/:session/:screen /app.html 200
+/mock-test/:session/:screen/ /app.html 200
+/progress/questions/:question /app.html 200
+/progress/questions/:question/ /app.html 200
+/progress/tests/:session /app.html 200
+/progress/tests/:session/ /app.html 200
