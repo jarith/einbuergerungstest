@@ -9,6 +9,8 @@ export type {
 
 export { getQuestionAttempts } from './domain/learner-state'
 export { createLearnerState } from './application/learner-state.model'
+export { createOrderedStudyAnalytics } from './application/ordered-study.analytics'
+export { observeProgressAnalytics } from './application/progress.analytics'
 export { createStartupRecovery } from './application/startup-recovery.model'
 export { isLearnerStateConflict } from './infrastructure/learner-state-conflict-error'
 

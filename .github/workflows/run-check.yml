@@ -12,6 +12,11 @@ on:
         required: false
         default: false
         type: boolean
+      production-build:
+        description: Build indexable public pages and upload the production artifact
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: read
@@ -60,4 +65,16 @@ jobs:
       - name: Run check
         env:
           SCRIPT: ${{ inputs.script }}
+          SITE_INDEXABLE: ${{ inputs.production-build && inputs.script == 'build' && 'true' || 'false' }}
         run: mise exec -- yarn "$SCRIPT"
+
+      - name: Save production build
+        if: inputs.production-build && inputs.script == 'build'
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: pages-${{ github.sha }}-${{ github.run_id }}
+          path: web/dist
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 7
+          overwrite: true

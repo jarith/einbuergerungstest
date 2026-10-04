@@ -52,8 +52,12 @@ export const BackupControls = reatomComponent((props: BackupControlsProps) => {
               void model.selectFile(file)
             })}
           />
-          {message === 'invalid' ? (
-            <InlineNotice intent="danger">{t('validation.invalidBackup')}</InlineNotice>
+          {message === 'invalid' || message === 'too-large' ? (
+            <InlineNotice intent="danger">
+              {t(
+                message === 'too-large' ? 'validation.backupTooLarge' : 'validation.invalidBackup',
+              )}
+            </InlineNotice>
           ) : null}
           <BackupPreview {...props} />
         </Stack>

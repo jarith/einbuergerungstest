@@ -1,4 +1,9 @@
 paths:
+  .github/workflows/ci.yml:
+    ignore:
+      # actionlint 1.7.12 predates GitHub's production queue and runner label.
+      - 'unexpected key "queue" for "concurrency" section'
+      - 'label "ubuntu-26\.04" is unknown'
   .github/workflows/run-check.yml:
     ignore:
       # actionlint 1.7.12 predates GitHub's ubuntu-26.04 runner label.

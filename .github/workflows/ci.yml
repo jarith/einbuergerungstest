@@ -11,7 +11,8 @@ permissions:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  queue: ${{ github.event_name == 'pull_request' && 'single' || 'max' }}
 
 jobs:
   build:
@@ -19,6 +20,7 @@ jobs:
     uses: ./.github/workflows/run-check.yml
     with:
       script: build
+      production-build: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
 
   lint:
     name: Lint
@@ -106,3 +108,96 @@ jobs:
     with:
       script: test:storybook
       install-browsers: true
+
+  deploy:
+    name: Deploy production
+    needs:
+      - build
+      - lint
+      - typecheck
+      - format-check
+      - tooling-tests
+      - behavior-tests
+      - ui-tests
+      - e2e-scope
+      - e2e-tests
+      - browser-tests
+      - storybook-tests
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-26.04
+    timeout-minutes: 15
+    environment:
+      name: production
+      url: https://einbuergerungstest.jarith.dev
+    steps:
+      - name: Check out deployment commit
+        uses: actions/checkout@v7
+        with:
+          # The deployment guard compares ancestry with the current production SHA.
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Read mise version
+        id: mise-version
+        run: echo "version=$(cat .mise-version)" >> "$GITHUB_OUTPUT"
+
+      - name: Set up locked tools
+        uses: jdx/mise-action@v4
+        with:
+          version: ${{ steps.mise-version.outputs.version }}
+          install_args: --locked
+
+      - name: Download successful production build
+        uses: actions/download-artifact@v8.0.1
+        with:
+          name: pages-${{ github.sha }}-${{ github.run_id }}
+          path: web/dist
+          digest-mismatch: error
+
+      - name: Deploy existing build to Cloudflare Pages
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_PAGES_PROJECT: ${{ vars.CLOUDFLARE_PAGES_PROJECT || 'einbuergerungstest' }}
+          WRANGLER_SEND_METRICS: 'false'
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo '::error::Set the CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID repository secrets.'
+            exit 1
+          fi
+
+          project=$(curl --fail --silent --show-error --retry 3 \
+            --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/$CLOUDFLARE_PAGES_PROJECT")
+          if ! jq -e '.success == true and .result.production_branch == "master"' <<< "$project" > /dev/null; then
+            echo '::error::Set the existing Cloudflare Pages project production branch to master. See docs/deployment.md.'
+            exit 1
+          fi
+
+          # Queue order is not commit order. Never let a delayed run or an old
+          # rerun replace a newer release. An empty SHA permits the first upload.
+          deployed_sha=$(jq -r '.result.canonical_deployment.deployment_trigger.metadata.commit_hash // ""' <<< "$project")
+          if [ -n "$deployed_sha" ]; then
+            if ! [[ "$deployed_sha" =~ ^[0-9a-f]{40}$ ]] || ! git cat-file -e "$deployed_sha^{commit}"; then
+              echo '::error::The production commit is not in this repository history. Resolve the deployment history before retrying; use Cloudflare for intentional rollbacks.'
+              exit 1
+            fi
+            if ! git merge-base --is-ancestor "$deployed_sha" "$GITHUB_SHA"; then
+              echo '::notice::A newer or divergent commit is already in production; this run will not replace it.'
+              echo "Deployment skipped: production already contains commit $deployed_sha." >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+          fi
+
+          mise exec -- npm exec --yes --package=wrangler@4.147.0 -- \
+            wrangler pages deploy web/dist \
+            --project-name="$CLOUDFLARE_PAGES_PROJECT" \
+            --branch=master \
+            --commit-hash="$GITHUB_SHA"
+
+          {
+            echo '### Production deployment'
+            echo "Commit: $GITHUB_SHA"
+            echo 'App: https://einbuergerungstest.jarith.dev'
+            echo "Project: $CLOUDFLARE_PAGES_PROJECT"
+          } >> "$GITHUB_STEP_SUMMARY"

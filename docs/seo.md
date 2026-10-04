@@ -17,12 +17,13 @@ SITE_INDEXABLE=true mise exec -- yarn workspace @einbuergerungstest/web build
 ```
 
 The build prerenders both language pages with React and the shared design system. The
-delivered public pages have no application JavaScript and do not initialize the question
-bank, learner storage, localization preferences, or service worker. Language links perform
-normal navigation and work with JavaScript disabled. Training links load the existing app.
-The renderer supplies one title, a language-specific description, absolute canonical,
-reciprocal `de`/`en`/`x-default` alternates, and Open Graph and Twitter metadata with a
-1200 × 630 PNG share image.
+delivered public pages load only a small analytics entry and the Umami tracker; they do
+not initialize the learner application, question bank, learner storage, localization
+preferences, or service worker. See [analytics coverage](analytics.md). Language links
+perform normal navigation and work with JavaScript disabled. Training links load the
+existing app. The renderer supplies one title, a language-specific description, absolute
+canonical, reciprocal `de`/`en`/`x-default` alternates, and Open Graph and Twitter
+metadata with a 1200 × 630 PNG share image.
 
 `app.html` contains `noindex, follow` before JavaScript runs. The app updates its existing
 HTML title on route/language changes. Learner routes, progress, settings, question
@@ -39,9 +40,11 @@ as described below.
 
 ## Hosting contract
 
-Deploy the entire `web/dist` directory atomically. The Vite preview middleware implements
-this contract for local verification; **it does not configure a production provider**. The
-provider must implement the same routing:
+Deploy the entire `web/dist` directory atomically. Cloudflare Pages routing and response
+headers are supplied by `web/public/_redirects` and `web/public/_headers`. The Vite
+preview middleware implements the same route contract locally. See the
+[deployment guide](deployment.md) for the required dashboard setup, CI gate, and
+provider-hostname redirect:
 
 - Serve `/` from `index.html` and `/en/` from `en/index.html`.
 - Permanently redirect `/en` to `/en/` and `/index.html` to `/`, preserving queries.
@@ -56,8 +59,8 @@ provider must implement the same routing:
 - On preview hosts, add `X-Robots-Tag: noindex, follow` to responses as an additional
   host-level safeguard. Never inherit `SITE_INDEXABLE=true` into preview builds.
 - Serve HTML, `sw.js`, `offline-check.js`, and the manifest with revalidation/no-cache
-  headers. Hashed assets can use immutable caching. Keep older hashed assets while clients
-  might still use them.
+  headers. Existing clients use the service-worker precache; see the deployment guide for
+  recovery after cache eviction and the limits of cross-release asset availability.
 
 The service worker precaches both public pages and the learner shell. Its navigation
 fallback applies only to learner paths, so offline `/en/` stays English and the public
@@ -80,9 +83,10 @@ Implementation checks:
       content, canonical selection, crawl availability, and absence of production noindex.
 - [ ] Submit `https://einbuergerungstest.jarith.dev/sitemap.xml` in Search Console.
 
-The repository does not currently identify the hosting provider/default hostname or
-contain deployment credentials. Provider configuration and Search Console verification
-need that information and account access; local checks do not establish live indexing.
+The repository targets Cloudflare Pages. Its assigned provider hostname, custom-domain
+activation, and canonical-host redirect are configured in Cloudflare. Credentials stay in
+GitHub repository secrets. Provider setup and Search Console verification still require
+account access; repository configuration alone does not establish live indexing.
 
 This follows Google's guidance on
 [JavaScript SEO and SPA error pages](https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics),

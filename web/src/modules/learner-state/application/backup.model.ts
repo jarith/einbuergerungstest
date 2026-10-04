@@ -2,15 +2,15 @@ import { action, atom, computed, withAsync, wrap } from '@reatom/core'
 
 import type { createLearnerState } from './learner-state.model'
 import { downloadJson } from '../../../shared/files/download-json'
+import { getBackupSizeLimit } from '../infrastructure/backup-validation'
 import { isLearnerStateConflict } from '../infrastructure/learner-state-conflict-error'
 
 export const createBackupModel = (learner: ReturnType<typeof createLearnerState>) => {
   const file = atom<File | null>(null, 'backup.file')
 
-  const message = atom<'invalid' | 'storage' | 'conflict' | 'exported' | 'replaced' | null>(
-    null,
-    'backup.message',
-  )
+  const message = atom<
+    'invalid' | 'too-large' | 'storage' | 'conflict' | 'exported' | 'replaced' | null
+  >(null, 'backup.message')
 
   const confirmationKind = atom<'import' | 'reset' | null>(null, 'backup.confirmationKind')
 
@@ -22,6 +22,12 @@ export const createBackupModel = (learner: ReturnType<typeof createLearnerState>
     learner.cancelReplacement()
 
     if (selected === null) {
+      return
+    }
+
+    if (selected.size > getBackupSizeLimit()) {
+      message.set('too-large')
+
       return
     }
     try {

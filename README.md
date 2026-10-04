@@ -83,6 +83,7 @@ check the rules and `yarn format` to apply formatting.
 - [Test ownership and CI](docs/testing.md)
 - [Toolchain versions and dependency maintenance](docs/toolchain.md)
 - [E2E workspace](e2e/README.md)
+- [Cloudflare production deployment](docs/deployment.md)
 - [Extraction sources and intentional omissions](docs/extraction-sources.md)
 
 GitHub Actions runs build, lint, type, formatting, tooling, business integration,
@@ -90,7 +91,8 @@ component-browser, browser UI, Storybook, and selected E2E checks. E2E waits for
 and component integration checks, then runs backup/offline smoke before reset/recovery.
 Pull requests select E2E when application or test boundaries change; master pushes run the
 complete suite. CI runs only on pull requests and master pushes. Jobs use the locked mise
-tools and immutable dependency installs. No jobs upload artifacts.
+tools and immutable dependency installs. Master builds upload `web/dist`; production
+deploys that same artifact to Cloudflare Pages only after every required CI job succeeds.
 
 The application needs no credentials, server database, or external service. Learner data
 stays in IndexedDB on the device. `yarn test:behavior` runs the business Gherkin against
@@ -105,16 +107,17 @@ visual states. Application unit tests remain outside the delivery scope. See the
 ## Offline build and deployment
 
 Run `yarn build` and deploy the entire `web/dist` directory at the root of an HTTPS
-origin. Serve the prerendered public pages at `/` and `/en/`, and rewrite only learner
-routes to `app.html`. Unknown public paths must return `404.html` with status 404; serve
+origin. The included Cloudflare Pages rules serve the prerendered public pages at `/` and
+`/en/`, and rewrite only learner routes to `app.html`. Unknown public paths must return
+`404.html` with status 404; serve
 asset files with their correct MIME types and real errors for missing files. Builds are
 non-indexable by default: set `SITE_INDEXABLE=true` only for custom-domain production.
-See the [SEO and hosting guide](docs/seo.md) for routing, redirects, previews, and launch
-verification. Serve `sw.js`, `offline-check.js`, all HTML and the manifest with
-revalidation/no-cache headers;
-content-hashed assets may use immutable caching. Publish the complete output atomically
-and retain older hashed assets while clients can still run them. Localhost preview is also
-a secure context.
+See the [deployment guide](docs/deployment.md) for the one-time Cloudflare/GitHub setup,
+automatic releases, and recovery, and the [SEO guide](docs/seo.md) for indexing.
+The included headers require network revalidation; the service worker manages offline
+caching. Pages publishes the complete output atomically. Old clients normally use their
+precache; an evicted cache can require closing and reopening online after a release.
+Localhost preview is also a secure context.
 
 The post-build Workbox `generateSW` step includes HTML, scripts, styles, fonts, manifest,
 icons, both generated UI catalogs, the JSON bank and all 35 optimized WebP illustrations.

@@ -44,11 +44,26 @@ export const publicPages = (): Plugin => ({
     return renderer.renderPublic(html, language, false)
   },
   async configurePreviewServer(server) {
+    const headers = await readFile(
+      resolve(server.config.root, server.config.build.outDir, '_headers'),
+      'utf8',
+    )
+
+    const policy = headers.match(/^  (Content-Security-Policy(?:-Report-Only)?): (.+)$/m)
+
+    if (policy?.[1] === undefined || policy[2] === undefined) {
+      throw new Error('The production build must declare a Content Security Policy in _headers.')
+    }
+    const [, policyHeader, policyValue] = policy
+
     const notFound = await readFile(
       resolve(server.config.root, server.config.build.outDir, '404.html'),
     )
 
     server.middlewares.use((request, response, next) => {
+      // Exercise the deployed policy, including service workers and offline HTML, in preview.
+      response.setHeader(policyHeader, policyValue)
+
       const url = new URL(request.url ?? '/', 'http://localhost')
 
       if (url.pathname === '/en' || url.pathname === '/index.html') {
