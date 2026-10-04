@@ -96,11 +96,7 @@ export const AppLayout = reatomComponent(({ route, routes, title, recovery }: Ap
           href: routes.settings.path(),
         },
       ]}
-      links={[
-        ...(routes.progress.exact()
-          ? [{ label: t('progress.backupAction'), href: routes.settings.path() }]
-          : []),
-      ]}
+      links={[]}
     >
       {page ?? <RouteStatus error={pageNotFound()} language={data.localization.language()} />}
     </AppShell>

@@ -10,7 +10,7 @@ test(
     // Browser boundary: a cancelled popstate must restore the active route without replacing history.
     await page.goto('/settings')
 
-    await openNavigation(page, '/')
+    await openNavigation(page, '/dashboard')
 
     await startMock(page)
 
@@ -44,7 +44,7 @@ test(
 
     await exit.getByRole('button', { name: 'Exit test', exact: true }).click()
 
-    await expect(page).toHaveURL('/')
+    await expect(page).toHaveURL('/dashboard')
     await expect(page.getByRole('link', { name: 'Study all questions', exact: true })).toBeVisible()
 
     await page.goBack()
@@ -54,7 +54,7 @@ test(
 
     await page.goForward()
 
-    await expect(page).toHaveURL('/')
+    await expect(page).toHaveURL('/dashboard')
     await expect(page.getByRole('link', { name: 'Study all questions', exact: true })).toBeVisible()
     await expect(exit).toHaveCount(0)
   },

@@ -5,7 +5,9 @@ export const styles = {
     minWidth: '0',
     gap: '8',
     paddingBlock: '16',
-    borderBlockEnd: '{borderWidths.control} solid {colors.surface-raised}',
+    '&:not(:last-child)': {
+      borderBlockEnd: '{borderWidths.control} solid {colors.surface-raised}',
+    },
     gridTemplateColumns: 'minmax(0, 1fr)',
     gridTemplateAreas: '"identity" "controls" "resume"',
     '@media (min-width: 48rem)': {

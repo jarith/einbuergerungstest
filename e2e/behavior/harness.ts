@@ -9,7 +9,7 @@ import { getRemainingSeconds } from '../../web/src/modules/mock-test/domain/mock
 import { getAnswerFeedback } from '../../web/src/modules/question-bank/domain/question-answer'
 import { createDashboardModel } from '../../web/src/pages/dashboard/dashboard.model'
 import { createMockPageModel } from '../../web/src/pages/mock-test/mock-test.model'
-import { createQuestionListModel } from '../../web/src/pages/question-list/question-list.model'
+import { createProgressPageModel } from '../../web/src/pages/progress/progress.model'
 import { createTestReviewModel } from '../../web/src/pages/test-review/test-review.model'
 import { browserNavigationAtom } from '../../web/src/shared/navigation/browser-navigation.model'
 import { savedProfile, rejectedProfile, replacementProfile } from './fixtures/storage'
@@ -18,7 +18,7 @@ type ScenarioState = {
   resources?: Awaited<ReturnType<typeof loadAppResources>>
   study?: ReturnType<typeof createOrderedStudy>
   dashboard?: ReturnType<typeof createDashboardModel>
-  list?: ReturnType<typeof createQuestionListModel>
+  list?: ReturnType<typeof createProgressPageModel>
   backup?: ReturnType<typeof createBackupModel>
   review?: ReturnType<typeof createTestReviewModel>
   recovery?: ReturnType<typeof createStartupRecovery>
@@ -138,7 +138,7 @@ const createHarness = () => {
       const app = await wrap(loadAppResources())
       state.resources = app
       state.dashboard = createDashboardModel(app)
-      state.list = createQuestionListModel(app)
+      state.list = createProgressPageModel(app)
       state.backup = createBackupModel(app.learner)
 
       state.dispose.push(state.dashboard.date.subscribe(() => undefined))

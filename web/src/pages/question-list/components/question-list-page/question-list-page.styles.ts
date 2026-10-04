@@ -1,8 +1,0 @@
-import { css } from '@einbuergerungstest/design-system'
-
-export const styles = {
-  root: css.raw({ minWidth: '0', overflowWrap: 'anywhere', hyphens: 'auto' }),
-  muted: css({ textStyle: 'caption', color: 'content.muted' }),
-  rows: css.raw({ listStyle: 'none', padding: '0', gap: '0' }),
-  panel: css({ padding: '8' }),
-}

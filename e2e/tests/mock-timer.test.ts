@@ -5,7 +5,7 @@ import { startMock } from './helpers'
 test('the mock timer displays zero-padded minutes and seconds', async ({ page }) => {
   await page.clock.install({ time: new Date('2026-09-26T12:00:00Z') })
 
-  await page.goto('/')
+  await page.goto('/dashboard')
 
   await startMock(page)
 

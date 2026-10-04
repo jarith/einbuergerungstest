@@ -11,7 +11,9 @@ export const styles = {
   history: css.raw({ listStyle: 'none', padding: '0', gap: '16' }),
   entry: css.raw({
     paddingBlockEnd: '16',
-    borderBlockEnd: '{borderWidths.control} solid {colors.panel.border}',
+    '&:not(:last-child)': {
+      borderBlockEnd: '{borderWidths.control} solid {colors.panel.border}',
+    },
     gap: '8',
   }),
 }

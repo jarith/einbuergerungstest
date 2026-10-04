@@ -8,7 +8,7 @@ for (const mode of ['live', 'review']) {
     `${mode} question picker supports keyboard jumps and dismissal`,
     { tag: '@webkit' },
     async ({ page }) => {
-      await page.goto('/')
+      await page.goto('/dashboard')
 
       await startMock(page)
 

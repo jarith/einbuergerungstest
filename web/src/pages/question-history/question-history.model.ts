@@ -20,7 +20,7 @@ export const createQuestionHistoryModel = (resources: AppResources, selected: Lo
     selected,
     localization: resources.localization,
     studyPath: `/study/${encodeURIComponent(selected.key)}`,
-    listPath: '/progress/questions',
+    listPath: '/progress',
     getOption: (label: string) =>
       selected.question.answer_options.find((option) => option.label === label),
   }))

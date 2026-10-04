@@ -42,7 +42,7 @@ export const progressFixture = () => {
 }
 
 export const seedProfile = async (page: Page, source = JSON.stringify(progressFixture())) => {
-  await page.goto('/')
+  await page.goto('/dashboard')
 
   await expect(page.getByRole('main')).toBeVisible()
 

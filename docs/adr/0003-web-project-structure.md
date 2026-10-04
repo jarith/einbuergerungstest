@@ -51,7 +51,7 @@ Place every page in its own folder directly under `web/src/pages/`:
 
 ```text
 dashboard/       study/           mock-test/
-test-review/     progress/        question-list/   question-history/
+test-review/     progress/        question-history/
 settings/        installation/
 ```
 
