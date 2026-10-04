@@ -17,17 +17,14 @@ export const LandingPage = ({ language }: LandingPageProps) => {
       </a>
       <Container css={{ ...styles.page }}>
         <LandingHeader language={language} content={content} />
-        <Stack as="main" id="main" tabIndex={-1} gap="48">
+        <Stack as="main" id="main" tabIndex={-1} gap="24">
           <Stack css={{ ...styles.hero }}>
             <p className={styles.eyebrow}>BERLIN · DEUTSCH / ENGLISH</p>
             <h1 className={styles.title}>{content.heading}</h1>
             <p className={styles.lead}>{content.lead}</p>
             <p className={styles.copy}>{content.intro}</p>
             <Flex css={{ ...styles.actions }}>
-              <ButtonLink href="/study">{content.start}</ButtonLink>
-              <ButtonLink href="/dashboard" appearance="ghost">
-                {content.dashboard}
-              </ButtonLink>
+              <ButtonLink href="/dashboard">{content.dashboard}</ButtonLink>
             </Flex>
           </Stack>
           <Divider />
@@ -41,14 +38,17 @@ export const LandingPage = ({ language }: LandingPageProps) => {
           </Grid>
           <Divider />
           <Stack as="section" css={{ ...styles.section }}>
-            <h2 className={styles.heading}>{content.closing}</h2>
-            <p className={styles.copy}>{content.closingText}</p>
-            <Flex css={{ ...styles.actions }}>
-              <ButtonLink href="/study">{content.start}</ButtonLink>
-            </Flex>
+            <h2 className={styles.heading}>{content.installation.title}</h2>
+            <Grid css={{ ...styles.features }}>
+              {content.installation.platforms.map((platform) => (
+                <Stack key={platform.title} css={{ ...styles.section }}>
+                  <h3 className={styles.platformHeading}>{platform.title}</h3>
+                  <p className={styles.copy}>{platform.text}</p>
+                </Stack>
+              ))}
+            </Grid>
           </Stack>
           <Stack as="footer" css={{ ...styles.footer }}>
-            <p>{content.footer}</p>
             <a
               className={styles.link}
               href="https://www.bamf.de/DE/Themen/Integration/ZugewanderteTeilnehmende/Einbuergerung/einbuergerung-node.html"

@@ -123,3 +123,44 @@ for (const { language, label, next, previous, september, october, clear } of [
     },
   )
 }
+
+test(
+  'mobile navigation stays above appearance controls while scrolling',
+  { tag: '@webkit' },
+  async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 600 })
+
+    await page.goto('/settings')
+
+    const appearance = page.getByRole('radiogroup', { name: 'Appearance' })
+
+    await expect(appearance).toBeVisible()
+
+    const navigation = page.getByRole('navigation')
+    const navigationBounds = await navigation.boundingBox()
+    const appearanceBounds = await appearance.boundingBox()
+
+    if (navigationBounds === null || appearanceBounds === null) {
+      throw new Error('Settings controls and navigation must have visible bounds.')
+    }
+
+    await page.evaluate(
+      (offset) => window.scrollBy(0, offset),
+      appearanceBounds.y - navigationBounds.y,
+    )
+
+    await expect
+      .poll(async () =>
+        navigation.evaluate((element) => {
+          const bounds = element.getBoundingClientRect()
+
+          return element.contains(document.elementFromPoint(60, bounds.top + 20))
+        }),
+      )
+      .toBe(true)
+
+    await navigation.getByRole('link', { name: 'Home', exact: true }).click()
+
+    await expect(page).toHaveURL(/\/dashboard$/)
+  },
+)

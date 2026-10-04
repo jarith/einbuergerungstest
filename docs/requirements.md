@@ -78,11 +78,11 @@ matching the published format.
   the backup and requires confirmation before replacing existing data. Invalid backups
   must leave existing data intact.
 - The app offers a confirmed reset of local progress.
-- The PWA provides a standalone launch, suitable icons, an install guide for iPhone and
-  iPad, and offline access to the app, questions, and images after installation. Layouts
-  must remain usable at iPhone and iPad sizes, including touch controls and display safe
-  areas. Answer correctness and question status must be conveyed with text or icons in
-  addition to color.
+- The PWA provides a standalone launch, suitable icons, numbered iOS and Android install
+  guides directly in Settings, and offline access to the app, questions, and images after
+  installation. Layouts must remain usable at iPhone and iPad sizes, including touch
+  controls and display safe areas. Answer correctness and question status must be conveyed
+  with text or icons in addition to color.
 
 ## Study sessions and repeated answers
 

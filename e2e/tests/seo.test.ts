@@ -42,12 +42,26 @@ for (const language of ['de', 'en'] as const) {
       'content',
       process.env['SITE_INDEXABLE'] === 'true' ? 'index, follow' : 'noindex, follow',
     )
-    await expect(page.getByRole('heading', { level: 2 })).toHaveCount(7)
+
+    const dashboard = page.getByRole('link', {
+      name: language === 'de' ? 'Zur Lernübersicht' : 'Open dashboard',
+      exact: true,
+    })
+
+    await expect(dashboard).toHaveCount(1)
+    await expect(dashboard).toHaveAttribute('href', '/dashboard')
     await expect(
-      page
-        .getByRole('link', { name: language === 'de' ? 'Jetzt üben' : 'Start practising' })
-        .first(),
-    ).toHaveAttribute('href', '/study')
+      page.locator('a[href^="/"]').filter({ hasNotText: /Einbürgerungstest|Deutsch|English/ }),
+    ).toHaveCount(1)
+    await expect(page.getByRole('heading', { name: 'Android · Chrome', exact: true })).toBeVisible()
+    await expect(
+      page.getByRole('heading', { name: 'iPhone & iPad · Safari', exact: true }),
+    ).toBeVisible()
+    await expect(
+      page.getByText(
+        /Independent study tool|Unabhängiges Lernangebot|Study for Berlin|Für Berlin lernen|Learn with English translations|Mit englischen Übersetzungen/,
+      ),
+    ).toHaveCount(0)
 
     await page.setViewportSize({ width: 360, height: 800 })
 
@@ -106,9 +120,10 @@ test('training keeps one title through navigation and stays non-indexable', asyn
 
   await page.goto('/en/')
 
-  await page.getByRole('link', { name: 'Start practising', exact: true }).first().click()
+  await page.getByRole('link', { name: 'Open dashboard', exact: true }).click()
 
-  await expect(page).toHaveTitle('Study · Einbürgerungstest Berlin')
+  await expect(page).toHaveURL(/\/dashboard$/)
+  await expect(page).toHaveTitle('Dashboard · Einbürgerungstest Berlin')
   await expect(page.locator('head title')).toHaveCount(1)
 
   await page.getByRole('navigation').getByRole('link', { name: 'Progress', exact: true }).click()

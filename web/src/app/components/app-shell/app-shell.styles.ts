@@ -32,6 +32,7 @@ export const shellStyles = {
     },
   }),
   main: css.raw({
+    isolation: 'isolate',
     gap: 'layout.section',
     minWidth: '0',
     paddingBlock: '[1.5rem calc(6rem + env(safe-area-inset-bottom))]',

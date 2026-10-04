@@ -32,9 +32,6 @@ export const LandingHeader = ({ language, content }: LandingHeaderProps) => (
       >
         English
       </a>
-      <a className={styles.link} href="/dashboard">
-        {content.dashboard}
-      </a>
     </Flex>
   </Flex>
 )

@@ -2,9 +2,9 @@
 
 The canonical origin is `https://einbuergerungstest.jarith.dev`. The only indexable pages
 in this first release are `/` (German) and `/en/` (English). They contain the Berlin
-introduction, question coverage, translations, offline preparation, installation, and
-device-local progress information. The existing learner dashboard is `/dashboard`; the
-installed app opens there. Study and other learner URLs retain their paths.
+introduction, mock tests, offline preparation, iOS/Android installation, and device-local
+progress information. The existing learner dashboard is `/dashboard`; the installed app
+opens there. Study and other learner URLs retain their paths.
 
 ## Build and indexing policy
 
@@ -20,10 +20,10 @@ The build prerenders both language pages with React and the shared design system
 delivered public pages load only a small analytics entry and the Umami tracker; they do
 not initialize the learner application, question bank, learner storage, localization
 preferences, or service worker. See [analytics coverage](analytics.md). Language links
-perform normal navigation and work with JavaScript disabled. Training links load the
-existing app. The renderer supplies one title, a language-specific description, absolute
-canonical, reciprocal `de`/`en`/`x-default` alternates, and Open Graph and Twitter
-metadata with a 1200 × 630 PNG share image.
+perform normal navigation and work with JavaScript disabled. The single dashboard button
+loads the existing app at `/dashboard`. The renderer supplies one title, a
+language-specific description, absolute canonical, reciprocal `de`/`en`/`x-default`
+alternates, and Open Graph and Twitter metadata with a 1200 × 630 PNG share image.
 
 `app.html` contains `noindex, follow` before JavaScript runs. The app updates its existing
 HTML title on route/language changes. Learner routes, progress, settings, question
@@ -48,7 +48,8 @@ provider-hostname redirect:
 
 - Serve `/` from `index.html` and `/en/` from `en/index.html`.
 - Permanently redirect `/en` to `/en/` and `/index.html` to `/`, preserving queries.
-- Rewrite learner paths to `app.html` with status 200. The exact allowlist is defined in
+- Rewrite learner paths to `/app` with status 200, serving the `app.html` asset without
+  Cloudflare’s `.html` canonical redirect. The exact allowlist is defined in
   `web/src/app/seo/site.ts`; it includes dashboard, study, mock-test, progress, and
   settings routes. Do not use a site-wide fallback to the public homepage.
 - Return `404.html` with HTTP 404 for unknown public paths. Missing assets must also

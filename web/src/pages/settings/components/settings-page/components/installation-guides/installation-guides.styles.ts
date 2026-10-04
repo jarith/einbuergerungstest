@@ -1,25 +1,16 @@
 import { css } from '@einbuergerungstest/design-system'
 
 export const styles = {
-  root: css.raw({ overflowWrap: 'anywhere', hyphens: 'auto' }),
-  eyebrow: css({ textStyle: 'caption' }),
-  title: css({
-    textStyle: 'compactTitle',
-    '@media (min-width: 48rem)': { textStyle: 'installationTitle' },
-  }),
-  heading: css({
-    textStyle: 'compactHeading',
-    '@media (min-width: 48rem)': { textStyle: 'installationHeading' },
-  }),
-  transferHeading: css({
-    textStyle: 'compactSubheading',
-    '@media (min-width: 48rem)': { textStyle: 'installationTransferHeading' },
-  }),
+  root: css.raw({ containerType: 'inline-size' }),
   columns: css.raw({
     gridTemplateColumns: 'minmax(0, 1fr)',
     gap: '32',
     alignItems: 'start',
-    '@media (min-width: 64rem)': { gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 1fr)' },
+    '@container (min-width: 40rem)': { gridTemplateColumns: 'repeat(2, minmax(0, 1fr))' },
+  }),
+  heading: css({
+    textStyle: 'compactHeading',
+    '@media (min-width: 48rem)': { textStyle: 'installationHeading' },
   }),
   steps: css.raw({ listStyle: 'none', padding: '0', gap: '12' }),
   step: css.raw({ alignItems: 'start', gap: '16', paddingBlock: '8' }),
@@ -44,5 +35,4 @@ export const styles = {
     color: 'content.muted',
     '@media (min-width: 48rem)': { textStyle: 'caption' },
   }),
-  icon: css({ color: 'accent', width: 'icon.action', height: 'icon.action' }),
 }

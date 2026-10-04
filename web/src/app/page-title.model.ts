@@ -16,7 +16,6 @@ export const createPageTitleAtom = (appRoute: AppRoute, routes: AppRoutes) => {
     { route: routes.questionHistory, title: 'navigation.questionHistory' },
     { route: routes.testReview, title: 'navigation.testReview' },
     { route: routes.settings, title: 'navigation.settings' },
-    { route: routes.installation, title: 'navigation.installation' },
   ] as const
 
   return computed(() => {

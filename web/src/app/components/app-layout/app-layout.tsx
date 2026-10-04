@@ -61,8 +61,7 @@ export const AppLayout = reatomComponent(({ route, routes, title, recovery }: Ap
         routes.study.groupEntry.exact() ||
         routes.study.groupStudy.exact() ||
         routes.mock.entry.match() ||
-        routes.testReview.exact() ||
-        routes.installation.exact()
+        routes.testReview.exact()
       }
       destinations={[
         {
