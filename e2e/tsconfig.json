@@ -1,8 +1,8 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "types": ["node"],
+    "types": ["node", "vite/client"],
     "lib": ["ES2025", "DOM", "DOM.Iterable", "ESNext.Disposable"]
   },
-  "include": ["src", "steps", "*.config.ts"]
+  "include": ["behavior", "journeys", "support", "tests", "*.config.ts"]
 }

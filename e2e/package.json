@@ -10,10 +10,12 @@
     "format:check": "yarn run -T oxfmt --check .",
     "test": "echo",
     "test:browser": "echo",
-    "bddgen": "yarn run -T bddgen",
-    "test:e2e": "yarn workspace @einbuergerungstest/web build && yarn bddgen && yarn run -T playwright test",
-    "test:e2e:headed": "yarn workspace @einbuergerungstest/web build && yarn bddgen && yarn run -T playwright test --headed",
-    "browser:install": "yarn run -T playwright install chromium",
-    "report": "yarn run -T playwright show-report"
+    "bddgen": "yarn run -T bddgen -c behavior.config.ts",
+    "test:e2e": "yarn workspace @einbuergerungstest/web build && yarn run -T playwright test --project=e2e",
+    "test:e2e:headed": "yarn workspace @einbuergerungstest/web build && yarn run -T playwright test --project=e2e --headed",
+    "browser:install": "yarn run -T playwright install chromium webkit",
+    "report": "yarn run -T playwright show-report",
+    "test:behavior": "yarn bddgen && yarn run -T playwright test -c behavior.config.ts",
+    "test:ui": "yarn workspace @einbuergerungstest/web build && yarn run -T playwright test --project=ui --project=webkit"
   }
 }

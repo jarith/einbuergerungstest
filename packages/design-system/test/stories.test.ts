@@ -106,16 +106,52 @@ for (const colorScheme of ['light', 'dark']) {
     await expect(answers.nth(1)).toHaveAttribute('aria-checked', 'true')
     await expect(page.getByText('Correct', { exact: true })).toBeVisible()
 
-    await answers.nth(0).hover()
-
-    await expect(answers.nth(0)).toHaveCSS(
-      'background-color',
-      colorScheme === 'light' ? 'rgb(246, 212, 208)' : 'rgb(77, 38, 39)',
-    )
-
     const accessibility = await new AxeBuilder({ page }).include('#storybook-root').analyze()
 
     expect(accessibility.violations).toEqual([])
+  })
+}
+
+for (const { colorScheme, incorrect, correct } of [
+  {
+    colorScheme: 'light',
+    incorrect: { background: 'rgb(246, 212, 208)', border: 'rgb(158, 52, 66)' },
+    correct: { background: 'rgb(212, 226, 179)', border: 'rgb(63, 91, 23)' },
+  },
+  {
+    colorScheme: 'dark',
+    incorrect: { background: 'rgb(77, 38, 39)', border: 'rgb(237, 160, 161)' },
+    correct: { background: 'rgb(46, 61, 26)', border: 'rgb(167, 192, 128)' },
+  },
+]) {
+  test(`${colorScheme} answer feedback keeps its colors when selected and hovered`, async ({
+    page,
+  }) => {
+    await page.goto(
+      `/iframe.html?id=components-choicegroup--feedback&globals=colorScheme:${colorScheme}`,
+    )
+
+    for (const { marker, result, background, border } of [
+      { marker: 'A', result: 'Incorrect', ...incorrect },
+      { marker: 'D', result: 'Correct', ...correct },
+    ]) {
+      const answer = page.getByRole('radio', { name: new RegExp(`^${marker}\\b`) })
+
+      await expect(answer).toContainText(result)
+      await expect(answer).toHaveCSS('background-color', background)
+      await expect(answer).toHaveCSS('border-color', border)
+
+      await answer.hover()
+
+      await expect(answer).toHaveCSS('background-color', background)
+      await expect(answer).toHaveCSS('border-color', border)
+
+      await answer.click()
+
+      await expect(answer).toBeChecked()
+      await expect(answer).toHaveCSS('background-color', background)
+      await expect(answer).toHaveCSS('border-color', border)
+    }
   })
 }
 

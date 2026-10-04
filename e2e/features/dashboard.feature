@@ -1,98 +1,72 @@
-Feature: See learning progress and a planned test date on the dashboard
+Feature: Track learning progress and a planned test date
 
   Scenario: Progress counts contributing questions and rounds to a whole percent
-    Given I open the app with a fresh learner profile
-    Then the dashboard shows 0 of 310 questions contributing to progress and 0 percent
-    When I start studying
+    Given a learner has no saved history
+    Then overall progress is 0 of 310 questions contributing to progress and 0 percent
+    When I start a new all-question study session
     And I select study answer "A"
-    And I open dashboard
-    Then the dashboard shows 0 of 310 questions contributing to progress and 0 percent
-    When I open progress
-    And I open question 1 from progress
+    Then overall progress is 0 of 310 questions contributing to progress and 0 percent
+    When I start a new study session at question 1
     And I select study answer "D"
-    And I open dashboard
-    Then the dashboard shows 1 of 310 questions contributing to progress and 0 percent
-    When I open progress
-    And I open question 2 from progress
+    Then overall progress is 1 of 310 questions contributing to progress and 0 percent
+    When I start a new study session at question 2
     And I select study answer "B"
-    And I open dashboard
-    Then the dashboard shows 2 of 310 questions contributing to progress and 1 percent
-    When I open progress
-    And I open question 1 from progress
+    Then overall progress is 2 of 310 questions contributing to progress and 1 percent
+    When I start a new study session at question 1
     And I select study answer "A"
-    And I open dashboard
-    Then the dashboard shows 1 of 310 questions contributing to progress and 0 percent
+    Then overall progress is 1 of 310 questions contributing to progress and 0 percent
 
   Scenario: A planned date counts down, marks today, and clears on the next opening
-    Given I open the app on local date "2026-09-26"
-    When I open settings
-    And I set the test date to "2026-10-01"
-    And I open dashboard
-    Then the dashboard shows 5 days until the test
+    Given a learner starts on local date "2026-09-26"
+    When I set the test date to "2026-10-01"
+    Then there are 5 local calendar days until the test
     When the local date becomes "2026-10-01"
-    And I reload the app
-    Then the dashboard says the test is today
+    And I restart with my saved history
+    Then the planned test is today
     When the local date becomes "2026-10-02"
-    And I reload the app
-    Then the dashboard has no test date message
-    When I open settings
-    Then the test date is empty
+    And I restart with my saved history
+    Then there is no current test countdown
+    And the test date is empty
 
   Scenario: A past date is rejected and a future date can be cleared manually
-    Given I open the app on local date "2026-09-26"
-    When I open settings
-    And I try to set the test date to "2026-09-25"
-    Then the past test date is rejected with visible feedback
-    When I open dashboard
-    Then the dashboard has no test date message
-    When I open settings
-    And I set the test date to "2026-10-01"
-    And I open dashboard
-    Then the dashboard shows 5 days until the test
-    When I open settings
-    And I clear the test date
-    And I open dashboard
-    And I reload the app
-    Then the dashboard has no test date message
+    Given a learner starts on local date "2026-09-26"
+    When I try to set the test date to "2026-09-25"
+    Then the past test date is rejected
+    And there is no current test countdown
+    When I set the test date to "2026-10-01"
+    Then there are 5 local calendar days until the test
+    When I clear the test date
+    And I restart with my saved history
+    Then there is no current test countdown
 
   Scenario: Backup and import restore the selected language and test date
-    Given I open the app on local date "2026-09-26"
-    When I choose German as UI language
-    And I open settings
+    Given a learner starts on local date "2026-09-26"
+    When I choose German as my preferred language
     And I set the test date to "2026-10-01"
-    And I open progress
-    And I export my progress
-    And I choose English as UI language
-    And I open settings
+    And I create a backup of my progress
+    And I choose English as my preferred language
     And I clear the test date
-    And I open progress
-    And I import the exported progress
+    And I preview the saved backup
     And I confirm replacing local progress
-    And I open dashboard
-    Then German interface controls are visible
-    And the dashboard shows 5 days until the test
+    Then my preferred language is German
+    And there are 5 local calendar days until the test
 
-  Scenario: An open dashboard refreshes at local midnight before the UTC day changes
-    Given I open the app on local date "2026-10-02"
-    When I open settings
-    And I set the test date to "2026-10-03"
-    And I open dashboard
-    And the app resumes at "2026-10-02T23:59:00+02:00"
-    Then the dashboard shows 1 days until the test
-    When 1 minute passes on the dashboard
-    Then the dashboard says the test is today
-    When the app resumes at "2026-10-04T08:00:00+02:00"
-    Then the dashboard has no test date message
-    When I open settings
-    Then the test date remains "2026-10-03"
-    When I reload the app
+  Scenario: The countdown refreshes at local midnight before the UTC day changes
+    Given a learner starts on local date "2026-10-02"
+    When I set the test date to "2026-10-03"
+    And the learner resumes at "2026-10-02T23:59:00+02:00"
+    Then there are 1 local calendar days until the test
+    When 1 minute passes
+    Then the planned test is today
+    When the learner resumes at "2026-10-04T08:00:00+02:00"
+    Then there is no current test countdown
+    And the test date remains "2026-10-03"
+    When I restart with my saved history
     Then the test date is empty
 
   Scenario: Resuming across the autumn timezone change refreshes the local calendar day
-    Given I open the app on local date "2026-10-24"
-    When I open settings
-    And I set the test date to "2026-10-25"
-    And I open dashboard
-    Then the dashboard shows 1 days until the test
-    When the app resumes at "2026-10-25T08:00:00+01:00"
-    Then the dashboard says the test is today
+    Given a learner starts on local date "2026-10-24"
+    When I set the test date to "2026-10-25"
+    Then there are 1 local calendar days until the test
+    When the learner resumes at "2026-10-25T08:00:00+01:00"
+    Then the planned test is today
