@@ -1,18 +1,11 @@
 import { defineConfig, devices } from '@playwright/test'
-import { defineBddConfig } from 'playwright-bdd'
 
 import { fileURLToPath } from 'node:url'
 
-const testDir = defineBddConfig({
-  features: 'features/**/*.feature',
-  steps: 'steps/**/*.ts',
-  outputDir: '.features-gen',
-})
-
 export default defineConfig({
-  testDir,
   forbidOnly: Boolean(process.env['CI']),
   retries: 0,
+  outputDir: 'test-results/browser',
   timeout: 30_000,
   reporter: [['list'], ['html', { open: 'never' }]],
   use: {
@@ -21,7 +14,18 @@ export default defineConfig({
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
   },
-  projects: [{ name: 'chromium', use: devices['Desktop Chrome'] }],
+  projects: [
+    { name: 'smoke', testDir: './journeys', grep: /@smoke/, use: devices['Desktop Chrome'] },
+    {
+      name: 'e2e',
+      testDir: './journeys',
+      grepInvert: /@smoke/,
+      dependencies: ['smoke'],
+      use: devices['Desktop Chrome'],
+    },
+    { name: 'ui', testDir: './tests', use: devices['Desktop Chrome'] },
+    { name: 'webkit', testDir: './tests', grep: /@webkit/, use: devices['Desktop Safari'] },
+  ],
   webServer: {
     command: 'yarn preview --port 4173 --strictPort',
     cwd: fileURLToPath(new URL('../web', import.meta.url)),

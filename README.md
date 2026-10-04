@@ -1,8 +1,8 @@
 # Einbürgerungstest Berlin
 
 A device-local study app for the Berlin citizenship test, with all 310 questions,
-English/German UI, timed mock tests, progress backups and offline installation. Built
-with React, Reatom, Mantine and Panda.
+English/German UI, timed mock tests, progress backups and offline installation. Built with
+React, Reatom, Mantine and Panda.
 
 ## Start here
 
@@ -27,43 +27,43 @@ To update a tool, change its version in `mise.toml`, regenerate `mise.lock` with
 `mise install --locked`. For Yarn, record the SHA-256 of the published `yarn.js` in each
 platform entry of `mise.lock`; its Aqua recipe does not supply a checksum.
 
-The application listens on all network interfaces at port `5173` and fails if that port
-is already in use. Open the Network URL printed by Vite on both your computer and iPhone
-while connected to the same Wi-Fi, or use `http://127.0.0.1:5173` on the computer.
-Offline PWA testing requires a production build over HTTPS; development does not register
-a service worker. Run `yarn storybook` in another terminal
-for the component workbench at `http://localhost:6006`. Both commands generate Panda
-assets before starting and watch styles during development. Stop the command to stop its
-processes.
+The application listens on all network interfaces at port `5173` and fails if that port is
+already in use. Open the Network URL printed by Vite on both your computer and iPhone
+while connected to the same Wi-Fi, or use `http://127.0.0.1:5173` on the computer. Offline
+PWA testing requires a production build over HTTPS; development does not register a
+service worker. Run `yarn storybook` in another terminal for the component workbench at
+`http://localhost:6006`. Both commands generate Panda assets before starting and watch
+styles during development. Stop the command to stop its processes.
 
-Application logic stays in `web`,
-browser acceptance tests in `e2e`, and reusable infrastructure in `packages/*`. All
-dependencies are declared at the repository root. Workspace packages use the
-`@einbuergerungstest/*` scope.
+Application logic stays in `web`, browser acceptance tests in `e2e`, and reusable
+infrastructure in `packages/*`. All dependencies are declared at the repository root.
+Workspace packages use the `@einbuergerungstest/*` scope.
 
 ## Commands
 
 Run these from the repository root with mise activated, or prefix a command with
 `mise exec --`:
 
-| Command                                                  | Purpose                                                                  |
-| -------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `yarn dev`                                               | Develop the application with Vite and Panda watching                     |
-| `yarn build`                                             | Build the production application into `web/dist`                         |
-| `yarn workspace @einbuergerungstest/web preview`         | Serve an existing production build locally                               |
-| `yarn storybook`                                         | Develop component stories                                                |
-| `yarn workspace @einbuergerungstest/design-system build` | Build the static workbench                                               |
-| `yarn ts:compile`                                        | Check all workspaces, tests, stories and configuration with TypeScript 7 |
-| `yarn lint`                                              | Generate Panda helpers, then run Actionlint, ast-grep, and Oxlint        |
-| `yarn lint:ast-grep`                                     | Run custom ast-grep rules in every workspace                             |
-| `yarn format:check` / `yarn format`                      | Oxfmt checks / formatting                                                |
-| `yarn test`                                              | Existing workspace checks (no application unit tests)                               |
-| `yarn test:browser`                                      | React/Reatom browser integration tests                                   |
-| `yarn test:storybook`                                    | Build and test component stories with Playwright                         |
-| `yarn test:e2e`                                          | Build and test the complete app with Playwright BDD                      |
-| `yarn panda:prepare`                                     | Regenerate ignored Panda utilities and CSS                               |
-| `yarn browser:install`                                   | Install the pinned Chromium browser                                      |
-| `yarn create:package <name>`                             | Create an infrastructure workspace                                       |
+| Command                                                  | Purpose                                                                      |
+| -------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `yarn dev`                                               | Develop the application with Vite and Panda watching                         |
+| `yarn build`                                             | Build the production application into `web/dist`                             |
+| `yarn workspace @einbuergerungstest/web preview`         | Serve an existing production build locally                                   |
+| `yarn storybook`                                         | Develop component stories                                                    |
+| `yarn workspace @einbuergerungstest/design-system build` | Build the static workbench                                                   |
+| `yarn ts:compile`                                        | Check all workspaces, tests, stories and configuration with TypeScript 7     |
+| `yarn lint`                                              | Generate Panda helpers, then run Actionlint, ast-grep, and Oxlint            |
+| `yarn lint:ast-grep`                                     | Run custom ast-grep rules in every workspace                                 |
+| `yarn format:check` / `yarn format`                      | Oxfmt checks / formatting                                                    |
+| `yarn test`                                              | Existing workspace checks (no application unit tests)                        |
+| `yarn test:browser`                                      | React/Reatom browser integration tests                                       |
+| `yarn test:storybook`                                    | Build and test component stories with Playwright                             |
+| `yarn test:behavior`                                     | Run portable business specifications through application integration drivers |
+| `yarn test:e2e`                                          | Build and run four selected production E2E journeys                          |
+| `yarn test:ui`                                           | Build and run browser presentation and interaction checks                    |
+| `yarn panda:prepare`                                     | Regenerate ignored Panda utilities and CSS                                   |
+| `yarn browser:install`                                   | Install the pinned Chromium browser                                          |
+| `yarn create:package <name>`                             | Create an infrastructure workspace                                           |
 
 `preview` intentionally serves an existing build; run `build` first. Other documented
 commands prepare their generated assets. Test servers require free ports: 4173 for E2E,
@@ -85,61 +85,62 @@ check the rules and `yarn format` to apply formatting.
 - [E2E workspace](e2e/README.md)
 - [Extraction sources and intentional omissions](docs/extraction-sources.md)
 
-GitHub Actions runs separate build, lint, `ts:compile`, format check, tooling regression, E2E test,
-browser test, and Storybook test jobs on pull requests and pushes to `master`, with manual
-runs also available. All eight jobs call
-[the reusable check workflow](.github/workflows/run-check.yml), which uses mise to install
-Node and Yarn from the checked-in tool lockfile, a shared package cache, and immutable
-dependency installs. `.mise-version` pins the mise CLI used by CI. Jobs run independently
-with shallow checkouts, and newer runs cancel superseded runs for the same pull request or
-branch. The E2E, browser, and Storybook jobs install Chromium with its system
-dependencies. No jobs upload artifacts.
+GitHub Actions runs build, lint, type, formatting, tooling, business integration,
+component-browser, browser UI, Storybook, and selected E2E checks. E2E waits for business
+and component integration checks, then runs backup/offline smoke before reset/recovery.
+Pull requests select E2E when application or test boundaries change; master pushes run the
+complete suite. CI runs only on pull requests and master pushes. Jobs use the locked mise
+tools and immutable dependency installs. No jobs upload artifacts.
 
-The application needs no credentials, server database or external service. Learner data
-stays in IndexedDB on the device. The tooling regression job runs `yarn test:tooling`;
-application unit tests are outside this project's delivery scope. The BDD acceptance suite
-exercises the production app through its accessible controls and routes, including offline
-study, backup transfer, local-day countdown updates, and stale-window recovery. Run
-`yarn test:e2e` for all scenarios. See [audit remediation](tasks/audit-remediation.md) for
-verified results and the remaining real-device checks.
+The application needs no credentials, server database, or external service. Learner data
+stays in IndexedDB on the device. `yarn test:behavior` runs the business Gherkin against
+real application models and IndexedDB without rendering app screens. Specs describe domain
+behavior; drivers contain platform and implementation details. `yarn test:e2e` covers
+backup transfer/replacement, confirmed reset, startup recovery, and offline study against
+the production build. `yarn test:ui` owns presentation and concrete browser interactions;
+`yarn test:browser` owns focused component integration, and Storybook owns component
+visual states. Application unit tests remain outside the delivery scope. See the
+[E2E guide](e2e/README.md) and [migration record](docs/bdd-migration.md).
 
 ## Offline build and deployment
 
-Run `yarn build` and deploy the entire `web/dist` directory at the root of an HTTPS origin.
-Use a same-origin SPA fallback to `index.html` for app routes; serve asset files with their
-correct MIME types and real errors for missing files. Serve `sw.js`, `offline-check.js`,
-`index.html` and the manifest with revalidation/no-cache headers; content-hashed assets
-may use immutable caching. Publish the complete output atomically and retain older hashed
-assets while clients can still run them. Localhost preview is also a secure context.
+Run `yarn build` and deploy the entire `web/dist` directory at the root of an HTTPS
+origin. Use a same-origin SPA fallback to `index.html` for app routes; serve asset files
+with their correct MIME types and real errors for missing files. Serve `sw.js`,
+`offline-check.js`, `index.html` and the manifest with revalidation/no-cache headers;
+content-hashed assets may use immutable caching. Publish the complete output atomically
+and retain older hashed assets while clients can still run them. Localhost preview is also
+a secure context.
 
 The post-build Workbox `generateSW` step includes HTML, scripts, styles, fonts, manifest,
 icons, both generated UI catalogs, the JSON bank and all 35 optimized WebP illustrations.
-The worker verifies every entry in that same generated precache before the app says
-“Ready offline”. An incomplete download or evicted entry shows an error with retry;
-Workbox uses integrity checks when repairing cached resources. Development Vite does not
-register a service worker. Verify offline behavior using the production preview.
+The worker verifies every entry in that same generated precache before the app says “Ready
+offline”. An incomplete download or evicted entry shows an error with retry; Workbox uses
+integrity checks when repairing cached resources. Development Vite does not register a
+service worker. Verify offline behavior using the production preview.
 
-Updates download into the precache and wait until every existing app window closes.
-Finish the live mock, close the browser tabs/installed windows and reopen the app to
-activate an available update. There is no forced reload or `skipWaiting` message, so
-resource updates do not interrupt a sitting. Service-worker caches never store or clear
-learner IndexedDB data. The existing learner model supports one writing window at a time;
-reopening an active sitting treats it as unfinished under the documented storage policy.
+Updates download into the precache and wait until every existing app window closes. Finish
+the live mock, close the browser tabs/installed windows and reopen the app to activate an
+available update. There is no forced reload or `skipWaiting` message, so resource updates
+do not interrupt a sitting. Service-worker caches never store or clear learner IndexedDB
+data. The existing learner model supports one writing window at a time; reopening an
+active sitting treats it as unfinished under the documented storage policy.
 
 Questions use stable five-character lowercase alphanumeric IDs in URLs and saved history.
 The bank's `order` field controls display numbering and study order; question IDs do not
 include a section prefix.
 
-Learner snapshots and exported backups use version 3 with these question IDs and an explicit
-finish reason for completed tests. This MVP does not migrate older local data or backups;
-use a fresh learner profile for this version. Unsupported data is preserved and rejected.
+Learner snapshots and exported backups use version 3 with these question IDs and an
+explicit finish reason for completed tests. This MVP does not migrate older local data or
+backups; use a fresh learner profile for this version. Unsupported data is preserved and
+rejected.
 
-If startup shows “Saved data cannot be loaded”, use **Download saved data** to
-keep the original snapshot, then **Start with a fresh profile** and confirm the
-reset. Nothing is replaced before confirmation. The download preserves the original
-data for recovery; unsupported or damaged snapshots cannot be imported into this
-version. If another app window changes the saved data before confirmation, the reset
-is blocked: reload to inspect the current state before trying again.
+If startup shows “Saved data cannot be loaded”, use **Download saved data** to keep the
+original snapshot, then **Start with a fresh profile** and confirm the reset. Nothing is
+replaced before confirmation. The download preserves the original data for recovery;
+unsupported or damaged snapshots cannot be imported into this version. If another app
+window changes the saved data before confirmation, the reset is blocked: reload to inspect
+the current state before trying again.
 
 On iPhone/iPad, follow Settings → install guide. The Home Screen app has separate storage:
 export from Safari, import and confirm in the installed app, and prepare that copy online

@@ -5,7 +5,6 @@ on:
   push:
     branches:
       - master
-  workflow_dispatch:
 
 permissions:
   contents: read
@@ -45,8 +44,50 @@ jobs:
     with:
       script: test:tooling
 
+  behavior-tests:
+    name: Business integration specifications
+    uses: ./.github/workflows/run-check.yml
+    with:
+      script: test:behavior
+      install-browsers: true
+
+  ui-tests:
+    name: Browser UI tests
+    uses: ./.github/workflows/run-check.yml
+    with:
+      script: test:ui
+      install-browsers: true
+
+  e2e-scope:
+    name: Select E2E scope
+    runs-on: ubuntu-latest
+    outputs:
+      run: ${{ steps.scope.outputs.run }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+      - name: Check application and test boundaries
+        id: scope
+        env:
+          EVENT: ${{ github.event_name }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          if [ "$EVENT" != "pull_request" ]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          else
+            git fetch --no-tags --depth=1 origin "$BASE_SHA"
+            if git diff --quiet "$BASE_SHA" HEAD -- web e2e packages/design-system package.json yarn.lock mise.toml mise.lock .github; then
+              echo "run=false" >> "$GITHUB_OUTPUT"
+            else
+              echo "run=true" >> "$GITHUB_OUTPUT"
+            fi
+          fi
+
   e2e-tests:
-    name: E2E tests
+    name: Selected E2E journeys
+    needs: [behavior-tests, browser-tests, e2e-scope]
+    if: needs.e2e-scope.outputs.run == 'true'
     uses: ./.github/workflows/run-check.yml
     with:
       script: test:e2e

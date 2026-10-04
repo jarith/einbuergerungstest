@@ -1,35 +1,33 @@
-Feature: Recover safely after another app window changes saved data
+Feature: Preserve newer saved data when sessions conflict
   Background:
-    Given I open the app with a fresh learner profile
+    Given a learner has no saved history
 
-  Scenario: A stale mock answer offers reload and preserves the saved unfinished choice
+  Scenario: A stale mock answer cannot replace the saved unfinished choice
     When I start a mock test
     And I select mock answer "A"
-    And another app window changes the saved preferences
+    And another session saves newer preferences
     And I select a stale mock answer "B"
-    Then I see storage conflict guidance with a reload action
-    When I reload using the conflict recovery action
-    And I open progress
-    And I open the unfinished test from history
+    Then the stale change is rejected
+    When I restart with my saved history
+    And I review the unfinished mock
     Then the unfinished review retains answer "A" without grading
 
-  Scenario: A stale mock submission offers reload inside its confirmation
+  Scenario: A stale mock submission cannot grade saved answers
     When I start a mock test
     And I select mock answer "A"
-    And another app window changes the saved preferences
+    And another session saves newer preferences
     And I submit the stale mock test
-    Then the submission dialog offers conflict recovery
-    When I reload using the conflict recovery action
-    And I open progress
-    And I open the unfinished test from history
+    Then the stale change is rejected
+    When I restart with my saved history
+    And I review the unfinished mock
     Then the unfinished review retains answer "A" without grading
 
-  Scenario: A stale review translation setting offers reload without overwriting preferences
+  Scenario: A stale translation change cannot overwrite newer preferences
     When I start a mock test
-    And I submit the mock test with unanswered questions
-    And another app window changes the saved preferences
+    And I confirm submitting the mock with unanswered questions
+    And another session saves newer preferences
     And I try to change the stale review translation
-    Then I see storage conflict guidance with a reload action
-    When I reload using the conflict recovery action
-    Then the newer appearance preference is preserved
-    And the review translation remains disabled
+    Then the stale change is rejected
+    When I restart with my saved history
+    Then the review translation remains disabled
+    And the newer appearance preference is preserved

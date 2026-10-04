@@ -8,7 +8,7 @@ on:
         required: true
         type: string
       install-browsers:
-        description: Whether to install Chromium and its system dependencies
+        description: Whether to install Chromium, WebKit, and their system dependencies
         required: false
         default: false
         type: boolean

@@ -1,35 +1,97 @@
-# End-to-end tests
+# Business specifications, integration drivers, and E2E journeys
 
-This private workspace owns Playwright BDD tests. All dependencies are declared at the
-repository root; run the following commands there:
+Business specifications describe learning, scoring, progress, dates, preferences,
+confirmation, and recovery. They must remain valid when the UI, platform, or technology
+stack changes. Keep screens, routes, widgets, styles, exact interface copy, storage
+formats, and test machinery out of `features/**/*.feature`.
+
+## Commands
+
+Run from the repository root with mise activated, or prefix with `mise exec --`:
+
+| Command                                                  | Coverage                                                                                      |
+| -------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `yarn test:behavior`                                     | Generate Gherkin and run application integration specifications                               |
+| `yarn test:browser`                                      | Focused rendered-component integrations                                                       |
+| `yarn test:e2e`                                          | Build production app; run two smoke journeys, then two destructive-operation journeys         |
+| `yarn test:ui`                                           | Existing presentation and browser interaction checks in Chromium and the tagged WebKit subset |
+| `yarn workspace @einbuergerungstest/e2e bddgen`          | Check every business step has an unambiguous implementation                                   |
+| `yarn workspace @einbuergerungstest/e2e test:e2e:headed` | Run the selected E2E journeys visibly                                                         |
+| `yarn browser:install`                                   | Install the pinned Chromium and WebKit browsers                                               |
+
+## Integration specifications
+
+`behavior.config.ts` compiles the feature files using playwright-bdd. Its test-only Vite
+server serves `behavior/index.html` on port 4174. The harness loads the actual application
+models through module exports that also reference UI components, so server startup runs
+`panda:prepare` to generate their style imports even on a clean checkout. The complete
+behavior run has a five-minute limit to bound shared startup failures. The harness uses
+real IndexedDB; it renders no application screens. Each scenario gets a fresh browser
+context, storage, application instances, and controlled clock. A second persistence client
+establishes concurrent changes without clicking through another browser window.
+
+The browser is needed by the current storage and lifecycle adapters, not by the business
+specification. `behavior/harness.ts`, `behavior/fixtures`, and `behavior/steps` are
+replaceable implementation adapters. They call public application actions, observe
+results, and arrange external fixtures. They must not implement scoring, progress,
+validation, confirmation, or other production rules themselves, or mock application
+modules. Raw unsupported/corrupted profile formats belong only in fixture adapters.
+
+Date-boundary specifications use explicit example dates and Europe/Berlin as the test
+calendar. They do not depend on the wall-clock date when the suite runs. E2E fixture dates
+are relative to the current date.
+
+Business checks for language content are backed by focused `QuestionContent` component
+integrations under `web`, so the rendering connection is checked without a full app
+journey. Platform installation guidance stays in the browser UI suite. Offline behavior is
+covered by the production E2E below because a model harness cannot verify deployed asset
+caching.
+
+## Selected production E2E paths
+
+`journeys/*.test.ts` contains one user path per file, with its selection criterion:
+
+| Path                                                                            | Criterion                                             | Smoke |
+| ------------------------------------------------------------------------------- | ----------------------------------------------------- | ----- |
+| Download backup → import and confirm replacement → restored history/settings    | Irreversible replacement and actual file transfer     | Yes   |
+| Prepare online → reopen offline → study an illustrated question → retain answer | Actual service-worker/deployment/network boundary     | Yes   |
+| Confirm reset → reopen with erased history                                      | Irreversible deletion                                 | No    |
+| Recover original saved data → confirm fresh start → study successfully          | Irreversible replacement and actual recovery download | No    |
+
+Smoke failures prevent the dependent E2E project from running. Each path seeds its own
+state, uses accessible roles/labels, waits for observable outcomes, and has no automatic
+retries. Fixture code is the only E2E code allowed to arrange IndexedDB directly. Outcomes
+are verified through the user flow; exhaustive field combinations and rejection cases
+belong in integration specifications. A consumed replacement confirmation cannot erase
+subsequent progress; a newly requested import or reset is still allowed.
+
+The offline path verifies a prepared browser copy, not an installed iOS app. Installation
+and separate Home Screen storage still need real-device verification.
+
+`test:e2e` and `test:ui` build the app and use production preview on port 4173. Existing
+servers are not reused. To rerun a specific test against an existing build:
 
 ```sh
-yarn browser:install
-yarn test:e2e
-yarn workspace @einbuergerungstest/e2e test:e2e:headed
-yarn workspace @einbuergerungstest/e2e bddgen
-yarn workspace @einbuergerungstest/e2e report
+yarn workspace @einbuergerungstest/e2e run -T playwright test --project=smoke journeys/backup.test.ts
+yarn workspace @einbuergerungstest/e2e run -T playwright test --project=e2e --no-deps journeys/reset.test.ts
 ```
 
-On Linux CI, use `yarn browser:install --with-deps` to install browser system
-dependencies.
+## UI checks and CI
 
-Put executable Gherkin in `features/**/*.feature` and step definitions in `steps/**/*.ts`.
-Playwright's page and browser context are scenario-local fixtures. Add fixtures here when
-a scenario needs additional external setup; do not import web implementation or state.
+`tests/**/*.test.ts` owns responsive layout, touch targets, image zoom, concrete keyboard
+and focus interactions, date/timer formatting, installation guidance, and deployed
+manifest assets. The `webkit` project runs cases tagged `@webkit`. These tests may depend
+on UI or platform details; they are not the portable business contract. Shared browser
+helpers live in `support/browser.ts`. Component colors and visual variants stay in
+Storybook coverage.
 
-Both execution commands build the application, regenerate scenarios, and start Vite
-preview at `http://127.0.0.1:4173`. The port must be free. Existing servers are never
-reused, including locally, so tests exercise the current production build. BDD generation
-fails on missing or ambiguous steps. CI rejects focused tests. Failures are not retried
-automatically.
+CI runs E2E only after business integration and component-browser checks succeed. On pull
+requests it selects the four journeys when app, E2E, design-system, dependency/toolchain,
+or workflow paths change. The complete suite runs on master pushes. CI runs only on pull
+requests and master pushes. No application unit-test requirement is introduced by this
+migration.
 
-`.features-gen`, `test-results`, and `playwright-report` are disposable Git-ignored
-output. The HTML report includes retained failure traces and screenshots. Root lint,
-format and type checks include this workspace's authored steps and configuration.
-
-Use accessible names for locators and observable outcomes for assertions. Keep component
-visual states in the design system's Storybook tests. Application unit tests are outside
-this project's scope; verify domain outcomes through the acceptance flows. Mock questions
-must be identified by their key and full content because some prompts occur more than
-once.
+`.features-gen`, `test-results`, and `playwright-report` are disposable ignored output.
+Generation rejects missing/ambiguous steps; CI rejects focused tests. Production-browser
+failures retain traces and screenshots. See
+[migration and coverage ownership](../docs/bdd-migration.md).

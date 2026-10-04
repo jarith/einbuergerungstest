@@ -1,11 +1,11 @@
 Feature: Practice a Berlin Einbürgerungstest
   Background:
-    Given I open the app with a fresh learner profile
-    And I choose German as UI language
+    Given a learner has no saved history
+    When I choose German as my preferred language
 
   Scenario: A live mock follows the published test format
     When I start a mock test
-    Then the mock timer starts at 60 minutes
+    Then the mock has 60 minutes remaining
     And the mock contains 30 general and 3 Berlin questions without repeats
     And English translation is unavailable in the live mock
 
@@ -13,31 +13,30 @@ Feature: Practice a Berlin Einbürgerungstest
     When I start a mock test
     And I select mock answer "A"
     And I change mock answer to "B"
-    Then only mock answer "B" is selected
-    And no answer feedback is shown
+    Then the selected mock answer is "B"
+    And answer correctness is withheld
     When I go to the next mock question
     And I go to the previous mock question
-    Then only mock answer "B" is selected
+    Then the selected mock answer is "B"
 
   Scenario: Blank answers warn before submission and score zero
     When I start a mock test
-    And I try to submit the mock test
-    Then I am warned that 33 questions are unanswered
+    And I request mock submission
+    Then submission awaits confirmation for 33 unanswered questions
     When I cancel mock submission
-    Then the live mock remains open
-    When I submit the mock test with unanswered questions
+    Then the mock remains active
+    When I confirm submitting the mock with unanswered questions
     Then the mock result is 0 of 33 and "failed"
-    And the completed test review shows every question and correct answer
-    When I open progress
-    Then the question totals are 310 not started, 0 needing review, 0 learning, and 0 learned
+    And the completed review includes every question and correct answer
+    And the question totals are 310 not started, 0 needing review, 0 learning, and 0 learned
     And the mock totals are 1 completed, 0 passed, 1 failed, and 0 unfinished
-    When I open the completed test from history
-    Then the completed test review shows every question and correct answer
+    When I review the completed mock
+    Then the completed review includes every question and correct answer
 
   Scenario Outline: The pass threshold is 17 correct answers
     When I start a mock test
     And I answer <correct> mock questions correctly and leave the rest blank
-    And I submit the mock test with unanswered questions
+    And I confirm submitting the mock with unanswered questions
     Then the mock result is <correct> of 33 and "<result>"
 
     Examples:
@@ -46,37 +45,34 @@ Feature: Practice a Berlin Einbürgerungstest
       | 17      | passed |
 
   Scenario: Reaching the time limit submits and scores the test
-    Given the browser clock is controlled
+    Given the current time is "2026-01-01T10:00:00Z"
     When I start a mock test
     And 60 minutes pass
     Then the mock result is 0 of 33 and "failed"
-    When I open progress
-    Then the mock totals are 1 completed, 0 passed, 1 failed, and 0 unfinished
+    And the mock totals are 1 completed, 0 passed, 1 failed, and 0 unfinished
 
   Scenario: Leaving early retains an unfinished attempt without scoring it
     When I start a mock test
     And I select mock answer "A"
-    And I try to leave the mock test
-    Then I see an exit confirmation
-    When I stay in the mock test
-    Then the live mock remains open
-    And only mock answer "A" is selected
-    When I leave the mock test after confirmation
-    And I open progress
-    Then the unfinished test appears in history without a score
+    And I request to end the mock early
+    Then ending the mock awaits confirmation
+    When I cancel ending the mock
+    Then the mock remains active
+    And the selected mock answer is "A"
+    When I confirm ending the mock early
+    Then the saved mock is unfinished and has no score
     And the mock totals are 0 completed, 0 passed, 0 failed, and 1 unfinished
     And the question totals are 310 not started, 0 needing review, 0 learning, and 0 learned
-    When I open the unfinished test from history
-    Then the unfinished test review shows mock answer "A" without a score
+    When I review the unfinished mock
+    Then the unfinished review retains answer "A" without grading
 
   Scenario: A brief interruption preserves the test but a fresh launch ends it
-    Given the browser clock is controlled
+    Given the current time is "2026-01-01T10:00:00Z"
     When I start a mock test
     And I select mock answer "A"
-    And I briefly background the app
-    Then the live mock remains open
-    And only mock answer "A" is selected
-    And the mock timer shows 55 minutes remaining
-    When I relaunch the app
-    And I open progress
-    Then the unfinished test appears in history without a score
+    And the learner pauses for 5 minutes without ending the session
+    Then the mock remains active
+    And the selected mock answer is "A"
+    And the mock has 55 minutes remaining
+    When I restart with my saved history
+    Then the saved mock is unfinished and has no score
