@@ -156,8 +156,7 @@ Production preview reads the policy from the built `_headers` file, so browser c
 exercise the same policy on public pages, learner routes, worker scripts, and cached
 offline HTML. Development's Vite/HMR server is unaffected. When changing the policy, first
 check `Content-Security-Policy-Report-Only`, then enforce `Content-Security-Policy` after
-the supported flows pass. The security browser tests check both allowed flows and blocked
-scripts/connections. Verify the actual Cloudflare headers after the first deploy.
+the supported flows pass. Verify the actual Cloudflare headers after the first deploy.
 
 This policy still trusts the existing third-party tracker; it does not pin its content or
 isolate it from device-local data.
