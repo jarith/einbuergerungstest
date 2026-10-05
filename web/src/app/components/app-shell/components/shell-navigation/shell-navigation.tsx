@@ -24,6 +24,7 @@ export const ShellNavigation = ({ label, destinations }: ShellNavigationProps) =
         label={<span className={styles.navLabel}>{destination.label}</span>}
         leftSection={<Icon aria-hidden="true" focusable="false" className={styles.icon} />}
         active={destination.active}
+        data-navigation-current={destination.active || undefined}
         href={destination.href}
         className={styles.navItem}
       />

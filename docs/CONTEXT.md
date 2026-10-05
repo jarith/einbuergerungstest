@@ -63,6 +63,18 @@ Learned status, rounded to the nearest whole percent.
 **Group progress**: The share of a question group currently in Learning or Learned status,
 rounded to the nearest whole percent.
 
+The dashboard donut and group bars show exact status proportions in this order: Not
+started, Needs review, Learning, Learned. Whole-number labels do not determine segment
+sizes; 100% contributing can still include Learning, and only all Learned is fully green.
+The overall legend previews slices on pointer hover or keyboard focus and toggles a
+persistent selection on touch, Enter, or Space. Mouse clicks do nothing; mouse interaction
+only previews on hover. Escape or an outside press clears the highlight. Zero-count
+statuses remain selectable without drawing or dimming slices. Desktop and tablet center
+the chart beside its legend; mobile places a compact two-column legend below, with inline
+count and percentage values. Group bars expose their group's contributing count and four
+status counts and percentages in a tooltip on mouse hover or keyboard focus. Touch does
+not open these tooltips.
+
 **Test date**: The learner's optional planned date for taking the real Einbürgerungstest,
 distinct from a mock-test sitting.
 
@@ -90,6 +102,19 @@ Mobile navigation stays fixed at the bottom of the viewport, above page controls
 content establishes its own stacking context so segmented controls cannot cover
 navigation. The mock-test exit confirmation uses “Stay in test” / “Im Test bleiben” to
 retain the active attempt.
+
+Forward navigation starts at the top and focuses the destination heading after its content
+renders. Question navigation focuses the German question heading; answering does not move
+focus. Browser Back/Forward keeps native scroll restoration. A single pointer tap on the
+active primary-navigation destination stays in the current session; two consecutive taps
+within 400 ms scroll to the top without reopening the route or adding history. Keyboard
+activation performs that action immediately. Reduced-motion preferences disable smooth
+scrolling. Cancelled pointer gestures clear the tap sequence.
+
+Touch targets for the translation switch and dialog close control are at least 44px.
+Full-screen image dialogs account for all display safe areas. The document theme color
+follows the saved appearance; the manifest launch background remains the default light
+appearance. Installed iOS/Android system bars and safe areas require real-device checks.
 
 The calendar displays dates as `DD.MM.YYYY` while storing `YYYY-MM-DD`. Settings disables
 past popup dates with `excludeDate`, allowing typed past dates to reach the existing field

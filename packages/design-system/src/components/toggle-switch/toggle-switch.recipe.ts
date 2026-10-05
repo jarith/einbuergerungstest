@@ -5,7 +5,12 @@ export const toggleSwitchRecipe = defineSlotRecipe({
   slots: ['root', 'body', 'input', 'track', 'thumb', 'trackLabel', 'label', 'description', 'error'],
   base: {
     root: { minWidth: 0 },
-    body: { alignItems: 'center', gap: 'layout.inline' },
+    body: {
+      alignItems: 'center',
+      gap: 'layout.inline',
+      minHeight: 'control.action',
+      touchAction: 'manipulation',
+    },
     track: {
       width: '54px',
       height: '28px',

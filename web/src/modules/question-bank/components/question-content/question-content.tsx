@@ -100,7 +100,12 @@ export const QuestionContent = ({
 
   return (
     <Stack gap="16" minWidth="0">
-      <h2 lang="de" className={isReadOnly ? reviewTitle : questionTitle}>
+      <h2
+        lang="de"
+        data-question-heading
+        tabIndex={-1}
+        className={isReadOnly ? reviewTitle : questionTitle}
+      >
         {question.question_de}
       </h2>
       {hasTranslation ? (
@@ -129,6 +134,7 @@ export const QuestionContent = ({
       <ChoiceGroup
         density="compact"
         aria-label={question.question_de}
+        labelProps={{ lang: 'de' }}
         value={selectedOption ?? ''}
         readOnly={isLocked || isPending}
         aria-busy={isPending}

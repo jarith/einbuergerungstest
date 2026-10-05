@@ -26,6 +26,7 @@ export const segmentedChoiceRecipe = defineSlotRecipe({
       color: 'content.primary',
       textStyle: 'controlLabel',
       whiteSpace: 'normal',
+      touchAction: 'manipulation',
       '&[data-active]': {
         backgroundColor: 'action.solid.bg',
         borderColor: 'action.solid.border',
@@ -33,7 +34,10 @@ export const segmentedChoiceRecipe = defineSlotRecipe({
       },
       '&[data-disabled]': { opacity: 'disabled', cursor: 'not-allowed' },
       'input:focus-visible + &': { layerStyle: 'focus' },
-      '&:not([data-active], [data-disabled]):hover': { backgroundColor: 'action.neutral.hover' },
+      '@media (hover: hover) and (pointer: fine)': {
+        '&:not([data-active], [data-disabled]):hover': { backgroundColor: 'action.neutral.hover' },
+      },
+      '&:not([data-active], [data-disabled]):active': { backgroundColor: 'action.neutral.pressed' },
     },
   },
   variants: {

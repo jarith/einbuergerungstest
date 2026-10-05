@@ -6,16 +6,26 @@ type PageHeaderProps = Readonly<{
   title: string
   links: readonly PageLink[]
   isTitleHidden?: boolean
+  hasPageHeading?: boolean
 }>
 
-export const PageHeader = ({ title, links, isTitleHidden = false }: PageHeaderProps) => (
+export const PageHeader = ({
+  title,
+  links,
+  isTitleHidden = false,
+  hasPageHeading = false,
+}: PageHeaderProps) => (
   <Wrap
     alignItems="center"
     justifyContent="space-between"
     css={{ ...styles.header }}
     data-hidden={isTitleHidden && links.length === 0 ? true : undefined}
   >
-    <h1 className={isTitleHidden ? styles.hiddenHeading : styles.heading}>{title}</h1>
+    {hasPageHeading ? null : (
+      <h1 tabIndex={-1} className={isTitleHidden ? styles.hiddenHeading : styles.heading}>
+        {title}
+      </h1>
+    )}
     {links.length === 0 ? null : (
       <Wrap css={{ ...styles.secondary }}>
         {links.map((link) => (

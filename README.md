@@ -122,9 +122,14 @@ Localhost preview is also a secure context.
 The post-build Workbox `generateSW` step includes HTML, scripts, styles, fonts, manifest,
 icons, both generated UI catalogs, the JSON bank and all 35 optimized WebP illustrations.
 The worker verifies every entry in that same generated precache before the app says “Ready
-offline”. An incomplete download or evicted entry shows an error with retry; Workbox uses
-integrity checks when repairing cached resources. Development Vite does not register a
-service worker. Verify offline behavior using the production preview.
+offline”. The build validates the complete 310-question bank and rejects any referenced
+illustration or responsive variant missing from the precache. An incomplete download or
+evicted entry shows an error with retry; Workbox uses integrity checks when repairing
+cached resources. A delayed verification retries without reporting missing downloads; if
+checks remain unavailable, the app shows a separate verification notice. Returning to the
+foreground checks again, and failed updates do not invalidate the current prepared copy.
+Development Vite does not register a service worker. Verify offline behavior using the
+production preview.
 
 Updates download into the precache and wait until every existing app window closes. Finish
 the live mock, close the browser tabs/installed windows and reopen the app to activate an

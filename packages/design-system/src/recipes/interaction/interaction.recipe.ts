@@ -3,13 +3,16 @@ import type { SystemStyleObject } from '@pandacss/types'
 export const interactive = {
   boxSizing: 'border-box',
   textStyle: 'controlLabel',
+  touchAction: 'manipulation',
   _focusVisible: { layerStyle: 'focus' },
   '&:is(:disabled, [data-disabled], [data-loading])': {
     opacity: 'disabled',
     cursor: 'not-allowed',
   },
-  '&:not(:disabled, [data-disabled], [data-loading], [aria-disabled=true]):hover': {
-    backgroundColor: 'action.neutral.hover',
+  '@media (hover: hover) and (pointer: fine)': {
+    '&:not(:disabled, [data-disabled], [data-loading], [aria-disabled=true]):hover': {
+      backgroundColor: 'action.neutral.hover',
+    },
   },
   '&:not(:disabled, [data-disabled], [data-loading], [aria-disabled=true]):active': {
     backgroundColor: 'action.neutral.pressed',
@@ -22,8 +25,10 @@ export const appearances = {
       backgroundColor: 'action.solid.bg',
       color: 'action.solid.fg',
       borderColor: 'action.solid.border',
-      '&:not(:disabled, [data-disabled], [data-loading]):hover': {
-        backgroundColor: 'action.solid.hover',
+      '@media (hover: hover) and (pointer: fine)': {
+        '&:not(:disabled, [data-disabled], [data-loading]):hover': {
+          backgroundColor: 'action.solid.hover',
+        },
       },
       '&:not(:disabled, [data-disabled], [data-loading]):active': {
         backgroundColor: 'action.solid.pressed',

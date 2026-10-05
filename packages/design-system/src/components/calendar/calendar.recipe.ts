@@ -20,7 +20,9 @@ const dateControl = {
     borderColor: 'action.solid.border',
     fontWeight: 'semibold',
     opacity: 1,
-    '&:not(:disabled, [data-disabled]):hover': { backgroundColor: 'action.solid.hover' },
+    '@media (hover: hover) and (pointer: fine)': {
+      '&:not(:disabled, [data-disabled]):hover': { backgroundColor: 'action.solid.hover' },
+    },
     '&:not(:disabled, [data-disabled]):active': { backgroundColor: 'action.solid.pressed' },
   },
 } satisfies SystemStyleObject

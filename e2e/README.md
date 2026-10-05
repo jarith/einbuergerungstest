@@ -9,15 +9,15 @@ formats, and test machinery out of `features/**/*.feature`.
 
 Run from the repository root with mise activated, or prefix with `mise exec --`:
 
-| Command                                                  | Coverage                                                                                      |
-| -------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `yarn test:behavior`                                     | Generate Gherkin and run application integration specifications                               |
-| `yarn test:browser`                                      | Focused rendered-component integrations                                                       |
-| `yarn test:e2e`                                          | Build production app; run two smoke journeys, then two destructive-operation journeys         |
-| `yarn test:ui`                                           | Existing presentation and browser interaction checks in Chromium and the tagged WebKit subset |
-| `yarn workspace @einbuergerungstest/e2e bddgen`          | Check every business step has an unambiguous implementation                                   |
-| `yarn workspace @einbuergerungstest/e2e test:e2e:headed` | Run the selected E2E journeys visibly                                                         |
-| `yarn browser:install`                                   | Install the pinned Chromium and WebKit browsers                                               |
+| Command                                                  | Coverage                                                                              |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `yarn test:behavior`                                     | Generate Gherkin and run application integration specifications                       |
+| `yarn test:browser`                                      | Focused rendered-component integrations                                               |
+| `yarn test:e2e`                                          | Build production app; run two smoke journeys, then two destructive-operation journeys |
+| `yarn test:ui`                                           | Presentation and interaction checks, including Android/iPhone touch profiles          |
+| `yarn workspace @einbuergerungstest/e2e bddgen`          | Check every business step has an unambiguous implementation                           |
+| `yarn workspace @einbuergerungstest/e2e test:e2e:headed` | Run the selected E2E journeys visibly                                                 |
+| `yarn browser:install`                                   | Install the pinned Chromium and WebKit browsers                                       |
 
 ## Integration specifications
 
@@ -80,10 +80,19 @@ yarn workspace @einbuergerungstest/e2e run -T playwright test --project=e2e --no
 
 `tests/**/*.test.ts` owns responsive layout, touch targets, image zoom, concrete keyboard
 and focus interactions, date/timer formatting, installation guidance, and deployed
-manifest assets. The `webkit` project runs cases tagged `@webkit`. These tests may depend
-on UI or platform details; they are not the portable business contract. Shared browser
-helpers live in `support/browser.ts`. Component colors and visual variants stay in
-Storybook coverage.
+manifest assets. Offline-readiness checks inspect the full cached bank and every
+referenced illustration, then exercise delayed verification, stale replies, resume, cache
+repair, and update failures against the production build. The `webkit` project runs cases
+tagged `@webkit`. These tests may depend on UI or platform details; they are not the
+portable business contract. Shared browser helpers live in `support/browser.ts`. Component
+colors and visual variants stay in Storybook coverage.
+
+`touch/**/*.test.ts` runs in the `touch-android` (Pixel 7 / Chromium) and `touch-ios`
+(iPhone 13 / WebKit) projects. These use touch taps rather than desktop clicks to cover
+date clearing, route scroll/focus, active-navigation double taps, history preservation,
+test departure, accessible answer groups, target sizes, and appearance metadata. Emulation
+cannot verify the installed app's software keyboard, system bars, physical safe-area
+insets, or VoiceOver/TalkBack; those remain real-device checks.
 
 CI runs E2E only after business integration and component-browser checks succeed. On pull
 requests it selects the four journeys when app, E2E, design-system, dependency/toolchain,

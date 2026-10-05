@@ -4,7 +4,8 @@ import { Radio } from '@mantine/core'
 
 import type { PrimitiveProps } from '../../foundation/mantine/props'
 import { Stack } from '../../../styled-system/jsx'
-import { choiceField, choiceGroup } from './choice-group.styles'
+import { cx } from '../../foundation/panda/styling'
+import { choiceField, choiceGroup, hiddenLabel } from './choice-group.styles'
 
 export type ChoiceOption = Readonly<{
   value: string
@@ -24,17 +25,28 @@ export type ChoiceGroupProps = Omit<PrimitiveProps<RadioGroupProps>, 'children'>
     ref?: Ref<HTMLDivElement>
   }>
 
-/** A keyboard-operable single choice list, with optional answer feedback. */
+/**
+ * A keyboard-operable single choice list, with optional answer feedback.
+ * Mantine names its inner radiogroup through label context; aria-label alone names only the wrapper.
+ */
 export const ChoiceGroup = ({
   options,
   density = 'regular',
   readOnly = false,
   onChange,
   ref,
+  label,
+  labelProps,
+  'aria-label': accessibleLabel,
   ...props
 }: ChoiceGroupProps) => (
   <Radio.Group
     {...props}
+    label={label ?? accessibleLabel}
+    labelProps={{
+      ...labelProps,
+      className: cx(labelProps?.className, label == null ? hiddenLabel : undefined),
+    }}
     onChange={(value) => {
       if (!readOnly) {
         onChange?.(value)

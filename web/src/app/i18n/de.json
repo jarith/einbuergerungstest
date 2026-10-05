@@ -131,7 +131,7 @@
     "plannedFor": "Geplant für {{date}}",
     "setDate": "Datum festlegen",
     "editDate": "Datum ändern",
-    "progressTitle": "Dein Fortschritt",
+    "progressTitle": "Gesamtfortschritt der Fragen",
     "firstUse": "Noch keine Antworten. Beginne zu lernen, um deinen Fortschritt zu sehen.",
     "progressHelp": "Eine Frage zählt zum Fortschritt, wenn die letzte Antwort richtig ist.",
     "savedTitle": "Auf diesem Gerät gespeichert",
@@ -285,6 +285,9 @@
     "confirmHelp": "Folge den Anweisungen auf dem Bildschirm und öffne die App danach über den Startbildschirm."
   },
   "offline": {
+    "unverified": "Die Offline-Bereitschaft konnte nicht geprüft werden.",
+    "verificationHelp": "Lass die App geöffnet und versuche es erneut. Diese Prüfung verändert weder gespeicherte Fragen noch deinen Lernfortschritt.",
+    "updateFailed": "Ein Update konnte nicht heruntergeladen werden. Deine aktuelle Offline-Kopie bleibt unverändert. Öffne die App erneut mit Internetverbindung.",
     "not-ready": "Noch nicht offline bereit.",
     "preparing": "Alle Fragen und Bilder werden für die Offline-Nutzung vorbereitet …",
     "ready": "Offline bereit",

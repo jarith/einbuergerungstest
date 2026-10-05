@@ -5,8 +5,28 @@ import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
 
 import { getLearnerPathPattern } from '../src/app/seo/site.ts'
+import {
+  isJsonValue,
+  parseQuestionBank,
+} from '../src/modules/question-bank/domain/question-bank.ts'
 
 const output = fileURLToPath(new URL('../dist/', import.meta.url))
+
+const bankValue: unknown = JSON.parse(await readFile(`${output}/questionbank-berlin.json`, 'utf8'))
+
+if (!isJsonValue(bankValue)) {
+  throw new Error('The offline question bank must contain valid JSON data.')
+}
+
+const bank = parseQuestionBank(bankValue)
+
+const requiredResources = [
+  'questionbank-berlin.json',
+  ...bank.questions.flatMap((question) => [
+    ...(question.question_image_resource === undefined ? [] : [question.question_image_resource]),
+    ...(question.question_image_variants ?? []).map((variant) => variant.resource),
+  ]),
+]
 
 await mkdir(`${output}/locales`, { recursive: true })
 
@@ -36,6 +56,13 @@ const result = await generateSW({
   dontCacheBustURLsMatching: /^assets\/.+-[\w-]+\./,
   manifestTransforms: [
     async (entries) => {
+      const included = new Set(entries.map((entry) => entry.url))
+      const omitted = requiredResources.filter((url) => !included.has(url))
+
+      if (omitted.length > 0) {
+        throw new Error(`Offline precache is missing question resources: ${omitted.join(', ')}`)
+      }
+
       const manifest = await Promise.all(
         entries.map(async (entry) => ({
           ...entry,

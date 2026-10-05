@@ -1,17 +1,38 @@
-export const getMissingResources = (worker: ServiceWorker): Promise<string[]> =>
+export const getMissingResources = (
+  worker: ServiceWorker,
+  signal?: AbortSignal,
+): Promise<string[]> =>
   new Promise((resolve, reject) => {
+    signal?.throwIfAborted()
+
     const channel = new MessageChannel()
 
-    const timeout = setTimeout(() => {
+    const cleanup = () => {
+      clearTimeout(timeout)
+
       channel.port1.close()
+
+      signal?.removeEventListener('abort', cancel)
+    }
+
+    const cancel = () => {
+      cleanup()
+
+      reject(
+        signal?.reason instanceof Error
+          ? signal.reason
+          : new DOMException('Offline verification was cancelled.', 'AbortError'),
+      )
+    }
+
+    const timeout = setTimeout(() => {
+      cleanup()
 
       reject(new Error('Offline cache verification timed out. Reconnect and retry.'))
     }, 10_000)
 
     channel.port1.onmessage = (event: MessageEvent<unknown>) => {
-      clearTimeout(timeout)
-
-      channel.port1.close()
+      cleanup()
 
       const data = event.data
 
@@ -26,7 +47,15 @@ export const getMissingResources = (worker: ServiceWorker): Promise<string[]> =>
       }
     }
 
-    worker.postMessage('CHECK_OFFLINE', [channel.port2])
+    signal?.addEventListener('abort', cancel, { once: true })
+
+    try {
+      worker.postMessage('CHECK_OFFLINE', [channel.port2])
+    } catch (error) {
+      cleanup()
+
+      reject(new Error('Could not contact the offline worker.', { cause: error }))
+    }
   })
 
 export const watchServiceWorker = (

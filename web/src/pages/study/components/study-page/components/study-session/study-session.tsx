@@ -80,7 +80,7 @@ export const StudySession = reatomComponent(({ model }: StudySessionProps) => {
         ) : null}
       </output>
       {error !== null ? (
-        <InlineNotice intent="danger">
+        <InlineNotice intent="danger" role="alert">
           {t(isLearnerStateConflict(error) ? 'errors.storageConflict' : 'errors.storage')}
         </InlineNotice>
       ) : null}

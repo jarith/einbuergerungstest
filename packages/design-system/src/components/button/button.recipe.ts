@@ -39,8 +39,10 @@ export const buttonRecipe = defineSlotRecipe({
           backgroundColor: 'action.danger.bg',
           color: 'action.danger.fg',
           borderColor: 'action.danger.border',
-          '&:not(:disabled, [data-disabled], [data-loading]):hover': {
-            backgroundColor: 'action.danger.hover',
+          '@media (hover: hover) and (pointer: fine)': {
+            '&:not(:disabled, [data-disabled], [data-loading]):hover': {
+              backgroundColor: 'action.danger.hover',
+            },
           },
           '&:not(:disabled, [data-disabled], [data-loading]):active': {
             backgroundColor: 'action.danger.pressed',
