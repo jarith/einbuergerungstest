@@ -36,11 +36,6 @@ export const OfflineStatus = reatomComponent(({ offline, localization }: Offline
           </Stack>
         </InlineNotice>
       ) : null}
-      {offline.update() !== 'none' ? (
-        <InlineNotice intent="info">
-          {t(offline.update() === 'available' ? 'offline.update' : 'offline.updateFailed')}
-        </InlineNotice>
-      ) : null}
     </Stack>
   )
 }, 'OfflineStatus')

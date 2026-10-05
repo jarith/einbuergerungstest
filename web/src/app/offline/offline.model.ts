@@ -169,10 +169,10 @@ export const createOfflineModel = () => {
         const current = registration()
 
         if (current === null) {
-          return undefined
+          return
         }
 
-        return watchServiceWorker(
+        const stopWatching = watchServiceWorker(
           current,
           wrap(() => {
             void verify()
@@ -189,6 +189,8 @@ export const createOfflineModel = () => {
             }, 'offline.installFailed'),
           ),
         )
+
+        abortVar.subscribe(stopWatching)
       }, 'offline.workerEvents')
 
       const events = effect(() => {
@@ -205,7 +207,7 @@ export const createOfflineModel = () => {
 
       const timeout = effect(() => {
         if (status() !== 'preparing' || !visible()) {
-          return undefined
+          return
         }
 
         const timer = setTimeout(
@@ -213,7 +215,8 @@ export const createOfflineModel = () => {
           45_000,
         )
 
-        return () => clearTimeout(timer)
+        // Reatom effects dispose through abort, not returned cleanup functions.
+        abortVar.subscribe(() => clearTimeout(timer))
       }, 'offline.preparationTimeout')
 
       void prepare()

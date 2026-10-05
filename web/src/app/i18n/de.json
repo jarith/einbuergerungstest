@@ -287,15 +287,13 @@
   "offline": {
     "unverified": "Die Offline-Bereitschaft konnte nicht geprüft werden.",
     "verificationHelp": "Lass die App geöffnet und versuche es erneut. Diese Prüfung verändert weder gespeicherte Fragen noch deinen Lernfortschritt.",
-    "updateFailed": "Ein Update konnte nicht heruntergeladen werden. Deine aktuelle Offline-Kopie bleibt unverändert. Öffne die App erneut mit Internetverbindung.",
     "not-ready": "Noch nicht offline bereit.",
     "preparing": "Alle Fragen und Bilder werden für die Offline-Nutzung vorbereitet …",
     "ready": "Offline bereit",
     "error": "Die Offline-Vorbereitung konnte nicht abgeschlossen werden.",
     "unsupported": "Die Offline-Vorbereitung ist in diesem Browser nicht verfügbar. Öffne die installierte App oder nutze einen unterstützten Browser über eine sichere Verbindung.",
     "failureHelp": "Einige Dateien konnten nicht gespeichert werden. Prüfe deine Verbindung und den freien Gerätespeicher und versuche es erneut. Dein Lernfortschritt bleibt erhalten.",
-    "missing": "Fehlende Dateien: {{resources}}",
-    "update": "Ein Update ist heruntergeladen. Beende deinen laufenden Probetest, schließe alle App-Fenster und öffne die App erneut, um es zu verwenden."
+    "missing": "Fehlende Dateien: {{resources}}"
   },
   "startupRecovery": {
     "title": "Ein Neustart ist nötig",

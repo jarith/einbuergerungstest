@@ -233,7 +233,7 @@ test(
 
     await expect(
       page.getByText('An update could not be downloaded.', { exact: false }),
-    ).toBeVisible()
+    ).toHaveCount(0)
     await expect(readyStatus(page)).toHaveCount(1)
     await expect(
       page.getByText('Offline preparation could not finish.', { exact: true }),
@@ -319,7 +319,7 @@ test(
 
     await expect(
       page.getByText('An update could not be downloaded.', { exact: false }),
-    ).toBeVisible()
+    ).toHaveCount(0)
     await expect(readyStatus(page)).toHaveCount(1)
     await expect(
       page.getByText('Offline preparation could not finish.', { exact: true }),

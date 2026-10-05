@@ -59,10 +59,7 @@ export const AppShell = reatomComponent(
                 isTitleHidden={isTitleHidden}
                 hasPageHeading={hasPageHeading}
               />
-              {offline() === 'error' ||
-              offline() === 'unverified' ||
-              offline() === 'preparing' ||
-              offline.update() !== 'none' ? (
+              {offline() === 'error' || offline() === 'unverified' || offline() === 'preparing' ? (
                 <OfflineStatus offline={offline} localization={localization} />
               ) : null}
               {children}
