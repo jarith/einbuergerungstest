@@ -53,9 +53,12 @@ and
 
 When a new version is published, prepare its resources before replacing the old cache.
 Keep the new worker waiting and apply an available update at a safe point so a live mock
-test is not interrupted. Keep learner data separate from resource caches. A browser tab
-and an installed PWA use the same service worker and application logic. The installed
-iPhone or iPad app needs its own online preparation because
+test is not interrupted. Background updates are silent: neither an available version nor a
+failed update download displays a notice. Keep using the prepared current copy and reserve
+offline notices for preparation or verification of its required resources. Keep learner
+data separate from resource caches. A browser tab and an installed PWA use the same
+service worker and application logic. The installed iPhone or iPad app needs its own
+online preparation because
 [WebKit does not copy Safari's local website data into it](https://webkit.org/blog/14787/webkit-features-in-safari-17-2/).
 
 ### Learner state

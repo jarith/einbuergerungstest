@@ -287,15 +287,13 @@
   "offline": {
     "unverified": "Offline readiness could not be checked.",
     "verificationHelp": "Keep the app open and try again. This check does not change your saved questions or learning progress.",
-    "updateFailed": "An update could not be downloaded. Your current offline copy is unchanged. Reopen the app online to try again.",
     "not-ready": "Not ready offline yet.",
     "preparing": "Preparing all questions and images for offline use…",
     "ready": "Ready offline",
     "error": "Offline preparation could not finish.",
     "unsupported": "Offline preparation is unavailable in this browser. Open the installed app or use a supported browser over a secure connection.",
     "failureHelp": "Some resources could not be saved. Check your connection and available device storage, then try again. Your learning progress is unchanged.",
-    "missing": "Missing resources: {{resources}}",
-    "update": "An update is downloaded. Finish any live mock test, close all app windows, then reopen to use it."
+    "missing": "Missing resources: {{resources}}"
   },
   "startupRecovery": {
     "title": "A fresh start is needed",
