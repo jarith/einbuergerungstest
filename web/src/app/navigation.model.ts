@@ -1,3 +1,4 @@
+import { getThemeColor } from '@einbuergerungstest/design-system'
 import { effect } from '@reatom/core'
 
 import { browserNavigationAtom } from '../shared/navigation/browser-navigation.model'
@@ -31,4 +32,11 @@ export const startNavigation = () =>
 export const startPageMetadata = () =>
   effect(() => {
     document.title = `${pageTitle() || 'Training'} · Einbürgerungstest Berlin`
+
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute(
+        'content',
+        getThemeColor(appRoute.loader.data()?.localization.appearance() ?? 'light'),
+      )
   }, 'app.pageMetadata')

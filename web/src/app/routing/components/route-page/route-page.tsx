@@ -1,9 +1,11 @@
 import type { RouteLoader } from '@reatom/core'
 import type { ComponentType } from 'react'
+import { Box } from '@einbuergerungstest/design-system/jsx'
 import { wrap } from '@reatom/core'
 import { reatomComponent } from '@reatom/react'
 
 import type { PageProps } from '../../route-context'
+import { browserNavigationAtom } from '../../../../shared/navigation/browser-navigation.model'
 import { RouteStatus } from '../route-status/route-status'
 
 type RoutePageProps<Params extends object, Data> = Readonly<{
@@ -23,17 +25,26 @@ export const RoutePage = reatomComponent(
 
     if (error !== undefined || !loader.ready() || data === undefined) {
       return (
-        <RouteStatus
-          error={error}
-          language={language}
-          retry={wrap(() => {
-            void loader.retry()
-          })}
-        />
+        <Box
+          display="contents"
+          ref={error === undefined ? undefined : wrap(browserNavigationAtom.complete)}
+        >
+          <RouteStatus
+            error={error}
+            language={language}
+            retry={wrap(() => {
+              void loader.retry()
+            })}
+          />
+        </Box>
       )
     }
 
-    return <Page data={data} />
+    return (
+      <Box display="contents" ref={wrap(browserNavigationAtom.complete)}>
+        <Page data={data} />
+      </Box>
+    )
   },
   'RoutePage',
 )

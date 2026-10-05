@@ -17,6 +17,16 @@ const pendingAtom = atom<PendingNavigation | null>(null, 'navigation.pending')
 
 const errorAtom = atom<Error | undefined>(undefined, 'navigation.error')
 
+const pageArrival = atom<Readonly<{ href: string; isHistory: boolean }> | null>(
+  null,
+  'navigation.pageArrival',
+)
+
+const lastNavigationTap = atom<Readonly<{ href: string; time: number }> | null>(
+  null,
+  'navigation.lastTap',
+)
+
 // The History API is an untyped browser boundary.
 const readIndex = () => {
   const state: unknown = history.state
@@ -33,6 +43,49 @@ const readIndex = () => {
 export const browserNavigationAtom = computed(() => pendingAtom() !== null, 'navigation').extend(
   () => ({
     error: computed(() => errorAtom(), 'navigation.errorView'),
+    // Called by the rendered route, after its loader and DOM have caught up with the URL.
+    complete: action((page: HTMLElement | null) => {
+      const arrival = pageArrival()
+
+      if (page === null || arrival === null || arrival.href !== location.href) {
+        return undefined
+      }
+
+      const frame = requestAnimationFrame(
+        wrap(() => {
+          if (!page.isConnected || arrival !== pageArrival() || arrival.href !== location.href) {
+            return
+          }
+
+          pageArrival.set(null)
+
+          const anchor =
+            location.hash === '' ? null : document.getElementById(location.hash.slice(1))
+
+          const heading =
+            page.querySelector<HTMLElement>('[data-question-heading]') ??
+            document.querySelector<HTMLElement>('main h1')
+
+          const target = anchor ?? heading ?? document.getElementById('main')
+
+          if (target !== null) {
+            target.tabIndex = -1
+
+            target.focus({ preventScroll: true })
+          }
+
+          if (!arrival.isHistory) {
+            if (anchor === null) {
+              window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+            } else {
+              anchor.scrollIntoView()
+            }
+          }
+        }),
+      )
+
+      return () => cancelAnimationFrame(frame)
+    }, 'navigation.complete'),
     cancel: action(() => {
       pendingAtom.set(null)
 
@@ -73,6 +126,15 @@ export const browserNavigationAtom = computed(() => pendingAtom() !== null, 'nav
       urlAtom.catchLinks.set(false)
 
       urlAtom.sync.set(() => (url, replace = false) => {
+        if (url.href !== location.href) {
+          pageArrival.set({
+            href: url.href,
+            isHistory: replace && pageArrival()?.isHistory === true,
+          })
+
+          lastNavigationTap.set(null)
+        }
+
         historyPosition.current += replace ? 0 : 1
 
         const state = { appNavigationIndex: historyPosition.current }
@@ -137,6 +199,8 @@ export const browserNavigationAtom = computed(() => pendingAtom() !== null, 'nav
           } else {
             historyPosition.current = index
 
+            pageArrival.set({ href: destination.href, isHistory: true })
+
             urlAtom.syncFromSource(destination, true)
           }
         })
@@ -157,16 +221,45 @@ export const browserNavigationAtom = computed(() => pendingAtom() !== null, 'nav
             link.origin !== location.origin ||
             link.rel === 'external'
           ) {
+            lastNavigationTap.set(null)
+
             return
           }
 
           event.preventDefault()
+
+          if (link.hasAttribute('data-navigation-current')) {
+            const previous = lastNavigationTap()
+            const isRepeated = previous?.href === link.href && event.timeStamp - previous.time < 400
+
+            lastNavigationTap.set(
+              isRepeated || event.detail === 0 ? null : { href: link.href, time: event.timeStamp },
+            )
+
+            if (isRepeated || event.detail === 0) {
+              window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+                  ? 'instant'
+                  : 'smooth',
+              })
+            }
+
+            return
+          }
+
+          lastNavigationTap.set(null)
 
           urlAtom.go(link.href)
 
           if (link.hash !== '') {
             document.getElementById(link.hash.slice(1))?.focus()
           }
+        })
+
+        onEvent(document.body, 'pointercancel', () => {
+          lastNavigationTap.set(null)
         })
 
         onEvent(window, 'beforeunload', (event) => {

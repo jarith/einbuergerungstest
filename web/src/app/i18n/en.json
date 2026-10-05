@@ -131,7 +131,7 @@
     "plannedFor": "Planned for {{date}}",
     "setDate": "Set date",
     "editDate": "Edit date",
-    "progressTitle": "Your progress",
+    "progressTitle": "Overall question progress",
     "firstUse": "No answers yet. Start studying to track progress.",
     "progressHelp": "A question contributes when its latest answer is correct.",
     "savedTitle": "Saved on this device",

@@ -11,6 +11,7 @@ import { progressBarRecipe } from '../../components/progress-bar/progress-bar.re
 import { segmentedChoiceRecipe } from '../../components/segmented-choice/segmented-choice.recipe'
 import { statusBadgeRecipe } from '../../components/status-badge/status-badge.recipe'
 import { toggleSwitchRecipe } from '../../components/toggle-switch/toggle-switch.recipe'
+import { tooltipRecipe } from '../../components/tooltip/tooltip.recipe'
 import { fieldRecipe } from '../../recipes/field/field.recipe'
 import { inputRecipe } from '../../recipes/input/input.recipe'
 
@@ -29,6 +30,7 @@ export const slotRecipes = {
   segmentedChoice: segmentedChoiceRecipe,
   statusBadge: statusBadgeRecipe,
   toggleSwitch: toggleSwitchRecipe,
+  tooltip: tooltipRecipe,
   field: fieldRecipe,
   input: inputRecipe,
 }

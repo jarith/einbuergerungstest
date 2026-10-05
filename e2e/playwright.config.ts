@@ -25,6 +25,8 @@ export default defineConfig({
     },
     { name: 'ui', testDir: './tests', use: devices['Desktop Chrome'] },
     { name: 'webkit', testDir: './tests', grep: /@webkit/, use: devices['Desktop Safari'] },
+    { name: 'touch-android', testDir: './touch', use: devices['Pixel 7'] },
+    { name: 'touch-ios', testDir: './touch', use: devices['iPhone 13'] },
   ],
   webServer: {
     command: 'yarn preview --port 4173 --strictPort',

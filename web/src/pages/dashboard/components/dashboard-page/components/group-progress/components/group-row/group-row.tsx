@@ -1,9 +1,10 @@
 import type { TFunction } from 'i18next'
-import { ButtonLink, ProgressBar } from '@einbuergerungstest/design-system'
+import { ButtonLink } from '@einbuergerungstest/design-system'
 import { Flex, Grid, Stack } from '@einbuergerungstest/design-system/jsx'
 import { ArrowRight } from 'lucide-react'
 
 import type { DashboardGroup } from '../../../../../../dashboard.model'
+import { GroupStatusBar } from './components/group-status-bar/group-status-bar'
 import { styles } from './group-row.styles'
 
 type GroupRowProps = Readonly<{ group: DashboardGroup; t: TFunction }>
@@ -24,16 +25,7 @@ export const GroupRow = ({ group, t }: GroupRowProps) => (
           </span>
           <span className={styles.percentage}>{group.percentageLabel}%</span>
         </Flex>
-        <ProgressBar
-          aria-label={group.title}
-          aria-valuenow={group.contributing}
-          aria-valuemax={group.total}
-          aria-valuetext={t('dashboard.groupCount', {
-            count: group.contributing,
-            total: group.total,
-          })}
-          value={group.progressValue}
-        />
+        <GroupStatusBar group={group} t={t} />
       </Stack>
       <ButtonLink
         className={styles.action}

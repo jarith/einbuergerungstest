@@ -19,6 +19,7 @@ type AppShellProps = Readonly<{
   offline: AppResources['offline']
   title: string
   isTitleHidden?: boolean
+  hasPageHeading?: boolean
   isContentCentered?: boolean
   destinations: readonly Destination[]
   links: readonly PageLink[]
@@ -34,6 +35,7 @@ export const AppShell = reatomComponent(
     links,
     children,
     isTitleHidden = false,
+    hasPageHeading = false,
     isContentCentered = false,
   }: AppShellProps) => {
     const t = localization.t()
@@ -51,7 +53,12 @@ export const AppShell = reatomComponent(
           </div>
           <Stack as="main" id="main" tabIndex={-1} css={{ ...shellStyles.main }}>
             <Stack css={{ ...shellStyles.content }} data-centered={isContentCentered || undefined}>
-              <PageHeader title={title} links={links} isTitleHidden={isTitleHidden} />
+              <PageHeader
+                title={title}
+                links={links}
+                isTitleHidden={isTitleHidden}
+                hasPageHeading={hasPageHeading}
+              />
               {offline() === 'error' ||
               offline() === 'unverified' ||
               offline() === 'preparing' ||
