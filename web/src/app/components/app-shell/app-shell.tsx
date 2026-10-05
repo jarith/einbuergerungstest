@@ -52,7 +52,10 @@ export const AppShell = reatomComponent(
           <Stack as="main" id="main" tabIndex={-1} css={{ ...shellStyles.main }}>
             <Stack css={{ ...shellStyles.content }} data-centered={isContentCentered || undefined}>
               <PageHeader title={title} links={links} isTitleHidden={isTitleHidden} />
-              {offline() === 'error' || offline() === 'preparing' || offline.update() ? (
+              {offline() === 'error' ||
+              offline() === 'unverified' ||
+              offline() === 'preparing' ||
+              offline.update() !== 'none' ? (
                 <OfflineStatus offline={offline} localization={localization} />
               ) : null}
               {children}

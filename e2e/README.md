@@ -80,10 +80,12 @@ yarn workspace @einbuergerungstest/e2e run -T playwright test --project=e2e --no
 
 `tests/**/*.test.ts` owns responsive layout, touch targets, image zoom, concrete keyboard
 and focus interactions, date/timer formatting, installation guidance, and deployed
-manifest assets. The `webkit` project runs cases tagged `@webkit`. These tests may depend
-on UI or platform details; they are not the portable business contract. Shared browser
-helpers live in `support/browser.ts`. Component colors and visual variants stay in
-Storybook coverage.
+manifest assets. Offline-readiness checks inspect the full cached bank and every
+referenced illustration, then exercise delayed verification, stale replies, resume, cache
+repair, and update failures against the production build. The `webkit` project runs cases
+tagged `@webkit`. These tests may depend on UI or platform details; they are not the
+portable business contract. Shared browser helpers live in `support/browser.ts`. Component
+colors and visual variants stay in Storybook coverage.
 
 CI runs E2E only after business integration and component-browser checks succeed. On pull
 requests it selects the four journeys when app, E2E, design-system, dependency/toolchain,

@@ -1,9 +1,13 @@
 import {
+  abortVar,
   action,
   atom,
   computed,
   effect,
+  isAbort,
   onEvent,
+  sleep,
+  withAbort,
   withAsync,
   withConnectHook,
   wrap,
@@ -11,7 +15,7 @@ import {
 
 import { getMissingResources, repairResources, watchServiceWorker } from './service-worker'
 
-type OfflineStatus = 'not-ready' | 'preparing' | 'ready' | 'error' | 'unsupported'
+type OfflineStatus = 'not-ready' | 'preparing' | 'ready' | 'unverified' | 'error' | 'unsupported'
 
 export const createOfflineModel = () => {
   const status = atom<OfflineStatus>('not-ready', 'offline.status')
@@ -34,28 +38,62 @@ export const createOfflineModel = () => {
 
   const registration = atom<ServiceWorkerRegistration | null>(null, 'offline.registration')
   const missing = atom<readonly string[]>([], 'offline.missing')
-  const update = atom(false, 'offline.update')
+  const update = atom<'none' | 'available' | 'error'>('none', 'offline.update')
+  const visible = atom(document.visibilityState === 'visible', 'offline.visible')
+  const verificationError = atom<Error | null>(null, 'offline.verificationError')
 
   const verify = action(async () => {
     const current = registration()
     const worker = current?.active
 
-    update.set(current?.waiting !== null && current?.waiting !== undefined)
+    if (current?.waiting) {
+      update.set('available')
+    } else if (update() === 'available') {
+      update.set('none')
+    }
 
-    if (worker === undefined || worker === null || worker.state !== 'activated') {
+    if (!visible() || worker === undefined || worker === null || worker.state !== 'activated') {
       return
     }
 
-    try {
-      const resources = await wrap(getMissingResources(worker))
+    // A sleeping worker or interrupted message is not evidence of missing resources.
+    // oxlint-disable-next-line app/prefer-array-methods -- Sequential, bounded retries stop on success.
+    for (const delay of [0, 1000, 3000]) {
+      const subscription = abortVar.subscribe()
 
-      missing.set(resources)
+      try {
+        if (delay > 0) {
+          await wrap(sleep(delay))
+        }
 
-      status.set(resources.length === 0 ? 'ready' : 'error')
-    } catch {
-      status.set('error')
+        const resources = await wrap(getMissingResources(worker, subscription.controller.signal))
+
+        missing.set(resources)
+
+        verificationError.set(null)
+
+        status.set(resources.length === 0 ? 'ready' : 'error')
+
+        return
+      } catch (error) {
+        if (isAbort(error)) {
+          return
+        }
+
+        verificationError.set(
+          error instanceof Error
+            ? error
+            : new Error('Offline verification failed.', { cause: error }),
+        )
+      } finally {
+        subscription.unsubscribe()
+      }
     }
-  }, 'offline.verify').extend(withAsync())
+
+    if (missing().length === 0) {
+      status.set('unverified')
+    }
+  }, 'offline.verify').extend(withAsync(), withAbort())
 
   const prepare = action(async () => {
     if (!import.meta.env.PROD || !('serviceWorker' in navigator) || !window.isSecureContext) {
@@ -64,7 +102,9 @@ export const createOfflineModel = () => {
       return
     }
 
-    status.set('preparing')
+    if (status() !== 'ready') {
+      status.set('preparing')
+    }
 
     try {
       const existing = await wrap(navigator.serviceWorker.getRegistration('/'))
@@ -86,14 +126,42 @@ export const createOfflineModel = () => {
       // The browser activates updates only after all existing clients have closed.
       // Never send SKIP_WAITING: another window may still have a live mock test.
       if (navigator.onLine) {
-        await wrap(current.update())
+        try {
+          await wrap(current.update())
+
+          update.set(current.waiting === null ? 'none' : 'available')
+        } catch (error) {
+          if (!isAbort(error)) {
+            update.set('error')
+          }
+        }
       }
-    } catch {
+    } catch (error) {
+      if (isAbort(error)) {
+        return
+      }
+
       if (status() !== 'ready') {
         status.set('error')
       }
     }
-  }, 'offline.prepare').extend(withAsync())
+  }, 'offline.prepare').extend(withAsync(), withAbort())
+
+  const resume = action(() => {
+    visible.set(document.visibilityState === 'visible')
+
+    if (!visible()) {
+      verify.abort()
+
+      return
+    }
+
+    if (registration()?.active?.state === 'activated') {
+      void verify()
+    } else {
+      void prepare()
+    }
+  }, 'offline.resume')
 
   return computed(() => status(), 'offline').extend(
     withConnectHook(() => {
@@ -109,7 +177,17 @@ export const createOfflineModel = () => {
           wrap(() => {
             void verify()
           }),
-          wrap(action(() => status.set('error'), 'offline.installFailed')),
+          wrap(
+            action(() => {
+              if (current.active?.state === 'activated') {
+                update.set('error')
+
+                void verify()
+              } else {
+                status.set('error')
+              }
+            }, 'offline.installFailed'),
+          ),
         )
       }, 'offline.workerEvents')
 
@@ -118,16 +196,22 @@ export const createOfflineModel = () => {
           void prepare()
         })
 
-        onEvent(window, 'focus', () => {
-          void verify()
-        })
+        onEvent(window, 'focus', resume)
+
+        onEvent(window, 'pageshow', resume)
+
+        onEvent(document, 'visibilitychange', resume)
       }, 'offline.browserEvents')
 
       const timeout = effect(() => {
-        if (status() !== 'preparing') {
+        if (status() !== 'preparing' || !visible()) {
           return undefined
         }
-        const timer = setTimeout(wrap(action(() => status.set('error'), 'offline.timeout')), 45_000)
+
+        const timer = setTimeout(
+          wrap(action(() => status.set('unverified'), 'offline.timeout')),
+          45_000,
+        )
 
         return () => clearTimeout(timer)
       }, 'offline.preparationTimeout')
@@ -146,8 +230,9 @@ export const createOfflineModel = () => {
       standalone,
       missing,
       update,
+      verificationError,
       prepare,
-      pending: computed(() => prepare.pending() > 0, 'offline.pending'),
+      pending: computed(() => prepare.pending() > 0 || verify.pending() > 0, 'offline.pending'),
     }),
   )
 }

@@ -285,6 +285,9 @@
     "confirmHelp": "Follow the on-screen prompts, then open the app from your Home Screen."
   },
   "offline": {
+    "unverified": "Offline readiness could not be checked.",
+    "verificationHelp": "Keep the app open and try again. This check does not change your saved questions or learning progress.",
+    "updateFailed": "An update could not be downloaded. Your current offline copy is unchanged. Reopen the app online to try again.",
     "not-ready": "Not ready offline yet.",
     "preparing": "Preparing all questions and images for offline use…",
     "ready": "Ready offline",
