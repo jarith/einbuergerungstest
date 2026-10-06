@@ -21,7 +21,11 @@ export const loadAppResources = async () => {
       questions,
       learner,
       localization,
-      offline: createOfflineModel(),
+      offline: createOfflineModel(
+        () =>
+          learner.pending() > 0 ||
+          learner()?.mockSittings.some((sitting) => sitting.status === 'active') === true,
+      ),
       mock: createMockTest(questions.bank, learner),
     }
   } finally {

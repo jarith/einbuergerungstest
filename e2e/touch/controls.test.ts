@@ -1,14 +1,14 @@
 import { expect, test } from '@playwright/test'
 
 import { sourceQuestion } from '../support/browser'
-import { bounds, waitForOfflineReady } from '../tests/helpers'
+import { bounds, waitForAppReady } from '../tests/helpers'
 
 test('a touch tap clears the planned date while focused and after reload', async ({ page }) => {
   await page.clock.setFixedTime(new Date('2026-10-05T12:00:00Z'))
 
   await page.goto('/settings')
 
-  await waitForOfflineReady(page)
+  await waitForAppReady(page)
 
   const date = page.getByRole('textbox', { name: 'Planned test date', exact: true })
   const clear = page.getByRole('button', { name: 'Clear', exact: true })
@@ -45,7 +45,7 @@ test('answer groups have a name and translation and dialog controls have large t
 
   await page.goto(`/study/${question.id}`)
 
-  await waitForOfflineReady(page)
+  await waitForAppReady(page)
 
   await expect(
     page.getByRole('radiogroup', { name: question.question_de, exact: true }),
@@ -85,7 +85,7 @@ test('answer groups have a name and translation and dialog controls have large t
 test('the theme color follows the saved appearance', async ({ page }) => {
   await page.goto('/settings')
 
-  await waitForOfflineReady(page)
+  await waitForAppReady(page)
 
   const theme = page.locator('meta[name="theme-color"]')
 

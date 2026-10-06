@@ -27,6 +27,7 @@
     "storybook": "yarn workspace @einbuergerungstest/design-system storybook",
     "browser:install": "yarn workspace @einbuergerungstest/e2e browser:install",
     "test:behavior": "yarn workspace @einbuergerungstest/e2e test:behavior",
+    "test:updates": "yarn workspace @einbuergerungstest/e2e test:updates",
     "test:ui": "yarn workspace @einbuergerungstest/e2e test:ui"
   },
   "dependencies": {

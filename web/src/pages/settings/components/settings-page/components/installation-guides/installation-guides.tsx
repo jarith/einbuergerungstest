@@ -24,12 +24,14 @@ export const InstallationGuides = reatomComponent(
         <InstallationGuide localization={localization} platform="android" />
       </Grid>
       <ProgressTransfer localization={localization} />
-      <Stack as="section" gap="8" aria-labelledby="offline-title">
-        <h2 id="offline-title" className={styles.heading}>
-          {localization.t()('installation.offlineTitle')}
-        </h2>
-        <OfflineStatus offline={offline} localization={localization} />
-      </Stack>
+      {offline.standalone() ? (
+        <Stack as="section" gap="8" aria-labelledby="offline-title">
+          <h2 id="offline-title" className={styles.heading}>
+            {localization.t()('installation.offlineTitle')}
+          </h2>
+          <OfflineStatus offline={offline} localization={localization} />
+        </Stack>
+      ) : null}
     </Stack>
   ),
   'InstallationGuides',

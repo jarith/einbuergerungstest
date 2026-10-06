@@ -26,18 +26,13 @@ export const chooseLanguage = async (page: Page, language: 'English' | 'Deutsch'
   await openNavigation(page, '/dashboard')
 }
 
-export const waitForOfflineReady = async (page: Page) => {
-  // The preparation notice can disappear during a click and shift the target. Wait for
-  // readiness before interacting; the footer is visually hidden on phones.
-  await expect(
-    page
-      .getByRole('contentinfo', { includeHidden: true })
-      .getByText(/^(Ready offline|Offline bereit)$/),
-  ).toHaveCount(1)
+export const waitForAppReady = async (page: Page) => {
+  // Browser visits have no offline preparation phase. Wait for the loaded shell.
+  await expect(page.getByRole('navigation')).toBeVisible()
 }
 
 export const startMock = async (page: Page) => {
-  await waitForOfflineReady(page)
+  await waitForAppReady(page)
 
   await page.getByRole('link', { name: /^(Start mock test|Probetest starten)$/ }).click()
 

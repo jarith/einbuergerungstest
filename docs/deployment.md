@@ -121,11 +121,11 @@ Vite copies `web/public/_redirects` and `web/public/_headers` into the deploymen
 artifact. The redirects serve only the learner route allowlist through the extensionless
 `/app` asset target (which serves `app.html`). Rewriting to `/app.html` instead triggers
 Cloudflare’s automatic 308 to `/app` and loses the requested learner URL. The allowlist
-includes trailing-slash variants. Keep it aligned with `getLearnerPathPattern` in
-`web/src/app/seo/site.ts` when routes change. `/` and `/en/` remain prerendered public
-pages. `/settings/installation` is removed from the allowlist and returns 404; both
-installation guides are part of `/settings`. The generated top-level `404.html` preserves
-real errors for unknown public URLs and missing assets.
+includes trailing-slash variants and the same learner routes under `/pwa/`. Keep it
+aligned with `getLearnerPathPattern` in `web/src/app/seo/site.ts` when routes change. `/`
+and `/en/` remain prerendered public pages. `/settings/installation` is removed from the
+allowlist and returns 404; both installation guides are part of `/settings`. The generated
+top-level `404.html` preserves real errors for unknown public URLs and missing assets.
 
 Network responses revalidate and request no content transformation. The service worker
 still supplies offline resources from its versioned cache. Headers also provide MIME
@@ -134,17 +134,36 @@ types. Both the production Pages hostname and deployment aliases receive a host-
 `X-Robots-Tag: noindex, follow`, even when serving the production artifact. The custom
 domain does not receive that header.
 
-The existing manifest launches `/dashboard` in standalone mode. Offline preparation,
-installation instructions, backup transfer, and update behavior are unchanged. Updates
-wait until existing browser tabs and installed app windows close. Browser and installed
-app storage can be separate; use the existing backup export/import flow to transfer
-progress. Storage eviction can require online preparation again.
+The manifest keeps identity `/` and launches `/pwa/dashboard` with scope `/pwa/`. Only
+standalone launches register `/pwa/sw.js` and prepare offline resources. Ordinary browser
+routes use online delivery with HTTP revalidation and show no offline readiness or update
+notices. Browser visits inside `/pwa/` are redirected outside the offline scope. IndexedDB
+and backup transfer are unchanged; Safari and its installed app may still have separate
+storage.
+
+Installed apps check for a deployment on every online launch, foreground return, and
+reconnect. They automatically activate a completely downloaded release and restart the
+document, without a prompt or manual reload. Activation waits for all PWA windows to
+confirm there is no active mock test or pending learner write. Offline openings keep the
+prepared release, and failed downloads leave it usable. Settings displays the build ID
+(`GITHUB_SHA` in CI, local Git SHA otherwise; `VITE_APP_VERSION` can override it).
+
+Keep deploying the root `/sw.js`: it replaces previously installed root-scoped workers
+with network delivery and moves old documents to current code without clearing learner
+storage. It refreshes legacy windows except mock-test URLs. It also serves a minimal
+standalone launch bridge when offline, because existing iOS installations can retain
+`/dashboard` as their start URL after the manifest changes. The bridge sends installed
+launches to `/pwa/dashboard`, while ordinary browser visitors get an internet-required
+message, never the cached learner app. Existing root caches are left intact, but are no
+longer used to deliver app resources. Migration first requires connectivity and a browser
+worker update check; code already suspended in an old release cannot be retroactively
+given the new foreground handler.
 
 Pages deployments replace the files available on the production hostname. Retaining an old
-deployment does not make its missing hashed assets available on the new production
-hostname. Existing installed clients normally use their complete precache; if that cache
-is evicted, an old client may need to close and reopen online to install the current
-release. There is no cross-release asset retention mechanism in this deployment.
+deployment does not retain its hashed assets at that hostname. PWA updates therefore
+precache the full replacement before activation; failed repairs of an evicted old resource
+must not prevent checking for the new release. There is no cross-release asset retention
+mechanism in this deployment.
 
 ## Content Security Policy
 

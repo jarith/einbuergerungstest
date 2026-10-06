@@ -4,5 +4,5 @@
     "types": ["node", "vite/client"],
     "lib": ["ES2025", "DOM", "DOM.Iterable", "ESNext.Disposable"]
   },
-  "include": ["behavior", "journeys", "support", "tests", "*.config.ts"]
+  "include": ["behavior", "journeys", "updates", "support", "tests", "*.config.ts"]
 }

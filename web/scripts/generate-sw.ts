@@ -2,15 +2,15 @@ import { generateSW } from 'workbox-build'
 
 import { createHash } from 'node:crypto'
 import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises'
-import { fileURLToPath } from 'node:url'
 
 import { getLearnerPathPattern } from '../src/app/seo/site.ts'
 import {
   isJsonValue,
   parseQuestionBank,
 } from '../src/modules/question-bank/domain/question-bank.ts'
+import { getBuildOutput, getBuildVersion } from './build-version.ts'
 
-const output = fileURLToPath(new URL('../dist/', import.meta.url))
+const output = getBuildOutput()
 
 const bankValue: unknown = JSON.parse(await readFile(`${output}/questionbank-berlin.json`, 'utf8'))
 
@@ -39,14 +39,26 @@ await Promise.all(
   ),
 )
 
+await mkdir(`${output}/pwa`, { recursive: true })
+
+await writeFile(
+  `${output}/pwa/update-worker.js`,
+  (await readFile(new URL('./workers/update-worker.js', import.meta.url), 'utf8')).replace(
+    "'APP_BUILD_ID'",
+    JSON.stringify(getBuildVersion()),
+  ),
+)
+
+await copyFile(new URL('./workers/retire-worker.js', import.meta.url), `${output}/sw.js`)
+
 const result = await generateSW({
   globDirectory: output,
   globPatterns: ['**/*.{html,js,css,woff2,woff,ttf,json,webp,png,svg,ico,webmanifest}'],
-  globIgnores: ['sw.js', 'workbox-*.js', 'offline-check.js'],
-  swDest: `${output}/sw.js`,
-  importScripts: ['offline-check.js'],
+  globIgnores: ['sw.js', 'workbox-*.js', 'offline-check.js', 'pwa/**'],
+  swDest: `${output}/pwa/sw.js`,
+  importScripts: ['/pwa/offline-check.js', '/pwa/update-worker.js'],
   navigateFallback: '/app.html',
-  navigateFallbackAllowlist: [getLearnerPathPattern()],
+  navigateFallbackAllowlist: [new RegExp(`^/pwa${getLearnerPathPattern().source.slice(1)}`)],
   navigateFallbackDenylist: [/^\/images\//, /^\/assets\//, /^\/locales\//, /\.[^/]+$/],
   skipWaiting: false,
   clientsClaim: true,
@@ -66,6 +78,7 @@ const result = await generateSW({
       const manifest = await Promise.all(
         entries.map(async (entry) => ({
           ...entry,
+          url: `/${entry.url}`,
           // Integrity lets Workbox safely repair an evicted precache entry from the network.
           integrity: `sha384-${createHash('sha384')
             .update(await readFile(`${output}/${entry.url}`))
@@ -76,17 +89,19 @@ const result = await generateSW({
       // Verification uses the exact generated precache, never a hand-maintained bank manifest.
       // This script is part of the worker's own installed script graph, not an app resource.
       await writeFile(
-        `${output}/offline-check.js`,
+        `${output}/pwa/offline-check.js`,
         `
 const resources = ${JSON.stringify(manifest.map(({ url, revision }) => ({ url, revision })))};
 self.addEventListener('message', (event) => {
   if (event.data !== 'CHECK_OFFLINE' || !event.ports[0]) return;
   event.waitUntil((async () => {
     try {
+      const cacheNames = (await caches.keys()).filter((name) => name.startsWith('workbox-precache-') && name.endsWith(self.registration.scope));
       const missing = (await Promise.all(resources.map(async (entry) => {
         const key = new URL(entry.url, self.location.href);
         if (entry.revision) key.searchParams.set('__WB_REVISION__', entry.revision);
-        return (await caches.match(key.href))?.ok ? null : entry.url;
+        const matches = await Promise.all(cacheNames.map((cacheName) => caches.match(key.href, { cacheName })));
+        return matches.some((response) => response?.ok) ? null : entry.url.slice(1);
       }))).filter((url) => url !== null);
       event.ports[0].postMessage(missing);
     } catch {

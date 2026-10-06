@@ -43,6 +43,7 @@
     "savingSlow": "Saving is taking longer than expected. Keep this page open. If the save cannot finish, you can try again."
   },
   "settings": {
+    "version": "App version: {{version}}",
     "language": "Interface language",
     "english": "English",
     "german": "German",
@@ -276,7 +277,7 @@
     "addHelp": "Enable “Open as Web App” if shown, then confirm the app name to finish installation.",
     "transferTitle": "Copy your Safari progress",
     "transferHelp": "The installed app has separate storage from Safari. Progress does not transfer automatically. Export a backup in Safari, then import it in the installed app. Review the backup and confirm before replacing data.",
-    "separatePreparation": "The installed app also needs its own online preparation. Keep it open until it says it is ready offline; preparing Safari does not prepare the installed copy.",
+    "separatePreparation": "The installed app needs its own online preparation. Open it online until it says it is ready offline. Browser visits require an internet connection.",
     "installed": "You’re using the installed app.",
     "offlineTitle": "Offline readiness on this device",
     "iosTitle": "iPhone & iPad · Safari",

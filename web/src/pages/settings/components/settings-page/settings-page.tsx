@@ -19,6 +19,11 @@ export const SettingsPage = reatomComponent(
         model={data.settings.backup}
       />
       <InstallationGuides localization={data.localization} offline={data.offline} />
+      <p>
+        {data.localization.t()('settings.version', {
+          version: import.meta.env['VITE_APP_VERSION'],
+        })}
+      </p>
     </Stack>
   ),
   'SettingsPage',

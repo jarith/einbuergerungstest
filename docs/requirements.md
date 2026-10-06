@@ -80,7 +80,12 @@ matching the published format.
 - The app offers a confirmed reset of local progress.
 - The PWA provides a standalone launch, suitable icons, numbered iOS and Android install
   guides directly in Settings, and offline access to the app, questions, and images after
-  installation. Layouts must remain usable at iPhone and iPad sizes, including touch
+  online preparation. Each online launch or foreground return checks for and automatically
+  applies the latest completely downloaded release without an update prompt or manual
+  reload. Active mock tests and pending saves defer activation. Offline openings keep the
+  prepared copy without checking for or applying updates. Ordinary browser visits are
+  online-only and receive the current deployment on refresh, without offline preparation
+  or update notices. Layouts must remain usable at iPhone and iPad sizes, including touch
   controls and display safe areas. Answer correctness and question status must be conveyed
   with text or icons in addition to color.
 
