@@ -145,6 +145,11 @@ indexable; learner screens remain device-local, non-indexable app routes. The ca
 origin is `https://einbuergerungstest.jarith.dev`. See [SEO](seo.md) for the deployment
 contract and outstanding launch checks.
 
+Automatic update reloads must wait until the replacement controller is `activated`.
+`controllerchange` can arrive while it is still `activating`; reloading at that point
+intermittently leaves WebKit’s new document stuck preparing offline resources. The offline
+model tracks activation through worker lifecycle events before restarting.
+
 Internal learner links and redirects must retain the active router base. Use route
 `.path()`/`.go()` methods, or `getAppPath` for paths built outside route definitions.
 Root-level learner links inside `/pwa/` escape the router during client navigation and

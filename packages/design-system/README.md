@@ -47,6 +47,7 @@ import {
   DesignSystemProvider,
   Panel,
 } from '@einbuergerungstest/design-system'
+
 import '@einbuergerungstest/design-system/styles.css'
 
 const Example = () => (
