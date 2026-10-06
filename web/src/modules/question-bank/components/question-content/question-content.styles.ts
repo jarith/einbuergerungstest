@@ -1,5 +1,7 @@
 import { css } from '@einbuergerungstest/design-system'
 
+export const feedbackAnnouncement = css({ srOnly: true })
+
 export const questionTitle = css({
   fontSize: '24',
   '@media (min-width: 48rem)': { fontSize: '28' },

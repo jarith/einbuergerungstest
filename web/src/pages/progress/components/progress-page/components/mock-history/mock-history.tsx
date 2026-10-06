@@ -14,7 +14,7 @@ export const MockHistory = reatomComponent(({ model }: MockHistoryProps) => {
   return (
     <Stack as="section" gap="16" minWidth="0" aria-labelledby="mock-history-title">
       <h2 id="mock-history-title" className={styles.heading}>
-        {t('progress.mockTitle')}
+        {t('progress.testHistory')}
       </h2>
       <p className={styles.muted}>{t('progress.mockTotals', model.mockTotals())}</p>
       <Panel className={styles.panel}>

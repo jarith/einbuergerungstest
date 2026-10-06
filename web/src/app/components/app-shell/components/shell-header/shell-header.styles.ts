@@ -3,6 +3,9 @@ import { css } from '@einbuergerungstest/design-system'
 export const styles = {
   header: css.raw({
     gap: '8',
+    '@media (max-width: 63.999rem)': {
+      '&[data-compact-hidden]': { display: 'none' },
+    },
     justifyContent: 'center',
     minHeight: '[3.625rem]',
     paddingBlock: '8',

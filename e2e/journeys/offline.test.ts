@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 
-import { sourceQuestion } from '../support/browser'
+import { sourceQuestion, studyAnswer } from '../support/browser'
 
 test(
   'a prepared copy studies an unseen illustrated question offline and saves the answer',
@@ -50,9 +50,12 @@ test(
       )
       .toBe(true)
 
-    await page.getByRole('radio', { name: new RegExp(`^${question.correct_option}\\b`) }).click()
+    const answer = studyAnswer(page, question.correct_option)
 
-    await expect(page.getByRole('note').filter({ hasText: 'Correct' })).toBeVisible()
+    await answer.click()
+
+    await expect(answer).toBeChecked()
+    await expect(answer).toContainText('Correct')
 
     await page.reload()
 

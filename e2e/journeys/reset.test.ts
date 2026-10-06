@@ -8,11 +8,11 @@ test('confirmed reset erases the saved learner history', async ({ page }) => {
 
   await openSettings(page)
 
-  await page.getByRole('button', { name: 'Reset local progress', exact: true }).click()
+  await page.getByRole('button', { name: 'Reset progress and settings', exact: true }).click()
 
   await page
     .getByRole('dialog')
-    .getByRole('button', { name: 'Reset local progress', exact: true })
+    .getByRole('button', { name: 'Reset progress and settings', exact: true })
     .click()
 
   await expect(page.getByRole('dialog')).toHaveCount(0)

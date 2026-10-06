@@ -8,6 +8,7 @@ import { PendingNotice } from '../../../../../../app/components/pending-notice/p
 import {
   isLearnerStateConflict,
   QuestionStatusBadge,
+  QuestionStatusBar,
 } from '../../../../../../modules/learner-state'
 import { QuestionContent } from '../../../../../../modules/question-bank'
 import { styles } from '../../study-page.styles'
@@ -28,20 +29,30 @@ export const StudySession = reatomComponent(({ model }: StudySessionProps) => {
         <StudyCompletion model={model} />
       ) : (
         <>
-          <Flex justify="space-between" gap="16" css={{ ...styles.scope }}>
-            <span className={styles.scopeLabel}>
-              {t(model.isGroup ? 'navigation.groups' : 'navigation.study')} / {model.scope()}
-            </span>
-            <span
-              className={styles.position}
-              aria-label={t('common.questionPosition', {
-                current: current.index + 1,
-                total: current.total,
-              })}
-            >
-              {current.index + 1}/{current.total}
-            </span>
-          </Flex>
+          <Stack gap="8" minWidth="0">
+            <Flex justify="space-between" gap="16" css={{ ...styles.scope }}>
+              <span className={styles.scopeLabel}>
+                {t(model.isGroup ? 'navigation.groups' : 'navigation.study')} / {model.scope()}
+              </span>
+              <span
+                className={styles.position}
+                aria-label={t('common.questionPosition', {
+                  current: current.index + 1,
+                  total: current.total,
+                })}
+              >
+                {current.index + 1}/{current.total}
+              </span>
+            </Flex>
+            <QuestionStatusBar
+              group={{
+                ...model.totals(),
+                title: model.scope(),
+                percentageLabel: model.localization.formatNumber(model.totals().percentage),
+              }}
+              t={t}
+            />
+          </Stack>
           <Stack gap="24" minWidth="0">
             <QuestionStatusBadge status={model.status()} t={t} />
             <QuestionContent

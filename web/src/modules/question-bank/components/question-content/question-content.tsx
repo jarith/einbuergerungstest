@@ -13,7 +13,12 @@ import {
 } from '../../domain/question-answer'
 import { QuestionImage } from '../question-image/question-image'
 import { AnswerFeedback } from './components/answer-feedback/answer-feedback'
-import { questionTitle, reviewTitle, translationText } from './question-content.styles'
+import {
+  feedbackAnnouncement,
+  questionTitle,
+  reviewTitle,
+  translationText,
+} from './question-content.styles'
 
 type QuestionInteraction =
   | Readonly<{
@@ -146,18 +151,31 @@ export const QuestionContent = ({
         }}
       />
       <div
+        className={interaction.mode === 'study' ? feedbackAnnouncement : undefined}
         aria-live={
           interaction.mode === 'study' && interaction.shouldAnnounceFeedback ? 'polite' : 'off'
         }
         aria-atomic="true"
       >
-        <AnswerFeedback
-          question={question}
-          feedback={feedback}
-          hasJustLearned={interaction.mode === 'study' && interaction.hasJustLearned}
-          showTranslation={interaction.mode === 'study' && showTranslation}
-          t={t}
-        />
+        {interaction.mode === 'study' ? (
+          feedback === 'hidden' ? null : (
+            t(
+              feedback === 'correct'
+                ? interaction.hasJustLearned
+                  ? 'study.nowLearned'
+                  : 'study.correct'
+                : 'study.mistaken',
+            )
+          )
+        ) : (
+          <AnswerFeedback
+            question={question}
+            feedback={feedback}
+            hasJustLearned={false}
+            showTranslation={false}
+            t={t}
+          />
+        )}
       </div>
     </Stack>
   )

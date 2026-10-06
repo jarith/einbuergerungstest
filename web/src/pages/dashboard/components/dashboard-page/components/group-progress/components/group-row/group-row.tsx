@@ -4,7 +4,7 @@ import { Flex, Grid, Stack } from '@einbuergerungstest/design-system/jsx'
 import { ArrowRight } from 'lucide-react'
 
 import type { DashboardGroup } from '../../../../../../dashboard.model'
-import { GroupStatusBar } from './components/group-status-bar/group-status-bar'
+import { QuestionStatusBar } from '../../../../../../../../modules/learner-state'
 import { styles } from './group-row.styles'
 
 type GroupRowProps = Readonly<{ group: DashboardGroup; t: TFunction }>
@@ -25,7 +25,12 @@ export const GroupRow = ({ group, t }: GroupRowProps) => (
           </span>
           <span className={styles.percentage}>{group.percentageLabel}%</span>
         </Flex>
-        <GroupStatusBar group={group} t={t} />
+        <QuestionStatusBar group={group} t={t} />
+        {group.resumePosition === null ? null : (
+          <p id={`group-resume-${group.id}`} className={styles.resume}>
+            {t('groups.resumePosition', { position: group.resumePosition, total: group.total })}
+          </p>
+        )}
       </Stack>
       <ButtonLink
         className={styles.action}
@@ -38,10 +43,5 @@ export const GroupRow = ({ group, t }: GroupRowProps) => (
         <span id={`group-action-${group.id}`}>{t(group.action)}</span>
       </ButtonLink>
     </Grid>
-    {group.resumePosition === null ? null : (
-      <p id={`group-resume-${group.id}`} className={styles.resume}>
-        {t('groups.resumePosition', { position: group.resumePosition, total: group.total })}
-      </p>
-    )}
   </Grid>
 )

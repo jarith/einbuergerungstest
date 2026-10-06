@@ -76,7 +76,7 @@ export const ReviewQuestion = reatomComponent(({ model }: ReviewQuestionProps) =
         </Button>
       </Grid>
       <Toolbar placeContent="normal space-between">
-        <ButtonLink href="/progress" appearance="outline">
+        <ButtonLink href="/progress?tab=mock-tests" appearance="outline">
           {t('mock.backToOverview')}
         </ButtonLink>
         <Button onClick={wrap(model.openPicker)}>{t('mock.questionList')}</Button>

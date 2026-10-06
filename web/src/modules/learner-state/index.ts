@@ -37,3 +37,9 @@ export { createOrderedStudy, createStudySession } from './application/ordered-st
 export type { StudyMode } from './application/ordered-study.model'
 
 export { QuestionStatusFilter } from './components/question-status-filter/question-status-filter'
+export { QuestionStatusBar } from './components/question-status-bar/question-status-bar'
+export { getStatusSegments } from './domain/status-segments'
+
+export type { StatusSegment } from './domain/status-segments'
+
+export { progressStatus } from './components/progress-status.recipe'

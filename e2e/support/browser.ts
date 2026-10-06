@@ -25,7 +25,7 @@ export const questionStatusLabel = (status: string) => {
     case 'needs-review':
       return '(?:Needs review|Wiederholen)'
     case 'learning':
-      return '(?:Learning|In Bearbeitung)'
+      return '(?:Learning|Im Lernen)'
     case 'learned':
       return '(?:Learned|Gelernt)'
     default:

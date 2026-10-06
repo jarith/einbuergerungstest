@@ -2,7 +2,7 @@ import { cx } from '@einbuergerungstest/design-system'
 import { Grid } from '@einbuergerungstest/design-system/jsx'
 
 import type { LearningStatus } from '../../../../../../../../modules/learner-state'
-import { progressStatus } from '../../../../progress-status.recipe'
+import { progressStatus } from '../../../../../../../../modules/learner-state'
 import { styles } from './progress-legend.styles'
 
 export type ProgressLegendItem = Readonly<{
@@ -50,14 +50,7 @@ export const ProgressLegend = ({
           }
         }}
         onBlur={() => onPreview(null)}
-        onClick={(event) => {
-          if (
-            event.detail === 0 ||
-            (event.nativeEvent instanceof PointerEvent && event.nativeEvent.pointerType === 'touch')
-          ) {
-            onToggle(item.status)
-          }
-        }}
+        onClick={() => onToggle(item.status)}
       >
         <span
           className={cx(styles.dot, progressStatus({ status: item.status }))}

@@ -51,6 +51,7 @@ export const AppLayout = reatomComponent(({ route, routes, title, recovery }: Ap
       offline={data.offline}
       localization={data.localization}
       title={title()}
+      isCompactHeaderHidden={routes.study.entry.match()}
       hasPageHeading={routes.mock.entry.match() || routes.testReview.exact()}
       isContentCentered={
         routes.study.entry.match() || routes.mock.entry.match() || routes.settings.exact()
