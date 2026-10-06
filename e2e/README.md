@@ -94,6 +94,13 @@ test departure, accessible answer groups, target sizes, and appearance metadata.
 cannot verify the installed app's software keyboard, system bars, physical safe-area
 insets, or VoiceOver/TalkBack; those remain real-device checks.
 
+`touch/app-base.test.ts` exercises Continue group and Progress → question → study in
+standalone and browser modes at phone and tablet widths, including saved positions and
+return navigation. `tests/app-links.test.ts` checks rendered learner links across content,
+completion, and error states and follows mock submission through review and history. These
+catch links escaping `/pwa/`; opening a correctly prefixed URL directly cannot detect that
+regression.
+
 CI runs E2E only after business integration and component-browser checks succeed. On pull
 requests it selects the four journeys when app, E2E, design-system, dependency/toolchain,
 or workflow paths change. The complete suite runs on master pushes. CI runs only on pull

@@ -3,6 +3,7 @@ import { reatomComponent } from '@reatom/react'
 import { CalendarDays } from 'lucide-react'
 
 import type { DashboardSectionProps } from '../../dashboard-page'
+import { getAppPath } from '../../../../../../app/offline/app-mode'
 import { styles } from '../../dashboard-page.styles'
 
 export const TestCountdown = reatomComponent(({ model }: DashboardSectionProps) => {
@@ -26,7 +27,7 @@ export const TestCountdown = reatomComponent(({ model }: DashboardSectionProps) 
             : t('dashboard.plannedFor', { date: date.label })}
         </p>
       </Stack>
-      <a className={styles.link} href="/settings">
+      <a className={styles.link} href={getAppPath('/settings')}>
         {t(date === null ? 'dashboard.setDate' : 'dashboard.editDate')} →
       </a>
     </Flex>

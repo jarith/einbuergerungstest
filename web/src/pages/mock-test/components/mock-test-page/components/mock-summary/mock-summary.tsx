@@ -5,6 +5,7 @@ import { reatomComponent } from '@reatom/react'
 import { Check, List } from 'lucide-react'
 
 import type { MockPageModel } from '../../../../mock-test.model'
+import { getAppPath } from '../../../../../../app/offline/app-mode'
 import { styles } from '../../mock-test-page.styles'
 
 type MockSummaryProps = Readonly<{ model: MockPageModel }>
@@ -51,7 +52,7 @@ export const MockSummary = reatomComponent(({ model }: MockSummaryProps) => {
           ) : null}
         </Stack>
       </Panel>
-      <ButtonLink href="/dashboard" appearance="ghost">
+      <ButtonLink href={getAppPath('/dashboard')} appearance="ghost">
         {t('mock.exit')}
       </ButtonLink>
     </Stack>

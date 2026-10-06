@@ -5,6 +5,7 @@ import { reatomComponent } from '@reatom/react'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 import type { TestReviewModel } from '../../../../test-review.model'
+import { getAppPath } from '../../../../../../app/offline/app-mode'
 import { QuestionContent } from '../../../../../../modules/question-bank'
 import { styles } from '../../test-review-page.styles'
 
@@ -76,7 +77,7 @@ export const ReviewQuestion = reatomComponent(({ model }: ReviewQuestionProps) =
         </Button>
       </Grid>
       <Toolbar placeContent="normal space-between">
-        <ButtonLink href="/progress?tab=mock-tests" appearance="outline">
+        <ButtonLink href={getAppPath('/progress?tab=mock-tests')} appearance="outline">
           {t('mock.backToOverview')}
         </ButtonLink>
         <Button onClick={wrap(model.openPicker)}>{t('mock.questionList')}</Button>

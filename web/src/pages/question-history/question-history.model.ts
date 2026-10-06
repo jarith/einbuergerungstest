@@ -2,6 +2,7 @@ import { computed } from '@reatom/core'
 
 import type { AppResources } from '../../app/bootstrap.model'
 import type { LoadedQuestion } from '../../modules/question-bank'
+import { getAppPath } from '../../app/offline/app-mode'
 
 export const createQuestionHistoryModel = (resources: AppResources, selected: LoadedQuestion) => {
   const correctOption = selected.question.answer_options.find(
@@ -19,8 +20,8 @@ export const createQuestionHistoryModel = (resources: AppResources, selected: Lo
   }, 'questionHistory').extend(() => ({
     selected,
     localization: resources.localization,
-    studyPath: `/study/${encodeURIComponent(selected.key)}`,
-    listPath: '/progress',
+    studyPath: getAppPath(`/study/${encodeURIComponent(selected.key)}`),
+    listPath: getAppPath('/progress'),
     getOption: (label: string) =>
       selected.question.answer_options.find((option) => option.label === label),
   }))

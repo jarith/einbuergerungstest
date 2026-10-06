@@ -3,6 +3,7 @@ import { Stack } from '@einbuergerungstest/design-system/jsx'
 import { reatomComponent } from '@reatom/react'
 
 import type { ProgressPageModel } from '../../../../progress.model'
+import { getAppPath } from '../../../../../../app/offline/app-mode'
 import { styles } from '../../progress-page.styles'
 
 type MockHistoryProps = Readonly<{ model: ProgressPageModel }>
@@ -24,7 +25,10 @@ export const MockHistory = reatomComponent(({ model }: MockHistoryProps) => {
           <Stack as="ol" css={styles.list}>
             {mocks.map((mock) => (
               <li key={mock.id}>
-                <a href={`/progress/tests/${encodeURIComponent(mock.id)}`} className={styles.row}>
+                <a
+                  href={getAppPath(`/progress/tests/${encodeURIComponent(mock.id)}`)}
+                  className={styles.row}
+                >
                   <Stack gap="8">
                     <time dateTime={new Date(mock.startedAt).toISOString()}>
                       {model.localization.formatDate(new Date(mock.startedAt), {

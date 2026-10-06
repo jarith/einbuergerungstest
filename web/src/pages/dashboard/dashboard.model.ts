@@ -1,6 +1,7 @@
 import { computed, onLineAtom } from '@reatom/core'
 
 import type { AppResources } from '../../app/bootstrap.model'
+import { getAppPath } from '../../app/offline/app-mode'
 import { getQuestionKey } from '../../modules/question-bank'
 import { getCalendarDaysUntil } from './lib/calendar-days'
 import { getProgressPercentage } from './lib/progress-percentage'
@@ -57,7 +58,7 @@ export const createDashboardModel = (resources: AppResources) => {
             percentageLabel: localization.formatNumber(percentage.value, {
               maximumFractionDigits: percentage.fractionDigits,
             }),
-            href: `/study/groups/${encodeURIComponent(group.id)}`,
+            href: getAppPath(`/study/groups/${encodeURIComponent(group.id)}`),
             resumePosition:
               position?.status === 'in-progress' && savedIndex >= 0 ? savedIndex + 1 : null,
             action:

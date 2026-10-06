@@ -3,6 +3,7 @@ import { Button, InlineNotice } from '@einbuergerungstest/design-system'
 import { PendingNotice } from '../../../components/pending-notice/pending-notice'
 import de from '../../../i18n/de.json'
 import en from '../../../i18n/en.json'
+import { getAppPath } from '../../../offline/app-mode'
 
 type RouteStatusProps = Readonly<{
   language?: 'en' | 'de' | undefined
@@ -29,7 +30,7 @@ export const RouteStatus = ({ error, retry, language = 'en' }: RouteStatusProps)
         <p>{error.name === 'PageNotFound' ? messages.errors.notFound : messages.errors.startup}</p>
       )}
       {error === undefined ? null : error.name === 'PageNotFound' ? (
-        <a href="/dashboard">{messages.navigation.dashboard}</a>
+        <a href={getAppPath('/dashboard')}>{messages.navigation.dashboard}</a>
       ) : (
         <Button onClick={retry}>{messages.common.retry}</Button>
       )}

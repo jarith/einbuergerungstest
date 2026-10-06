@@ -4,6 +4,7 @@ import { reatomComponent } from '@reatom/react'
 import { Check } from 'lucide-react'
 
 import type { TestReviewModel } from '../../../../test-review.model'
+import { getAppPath } from '../../../../../../app/offline/app-mode'
 import { styles } from '../../test-review-page.styles'
 
 type ReviewSummaryProps = Readonly<{ model: TestReviewModel }>
@@ -53,7 +54,7 @@ export const ReviewSummary = reatomComponent(({ model }: ReviewSummaryProps) => 
             <p>{t('mock.unfinishedHelp', { count: summary.answered })}</p>
           </>
         )}
-        <ButtonLink href="/mock-test" appearance="outline">
+        <ButtonLink href={getAppPath('/mock-test')} appearance="outline">
           {t('mock.startAnother')}
         </ButtonLink>
       </Stack>
