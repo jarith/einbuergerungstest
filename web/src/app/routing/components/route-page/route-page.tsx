@@ -12,10 +12,16 @@ type RoutePageProps<Params extends object, Data> = Readonly<{
   loader: RouteLoader<Params, Data>
   page: ComponentType<PageProps<Data>>
   language?: 'en' | 'de' | undefined
+  keepPreviousData?: boolean
 }>
 
 export const RoutePage = reatomComponent(
-  <Params extends object, Data>({ loader, page: Page, language }: RoutePageProps<Params, Data>) => {
+  <Params extends object, Data>({
+    loader,
+    page: Page,
+    language,
+    keepPreviousData = false,
+  }: RoutePageProps<Params, Data>) => {
     // Keep the active loader connected so parent retries refresh its data.
     void loader()
 
@@ -23,7 +29,7 @@ export const RoutePage = reatomComponent(
     const error = loader.status().isRejected ? loader.error() : undefined
     const data = loader.data()
 
-    if (error !== undefined || !loader.ready() || data === undefined) {
+    if (error !== undefined || (!loader.ready() && !keepPreviousData) || data === undefined) {
       return (
         <Box
           display="contents"

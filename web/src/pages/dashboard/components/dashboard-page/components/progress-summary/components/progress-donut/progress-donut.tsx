@@ -1,8 +1,8 @@
 import { Grid, Stack } from '@einbuergerungstest/design-system/jsx'
 
 import type { LearningStatus } from '../../../../../../../../modules/learner-state'
-import type { StatusSegment } from '../../../../../../lib/status-segments'
-import { progressStatus } from '../../../../progress-status.recipe'
+import type { StatusSegment } from '../../../../../../../../modules/learner-state'
+import { progressStatus } from '../../../../../../../../modules/learner-state'
 import { styles } from './progress-donut.styles'
 
 type ProgressDonutProps = Readonly<{

@@ -19,6 +19,7 @@ type AppShellProps = Readonly<{
   offline: AppResources['offline']
   title: string
   isTitleHidden?: boolean
+  isCompactHeaderHidden?: boolean
   hasPageHeading?: boolean
   isContentCentered?: boolean
   destinations: readonly Destination[]
@@ -35,6 +36,7 @@ export const AppShell = reatomComponent(
     links,
     children,
     isTitleHidden = false,
+    isCompactHeaderHidden = false,
     hasPageHeading = false,
     isContentCentered = false,
   }: AppShellProps) => {
@@ -47,7 +49,7 @@ export const AppShell = reatomComponent(
         </a>
         <Grid css={{ ...shellStyles.root }}>
           <div className={shellStyles.sidebar}>
-            <ShellHeader brand={t('app.brand')} />
+            <ShellHeader brand={t('app.brand')} isCompactHidden={isCompactHeaderHidden} />
             <ShellNavigation label={t('navigation.main')} destinations={destinations} />
             <StorageFooter label={t(offline() === 'ready' ? 'offline.ready' : 'app.deviceLocal')} />
           </div>

@@ -2,6 +2,7 @@ import { expect, test } from '@playwright/test'
 
 import { readFile } from 'node:fs/promises'
 
+import { studyAnswer } from '../support/browser'
 import { seedProfile } from './fixtures'
 
 test('recovery preserves a downloadable original before a confirmed fresh start', async ({
@@ -33,9 +34,12 @@ test('recovery preserves a downloadable original before a confirmed fresh start'
 
   await page.getByRole('link', { name: 'Study all questions', exact: true }).click()
 
-  await page.getByRole('radio', { name: /^D\b/ }).click()
+  const answer = studyAnswer(page, 'D')
 
-  await expect(page.getByRole('note').filter({ hasText: 'Correct' })).toBeVisible()
+  await answer.click()
+
+  await expect(answer).toBeChecked()
+  await expect(answer).toContainText('Correct')
 
   await page.reload()
 

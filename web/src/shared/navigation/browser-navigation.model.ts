@@ -42,6 +42,12 @@ const readIndex = () => {
 
 export const browserNavigationAtom = computed(() => pendingAtom() !== null, 'navigation').extend(
   () => ({
+    // In-page route changes retain the initiating control's focus and scroll position.
+    withinPage: action((navigate: () => void) => {
+      navigate()
+
+      pageArrival.set(null)
+    }, 'navigation.withinPage'),
     error: computed(() => errorAtom(), 'navigation.errorView'),
     // Called by the rendered route, after its loader and DOM have caught up with the URL.
     complete: action((page: HTMLElement | null) => {

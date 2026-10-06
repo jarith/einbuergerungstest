@@ -8,7 +8,8 @@ const rowCss = css.raw({
   textDecoration: 'none',
   fontSize: '14',
   '@media (min-width: 48rem)': { fontSize: '16' },
-  _hover: { backgroundColor: 'surface-muted' },
+  touchAction: 'manipulation',
+  '@media (hover: hover) and (pointer: fine)': { _hover: { backgroundColor: 'surface-muted' } },
   _focusVisible: {
     outline: '{borderWidths.focus} solid {colors.focus.outer}',
     outlineOffset: 'focus.offset',
@@ -17,11 +18,14 @@ const rowCss = css.raw({
 
 export const styles = {
   root: css.raw({ minWidth: '0', overflowWrap: 'anywhere', hyphens: 'auto' }),
-  columns: css.raw({
-    gridTemplateColumns: 'minmax(0, 1fr)',
-    gap: '32',
-    '@media (min-width: 64rem)': { gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 1fr)' },
+  filterLabel: css({ textStyle: 'controlLabel' }),
+  groupTitle: css({
+    fontSize: '16',
+    lineHeight: '16',
+    fontWeight: 'semibold',
+    '@media (min-width: 48rem)': { fontSize: '18' },
   }),
+  empty: css({ padding: '20', gap: '16', alignItems: 'start' }),
   panel: css({ padding: '12', gap: '8' }),
   heading: css({
     textStyle: 'compactHeading',
@@ -31,6 +35,7 @@ export const styles = {
     textStyle: 'caption',
     fontSize: '14',
     color: 'content.muted',
+    fontWeight: 'regular',
   }),
   list: css.raw({
     listStyle: 'none',

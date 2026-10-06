@@ -3,7 +3,7 @@ import { onEvent, wrap } from '@reatom/core'
 import { reatomFactoryComponent } from '@reatom/react'
 
 import type { DashboardSectionProps } from '../../dashboard-page'
-import { getStatusSegments } from '../../../../lib/status-segments'
+import { getStatusSegments } from '../../../../../../modules/learner-state'
 import { ProgressDonut } from './components/progress-donut/progress-donut'
 import { ProgressLegend } from './components/progress-legend/progress-legend'
 import { createProgressHighlight } from './progress-highlight.model'

@@ -48,15 +48,18 @@ test(
     await page.getByRole('link', { name: 'Study all questions', exact: true }).click()
 
     const answer = studyAnswer(page, 'D')
-    const feedback = page.getByRole('note').filter({ hasText: 'Correct — now marked Learned' })
+
     // The live-region attributes are the browser contract under test, not BDD content selectors.
-    const announcement = page.locator('[aria-live]').filter({ has: feedback })
+    const announcement = page
+      .locator('[aria-live]')
+      .filter({ hasText: 'Correct — now marked Learned' })
 
     await answer.focus()
 
     await answer.press('Space')
 
-    await expect(feedback).toBeVisible()
+    await expect(answer).toContainText('Correct')
+    await expect(page.getByRole('note').filter({ hasText: /Correct/ })).toHaveCount(0)
     await expect(announcement).toHaveAttribute('aria-live', 'polite')
     await expect(announcement).toHaveAttribute('aria-atomic', 'true')
     await expect(answer).toBeFocused()
@@ -69,7 +72,7 @@ test(
 
     await page.getByRole('button', { name: 'Previous', exact: true }).click()
 
-    await expect(feedback).toBeVisible()
+    await expect(answer).toContainText('Correct')
     await expect(announcement).toHaveAttribute('aria-live', 'off')
     await expect(answer).not.toBeFocused()
   },
@@ -126,6 +129,6 @@ for (const { language, width } of [
     await expect(studyAnswer(page, 'A')).toBeChecked()
     await expect(studyAnswer(page, 'A')).toBeDisabled()
     await expect(studyAnswer(page, 'A')).toContainText(/Incorrect|Falsch/)
-    await expect(page.getByRole('note').filter({ hasText: /Incorrect|Falsch/ })).toBeVisible()
+    await expect(page.getByRole('note').filter({ hasText: /Incorrect|Falsch/ })).toHaveCount(0)
   })
 }

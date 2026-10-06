@@ -73,12 +73,18 @@ statuses remain selectable without drawing or dimming slices. Desktop and tablet
 the chart beside its legend; mobile places a compact two-column legend below, with inline
 count and percentage values. Group bars expose their group's contributing count and four
 status counts and percentages in a tooltip on mouse hover or keyboard focus. Touch does
-not open these tooltips.
+not open these tooltips. Study shows the same status bar immediately below its scope
+title, using totals for the current group or all questions and updating after answers. The
+Citizenship test header is hidden during study below the 1024px desktop breakpoint.
 
 **Test date**: The learner's optional planned date for taking the real Einbürgerungstest,
 distinct from a mock-test sitting.
 
 ## Interface conventions
+
+Interface copy describes the combined Learning and Learned count as “learning or learned”
+(“im Lernen oder gelernt” in German). The German Learning label is “Im Lernen”. Titles and
+headings omit trailing full stops; explanatory sentences keep normal punctuation.
 
 The approved distill pass keeps all 13 groups, their complete descriptions, progress, and
 resume hints. Progress shows bank-wide counts within the status filters; filtering or
@@ -87,11 +93,18 @@ navigation on every screen size. Backup download, file selection, and the full c
 preview belong together, with replacement and reset confirmations preserved. Backup,
 import, and reset controls are available only in Settings, with no backup link or
 disclosure on Progress. The question browser lives on `/progress`; the separate
-`/progress/questions` list route is removed. It shows questions in bank order, initially
-previews 10 matching questions, and reveals 10 more on request; changing the status filter
-resets that limit. List separators appear only between items, and hoverable rows retain
-padding in every state. The dashboard omits the “Saved on this device” notice. These
-simplifications do not change learning, scoring, or persistence rules.
+`/progress/questions` list route is removed. Question status is the default Progress tab;
+Mock tests uses `/progress?tab=mock-tests`, owned by the Reatom route search codec. Tab
+navigation retains keyboard focus. All 13 question groups remain visible and expand
+independently through the Mantine-based design-system Accordion. The first two groups
+start expanded. Filters apply to every question before each group's pagination; each
+expanded group previews 10 matches in bank order and reveals 10 more on request. Changing
+the filter resets all group limits. Group status bars always describe the full group.
+Filters, expanded groups, and revealed counts survive tab and question-history navigation
+for the current loaded learner. Browser Back preserves the departure scroll position. List
+separators appear only between items, and hoverable rows retain padding in every state.
+The dashboard omits the “Saved on this device” notice. These simplifications do not change
+learning, scoring, or persistence rules.
 
 At desktop widths (1024px and above), Study, Mock test, and Settings use a container
 measuring 50% of the viewport width, centered within the main area beside navigation. Page

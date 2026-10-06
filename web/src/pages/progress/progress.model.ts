@@ -10,7 +10,13 @@ export const createProgressPageModel = (resources: AppResources) => {
   const { learner, localization, questions } = resources
   const pageSize = 10
   const filter = atom<ProgressFilter>('all', 'progressPage.filter')
-  const limit = atom(pageSize, 'progressPage.limit')
+
+  const expanded = atom(
+    questions.bank.groups.slice(0, 2).map((group) => group.id),
+    'progressPage.expanded',
+  )
+
+  const limits = atom<Readonly<Record<string, number>>>({}, 'progressPage.limits')
 
   const filtered = computed(() => {
     const progress = learner.progress.questions()
@@ -26,12 +32,43 @@ export const createProgressPageModel = (resources: AppResources) => {
     })
   }, 'progressPage.filtered')
 
-  return computed(() => filtered().slice(0, limit()), 'progressPage.questions').extend(() => ({
+  const groups = computed(() => {
+    const rows = filtered()
+    const progress = learner.progress.groups()
+    const revealed = limits()
+
+    return questions.bank.groups.map((group) => {
+      const totals = progress.get(group.id)
+
+      if (totals === undefined) {
+        throw new Error(`Missing progress for question group ${group.id}.`)
+      }
+
+      const matches = rows.filter((row) => row.question.group_id === group.id)
+      const limit = revealed[group.id] ?? pageSize
+
+      return {
+        ...localization.getGroup(group),
+        ...totals,
+        percentageLabel: localization.formatNumber(totals.percentage),
+        matches: matches.length,
+        rows: matches.slice(0, limit),
+        remaining: Math.max(0, matches.length - limit),
+      }
+    })
+  }, 'progressPage.groups')
+
+  return filtered.extend(() => ({
     localization,
     pageSize,
     filter,
+    expanded,
+    groups,
     total: computed(() => filtered().length, 'progressPage.total'),
-    remaining: computed(() => Math.max(0, filtered().length - limit()), 'progressPage.remaining'),
+    matchingGroups: computed(
+      () => groups().filter((group) => group.matches > 0).length,
+      'progressPage.matchingGroups',
+    ),
     totals: learner.progress.totals,
     mockTotals: learner.progress.mockTotals,
     mocks: computed(
@@ -45,12 +82,28 @@ export const createProgressPageModel = (resources: AppResources) => {
     setFilter: action((status: ProgressFilter) => {
       filter.set(status)
 
-      limit.set(pageSize)
+      limits.set({})
     }, 'progressPage.setFilter'),
-    showMore: action(() => limit.set(limit() + pageSize), 'progressPage.showMore'),
+    showMore: action(
+      (groupId: string) =>
+        limits.set((current) => ({
+          ...current,
+          [groupId]: (current[groupId] ?? pageSize) + pageSize,
+        })),
+      'progressPage.showMore',
+    ),
   }))
 }
 
 export type ProgressPageModel = ReturnType<typeof createProgressPageModel>
 
-export type ProgressData = AppResources & Readonly<{ model: ProgressPageModel }>
+export type ProgressGroup = ReturnType<ProgressPageModel['groups']>[number]
+
+export type ProgressTab = 'question-status' | 'mock-tests'
+
+export type ProgressData = AppResources &
+  Readonly<{
+    model: ProgressPageModel
+    tab: ProgressTab
+    selectTab: (tab: string | null) => void
+  }>

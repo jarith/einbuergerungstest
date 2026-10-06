@@ -26,7 +26,7 @@ for (const language of ['English', 'Deutsch'] as const) {
     await page.getByText(new RegExp(`^${questionStatusLabel('learned')} ·`)).click()
 
     await expect(
-      page.getByText(/No questions have this status yet|Noch keine Fragen mit diesem Status/),
+      page.getByText(/No learned questions yet|Noch keine gelernten Fragen/),
     ).toBeVisible()
 
     await expectViewportFit(page)
@@ -46,14 +46,18 @@ test('progress reveals ten more matching questions and keeps bank-wide totals', 
 }) => {
   const saved = progressFixture()
 
+  const groupQuestions = Array.from({ length: 300 }, (_, index) =>
+    sourceQuestion(index + 1),
+  ).filter((question) => question.group_id === sourceQuestion(1).group_id)
+
   await seedProfile(
     page,
     JSON.stringify({
       ...saved,
-      studyAttempts: Array.from({ length: 11 }, (_, index) => ({
+      studyAttempts: groupQuestions.slice(0, 11).map((question, index) => ({
         id: `learning-${index}`,
-        questionKey: sourceQuestion(index + 1).id,
-        selectedOption: sourceQuestion(index + 1).correct_option,
+        questionKey: question.id,
+        selectedOption: question.correct_option,
         answeredAt: Date.now() - 1000 + index,
       })),
     }),
@@ -62,14 +66,20 @@ test('progress reveals ten more matching questions and keeps bank-wide totals', 
   await openNavigation(page, '/progress')
 
   const questions = page.getByRole('region', { name: 'Question status', exact: true })
-  const rows = questions.getByRole('listitem')
-  const mocks = page.getByRole('region', { name: 'Mock tests', exact: true })
+  const group = questions.getByRole('region', { name: /^Constitution, rights/ })
+  const rows = group.getByRole('listitem')
+  const mocks = page.getByRole('region', { name: 'Test history', exact: true })
 
   await expect(rows).toHaveCount(10)
-  await expect(questions.getByText('Showing 10 of 310 questions', { exact: true })).toBeVisible()
+  await expect(group.getByText('Showing 10 of 27 questions', { exact: true })).toBeVisible()
+
+  await page.getByRole('tab', { name: 'Mock tests', exact: true }).click()
+
   await expect(mocks.getByRole('listitem')).toHaveCount(1)
 
-  await questions.getByRole('button', { name: 'Show next 10 questions' }).click()
+  await page.getByRole('tab', { name: 'Question status', exact: true }).click()
+
+  await group.getByRole('button', { name: 'Show next 10 questions' }).click()
 
   await expect(rows).toHaveCount(20)
   await expect(questions.getByText('All · 310', { exact: true })).toBeVisible()
@@ -84,12 +94,19 @@ test('progress reveals ten more matching questions and keeps bank-wide totals', 
   await expect(rows).toHaveCount(11)
   await expect(questions.getByRole('button', { name: /Show next/ })).toHaveCount(0)
   await expect(questions.getByText('Not started · 299', { exact: true })).toBeVisible()
+
+  await page.getByRole('tab', { name: 'Mock tests', exact: true }).click()
+
   await expect(mocks.getByRole('listitem')).toHaveCount(1)
+
+  await page.getByRole('tab', { name: 'Question status', exact: true }).click()
 
   await questions.getByText('Not started · 299', { exact: true }).click()
 
   await expect(rows).toHaveCount(10)
-  await expect(rows.first()).toContainText(`12 · ${sourceQuestion(12).question_de}`)
+  await expect(rows.first()).toContainText(
+    `${groupQuestions[11]?.order} · ${groupQuestions[11]?.question_de}`,
+  )
 
   await rows.first().getByRole('link').click()
 

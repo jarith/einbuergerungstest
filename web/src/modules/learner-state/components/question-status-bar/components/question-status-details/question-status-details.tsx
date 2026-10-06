@@ -2,14 +2,17 @@ import type { TFunction } from 'i18next'
 import { cx } from '@einbuergerungstest/design-system'
 import { Grid, Stack } from '@einbuergerungstest/design-system/jsx'
 
-import type { DashboardGroup } from '../../../../../../../../../../dashboard.model'
-import { getStatusSegments } from '../../../../../../../../../../lib/status-segments'
-import { progressStatus } from '../../../../../../../../progress-status.recipe'
-import { styles } from './group-status-details.styles'
+import type { QuestionTotals } from '../../../../domain/question-progress'
+import { getStatusSegments } from '../../../../domain/status-segments'
+import { progressStatus } from '../../../progress-status.recipe'
+import { styles } from './question-status-details.styles'
 
-type GroupStatusDetailsProps = Readonly<{ group: DashboardGroup; t: TFunction }>
+type QuestionStatusDetailsProps = Readonly<{
+  group: QuestionTotals & Readonly<{ title: string; percentageLabel: string }>
+  t: TFunction
+}>
 
-export const GroupStatusDetails = ({ group, t }: GroupStatusDetailsProps) => (
+export const QuestionStatusDetails = ({ group, t }: QuestionStatusDetailsProps) => (
   <Stack gap="8">
     <strong>{group.title}</strong>
     <p className={styles.summary}>

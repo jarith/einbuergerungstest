@@ -2,6 +2,7 @@ import { css } from '@einbuergerungstest/design-system'
 
 export const styles = {
   row: css.raw({
+    position: 'relative',
     minWidth: '0',
     gap: '8',
     paddingBlock: '16',
@@ -9,10 +10,10 @@ export const styles = {
       borderBlockEnd: '{borderWidths.control} solid {colors.surface-raised}',
     },
     gridTemplateColumns: 'minmax(0, 1fr)',
-    gridTemplateAreas: '"identity" "controls" "resume"',
+    gridTemplateAreas: '"identity" "controls"',
     '@media (min-width: 48rem)': {
       gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 13.5rem)',
-      gridTemplateAreas: '"identity controls" "identity resume"',
+      gridTemplateAreas: '"identity controls"',
       columnGap: '24',
       alignItems: 'center',
     },
@@ -45,12 +46,20 @@ export const styles = {
   }),
   progress: css.raw({ flex: '[1 1 10rem]' }),
   resume: css({
-    gridArea: 'resume',
     textStyle: 'caption',
     color: 'content.muted',
-    '@media (min-width: 80rem)': { paddingInlineStart: '[15rem]' },
   }),
   action: css({
+    '@media (pointer: coarse)': {
+      position: 'static',
+      overflow: 'visible',
+      _active: { transform: 'none' },
+      _after: {
+        content: '""',
+        position: 'absolute',
+        inset: '0',
+      },
+    },
     textStyle: 'controlLabel',
     borderColor: 'transparent',
     backgroundColor: 'transparent',

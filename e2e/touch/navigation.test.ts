@@ -58,13 +58,21 @@ test('double tapping active Study scrolls up without restarting the session or a
 
   const before = await page.evaluate(() => ({ url: location.href, entries: history.length }))
 
-  await page.evaluate(() => window.scrollTo(0, 150))
+  // Compact study layouts can have less than 150px of overflow. Record the
+  // browser's actual position so the test checks navigation, not content height.
+  const position = await page.evaluate(() => {
+    window.scrollTo(0, 150)
+
+    return window.scrollY
+  })
+
+  expect(position).toBeGreaterThan(0)
 
   const study = page.getByRole('navigation').getByRole('link', { name: 'Study', exact: true })
 
   await study.tap()
 
-  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(150)
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(position)
 
   await study.tap()
 
@@ -76,7 +84,9 @@ test('double tapping active Study scrolls up without restarting the session or a
     before,
   )
 
-  await page.evaluate(() => window.scrollTo(0, 150))
+  await page.evaluate((offset) => window.scrollTo(0, offset), position)
+
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(position)
 
   await study.focus()
 
@@ -84,7 +94,9 @@ test('double tapping active Study scrolls up without restarting the session or a
 
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0)
 
-  await page.evaluate(() => window.scrollTo(0, 150))
+  await page.evaluate((offset) => window.scrollTo(0, offset), position)
+
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(position)
 
   await study.tap()
 
@@ -93,7 +105,7 @@ test('double tapping active Study scrolls up without restarting the session or a
 
   await study.tap()
 
-  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(150)
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(position)
 })
 
 test('Back preserves the expanded Progress list and its scroll position', async ({ page }) => {
@@ -101,15 +113,18 @@ test('Back preserves the expanded Progress list and its scroll position', async 
 
   await waitForOfflineReady(page)
 
-  await page.getByRole('button', { name: 'Show next 10 questions', exact: true }).tap()
+  const group = page.getByRole('region', { name: /^Constitution, rights/ })
 
-  const rows = page.getByRole('main').getByRole('listitem')
+  await group.getByRole('button', { name: 'Show next 10 questions', exact: true }).tap()
+
+  const rows = group.getByRole('listitem')
 
   await expect(rows).toHaveCount(20)
 
   const row = rows.nth(15).getByRole('link')
 
-  await row.scrollIntoViewIfNeeded()
+  // Keep the taller question row clear of the fixed mobile navigation before measuring.
+  await row.evaluate((element) => element.scrollIntoView({ block: 'center' }))
 
   const position = await page.evaluate(() => window.scrollY)
 

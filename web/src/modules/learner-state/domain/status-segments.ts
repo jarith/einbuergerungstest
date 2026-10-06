@@ -1,4 +1,4 @@
-import type { QuestionTotals } from '../../../modules/learner-state'
+import type { QuestionTotals } from './question-progress'
 
 const statuses = ['not-started', 'needs-review', 'learning', 'learned'] as const
 

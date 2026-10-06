@@ -84,7 +84,10 @@ export const expectEmptyHistory = async (page: Page) => {
   await page.getByRole('navigation').getByRole('link', { name: 'Progress', exact: true }).click()
 
   await expect(page.getByText('Not started · 310', { exact: true })).toBeVisible()
-  await expect(page.getByRole('region', { name: 'Mock tests', exact: true })).toContainText(
+
+  await page.getByRole('tab', { name: 'Mock tests', exact: true }).click()
+
+  await expect(page.getByRole('region', { name: 'Test history', exact: true })).toContainText(
     '0 completed',
   )
 }

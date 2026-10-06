@@ -1,16 +1,20 @@
 import type { TFunction } from 'i18next'
 import { Tooltip } from '@einbuergerungstest/design-system'
 
-import type { DashboardGroup } from '../../../../../../../../dashboard.model'
-import { getStatusSegments } from '../../../../../../../../lib/status-segments'
-import { progressStatus } from '../../../../../../progress-status.recipe'
-import { GroupStatusDetails } from './components/group-status-details/group-status-details'
-import { styles } from './group-status-bar.styles'
+import type { QuestionTotals } from '../../domain/question-progress'
+import { getStatusSegments } from '../../domain/status-segments'
+import { progressStatus } from '../progress-status.recipe'
+import { QuestionStatusDetails } from './components/question-status-details/question-status-details'
+import { styles } from './question-status-bar.styles'
 
-type GroupStatusBarProps = Readonly<{ group: DashboardGroup; t: TFunction }>
+type QuestionStatusBarProps = Readonly<{
+  group: QuestionTotals & Readonly<{ title: string; percentageLabel: string }>
+  t: TFunction
+  focusable?: boolean
+}>
 
 /* oxlint-disable jsx-a11y/prefer-tag-over-role, jsx-a11y/no-noninteractive-tabindex -- The SVG is a named chart; focus exposes its status tooltip to keyboard users. */
-export const GroupStatusBar = ({ group, t }: GroupStatusBarProps) => {
+export const QuestionStatusBar = ({ group, t, focusable = true }: QuestionStatusBarProps) => {
   const segments = getStatusSegments(group)
 
   const description = segments
@@ -20,10 +24,10 @@ export const GroupStatusBar = ({ group, t }: GroupStatusBarProps) => {
     .join('. ')
 
   return (
-    <Tooltip label={<GroupStatusDetails group={group} t={t} />}>
+    <Tooltip label={<QuestionStatusDetails group={group} t={t} />}>
       <svg
         role="img"
-        tabIndex={0}
+        tabIndex={focusable ? 0 : undefined}
         aria-label={`${group.title}. ${description}`}
         viewBox="0 0 100 8"
         preserveAspectRatio="none"

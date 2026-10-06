@@ -15,7 +15,7 @@ export const StudyCompletion = reatomComponent(({ model }: StudySessionProps) =>
   return (
     <Stack gap="24">
       {model.isGroup ? (
-        <Flex gap="12" align="start">
+        <Flex gap="12" align="center">
           <Check aria-hidden="true" className={completionStyles.check} />
           <h2 className={completionStyles.title}>{t('study.groupCompleted')}</h2>
         </Flex>
