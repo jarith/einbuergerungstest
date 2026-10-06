@@ -43,6 +43,7 @@
     "savingSlow": "Das Speichern dauert länger als erwartet. Lass diese Seite geöffnet. Falls das Speichern fehlschlägt, kannst du es erneut versuchen."
   },
   "settings": {
+    "version": "App-Version: {{version}}",
     "language": "Sprache der Benutzeroberfläche",
     "english": "Englisch",
     "german": "Deutsch",
@@ -276,7 +277,7 @@
     "addHelp": "Aktiviere „Als Web-App öffnen“, falls angezeigt, und bestätige den App-Namen, um die Installation abzuschließen.",
     "transferTitle": "Übertrage deinen Safari-Fortschritt",
     "transferHelp": "Die installierte App hat einen eigenen, von Safari getrennten Speicher. Dein Fortschritt wird nicht automatisch übertragen. Exportiere in Safari eine Sicherung und importiere sie in der installierten App. Prüfe die Vorschau und bestätige das Ersetzen der Daten.",
-    "separatePreparation": "Die installierte App muss auch separat online vorbereitet werden. Lass sie geöffnet, bis sie offline bereit ist. Die Vorbereitung in Safari bereitet die installierte App nicht vor.",
+    "separatePreparation": "Die installierte App muss separat online vorbereitet werden. Öffne sie online, bis sie offline bereit ist. Im Browser ist eine Internetverbindung erforderlich.",
     "installed": "Du verwendest die installierte App.",
     "offlineTitle": "Offline-Bereitschaft auf diesem Gerät",
     "iosTitle": "iPhone & iPad · Safari",

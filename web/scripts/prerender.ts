@@ -1,12 +1,12 @@
 import { createServer } from 'vite'
 
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
-import { fileURLToPath } from 'node:url'
 
 import type { renderPublic } from '../src/app/seo/render-public.tsx'
 import { getSiteOrigin } from '../src/app/seo/site.ts'
+import { getBuildOutput } from './build-version.ts'
 
-const output = fileURLToPath(new URL('../dist/', import.meta.url))
+const output = getBuildOutput()
 
 const template = await readFile(`${output}/index.html`, 'utf8')
 

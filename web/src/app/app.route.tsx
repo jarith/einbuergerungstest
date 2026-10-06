@@ -11,10 +11,12 @@ import { createStudyRoutes } from '../pages/study'
 import { createTestReviewRoute } from '../pages/test-review'
 import { loadAppResources } from './bootstrap.model'
 import { AppLayout } from './components/app-layout/app-layout'
+import { getAppBase } from './offline/app-mode'
 import { createPageTitleAtom } from './page-title.model'
 
 export const appRoute = reatomRoute(
   {
+    path: getAppBase(),
     layout: true,
     loader: loadAppResources,
     render: (self): ReactElement => (

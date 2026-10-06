@@ -8,7 +8,7 @@ declare module '@reatom/core' {
   interface RouteChild extends JSX.Element {}
 }
 
-export type AppRoute = RouteAtom<'/', {}, {}, AppResources>
+export type AppRoute = RouteAtom<'/' | '/pwa', {}, {}, AppResources>
 
 export type PageProps<Data = AppResources> = Readonly<{ data: Data }>
 

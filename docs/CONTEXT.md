@@ -137,10 +137,13 @@ validation and show an error. Mantine's `minDate` silently suppresses those valu
 
 The public introduction uses fixed language URLs: `/` for German and `/en/` for English.
 It is readable without JavaScript, question-bank loading, or learner storage. The learner
-dashboard is `/dashboard`, including the installed app start URL. Only the two public
-pages are indexable; learner screens remain device-local, non-indexable app routes. The
-canonical origin is `https://einbuergerungstest.jarith.dev`. See [SEO](seo.md) for the
-deployment contract and outstanding launch checks.
+dashboard is `/dashboard`; installed apps launch `/pwa/dashboard` in a separate worker
+scope. Browser use is online-only. Installed apps update automatically on online
+launch/resume, keep their prepared copy offline, and defer activation during a live mock
+test or pending save. Settings shows the running build ID. Only the two public pages are
+indexable; learner screens remain device-local, non-indexable app routes. The canonical
+origin is `https://einbuergerungstest.jarith.dev`. See [SEO](seo.md) for the deployment
+contract and outstanding launch checks.
 
 The landing page has one dashboard button and no other app links; language choices stay on
 the public routes. It omits the separate Berlin/translation sections and independent-tool

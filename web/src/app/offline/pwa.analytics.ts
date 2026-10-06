@@ -1,10 +1,7 @@
 import type { Analytics } from '../../shared/analytics'
+import { isStandalone } from './app-mode'
 
-export const getAppMode = () =>
-  window.matchMedia('(display-mode: standalone)').matches ||
-  ('standalone' in navigator && navigator.standalone === true)
-    ? 'pwa'
-    : 'web'
+export const getAppMode = () => (isStandalone() ? 'pwa' : 'web')
 
 export const observePwaAnalytics = (analytics: Analytics) => {
   const media = window.matchMedia('(display-mode: standalone)')

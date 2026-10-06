@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 
 import { openNavigation, sourceQuestion, studyAnswer } from '../support/browser'
-import { chooseLanguage, expectViewportFit, waitForOfflineReady } from './helpers'
+import { chooseLanguage, expectViewportFit, waitForAppReady } from './helpers'
 
 for (const { width, height } of [
   { width: 390, height: 844 },
@@ -39,7 +39,7 @@ test(
   async ({ page }) => {
     await page.goto(`/study/${sourceQuestion(1).id}`)
 
-    await waitForOfflineReady(page)
+    await waitForAppReady(page)
 
     await studyAnswer(page, 'D').click()
 

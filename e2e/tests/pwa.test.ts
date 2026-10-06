@@ -20,7 +20,9 @@ test('the deployed manifest supports standalone launch with loadable icons', asy
   expect(manifest).toMatchObject({
     name: expect.any(String),
     display: 'standalone',
-    start_url: '/dashboard',
+    start_url: '/pwa/dashboard',
+    scope: '/pwa/',
+    id: '/',
     icons: expect.arrayContaining([
       expect.objectContaining({ sizes: '192x192', purpose: 'any' }),
       expect.objectContaining({ sizes: '512x512', purpose: 'any' }),

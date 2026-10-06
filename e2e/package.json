@@ -16,6 +16,7 @@
     "browser:install": "yarn run -T playwright install chromium webkit",
     "report": "yarn run -T playwright show-report",
     "test:behavior": "yarn bddgen && yarn run -T playwright test -c behavior.config.ts",
-    "test:ui": "yarn workspace @einbuergerungstest/web build && yarn run -T playwright test --project=ui --project=webkit --project=touch-android --project=touch-ios"
+    "test:updates": "yarn run -T playwright test -c updates.config.ts",
+    "test:ui": "yarn workspace @einbuergerungstest/web build && yarn run -T playwright test --project=ui --project=webkit --project=touch-android --project=touch-ios && yarn test:updates"
   }
 }

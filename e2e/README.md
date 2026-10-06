@@ -65,8 +65,8 @@ are verified through the user flow; exhaustive field combinations and rejection 
 belong in integration specifications. A consumed replacement confirmation cannot erase
 subsequent progress; a newly requested import or reset is still allowed.
 
-The offline path verifies a prepared browser copy, not an installed iOS app. Installation
-and separate Home Screen storage still need real-device verification.
+The offline path verifies a prepared standalone-mode copy, not an actual installed iOS
+app. Installation and separate Home Screen storage still need real-device verification.
 
 `test:e2e` and `test:ui` build the app and use production preview on port 4173. Existing
 servers are not reused. To rerun a specific test against an existing build:
@@ -104,3 +104,26 @@ migration.
 Generation rejects missing/ambiguous steps; CI rejects focused tests. Production-browser
 failures retain traces and screenshots. See
 [migration and coverage ownership](../docs/bdd-migration.md).
+
+## Automatic deployment updates
+
+Run `yarn test:updates` for the dedicated release-transition suite. It is also included in
+`test:ui`, so the existing required browser-UI CI job runs it. Each worker builds two real
+production outputs in temporary directories with distinct build IDs, then atomically
+switches the files served on the same local origin. The tests use the real generated
+workers, precaches, integrity checks, and application code. A generated legacy root worker
+reproduces the previous deployment contract for migration tests.
+
+Coverage includes automatic online cold launch and foreground updates with no manual
+reload, offline cold launch and reconnect, failed download recovery, preserving study
+progress, deferring for a mock test in another window, online-only browser refresh with an
+installed PWA on the same origin, legacy root-worker migration, and offline launches from
+a retained iOS start URL. Chromium uses native offline emulation. WebKit uses a real
+server connection outage plus an emulated `navigator.onLine` signal because Playwright
+[issue #42775](https://github.com/microsoft/playwright/issues/42775) rejects even literal
+service-worker navigation responses with `setOffline(true)`. This workaround lives only in
+the test transport; the app and worker lifecycle are unchanged. Real iPhone Home Screen
+installation, OS suspension, and upgrade behavior still require device verification.
+
+`APP_BUILD_OUTPUT` selects the output directory for the Vite, prerender, and worker steps;
+it lets the suite build isolated releases without replacing the ordinary preview build.

@@ -10,7 +10,10 @@
 /sw.js
   Content-Type: application/javascript; charset=utf-8
 
-/offline-check.js
+/pwa/sw.js
+  Content-Type: application/javascript; charset=utf-8
+
+/pwa/offline-check.js
   Content-Type: application/javascript; charset=utf-8
 
 /manifest.webmanifest

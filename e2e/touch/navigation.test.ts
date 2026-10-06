@@ -1,14 +1,14 @@
 import { expect, test } from '@playwright/test'
 
 import { sourceQuestion, studyAnswer } from '../support/browser'
-import { waitForOfflineReady } from '../tests/helpers'
+import { waitForAppReady } from '../tests/helpers'
 
 test('touch navigation starts the destination at the top and focuses its heading', async ({
   page,
 }) => {
   await page.goto('/dashboard')
 
-  await waitForOfflineReady(page)
+  await waitForAppReady(page)
 
   await page.evaluate(() => window.scrollTo(0, 700))
 
@@ -23,7 +23,7 @@ test('touch navigation starts the destination at the top and focuses its heading
 test('Next reveals the new question and keyboard answering preserves focus', async ({ page }) => {
   await page.goto('/study')
 
-  await waitForOfflineReady(page)
+  await waitForAppReady(page)
 
   const answer = studyAnswer(page, 'A')
 
@@ -50,7 +50,7 @@ test('double tapping active Study scrolls up without restarting the session or a
 
   await page.goto('/study')
 
-  await waitForOfflineReady(page)
+  await waitForAppReady(page)
 
   await studyAnswer(page, 'A').tap()
 
@@ -111,7 +111,7 @@ test('double tapping active Study scrolls up without restarting the session or a
 test('Back preserves the expanded Progress list and its scroll position', async ({ page }) => {
   await page.goto('/progress')
 
-  await waitForOfflineReady(page)
+  await waitForAppReady(page)
 
   const group = page.getByRole('region', { name: /^Constitution, rights/ })
 
@@ -142,7 +142,7 @@ test('Back preserves the expanded Progress list and its scroll position', async 
 test('touch departure from a live test still requires confirmation', async ({ page }) => {
   await page.goto('/mock-test')
 
-  await waitForOfflineReady(page)
+  await waitForAppReady(page)
 
   await expect(page.getByRole('heading', { level: 1 })).toHaveCount(1)
 

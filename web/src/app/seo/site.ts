@@ -16,4 +16,5 @@ export const getPublicLanguage = (pathname: string) => {
 export const getLearnerPathPattern = () =>
   /^\/(?:dashboard|study(?:\/[^/]+|\/groups\/[^/]+(?:\/[^/]+)?)?|mock-test(?:\/[^/]+(?:\/[^/]+)?)?|progress(?:\/questions(?:\/[^/]+)?|\/tests\/[^/]+)?|settings)\/?$/
 
-export const isLearnerPath = (pathname: string) => getLearnerPathPattern().test(pathname)
+export const isLearnerPath = (pathname: string) =>
+  getLearnerPathPattern().test(pathname.replace(/^\/pwa(?=\/)/, ''))

@@ -51,14 +51,30 @@ them, since they dominate the initial download. See the
 and
 [Workbox build options](https://developer.chrome.com/docs/workbox/modules/workbox-build).
 
-When a new version is published, prepare its resources before replacing the old cache.
-Keep the new worker waiting and apply an available update at a safe point so a live mock
-test is not interrupted. Background updates are silent: neither an available version nor a
-failed update download displays a notice. Keep using the prepared current copy and reserve
-offline notices for preparation or verification of its required resources. Keep learner
-data separate from resource caches. A browser tab and an installed PWA use the same
-service worker and application logic. The installed iPhone or iPad app needs its own
-online preparation because
+Ordinary browser visits are online-only: they do not register the offline worker, prepare
+a cache, or display offline readiness/update notices. HTTP responses revalidate on
+refresh. Installed apps use `/pwa/` routes and `/pwa/sw.js`; the separate scope keeps PWA
+caching from controlling ordinary browser routes on the same origin. Keep manifest
+identity `/` and the existing IndexedDB database so changing the launch path does not
+replace an installation or its learner data.
+
+On every online launch, foreground return, and reconnect, check for a new worker. Prepare
+its complete resources before activation. Apply it automatically without an update banner
+or user action, then reload the running document under the new worker. Every open PWA
+window must confirm that no mock test or learner write is active; an unresponsive window
+vetoes activation. A deferred update is retried when the blocking activity finishes or the
+app returns to the foreground. Offline launches use the prepared copy without checking for
+or applying updates. A failed download retains the current offline copy. Offline readiness
+checks use only this worker scope's cache, not another registration's cache.
+
+The old root `/sw.js` becomes a network-only migration worker. It automatically refreshes
+legacy documents except mock-test URLs, leaves learner storage and existing caches intact,
+and retains a minimal offline launch bridge for installed apps whose saved start URL is
+still `/dashboard`. The bridge redirects standalone launches into `/pwa/`; it does not
+serve a cached learner app to ordinary browser tabs. Browser visits to `/pwa/` redirect
+back to the corresponding online-only route.
+
+The installed iPhone or iPad app needs its own online preparation because
 [WebKit does not copy Safari's local website data into it](https://webkit.org/blog/14787/webkit-features-in-safari-17-2/).
 
 ### Learner state

@@ -67,9 +67,10 @@ export const watchServiceWorker = (
   const options = { signal: lifecycle.signal }
 
   const observe = () => {
-    const worker = registration.installing
+    // A cold launch can find a worker already waiting or activating.
+    const worker = registration.installing ?? registration.waiting ?? registration.active
 
-    if (worker === null) {
+    if (worker === null || worker.state === 'activated') {
       return
     }
 
@@ -78,6 +79,14 @@ export const watchServiceWorker = (
       () => {
         if (worker.state === 'redundant') {
           failed()
+        } else if (worker.state === 'installed') {
+          // The statechange event can arrive before registration.waiting has
+          // been assigned. Read the registration in the next browser task.
+          setTimeout(() => {
+            if (!lifecycle.signal.aborted) {
+              changed()
+            }
+          }, 0)
         } else {
           changed()
         }
@@ -109,3 +118,25 @@ export const repairResources = async (urls: readonly string[]) => {
     }),
   )
 }
+
+export const getWorkerVersion = (worker: ServiceWorker): Promise<string | null> =>
+  new Promise((resolve) => {
+    const channel = new MessageChannel()
+
+    const finish = (version: string | null) => {
+      clearTimeout(timeout)
+
+      channel.port1.close()
+
+      resolve(version)
+    }
+
+    const timeout = setTimeout(() => finish(null), 2000)
+
+    channel.port1.onmessage = (event: MessageEvent<unknown>) => {
+      // oxlint-disable-next-line app/no-runtime-typeof -- Validate the worker message boundary.
+      finish(typeof event.data === 'string' ? event.data : null)
+    }
+
+    worker.postMessage('GET_VERSION', [channel.port2])
+  })

@@ -33,3 +33,31 @@
 /progress/questions/:question/ /app 200
 /progress/tests/:session /app 200
 /progress/tests/:session/ /app 200
+
+# Installed apps have a separate service-worker scope.
+/pwa/dashboard /app 200
+/pwa/dashboard/ /app 200
+/pwa/study /app 200
+/pwa/study/ /app 200
+/pwa/mock-test /app 200
+/pwa/mock-test/ /app 200
+/pwa/progress /app 200
+/pwa/progress/ /app 200
+/pwa/progress/questions /app 200
+/pwa/progress/questions/ /app 200
+/pwa/settings /app 200
+/pwa/settings/ /app 200
+/pwa/study/:question /app 200
+/pwa/study/:question/ /app 200
+/pwa/study/groups/:group /app 200
+/pwa/study/groups/:group/ /app 200
+/pwa/study/groups/:group/:question /app 200
+/pwa/study/groups/:group/:question/ /app 200
+/pwa/mock-test/:session /app 200
+/pwa/mock-test/:session/ /app 200
+/pwa/mock-test/:session/:screen /app 200
+/pwa/mock-test/:session/:screen/ /app 200
+/pwa/progress/questions/:question /app 200
+/pwa/progress/questions/:question/ /app 200
+/pwa/progress/tests/:session /app 200
+/pwa/progress/tests/:session/ /app 200

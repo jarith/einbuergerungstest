@@ -5,6 +5,12 @@ import { expect, test } from '@playwright/test'
 
 import questionBank from '../../web/public/questionbank-berlin.json' with { type: 'json' }
 
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(navigator, 'standalone', { value: true })
+  })
+})
+
 const readyStatus = (page: Page) =>
   page.getByRole('contentinfo', { includeHidden: true }).getByText('Ready offline', { exact: true })
 
@@ -12,10 +18,6 @@ test(
   'a fresh standalone copy prepares the complete bank and every illustration',
   { tag: '@webkit' },
   async ({ page }) => {
-    await page.addInitScript(() => {
-      Object.defineProperty(navigator, 'standalone', { value: true })
-    })
-
     await page.goto('/dashboard')
 
     await expect(readyStatus(page)).toHaveCount(1)
@@ -296,7 +298,7 @@ test(
     await expect(readyStatus(page)).toHaveCount(1)
 
     await page.evaluate(async () => {
-      const registration = await navigator.serviceWorker.getRegistration('/')
+      const registration = await navigator.serviceWorker.getRegistration('/pwa/')
 
       if (registration === undefined) {
         throw new Error('The prepared app must have a service worker registration.')

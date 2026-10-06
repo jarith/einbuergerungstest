@@ -6,6 +6,8 @@ test(
   'a prepared copy studies an unseen illustrated question offline and saves the answer',
   { tag: '@smoke' },
   async ({ page, context }) => {
+    await page.addInitScript(() => Object.defineProperty(navigator, 'standalone', { value: true }))
+
     // E2E criterion: real browser service-worker, deployment, and offline network boundary.
     await page.goto('/dashboard')
 
@@ -23,17 +25,9 @@ test(
 
     await context.setOffline(true)
 
-    await page.goto('/')
-
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Einbürgerungstest Berlin')
-
-    await page.getByRole('link', { name: 'English', exact: true }).click()
-
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Berlin citizenship test')
-
     const question = sourceQuestion(21)
 
-    await page.goto(`/study/${question.id}`)
+    await page.goto(`/pwa/study/${question.id}`)
 
     const illustration = page.getByRole('img', {
       name: 'Illustration for question 21',
