@@ -15,13 +15,21 @@ import {
 
 import { isStandalone } from './app-mode'
 import {
+  confirmWorkerActivation,
   getMissingResources,
   getWorkerVersion,
   repairResources,
   watchServiceWorker,
 } from './service-worker'
 
-type OfflineStatus = 'not-ready' | 'preparing' | 'ready' | 'unverified' | 'error' | 'unsupported'
+type OfflineStatus =
+  | 'not-ready'
+  | 'preparing'
+  | 'ready'
+  | 'activation-pending'
+  | 'unverified'
+  | 'error'
+  | 'unsupported'
 
 export const createOfflineModel = (isRestartBlocked: () => boolean) => {
   const status = atom<OfflineStatus>('not-ready', 'offline.status')
@@ -134,7 +142,7 @@ export const createOfflineModel = (isRestartBlocked: () => boolean) => {
       update.set('none')
     }
 
-    if (!visible() || worker === undefined || worker === null || worker.state !== 'activated') {
+    if (!visible() || worker === undefined || worker === null || worker.state === 'redundant') {
       return
     }
 
@@ -154,7 +162,27 @@ export const createOfflineModel = (isRestartBlocked: () => boolean) => {
 
         verificationError.set(null)
 
-        status.set(resources.length === 0 ? 'ready' : 'error')
+        if (resources.length > 0) {
+          status.set('error')
+
+          return
+        }
+
+        const activated = await wrap(
+          confirmWorkerActivation(worker, subscription.controller.signal),
+        )
+
+        activatedWorker.set(activated ? worker : null)
+
+        if (!activated) {
+          verificationError.set(
+            new Error(
+              `Offline cache is complete, but activation could not be confirmed for ${worker.scriptURL} (${worker.state}).`,
+            ),
+          )
+        }
+
+        status.set(activated ? 'ready' : 'activation-pending')
 
         return
       } catch (error) {
@@ -323,7 +351,8 @@ export const createOfflineModel = (isRestartBlocked: () => boolean) => {
           if (restartRequired()) {
             // controllerchange can fire during activation. Reloading then can
             // strand WebKit's new document with an activating worker forever.
-            // verify() observes statechange and makes activation reactive.
+            // verify() confirms activation through lifecycle events or a
+            // worker-only fetch response when WebKit exposes a stale state.
             if (activatedWorker() !== null && activatedWorker() === controller()) {
               location.reload()
             }

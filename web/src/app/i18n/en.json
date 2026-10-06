@@ -295,6 +295,8 @@
     "confirmHelp": "Follow the on-screen prompts, then open the app from your Home Screen."
   },
   "offline": {
+    "activation-pending": "Downloads are complete. Offline access is not confirmed yet.",
+    "activationHelp": "Try again. If this message remains, finish any active test, then fully close and reopen the app while online. Your learning progress is kept.",
     "unverified": "Offline readiness could not be checked.",
     "verificationHelp": "Keep the app open and try again. This check does not change your saved questions or learning progress.",
     "not-ready": "Not ready offline yet.",

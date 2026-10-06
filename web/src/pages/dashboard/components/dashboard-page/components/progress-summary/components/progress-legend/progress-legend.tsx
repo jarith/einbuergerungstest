@@ -50,7 +50,14 @@ export const ProgressLegend = ({
           }
         }}
         onBlur={() => onPreview(null)}
-        onClick={() => onToggle(item.status)}
+        onClick={(event) => {
+          if (
+            event.nativeEvent instanceof PointerEvent &&
+            event.nativeEvent.pointerType === 'touch'
+          ) {
+            onToggle(item.status)
+          }
+        }}
       >
         <span
           className={cx(styles.dot, progressStatus({ status: item.status }))}

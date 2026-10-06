@@ -5,6 +5,26 @@
 // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- This classic script is only loaded by a service worker.
 const worker = /** @type {ServiceWorkerGlobalScope} */ (/** @type {unknown} */ (self))
 
+// Unlike message events, fetch events wait for activation to finish. This
+// uncached response lets a controlled page confirm activation independently of
+// a stale ServiceWorker.state. There is deliberately no network resource here.
+worker.addEventListener('fetch', (event) => {
+  const url = new URL(event.request.url)
+
+  if (
+    event.request.method === 'GET' &&
+    url.origin === worker.location.origin &&
+    url.pathname === '/pwa/offline-ready'
+  ) {
+    event.respondWith(
+      new Response(null, {
+        status: 204,
+        headers: { 'X-Offline-Worker': worker.location.href, 'Cache-Control': 'no-store' },
+      }),
+    )
+  }
+})
+
 /** @returns {Promise<boolean>} */
 const approveUpdate = (/** @type {WindowClient} */ client) =>
   new Promise((resolve) => {

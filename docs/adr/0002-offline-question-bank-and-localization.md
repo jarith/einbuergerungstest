@@ -67,6 +67,14 @@ app returns to the foreground. Offline launches use the prepared copy without ch
 or applying updates. A failed download retains the current offline copy. Offline readiness
 checks use only this worker scope's cache, not another registration's cache.
 
+Cache completeness and worker activation are separate checks. A stale `activating` state
+on iOS must not prevent checking the cache. If the page cannot observe `activated`,
+require an uncached response from the worker-only `/pwa/offline-ready` endpoint before
+reporting readiness or allowing an automatic restart. Bound that probe to five seconds,
+cancel it with the verification lifecycle, and reject a result if the controller changed.
+A complete download without activation confirmation gets a specific recovery notice; retry
+never clears caches or learner storage. No network asset implements this endpoint.
+
 The old root `/sw.js` becomes a network-only migration worker. It automatically refreshes
 legacy documents except mock-test URLs, leaves learner storage and existing caches intact,
 and retains a minimal offline launch bridge for installed apps whose saved start URL is

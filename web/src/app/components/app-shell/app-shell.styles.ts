@@ -6,9 +6,9 @@ export const shellStyles = {
     minHeight: 'dvh',
     paddingBlock: '[env(safe-area-inset-top) env(safe-area-inset-bottom)]',
     paddingInline: '[env(safe-area-inset-left) env(safe-area-inset-right)]',
-    grid: 'auto 1fr auto / 1fr',
+    grid: '1fr / 1fr',
     gap: '0',
-    '@media (min-width: 48rem)': { grid: 'auto auto 1fr / 1fr' },
+    '@media (min-width: 48rem)': { grid: 'auto 1fr / 1fr' },
     '@media (min-width: 64rem)': {
       grid: '1fr / {sizes.shell.sidebar} minmax(0, 1fr)',
     },
@@ -37,8 +37,8 @@ export const shellStyles = {
     minWidth: '0',
     paddingBlock: '[1.5rem calc(6rem + env(safe-area-inset-bottom))]',
     paddingInline: '20',
-    gridRow: '2',
-    '@media (min-width: 48rem)': { gridRow: '3', paddingBlock: '32', paddingInline: '36' },
+    gridRow: '1',
+    '@media (min-width: 48rem)': { gridRow: '2', paddingBlock: '32', paddingInline: '36' },
     '@media (min-width: 64rem)': {
       gridColumn: '2',
       gridRow: '1',

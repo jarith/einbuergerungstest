@@ -75,7 +75,9 @@ count and percentage values. Group bars expose their group's contributing count 
 status counts and percentages in a tooltip on mouse hover or keyboard focus. Touch does
 not open these tooltips. Study shows the same status bar immediately below its scope
 title, using totals for the current group or all questions and updating after answers. The
-Citizenship test header is hidden during study below the 1024px desktop breakpoint.
+Citizenship test header is hidden on all app screens below the 1024px desktop breakpoint,
+with no reserved header row. Tablet navigation starts at the top; mobile navigation stays
+at the bottom. Desktop retains the sidebar header.
 
 **Test date**: The learner's optional planned date for taking the real Einbürgerungstest,
 distinct from a mock-test sitting.
@@ -145,10 +147,18 @@ indexable; learner screens remain device-local, non-indexable app routes. The ca
 origin is `https://einbuergerungstest.jarith.dev`. See [SEO](seo.md) for the deployment
 contract and outstanding launch checks.
 
-Automatic update reloads must wait until the replacement controller is `activated`.
+Automatic update reloads must wait until the replacement controller finishes activation.
 `controllerchange` can arrive while it is still `activating`; reloading at that point
 intermittently leaves WebKit’s new document stuck preparing offline resources. The offline
-model tracks activation through worker lifecycle events before restarting.
+model tracks activation through worker lifecycle events before restarting. On a connected
+iPhone on 2026-10-07, the latest worker answered cache checks successfully while the page
+continued reporting `activating` for minutes. Do not gate cache verification on that
+state. For an activating controller, a five-second, uncached `/pwa/offline-ready` fetch
+provides independent activation evidence: only the worker generates its 204 response and
+identifying header, and fetch events wait for activation. A complete cache without
+activation evidence shows a distinct notice with retry and close/reopen guidance. Cache
+completeness alone or a message reply must not authorize a reload. Preserve the
+active-test/pending-save guards.
 
 Internal learner links and redirects must retain the active router base. Use route
 `.path()`/`.go()` methods, or `getAppPath` for paths built outside route definitions.
