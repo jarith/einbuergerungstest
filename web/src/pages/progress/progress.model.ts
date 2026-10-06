@@ -2,6 +2,7 @@ import { action, atom, computed } from '@reatom/core'
 
 import type { AppResources } from '../../app/bootstrap.model'
 import type { LearningStatus } from '../../modules/learner-state'
+import { getAppPath } from '../../app/offline/app-mode'
 import { getQuestionKey } from '../../modules/question-bank'
 
 type ProgressFilter = 'all' | LearningStatus
@@ -28,7 +29,14 @@ export const createProgressPageModel = (resources: AppResources) => {
 
       return history === undefined || (status !== 'all' && history.status !== status)
         ? []
-        : [{ question, key, history, href: `/progress/questions/${encodeURIComponent(key)}` }]
+        : [
+            {
+              question,
+              key,
+              history,
+              href: getAppPath(`/progress/questions/${encodeURIComponent(key)}`),
+            },
+          ]
     })
   }, 'progressPage.filtered')
 

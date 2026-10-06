@@ -145,6 +145,12 @@ indexable; learner screens remain device-local, non-indexable app routes. The ca
 origin is `https://einbuergerungstest.jarith.dev`. See [SEO](seo.md) for the deployment
 contract and outstanding launch checks.
 
+Internal learner links and redirects must retain the active router base. Use route
+`.path()`/`.go()` methods, or `getAppPath` for paths built outside route definitions.
+Root-level learner links inside `/pwa/` escape the router during client navigation and
+render an empty app; the startup redirect only runs on document loads. Public landing
+links, resource URLs, and fragment links retain their existing destinations.
+
 The landing page has one dashboard button and no other app links; language choices stay on
 the public routes. It omits the separate Berlin/translation sections and independent-tool
 notice. Installation help covers iOS Safari and Android Chrome. Both numbered guides live

@@ -3,6 +3,7 @@ import { reatomComponent } from '@reatom/react'
 import { ChevronDown } from 'lucide-react'
 
 import type { StudySessionProps } from '../study-session/study-session'
+import { getAppPath } from '../../../../../../app/offline/app-mode'
 import { styles as pageStyles } from '../../study-page.styles'
 import { styles } from './study-help.styles'
 
@@ -17,7 +18,7 @@ export const StudyHelp = reatomComponent(({ model }: StudySessionProps) => {
       </summary>
       <Stack gap="12" paddingBlock="8">
         <p>{t('study.helpBody')}</p>
-        <a className={pageStyles.link} href="/progress">
+        <a className={pageStyles.link} href={getAppPath('/progress')}>
           {t('navigation.progress')} →
         </a>
       </Stack>

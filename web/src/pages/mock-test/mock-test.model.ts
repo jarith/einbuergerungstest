@@ -2,6 +2,7 @@ import { action, atom, computed, effect, urlAtom, withAsync, wrap } from '@reato
 
 import type { AppResources } from '../../app/bootstrap.model'
 import type { QuestionKey } from '../../modules/question-bank'
+import { getAppPath } from '../../app/offline/app-mode'
 import { isLearnerStateConflict } from '../../modules/learner-state'
 import { browserNavigationAtom } from '../../shared/navigation/browser-navigation.model'
 
@@ -69,7 +70,7 @@ export const createMockPageModel = (
 
           mock.cancelSubmission()
 
-          urlAtom.go(`/progress/tests/${encodeURIComponent(sitting.id)}`, true)
+          urlAtom.go(getAppPath(`/progress/tests/${encodeURIComponent(sitting.id)}`), true)
         } else if (
           sitting?.status === 'active' &&
           seconds === 0 &&

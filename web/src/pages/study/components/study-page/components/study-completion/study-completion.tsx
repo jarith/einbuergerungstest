@@ -5,6 +5,7 @@ import { reatomComponent } from '@reatom/react'
 import { Check } from 'lucide-react'
 
 import type { StudySessionProps } from '../study-session/study-session'
+import { getAppPath } from '../../../../../../app/offline/app-mode'
 import { styles } from '../../study-page.styles'
 import { styles as completionStyles } from './study-completion.styles'
 
@@ -67,7 +68,7 @@ export const StudyCompletion = reatomComponent(({ model }: StudySessionProps) =>
             </ButtonLink>
           ) : (
             <>
-              <a className={styles.link} href="/progress">
+              <a className={styles.link} href={getAppPath('/progress')}>
                 {t('navigation.progress')}
               </a>
               <a className={styles.link} href={model.exitPath}>

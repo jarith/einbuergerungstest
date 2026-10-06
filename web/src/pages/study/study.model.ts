@@ -3,6 +3,7 @@ import { action, atom, computed, withActions, withAsync, wrap } from '@reatom/co
 import type { AppResources } from '../../app/bootstrap.model'
 import type { StudyMode } from '../../modules/learner-state'
 import type { QuestionKey } from '../../modules/question-bank'
+import { getAppPath } from '../../app/offline/app-mode'
 import { createOrderedStudy, createStudySession } from '../../modules/learner-state'
 
 export const createStudySessionScope = () =>
@@ -95,7 +96,7 @@ export const createStudyModel = (
       'study.completion',
     ),
     isGroup: group !== undefined,
-    exitPath: '/dashboard',
+    exitPath: getAppPath('/dashboard'),
   }))
 }
 
