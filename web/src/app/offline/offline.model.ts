@@ -49,6 +49,7 @@ export const createOfflineModel = (isRestartBlocked: () => boolean) => {
   const updateRequested = atom(false, 'offline.updateRequested')
   const verificationError = atom<Error | null>(null, 'offline.verificationError')
   const controller = atom(navigator.serviceWorker?.controller ?? null, 'offline.controller')
+  const activatedWorker = atom<ServiceWorker | null>(null, 'offline.activatedWorker')
   const restartRequired = atom(false, 'offline.restartRequired')
 
   const applyUpdate = action(async () => {
@@ -124,6 +125,8 @@ export const createOfflineModel = (isRestartBlocked: () => boolean) => {
   const verify = action(async () => {
     const current = registration()
     const worker = current?.active
+
+    activatedWorker.set(worker?.state === 'activated' ? worker : null)
 
     if (current?.waiting) {
       update.set('available')
@@ -307,6 +310,8 @@ export const createOfflineModel = (isRestartBlocked: () => boolean) => {
 
           controller.set(next)
 
+          activatedWorker.set(next?.state === 'activated' ? next : null)
+
           if (previous !== null && previous !== next) {
             restartRequired.set(true)
           }
@@ -316,7 +321,12 @@ export const createOfflineModel = (isRestartBlocked: () => boolean) => {
       const updates = effect(() => {
         if (visible() && online() && updateChecked() && !isRestartBlocked()) {
           if (restartRequired()) {
-            location.reload()
+            // controllerchange can fire during activation. Reloading then can
+            // strand WebKit's new document with an activating worker forever.
+            // verify() observes statechange and makes activation reactive.
+            if (activatedWorker() !== null && activatedWorker() === controller()) {
+              location.reload()
+            }
           } else if (update() === 'available') {
             void applyUpdate()
           }
