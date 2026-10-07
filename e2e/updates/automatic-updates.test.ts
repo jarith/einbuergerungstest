@@ -2,6 +2,7 @@ import type { Page } from '@playwright/test'
 import { expect } from '@playwright/test'
 
 import { sourceQuestion, studyAnswer } from '../support/browser'
+import { exposeStaleActivationState } from '../support/offline'
 import { test } from '../support/releases'
 
 const version = (page: Page, release: string) =>
@@ -29,6 +30,26 @@ test.describe('installed PWA release transitions', () => {
     await context.addInitScript(() =>
       Object.defineProperty(navigator, 'standalone', { value: true }),
     )
+  })
+
+  test('a stale activating state verifies the real worker and survives an offline reload', async ({
+    page,
+    deployment,
+    setOffline,
+  }) => {
+    await exposeStaleActivationState(page)
+
+    await page.goto(`${deployment.origin}/pwa/settings`)
+
+    await expect(ready(page)).toHaveCount(1)
+    expect(await page.evaluate(() => navigator.serviceWorker.controller?.state)).toBe('activating')
+
+    await setOffline(true)
+
+    await page.reload()
+
+    await expect(ready(page)).toHaveCount(1)
+    await expect(version(page, 'release-a')).toBeVisible()
   })
 
   test('an online cold launch automatically downloads and runs the new release', async ({

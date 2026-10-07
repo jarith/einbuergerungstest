@@ -4,6 +4,7 @@ import type { Page } from '@playwright/test'
 import { expect, test } from '@playwright/test'
 
 import questionBank from '../../web/public/questionbank-berlin.json' with { type: 'json' }
+import { exposeStaleActivationState } from '../support/offline'
 
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => {
@@ -13,6 +14,48 @@ test.beforeEach(async ({ page }) => {
 
 const readyStatus = (page: Page) =>
   page.getByRole('contentinfo', { includeHidden: true }).getByText('Ready offline', { exact: true })
+
+test(
+  'complete downloads need activation confirmation and retry can recover',
+  { tag: '@webkit' },
+  async ({ page }) => {
+    await exposeStaleActivationState(page)
+
+    await page.addInitScript(() => {
+      const original = window.fetch
+
+      window.fetch = (input, init) => {
+        const url = new URL(input instanceof Request ? input.url : String(input), location.href)
+
+        if (
+          url.pathname === '/pwa/offline-ready' &&
+          document.documentElement.dataset['allowActivation'] !== 'true'
+        ) {
+          return Promise.resolve(new Response(null, { status: 404 }))
+        }
+
+        return original(input, init)
+      }
+    })
+
+    await page.goto('/settings')
+
+    await expect(
+      page.getByText('Downloads are complete. Offline access is not confirmed yet.', {
+        exact: true,
+      }),
+    ).toBeVisible()
+    await expect(readyStatus(page)).toHaveCount(0)
+
+    await page.evaluate(() => {
+      document.documentElement.dataset['allowActivation'] = 'true'
+    })
+
+    await page.getByRole('button', { name: 'Try again', exact: true }).click()
+
+    await expect(readyStatus(page)).toHaveCount(1)
+  },
+)
 
 test(
   'a fresh standalone copy prepares the complete bank and every illustration',

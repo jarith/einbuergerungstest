@@ -19,7 +19,7 @@ export const styles = {
       paddingBlock: '0',
       paddingInline: '36',
       minHeight: '[3.25rem]',
-      gridRow: '2',
+      gridRow: '1',
       placeSelf: 'start stretch',
       // oxlint-disable-next-line @pandacss/prefer-composite-properties -- Switch the sticky edge from the mobile bottom to the tablet top.
       insetBlockStart: '0',

@@ -17,10 +17,18 @@ export const OfflineStatus = reatomComponent(({ offline, localization }: Offline
   return (
     <Stack gap="12">
       <output>{t(`offline.${status}`)}</output>
-      {status === 'error' || status === 'unverified' ? (
+      {status === 'error' || status === 'unverified' || status === 'activation-pending' ? (
         <InlineNotice intent={status === 'error' ? 'danger' : 'info'}>
           <Stack gap="12">
-            <p>{t(status === 'error' ? 'offline.failureHelp' : 'offline.verificationHelp')}</p>
+            <p>
+              {t(
+                status === 'error'
+                  ? 'offline.failureHelp'
+                  : status === 'activation-pending'
+                    ? 'offline.activationHelp'
+                    : 'offline.verificationHelp',
+              )}
+            </p>
             {offline.missing().length === 0 ? null : (
               <p>{t('offline.missing', { resources: offline.missing().join(', ') })}</p>
             )}

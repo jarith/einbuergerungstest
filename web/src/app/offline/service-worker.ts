@@ -58,6 +58,40 @@ export const getMissingResources = (
     }
   })
 
+export const confirmWorkerActivation = async (worker: ServiceWorker, signal: AbortSignal) => {
+  if (worker.state === 'activated') {
+    return true
+  }
+
+  if (worker.state !== 'activating' || navigator.serviceWorker.controller !== worker) {
+    return false
+  }
+
+  // WebKit can leave the page's worker object in "activating" after a reload.
+  // A message reply only proves the worker is alive. A fetch event is dispatched
+  // after activation completes, so require a response only this worker produces.
+  try {
+    const url = new URL('/pwa/offline-ready', location.origin)
+
+    url.searchParams.set('check', crypto.randomUUID())
+
+    const response = await fetch(url, {
+      cache: 'no-store',
+      signal: AbortSignal.any([signal, AbortSignal.timeout(5000)]),
+    })
+
+    return (
+      response.status === 204 &&
+      response.headers.get('X-Offline-Worker') === worker.scriptURL &&
+      navigator.serviceWorker.controller === worker
+    )
+  } catch {
+    signal.throwIfAborted()
+
+    return false
+  }
+}
+
 export const watchServiceWorker = (
   registration: ServiceWorkerRegistration,
   changed: () => void,

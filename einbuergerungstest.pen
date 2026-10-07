@@ -6060,55 +6060,6 @@
       "children": [
         {
           "type": "frame",
-          "id": "gZJ7U",
-          "x": 0,
-          "y": 0,
-          "name": "Tablet Kopfzeile",
-          "enabled": false,
-          "width": "fill_container(820)",
-          "height": 70,
-          "fill": "$surface",
-          "padding": [
-            0,
-            36
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "frame",
-              "id": "I0vEAm",
-              "name": "Marke",
-              "layout": "vertical",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "b2WpW",
-                  "name": "Marke Titel",
-                  "fill": "$text",
-                  "content": "Citizenship test",
-                  "lineHeight": 1.45,
-                  "fontFamily": "Inter",
-                  "fontSize": "$font-size-20",
-                  "fontWeight": "700"
-                },
-                {
-                  "type": "text",
-                  "id": "auxg9",
-                  "name": "Marke Region",
-                  "fill": "$text-muted",
-                  "content": "BERLIN",
-                  "lineHeight": 1.45,
-                  "fontFamily": "Inter",
-                  "fontSize": 10,
-                  "fontWeight": "700"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "frame",
           "id": "OuD98",
           "name": "Tablet Navigation",
           "width": "fill_container",
@@ -6980,40 +6931,6 @@
       "fill": "$bg",
       "layout": "vertical",
       "children": [
-        {
-          "type": "frame",
-          "id": "rv4zK",
-          "x": 0,
-          "y": 0,
-          "name": "Telefon Kopfzeile",
-          "enabled": false,
-          "width": "fill_container(390)",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "sYZxa",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
         {
           "type": "frame",
           "id": "LzzdZ",
@@ -9058,40 +8975,6 @@
       "children": [
         {
           "type": "frame",
-          "id": "JrojE",
-          "x": 0,
-          "y": 0,
-          "name": "Telefon Kopfzeile",
-          "enabled": false,
-          "width": "fill_container(390)",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "ql9Yq",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
-        {
-          "type": "frame",
           "id": "ktGhj",
           "name": "Seiteninhalt",
           "width": "fill_container",
@@ -11109,55 +10992,6 @@
       "children": [
         {
           "type": "frame",
-          "id": "me8qS",
-          "x": 0,
-          "y": 0,
-          "name": "Tablet Kopfzeile",
-          "enabled": false,
-          "width": "fill_container(820)",
-          "height": 70,
-          "fill": "$surface",
-          "padding": [
-            0,
-            36
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "frame",
-              "id": "G2N8D",
-              "name": "Marke",
-              "layout": "vertical",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "Z067K",
-                  "name": "Marke Titel",
-                  "fill": "$text",
-                  "content": "Citizenship test",
-                  "lineHeight": 1.45,
-                  "fontFamily": "Inter",
-                  "fontSize": "$font-size-20",
-                  "fontWeight": "700"
-                },
-                {
-                  "type": "text",
-                  "id": "NiIsD",
-                  "name": "Marke Region",
-                  "fill": "$text-muted",
-                  "content": "BERLIN",
-                  "lineHeight": 1.45,
-                  "fontFamily": "Inter",
-                  "fontSize": 10,
-                  "fontWeight": "700"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "frame",
           "id": "tljI6",
           "name": "Tablet Navigation",
           "width": "fill_container",
@@ -12009,40 +11843,6 @@
       "fill": "$bg",
       "layout": "vertical",
       "children": [
-        {
-          "type": "frame",
-          "id": "s9DN7",
-          "x": 0,
-          "y": 0,
-          "name": "Telefon Kopfzeile",
-          "enabled": false,
-          "width": "fill_container(390)",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "eCfMf",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
         {
           "type": "frame",
           "id": "wnNkD",
@@ -13923,52 +13723,6 @@
       "children": [
         {
           "type": "frame",
-          "id": "OgZvw",
-          "name": "Tablet Kopfzeile",
-          "width": "fill_container",
-          "height": 70,
-          "fill": "$surface",
-          "padding": [
-            0,
-            36
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "frame",
-              "id": "F9cb0",
-              "name": "Marke",
-              "layout": "vertical",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "x1XXv",
-                  "name": "Marke Titel",
-                  "fill": "$text",
-                  "content": "Citizenship test",
-                  "lineHeight": 1.45,
-                  "fontFamily": "Inter",
-                  "fontSize": "$font-size-20",
-                  "fontWeight": "700"
-                },
-                {
-                  "type": "text",
-                  "id": "y7VI61",
-                  "name": "Marke Region",
-                  "fill": "$text-muted",
-                  "content": "BERLIN",
-                  "lineHeight": 1.45,
-                  "fontFamily": "Inter",
-                  "fontSize": 10,
-                  "fontWeight": "700"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "frame",
           "id": "ZStSx",
           "name": "Tablet Navigation",
           "width": "fill_container",
@@ -14813,37 +14567,6 @@
       "fill": "$bg",
       "layout": "vertical",
       "children": [
-        {
-          "type": "frame",
-          "id": "OQCQA",
-          "name": "Telefon Kopfzeile",
-          "width": "fill_container",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "PS18q",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
         {
           "type": "frame",
           "id": "mKJkl",
@@ -16871,37 +16594,6 @@
       "fill": "$bg",
       "layout": "vertical",
       "children": [
-        {
-          "type": "frame",
-          "id": "MfV3E",
-          "name": "Telefon Kopfzeile",
-          "width": "fill_container",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "TsjSO",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
         {
           "type": "frame",
           "id": "Mf2Hw",
@@ -19156,52 +18848,6 @@
       "children": [
         {
           "type": "frame",
-          "id": "sDExi",
-          "name": "Tablet Kopfzeile",
-          "width": "fill_container",
-          "height": 70,
-          "fill": "$surface",
-          "padding": [
-            0,
-            36
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "frame",
-              "id": "t9aF1",
-              "name": "Marke",
-              "layout": "vertical",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "BXFa7",
-                  "name": "Marke Titel",
-                  "fill": "$text",
-                  "content": "Citizenship test",
-                  "lineHeight": 1.45,
-                  "fontFamily": "Inter",
-                  "fontSize": "$font-size-20",
-                  "fontWeight": "700"
-                },
-                {
-                  "type": "text",
-                  "id": "jwCDx",
-                  "name": "Marke Region",
-                  "fill": "$text-muted",
-                  "content": "BERLIN",
-                  "lineHeight": 1.45,
-                  "fontFamily": "Inter",
-                  "fontSize": 10,
-                  "fontWeight": "700"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "frame",
           "id": "lU0iX",
           "name": "Tablet Navigation",
           "width": "fill_container",
@@ -20293,37 +19939,6 @@
       "fill": "$bg",
       "layout": "vertical",
       "children": [
-        {
-          "type": "frame",
-          "id": "X5qlGf",
-          "name": "Telefon Kopfzeile",
-          "width": "fill_container",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "SJ3my",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
         {
           "type": "frame",
           "id": "qK3bx",
@@ -25480,52 +25095,6 @@
       "children": [
         {
           "type": "frame",
-          "id": "GCYzP",
-          "name": "Tablet Kopfzeile",
-          "width": "fill_container",
-          "height": 70,
-          "fill": "$surface",
-          "padding": [
-            0,
-            36
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "frame",
-              "id": "RLiEr",
-              "name": "Marke",
-              "layout": "vertical",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "G98foX",
-                  "name": "Marke Titel",
-                  "fill": "$text",
-                  "content": "Citizenship test",
-                  "lineHeight": 1.45,
-                  "fontFamily": "Inter",
-                  "fontSize": "$font-size-20",
-                  "fontWeight": "700"
-                },
-                {
-                  "type": "text",
-                  "id": "Hye8d",
-                  "name": "Marke Region",
-                  "fill": "$text-muted",
-                  "content": "BERLIN",
-                  "lineHeight": 1.45,
-                  "fontFamily": "Inter",
-                  "fontSize": 10,
-                  "fontWeight": "700"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "frame",
           "id": "SzqYn",
           "name": "Tablet Navigation",
           "width": "fill_container",
@@ -29450,37 +29019,6 @@
       "fill": "$bg",
       "layout": "vertical",
       "children": [
-        {
-          "type": "frame",
-          "id": "u7HH3f",
-          "name": "Telefon Kopfzeile",
-          "width": "fill_container",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "GA0yh",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
         {
           "type": "frame",
           "id": "o5rje",
@@ -35659,52 +35197,6 @@
       "children": [
         {
           "type": "frame",
-          "id": "pTr3q",
-          "name": "Tablet Kopfzeile",
-          "width": "fill_container",
-          "height": 70,
-          "fill": "$surface",
-          "padding": [
-            0,
-            36
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "frame",
-              "id": "pj9n1",
-              "name": "Marke",
-              "layout": "vertical",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "kSVc8",
-                  "name": "Marke Titel",
-                  "fill": "$text",
-                  "content": "Citizenship test",
-                  "lineHeight": 1.45,
-                  "fontFamily": "Inter",
-                  "fontSize": "$font-size-20",
-                  "fontWeight": "700"
-                },
-                {
-                  "type": "text",
-                  "id": "XaB2w",
-                  "name": "Marke Region",
-                  "fill": "$text-muted",
-                  "content": "BERLIN",
-                  "lineHeight": 1.45,
-                  "fontFamily": "Inter",
-                  "fontSize": 10,
-                  "fontWeight": "700"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "frame",
           "id": "igl0t",
           "name": "Tablet Navigation",
           "width": "fill_container",
@@ -37801,37 +37293,6 @@
       "fill": "$bg",
       "layout": "vertical",
       "children": [
-        {
-          "type": "frame",
-          "id": "oB9lP",
-          "name": "Telefon Kopfzeile",
-          "width": "fill_container",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "PsrZC",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
         {
           "type": "frame",
           "id": "RnE6b",
@@ -39936,37 +39397,6 @@
       "fill": "$bg",
       "layout": "vertical",
       "children": [
-        {
-          "type": "frame",
-          "id": "GilRl",
-          "name": "Telefon Kopfzeile",
-          "width": "fill_container",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "OvwG7",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
         {
           "type": "frame",
           "id": "Zwiwz",
@@ -43281,37 +42711,6 @@
       "children": [
         {
           "type": "frame",
-          "id": "UCqOp",
-          "name": "Telefon Kopfzeile",
-          "width": "fill_container",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "KaEC1",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
-        {
-          "type": "frame",
           "id": "Z5zkNi",
           "name": "Seiteninhalt",
           "clip": true,
@@ -44998,40 +44397,6 @@
       "fill": "$bg",
       "layout": "vertical",
       "children": [
-        {
-          "type": "frame",
-          "id": "qPEGO",
-          "x": 0,
-          "y": 0,
-          "name": "Telefon Kopfzeile",
-          "enabled": false,
-          "width": "fill_container(390)",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "T3iVf",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
         {
           "type": "frame",
           "id": "ptuYL",
@@ -47048,37 +46413,6 @@
       "children": [
         {
           "type": "frame",
-          "id": "OeXhG",
-          "name": "Telefon Kopfzeile",
-          "width": "fill_container",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "ExpHo",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
-        {
-          "type": "frame",
           "id": "KAfxY",
           "name": "Seiteninhalt",
           "clip": true,
@@ -48092,37 +47426,6 @@
       "children": [
         {
           "type": "frame",
-          "id": "uNZe3",
-          "name": "Telefon Kopfzeile",
-          "width": "fill_container",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "H8OhM",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
-        {
-          "type": "frame",
           "id": "jyyLx",
           "name": "Seiteninhalt",
           "width": "fill_container",
@@ -49024,37 +48327,6 @@
       "fill": "$bg",
       "layout": "vertical",
       "children": [
-        {
-          "type": "frame",
-          "id": "p4DAE",
-          "name": "Telefon Kopfzeile",
-          "width": "fill_container",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "b6cGuv",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
         {
           "type": "frame",
           "id": "s3on3u",
@@ -50562,37 +49834,6 @@
       "fill": "$bg",
       "layout": "vertical",
       "children": [
-        {
-          "type": "frame",
-          "id": "slL0o",
-          "name": "Telefon Kopfzeile",
-          "width": "fill_container",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "xwGhd",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
         {
           "type": "frame",
           "id": "WBPxY",
@@ -52880,37 +52121,6 @@
       "children": [
         {
           "type": "frame",
-          "id": "zUwFy",
-          "name": "Telefon Kopfzeile",
-          "width": "fill_container",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "ZDuKJ",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
-        {
-          "type": "frame",
           "id": "j21HYY",
           "name": "Seiteninhalt",
           "width": "fill_container",
@@ -53448,40 +52658,6 @@
       "fill": "$bg",
       "layout": "vertical",
       "children": [
-        {
-          "type": "frame",
-          "id": "P5cBv",
-          "x": 0,
-          "y": 0,
-          "name": "Telefon Kopfzeile",
-          "enabled": false,
-          "width": "fill_container(390)",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "Mu4PC",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Einbürgerungstest",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
         {
           "type": "frame",
           "id": "Y91FX",
@@ -54343,40 +53519,6 @@
       "children": [
         {
           "type": "frame",
-          "id": "G0cf2",
-          "x": 0,
-          "y": 0,
-          "name": "Telefon Kopfzeile",
-          "enabled": false,
-          "width": "fill_container(390)",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "Afy1Z",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
-        {
-          "type": "frame",
           "id": "mMEC1",
           "name": "Seiteninhalt",
           "width": "fill_container",
@@ -54858,37 +54000,6 @@
       "fill": "$bg",
       "layout": "vertical",
       "children": [
-        {
-          "type": "frame",
-          "id": "KghHh",
-          "name": "Telefon Kopfzeile",
-          "width": "fill_container",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "RJzcW",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
         {
           "type": "frame",
           "id": "A9dQBE",
@@ -56024,40 +55135,6 @@
       "fill": "$bg",
       "layout": "vertical",
       "children": [
-        {
-          "type": "frame",
-          "id": "Fxe7W",
-          "x": 0,
-          "y": 0,
-          "name": "Telefon Kopfzeile",
-          "enabled": false,
-          "width": "fill_container(390)",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "Y3SJf",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
         {
           "type": "frame",
           "id": "GNmER",
@@ -58905,37 +57982,6 @@
       "fill": "$bg",
       "layout": "vertical",
       "children": [
-        {
-          "type": "frame",
-          "id": "Czgrh",
-          "name": "Telefon Kopfzeile",
-          "width": "fill_container",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "GNfEQ",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
         {
           "type": "frame",
           "id": "s8CaV",
@@ -62755,52 +61801,6 @@
       "children": [
         {
           "type": "frame",
-          "id": "nOZfB",
-          "name": "Tablet Kopfzeile",
-          "width": "fill_container",
-          "height": 70,
-          "fill": "$surface",
-          "padding": [
-            0,
-            36
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "frame",
-              "id": "Zwoqo",
-              "name": "Marke",
-              "layout": "vertical",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "XULOs",
-                  "name": "Marke Titel",
-                  "fill": "$text",
-                  "content": "Citizenship test",
-                  "lineHeight": 1.45,
-                  "fontFamily": "Inter",
-                  "fontSize": "$font-size-20",
-                  "fontWeight": "700"
-                },
-                {
-                  "type": "text",
-                  "id": "gaXr0",
-                  "name": "Marke Region",
-                  "fill": "$text-muted",
-                  "content": "BERLIN",
-                  "lineHeight": 1.45,
-                  "fontFamily": "Inter",
-                  "fontSize": 10,
-                  "fontWeight": "700"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "frame",
           "id": "O82kyH",
           "name": "Tablet Navigation",
           "width": "fill_container",
@@ -65958,37 +64958,6 @@
       "fill": "$bg",
       "layout": "vertical",
       "children": [
-        {
-          "type": "frame",
-          "id": "gtVxI",
-          "name": "Telefon Kopfzeile",
-          "width": "fill_container",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "rD81X",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
         {
           "type": "frame",
           "id": "X4SUj",
@@ -71042,7 +70011,7 @@
           "fill": "$text-muted",
           "textGrowth": "fixed-width",
           "width": "fill_container",
-          "content": "Study order: context and position → scope status bar (8 px below context) → learning-status badge → German prompt → Show English translation switch → translated prompt → image if present → choices → navigation → collapsed How study works. There is no visible feedback notification. Keep correctness icons and answer styling, and a visually hidden polite announcement for new answers. The status bar reflects current group or all-question totals and updates after answers. Below 1024 px, Study hides the brand header, including on tablet. German UI omits translation. Mobile bottom navigation remains fixed with scroll clearance.",
+          "content": "Study order: context and position → scope status bar (8 px below context) → learning-status badge → German prompt → Show English translation switch → translated prompt → image if present → choices → navigation → collapsed How study works. There is no visible feedback notification. Keep correctness icons and answer styling, and a visually hidden polite announcement for new answers. The status bar reflects current group or all-question totals and updates after answers. Below 1024 px, all app screens omit the brand header and its space, including on tablet. Tablet navigation starts at the top; desktop retains its sidebar header. German UI omits translation. Mobile bottom navigation remains fixed with scroll clearance.",
           "lineHeight": 1.5,
           "fontFamily": "Inter",
           "fontSize": "$font-size-14",
@@ -71320,40 +70289,6 @@
       "fill": "$bg",
       "layout": "vertical",
       "children": [
-        {
-          "type": "frame",
-          "id": "wvIi0",
-          "x": 0,
-          "y": 0,
-          "name": "Telefon Kopfzeile",
-          "enabled": false,
-          "width": "fill_container(390)",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "J5gMz",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
         {
           "type": "frame",
           "id": "fGvie",
@@ -72359,37 +71294,6 @@
       "fill": "$bg",
       "layout": "vertical",
       "children": [
-        {
-          "type": "frame",
-          "id": "Bqot2",
-          "name": "Telefon Kopfzeile",
-          "width": "fill_container",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "CBX4z",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
         {
           "type": "frame",
           "id": "Ke7vD",
@@ -75747,37 +74651,6 @@
       "fill": "$bg",
       "layout": "vertical",
       "children": [
-        {
-          "type": "frame",
-          "id": "vZIFv",
-          "name": "Telefon Kopfzeile",
-          "width": "fill_container",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "t9VIks",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
         {
           "type": "frame",
           "id": "c5vlIl",
@@ -79638,37 +78511,6 @@
       "fill": "$bg",
       "layout": "vertical",
       "children": [
-        {
-          "type": "frame",
-          "id": "QXL5E",
-          "name": "Telefon Kopfzeile",
-          "width": "fill_container",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "XeUJU",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
         {
           "type": "frame",
           "id": "m0D4OY",
@@ -83743,37 +82585,6 @@
       "children": [
         {
           "type": "frame",
-          "id": "x49bj",
-          "name": "Telefon Kopfzeile",
-          "width": "fill_container",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "EO7ye",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
-        {
-          "type": "frame",
           "id": "WM1Zv",
           "name": "Seiteninhalt",
           "width": "fill_container",
@@ -86552,40 +85363,6 @@
       "children": [
         {
           "type": "frame",
-          "id": "eWEFd",
-          "x": 0,
-          "y": 0,
-          "name": "Telefon Kopfzeile",
-          "enabled": false,
-          "width": "fill_container(390)",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "LTCSZ",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
-        {
-          "type": "frame",
           "id": "pD4oe",
           "name": "Seiteninhalt",
           "width": "fill_container",
@@ -88437,37 +87214,6 @@
       "children": [
         {
           "type": "frame",
-          "id": "VgqjW",
-          "name": "Telefon Kopfzeile",
-          "width": "fill_container",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "q1Ijwy",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
-        {
-          "type": "frame",
           "id": "vBKEg",
           "name": "Seiteninhalt",
           "width": "fill_container",
@@ -90292,37 +89038,6 @@
       "children": [
         {
           "type": "frame",
-          "id": "rWy9Z",
-          "name": "Telefon Kopfzeile",
-          "width": "fill_container",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "ZJNPY",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
-        {
-          "type": "frame",
           "id": "nY9Ih",
           "name": "Seiteninhalt",
           "width": "fill_container",
@@ -90699,40 +89414,6 @@
       "fill": "$bg",
       "layout": "vertical",
       "children": [
-        {
-          "type": "frame",
-          "id": "WpIFS",
-          "x": 0,
-          "y": 0,
-          "name": "Telefon Kopfzeile",
-          "enabled": false,
-          "width": "fill_container(390)",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "s8kfM",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
         {
           "type": "frame",
           "id": "fapIJ",
@@ -94895,52 +93576,6 @@
       "children": [
         {
           "type": "frame",
-          "id": "O3HHu",
-          "name": "Tablet Kopfzeile",
-          "width": "fill_container",
-          "height": 70,
-          "fill": "$surface",
-          "padding": [
-            0,
-            36
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "frame",
-              "id": "TEjl3",
-              "name": "Marke",
-              "layout": "vertical",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "aVkfz",
-                  "name": "Marke Titel",
-                  "fill": "$text",
-                  "content": "Citizenship test",
-                  "lineHeight": 1.45,
-                  "fontFamily": "Inter",
-                  "fontSize": "$font-size-20",
-                  "fontWeight": "700"
-                },
-                {
-                  "type": "text",
-                  "id": "RxiLp",
-                  "name": "Marke Region",
-                  "fill": "$text-muted",
-                  "content": "BERLIN",
-                  "lineHeight": 1.45,
-                  "fontFamily": "Inter",
-                  "fontSize": 10,
-                  "fontWeight": "700"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "frame",
           "id": "z3zlQV",
           "name": "Tablet Navigation",
           "width": "fill_container",
@@ -96427,37 +95062,6 @@
       "fill": "$bg",
       "layout": "vertical",
       "children": [
-        {
-          "type": "frame",
-          "id": "VhDj0",
-          "name": "Telefon Kopfzeile",
-          "width": "fill_container",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "uUfJP",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
         {
           "type": "frame",
           "id": "wDSth",
@@ -100176,52 +98780,6 @@
       "children": [
         {
           "type": "frame",
-          "id": "UMm6h",
-          "name": "Tablet Kopfzeile",
-          "width": "fill_container",
-          "height": 70,
-          "fill": "$surface",
-          "padding": [
-            0,
-            36
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "frame",
-              "id": "IQyHu",
-              "name": "Marke",
-              "layout": "vertical",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "Btyvi",
-                  "name": "Marke Titel",
-                  "fill": "$text",
-                  "content": "Citizenship test",
-                  "lineHeight": 1.45,
-                  "fontFamily": "Inter",
-                  "fontSize": "$font-size-20",
-                  "fontWeight": "700"
-                },
-                {
-                  "type": "text",
-                  "id": "htJfG",
-                  "name": "Marke Region",
-                  "fill": "$text-muted",
-                  "content": "BERLIN",
-                  "lineHeight": 1.45,
-                  "fontFamily": "Inter",
-                  "fontSize": 10,
-                  "fontWeight": "700"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "frame",
           "id": "iux2E",
           "name": "Tablet Navigation",
           "width": "fill_container",
@@ -100731,37 +99289,6 @@
       "fill": "$bg",
       "layout": "vertical",
       "children": [
-        {
-          "type": "frame",
-          "id": "QGmzM",
-          "name": "Telefon Kopfzeile",
-          "width": "fill_container",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "n9ucd",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
         {
           "type": "frame",
           "id": "jTyua",
@@ -101289,37 +99816,6 @@
       "children": [
         {
           "type": "frame",
-          "id": "d99GQ",
-          "name": "Telefon Kopfzeile",
-          "width": "fill_container",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "twao9",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
-        {
-          "type": "frame",
           "id": "WrbM6",
           "name": "Seiteninhalt",
           "width": "fill_container",
@@ -101716,37 +100212,6 @@
       "fill": "$bg",
       "layout": "vertical",
       "children": [
-        {
-          "type": "frame",
-          "id": "e4wUe",
-          "name": "Telefon Kopfzeile",
-          "width": "fill_container",
-          "height": 58,
-          "fill": "$surface",
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "padding": [
-            0,
-            18
-          ],
-          "justifyContent": "space_between",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "lhEyI",
-              "name": "Marke",
-              "fill": "$text",
-              "content": "Citizenship test",
-              "lineHeight": 1.45,
-              "fontFamily": "Inter",
-              "fontSize": 17,
-              "fontWeight": "700"
-            }
-          ]
-        },
         {
           "type": "frame",
           "id": "lLBgN",

@@ -5,31 +5,26 @@ import { createOfflineModel } from './offline.model'
 const createWorker = (state: ServiceWorkerState) =>
   Object.assign(new EventTarget(), {
     state,
+    scriptURL: 'https://example.test/pwa/sw.js',
     postMessage(message: string, ports: MessagePort[]) {
       ports[0]?.postMessage(message === 'CHECK_OFFLINE' ? [] : 'current-release')
     },
   })
 
-afterEach(() => {
-  vi.unstubAllGlobals()
-
-  vi.unstubAllEnvs()
-})
-
-test('an automatic restart waits for the replacement controller to finish activation', async () => {
-  const original = createWorker('activated')
-  const replacement = createWorker('installing')
-
+const createEnvironment = (
+  active: ReturnType<typeof createWorker>,
+  installing: ReturnType<typeof createWorker> | null = null,
+) => {
   const registration = Object.assign(new EventTarget(), {
     scope: 'https://example.test/pwa/',
-    active: original,
-    installing: replacement,
+    active,
+    installing,
     waiting: null,
     update: () => Promise.resolve(),
   })
 
   const serviceWorker = Object.assign(new EventTarget(), {
-    controller: original,
+    controller: active,
     getRegistration: () => Promise.resolve(registration),
   })
 
@@ -56,6 +51,56 @@ test('an automatic restart waits for the replacement controller to finish activa
       matchMedia: () => Object.assign(new EventTarget(), { matches: true }),
     }),
   )
+
+  vi.stubGlobal('fetch', () => Promise.resolve(new Response(null, { status: 404 })))
+
+  return { registration, serviceWorker, reload }
+}
+
+afterEach(() => {
+  vi.unstubAllGlobals()
+
+  vi.unstubAllEnvs()
+})
+
+test.each([
+  { responds: true, expected: 'ready' },
+  { responds: false, expected: 'activation-pending' },
+])(
+  'an activating worker with a complete cache reports $expected',
+  async ({ responds, expected }) => {
+    const worker = createWorker('activating')
+
+    const { reload } = createEnvironment(worker)
+
+    vi.stubGlobal('fetch', () =>
+      Promise.resolve(
+        new Response(null, {
+          status: responds ? 204 : 404,
+          headers: responds ? { 'X-Offline-Worker': worker.scriptURL } : {},
+        }),
+      ),
+    )
+
+    const offline = createOfflineModel(() => false)
+    const subscription = offline.subscribe()
+
+    try {
+      await vi.waitFor(() => expect(offline()).toBe(expected))
+
+      expect(offline.missing()).toEqual([])
+      expect(reload).not.toHaveBeenCalled()
+    } finally {
+      subscription()
+    }
+  },
+)
+
+test('an automatic restart waits for the replacement controller to finish activation', async () => {
+  const original = createWorker('activated')
+  const replacement = createWorker('installing')
+
+  const { registration, serviceWorker, reload } = createEnvironment(original, replacement)
 
   const offline = createOfflineModel(() => false)
   const subscription = offline.subscribe()
