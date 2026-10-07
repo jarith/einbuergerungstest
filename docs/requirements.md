@@ -17,9 +17,47 @@ and
 [section 1 of the Einbürgerungstestverordnung](https://www.gesetze-im-internet.de/einbtestv/__1.html)
 confirm the exam format: 33 questions, comprising 30 general and 3 from the learner's
 state; four choices with one correct answer; 60 minutes; and a pass threshold of 17
-correct answers. The official questionnaires are unpublished. The app therefore generates
-its own uniformly random practice papers with no duplicate question within a paper while
-matching the published format.
+correct answers. The official questionnaires are unpublished. The app generates its own
+topic-balanced practice papers using the approved rules below. The topic distribution
+comes from the historical test-development evidence in the
+[research note](research/einbuergerungstest-selection.md); it is not a claim to reproduce
+BAMF's current selection algorithm.
+
+### Mock-paper selection
+
+Each new paper independently chooses one of two compositions with equal probability: A has
+15 democracy, 7 history, 8 society, and 3 Berlin questions; B has 15 democracy, 8 history,
+7 society, and 3 Berlin questions. The approved per-group allocations reflect the groups'
+relative sizes, rounded to preserve the topic totals:
+
+| Topic                        | Existing group ID           |      A |      B |
+| ---------------------------- | --------------------------- | -----: | -----: |
+| Leben in der Demokratie      | constitution-rights         |      3 |      3 |
+| Leben in der Demokratie      | federalism-state-symbols    |      2 |      2 |
+| Leben in der Demokratie      | government-institutions     |      2 |      2 |
+| Leben in der Demokratie      | elections-participation     |      5 |      5 |
+| Leben in der Demokratie      | justice-legal-system        |      2 |      2 |
+| Leben in der Demokratie      | economy-social-security     |      1 |      1 |
+| Geschichte und Verantwortung | jewish-life-nazi-history    |      2 |      2 |
+| Geschichte und Verantwortung | postwar-ddr-reunification   |      3 |      4 |
+| Geschichte und Verantwortung | europe-eu                   |      2 |      2 |
+| Mensch und Gesellschaft      | family-education            |      4 |      4 |
+| Mensch und Gesellschaft      | everyday-administration     |      1 |      1 |
+| Mensch und Gesellschaft      | equality-religion-migration |      3 |      2 |
+| State-specific               | berlin                      |      3 |      3 |
+| **Total**                    |                             | **33** | **33** |
+
+Selection is uniformly random without replacement inside each group. Shuffle the 30
+selected general questions together, then append the three Berlin questions in random
+order. Questions may recur across tests; learning status and earlier answers do not
+influence selection. Existing saved papers retain their original question lists. An
+insufficient group pool is an error, not a reason to borrow questions from another group.
+
+The framework-independent `mock-paper` domain module owns these rules and exposes
+`createMockPaper(questions, random)` through its public entry. The mock-test application
+flow supplies the loaded question bank and `Math.random` when starting a sitting. Unit
+tests use controlled random inputs to verify both compositions, group counts, uniqueness,
+ordering, input preservation, and invalid inputs without probabilistic assertions.
 
 ## Product scope
 

@@ -51,6 +51,7 @@
     "light": "Hell",
     "dark": "Dunkel",
     "studyTranslation": "Englische Übersetzung anzeigen",
+    "hideStudyTranslation": "Englische Übersetzung ausblenden",
     "plannedDate": "Geplanter Prüfungstermin",
     "calendar": {
       "nextMonth": "Nächster Monat",

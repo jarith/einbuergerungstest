@@ -67,6 +67,8 @@ export const geometry = {
     'control.segmentCompact': 32,
     'control.badge': 28,
     'icon.action': 18,
+    'icon.translation': 28,
+    'icon.indicator': 10,
     'icon.field': 16,
     'progress.track': 8,
     'swatch.min': 160,

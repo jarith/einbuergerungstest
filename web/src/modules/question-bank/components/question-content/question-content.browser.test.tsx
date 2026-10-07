@@ -82,8 +82,12 @@ for (const scenario of cases) {
       .poll(() => screen.getByRole('note').query() !== null)
       .toBe(scenario.mode === 'completed-review')
 
-    const translation = screen.getByRole('switch', { name: i18n.t('settings.studyTranslation') })
+    const translation = screen.getByRole('button', { name: i18n.t('settings.studyTranslation') })
 
     await expect.poll(() => translation.query() !== null).toBe(scenario.available)
+
+    await expect
+      .poll(() => translation.query()?.getAttribute('aria-pressed'))
+      .toBe(scenario.available ? String(scenario.enabled) : undefined)
   })
 }

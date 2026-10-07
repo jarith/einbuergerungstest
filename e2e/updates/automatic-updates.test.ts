@@ -157,6 +157,22 @@ test.describe('installed PWA release transitions', () => {
 
     await expect(ready(page)).toHaveCount(1)
 
+    const failedUpdate = await page.evaluateHandle(async () => {
+      const registration = await navigator.serviceWorker.getRegistration('/pwa/')
+
+      if (registration === undefined) {
+        throw new Error('The prepared PWA must have a service worker registration.')
+      }
+
+      const update = { worker: registration.installing }
+
+      registration.addEventListener('updatefound', () => {
+        update.worker = registration.installing
+      })
+
+      return update
+    })
+
     deployment.failDownloads(true)
 
     deployment.publish('release-b')
@@ -164,6 +180,13 @@ test.describe('installed PWA release transitions', () => {
     await foreground(page)
 
     await expect.poll(deployment.failedRequests).toBeGreaterThan(0)
+
+    // A server-side 503 does not mean the browser has finished rejecting the
+    // installation. Retain the worker: registration.installing is cleared when
+    // it becomes redundant, and reconnecting earlier can join that failed job.
+    await expect.poll(() => failedUpdate.evaluate(({ worker }) => worker?.state)).toBe('redundant')
+
+    await failedUpdate.dispose()
 
     await expect(version(page, 'release-a')).toBeVisible()
     await expect(ready(page)).toHaveCount(1)
@@ -173,6 +196,7 @@ test.describe('installed PWA release transitions', () => {
     await page.reload()
 
     await expect(version(page, 'release-a')).toBeVisible()
+    await expect(ready(page)).toHaveCount(1)
 
     deployment.failDownloads(false)
 
@@ -181,6 +205,7 @@ test.describe('installed PWA release transitions', () => {
     await foreground(page)
 
     await expect(version(page, 'release-b')).toBeVisible({ timeout: 20_000 })
+    await expect(ready(page)).toHaveCount(1)
   })
 
   test('an active mock in another PWA window defers activation until it is exited', async ({

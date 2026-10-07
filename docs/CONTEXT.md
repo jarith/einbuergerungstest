@@ -32,8 +32,12 @@ same session feedback, one-answer rule, and shared attempt history as all-questi
 Re-entering a group preserves its position and allows fresh answers.
 
 **Mock test**: A timed practice sitting modeled on the Berlin Einbürgerungstest, with 30
-general and 3 Berlin questions. Answers may be revised until the test ends; results are
-revealed afterward.
+general and 3 Berlin questions. Each new paper uses the approved group quotas: 15
+democracy questions and either 7 history plus 8 society questions or 8 history plus 7
+society questions, chosen with equal probability. The `mock-paper` domain module selects
+questions randomly within each group, mixes the general questions, and places Berlin
+questions last. See the [selection rules](requirements.md#mock-paper-selection). Answers
+may be revised until the test ends; results are revealed afterward.
 
 **Completed mock test**: A mock test that was submitted or reached its time limit. Only
 completed mock tests count as tests tried.
@@ -126,10 +130,15 @@ within 400 ms scroll to the top without reopening the route or adding history. K
 activation performs that action immediately. Reduced-motion preferences disable smooth
 scrolling. Cancelled pointer gestures clear the tap sequence.
 
-Touch targets for the translation switch and dialog close control are at least 44px.
-Full-screen image dialogs account for all display safe areas. The document theme color
-follows the saved appearance; the manifest launch background remains the default light
-appearance. Installed iOS/Android system bars and safe areas require real-device checks.
+Translation uses a 48px icon toggle button with Lucide Languages at 28px, right-aligned
+below question progress and centered with the Study status badge. Review places it below
+the question count. The off state is outlined; the on state is solid accent with a small
+Check indicator. Its accessible name stays “Show English translation” with `aria-pressed`;
+hover/focus tooltips describe Show or Hide. Enter/Space toggles without moving focus. The
+dialog close control has a touch target of at least 44px. Full-screen image dialogs
+account for all display safe areas. The document theme color follows the saved appearance;
+the manifest launch background remains the default light appearance. Installed iOS/Android
+system bars and safe areas require real-device checks.
 
 The calendar displays dates as `DD.MM.YYYY` while storing `YYYY-MM-DD`. Settings disables
 past popup dates with `excludeDate`, allowing typed past dates to reach the existing field
@@ -159,6 +168,17 @@ identifying header, and fetch events wait for activation. A complete cache witho
 activation evidence shows a distinct notice with retry and close/reopen guidance. Cache
 completeness alone or a message reply must not authorize a reload. Preserve the
 active-test/pending-save guards.
+
+The release-update recovery test must observe the replacement worker becoming `redundant`
+before taking the app offline. The fixture's failed-request counter only proves the server
+received an asset request; the browser may still be installing that worker. Reconnecting
+at that point can join the unfinished failed update instead of starting a new one. This
+race reproduces the WebKit timeout seen after PR #16, whose source tree matched master:
+delaying delivery of the fixture's 503 response made the old test fail at its release-B
+assertion. The original CI run did not upload its trace, so its exact timing is unknown.
+Keep this synchronization on the actual worker lifecycle, and verify offline readiness
+after the offline reload and after recovery. CI saves browser UI failure traces and
+screenshots as `browser-ui-failure-<run ID>-<attempt>` artifacts for seven days.
 
 Internal learner links and redirects must retain the active router base. Use route
 `.path()`/`.go()` methods, or `getAppPath` for paths built outside route definitions.

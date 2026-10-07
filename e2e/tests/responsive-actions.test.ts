@@ -30,7 +30,16 @@ for (const width of [320, 390]) {
 
     await page.goto(`/study/${question.id}`)
 
-    await page.getByRole('switch', { name: 'Show English translation', exact: true }).click()
+    const translation = page.getByRole('button', { name: 'Show English translation', exact: true })
+
+    await expect(translation).toHaveAttribute('aria-pressed', 'false')
+
+    await translation.focus()
+
+    await translation.press('Space')
+
+    await expect(translation).toHaveAttribute('aria-pressed', 'true')
+    await expect(translation).toBeFocused()
 
     await expect(page.getByText(question.question_en, { exact: true })).toBeVisible()
 
@@ -44,6 +53,17 @@ for (const width of [320, 390]) {
       page,
       page.getByRole('button', { name: 'Next', exact: true }),
     )
+
+    await page.reload()
+
+    await expect(translation).toHaveAttribute('aria-pressed', 'true')
+    await expect(page.getByText(question.question_en, { exact: true })).toBeVisible()
+
+    await translation.press('Enter')
+
+    await expect(translation).toHaveAttribute('aria-pressed', 'false')
+    await expect(translation).toBeFocused()
+    await expect(page.getByText(question.question_en, { exact: true })).toHaveCount(0)
   })
 
   test(`German mock and translated review actions remain reachable at ${width}px`, async ({
@@ -83,7 +103,7 @@ for (const width of [320, 390]) {
 
     await page.goto(reviewUrl)
 
-    await page.getByRole('switch', { name: 'Show English translation', exact: true }).click()
+    await page.getByRole('button', { name: 'Show English translation', exact: true }).click()
 
     // Both language blocks must fit inside their choices, not merely inside the document.
     await expectReadable(page.getByRole('radio'))

@@ -54,9 +54,9 @@ export const StudySession = reatomComponent(({ model }: StudySessionProps) => {
             />
           </Stack>
           <Stack gap="24" minWidth="0">
-            <QuestionStatusBadge status={model.status()} t={t} />
             <QuestionContent
               key={current.key}
+              status={<QuestionStatusBadge status={model.status()} t={t} />}
               loaded={current.loaded}
               selectedOption={current.selectedOption}
               interaction={{
