@@ -65,7 +65,13 @@ for (const scenario of cases) {
       .toBeVisible()
 
     await expect
-      .poll(() => screen.getByText(question.question_en, { exact: true }).query() !== null)
+      .poll(
+        () =>
+          screen
+            .getByText(question.question_en, { exact: true })
+            .query()
+            ?.checkVisibility({ checkVisibilityCSS: true }) ?? false,
+      )
       .toBe(scenario.translated)
 
     for (const option of question.answer_options) {
@@ -74,7 +80,13 @@ for (const scenario of cases) {
       await expect.element(answer.getByText(option.text_de, { exact: true })).toBeVisible()
 
       await expect
-        .poll(() => answer.getByText(option.text_en, { exact: true }).query() !== null)
+        .poll(
+          () =>
+            answer
+              .getByText(option.text_en, { exact: true })
+              .query()
+              ?.checkVisibility({ checkVisibilityCSS: true }) ?? false,
+        )
         .toBe(scenario.translated)
     }
 
@@ -82,8 +94,12 @@ for (const scenario of cases) {
       .poll(() => screen.getByRole('note').query() !== null)
       .toBe(scenario.mode === 'completed-review')
 
-    const translation = screen.getByRole('switch', { name: i18n.t('settings.studyTranslation') })
+    const translation = screen.getByRole('button', { name: i18n.t('settings.studyTranslation') })
 
     await expect.poll(() => translation.query() !== null).toBe(scenario.available)
+
+    await expect
+      .poll(() => translation.query()?.getAttribute('aria-pressed'))
+      .toBe(scenario.available ? String(scenario.enabled) : undefined)
   })
 }

@@ -5,6 +5,17 @@ export type ColorScheme = 'light' | 'dark'
 /** UI dimensions are design pixels; the Panda adapter converts them to rem once. */
 export const designTokens = {
   colors,
+  durations: {
+    press: 80,
+    icon: 100,
+    feedback: 120,
+    backdrop: 150,
+    navigationCompact: 160,
+    reveal: 180,
+    navigation: 200,
+    completion: 220,
+  },
+  easings: { enter: 'cubic-bezier(0.2, 0, 0, 1)', exit: 'cubic-bezier(0.4, 0, 1, 1)' },
   spacing: {
     '0': 0,
     '2': 2,

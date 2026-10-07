@@ -14,7 +14,7 @@ export const StudyCompletion = reatomComponent(({ model }: StudySessionProps) =>
   const total = model.totals()
 
   return (
-    <Stack gap="24">
+    <Stack gap="24" css={{ ...completionStyles.root }} data-animate={model.shouldAnimateCompletion}>
       {model.isGroup ? (
         <Flex gap="12" align="center">
           <Check aria-hidden="true" className={completionStyles.check} />

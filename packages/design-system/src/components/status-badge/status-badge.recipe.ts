@@ -5,6 +5,8 @@ export const statusBadgeRecipe = defineSlotRecipe({
   slots: ['root', 'label', 'section'],
   base: {
     root: {
+      transition:
+        'background-color {durations.feedback} {easings.enter}, color {durations.feedback} {easings.enter}',
       minHeight: 'control.badge',
       height: 'auto',
       paddingInline: 'badge.inline',

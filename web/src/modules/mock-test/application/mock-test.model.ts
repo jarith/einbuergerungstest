@@ -2,7 +2,8 @@ import { action, atom, computed, withAsync, withConnectHook, wrap } from '@reato
 
 import type { createLearnerState } from '../../learner-state'
 import type { OptionLabel, QuestionBank, QuestionKey } from '../../question-bank'
-import { createMockPaper, getRemainingSeconds } from '../domain/mock-test'
+import { createMockPaper } from '../../mock-paper'
+import { getRemainingSeconds } from '../domain/mock-test'
 
 export const createMockTest = (
   bank: QuestionBank,
@@ -66,7 +67,7 @@ export const createMockTest = (
       await wrap(
         run(async () => {
           if (active() === null) {
-            await wrap(learner.startMock(createMockPaper(bank, Math.random)))
+            await wrap(learner.startMock(createMockPaper(bank.questions, Math.random)))
 
             submission.set(false)
           }

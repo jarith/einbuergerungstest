@@ -55,7 +55,7 @@ Run these from the repository root with mise activated, or prefix a command with
 | `yarn lint`                                              | Generate Panda helpers, then run Actionlint, ast-grep, and Oxlint            |
 | `yarn lint:ast-grep`                                     | Run custom ast-grep rules in every workspace                                 |
 | `yarn format:check` / `yarn format`                      | Oxfmt checks / formatting                                                    |
-| `yarn test`                                              | Existing workspace checks (no application unit tests)                        |
+| `yarn test`                                              | Workspace checks, including deterministic mock-paper unit tests              |
 | `yarn test:browser`                                      | React/Reatom browser integration tests                                       |
 | `yarn test:storybook`                                    | Build and test component stories with Playwright                             |
 | `yarn test:behavior`                                     | Run portable business specifications through application integration drivers |

@@ -19,10 +19,11 @@ their subcomponents with their owner. See the
 
 Treat Berlin test preparation as one initial bounded context. Organize reusable business
 behavior under `web/src/modules/`, beginning with `question-bank`, `learner-state`, and
-`mock-test`. These are cohesive modules, not separate bounded contexts. Inside a module,
-separate pure domain rules from application state and browser infrastructure when those
-responsibilities exist. Put cross-page question presentation with the question-bank
-module. Keep generic visual primitives in `packages/design-system`.
+`mock-test`, with `mock-paper` owning paper composition and question selection. These are
+cohesive modules, not separate bounded contexts. Inside a module, separate pure domain
+rules from application state and browser infrastructure when those responsibilities exist.
+Put cross-page question presentation with the question-bank module. Keep generic visual
+primitives in `packages/design-system`.
 
 Reserve this structure under `web/src/`:
 
@@ -39,6 +40,8 @@ modules/
     domain/  application/  infrastructure/
   mock-test/
     domain/  application/
+  mock-paper/
+    domain/
 pages/
   <page>/
     components/<page>-page/components/

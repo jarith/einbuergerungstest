@@ -51,22 +51,15 @@ test('answer groups have a name and translation and dialog controls have large t
     page.getByRole('radiogroup', { name: question.question_de, exact: true }),
   ).toBeVisible()
 
-  // The switch's associated label is the full touch target, not its compact visual track.
-  const translation = page.getByRole('switch', { name: 'Show English translation' })
+  const translation = page.getByRole('button', { name: 'Show English translation' })
+  const targetSize = await bounds(translation)
 
-  const targetHeight = await translation.evaluate((input) => {
-    if (!(input instanceof HTMLInputElement)) {
-      throw new Error('The translation switch must have an input.')
-    }
-
-    return input.labels?.[0]?.getBoundingClientRect().height ?? 0
-  })
-
-  expect(targetHeight).toBeGreaterThanOrEqual(44)
+  expect(targetSize.width).toBeGreaterThanOrEqual(48)
+  expect(targetSize.height).toBeGreaterThanOrEqual(48)
 
   await translation.tap()
 
-  await expect(translation).toBeChecked()
+  await expect(translation).toHaveAttribute('aria-pressed', 'true')
 
   await page.getByRole('button', { name: 'Enlarge question image', exact: true }).tap()
 

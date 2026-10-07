@@ -8,6 +8,8 @@ export type DesignTheme = Readonly<{
   colors: {
     readonly [K in keyof typeof designTokens.colors]: Readonly<Record<ColorScheme, string>>
   }
+  durations: Scale<typeof designTokens.durations>
+  easings: { readonly [K in keyof typeof designTokens.easings]: string }
   spacing: Scale<typeof designTokens.spacing>
   fontSizes: Scale<typeof designTokens.fontSizes>
   lineHeights: Scale<typeof designTokens.lineHeights>

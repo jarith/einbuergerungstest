@@ -8,6 +8,7 @@ import { Accordion as MantineAccordion } from '@mantine/core'
 import { ChevronDown } from 'lucide-react'
 
 import type { PrimitiveProps } from '../../foundation/mantine/props'
+import { token } from '../../foundation/panda/styling'
 import { accordion } from './accordion.styles'
 
 export type AccordionProps<Multiple extends boolean = false> = Omit<
@@ -21,7 +22,7 @@ export const Accordion = <Multiple extends boolean = false>(props: AccordionProp
     order={3}
     chevron={<ChevronDown size={18} aria-hidden="true" />}
     {...props}
-    transitionDuration={0}
+    transitionDuration={Number.parseFloat(token('durations.reveal'))}
     classNames={accordion()}
   />
 )

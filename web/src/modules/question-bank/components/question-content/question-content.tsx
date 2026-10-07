@@ -1,7 +1,8 @@
 import type { ChoiceOption } from '@einbuergerungstest/design-system'
 import type { TFunction } from 'i18next'
-import { ChoiceGroup, ToggleSwitch } from '@einbuergerungstest/design-system'
-import { Stack } from '@einbuergerungstest/design-system/jsx'
+import type { ReactNode } from 'react'
+import { ChoiceGroup, Reveal } from '@einbuergerungstest/design-system'
+import { Flex, Stack } from '@einbuergerungstest/design-system/jsx'
 import { Check, X } from 'lucide-react'
 
 import type { OptionLabel } from '../../domain/question-bank'
@@ -13,6 +14,7 @@ import {
 } from '../../domain/question-answer'
 import { QuestionImage } from '../question-image/question-image'
 import { AnswerFeedback } from './components/answer-feedback/answer-feedback'
+import { TranslationButton } from './components/translation-button/translation-button'
 import {
   feedbackAnnouncement,
   questionTitle,
@@ -42,6 +44,7 @@ export type QuestionContentProps = Readonly<{
   language: 'en' | 'de'
   translationEnabled: boolean
   onTranslationChange: (enabled: boolean) => void
+  status?: ReactNode
   t: TFunction
 }>
 
@@ -53,6 +56,7 @@ export const QuestionContent = ({
   language,
   translationEnabled,
   onTranslationChange,
+  status,
   t,
 }: QuestionContentProps) => {
   const { question, image } = loaded
@@ -80,7 +84,11 @@ export const QuestionContent = ({
       value: option.label,
       marker: option.label,
       label: <span lang="de">{option.text_de}</span>,
-      description: showTranslation ? <span lang="en">{option.text_en}</span> : null,
+      description: hasTranslation ? (
+        <Reveal opened={showTranslation}>
+          <span lang="en">{option.text_en}</span>
+        </Reveal>
+      ) : null,
     }
 
     if (result === undefined) {
@@ -105,29 +113,36 @@ export const QuestionContent = ({
 
   return (
     <Stack gap="16" minWidth="0">
-      <h2
-        lang="de"
-        data-question-heading
-        tabIndex={-1}
-        className={isReadOnly ? reviewTitle : questionTitle}
-      >
-        {question.question_de}
-      </h2>
-      {hasTranslation ? (
-        <ToggleSwitch
-          label={t('settings.studyTranslation')}
-          labelPosition="left"
-          layout="spread"
-          disabled={isPending}
-          checked={translationEnabled}
-          onChange={(event) => onTranslationChange(event.currentTarget.checked)}
-        />
+      {status !== undefined || hasTranslation ? (
+        <Flex align="center" justify="space-between" gap="16">
+          <div>{status}</div>
+          {hasTranslation ? (
+            <TranslationButton
+              isEnabled={translationEnabled}
+              isPending={isPending}
+              onChange={onTranslationChange}
+              t={t}
+            />
+          ) : null}
+        </Flex>
       ) : null}
-      {showTranslation ? (
-        <p lang="en" className={translationText}>
-          {question.question_en}
-        </p>
-      ) : null}
+      <div>
+        <h2
+          lang="de"
+          data-question-heading
+          tabIndex={-1}
+          className={isReadOnly ? reviewTitle : questionTitle}
+        >
+          {question.question_de}
+        </h2>
+        {hasTranslation ? (
+          <Reveal opened={showTranslation}>
+            <span lang="en" className={translationText}>
+              {question.question_en}
+            </span>
+          </Reveal>
+        ) : null}
+      </div>
       {image === undefined ? null : (
         <QuestionImage
           key={image.url}
@@ -137,6 +152,7 @@ export const QuestionContent = ({
         />
       )}
       <ChoiceGroup
+        animateFeedback={interaction.mode === 'study' && interaction.shouldAnnounceFeedback}
         density="compact"
         aria-label={question.question_de}
         labelProps={{ lang: 'de' }}

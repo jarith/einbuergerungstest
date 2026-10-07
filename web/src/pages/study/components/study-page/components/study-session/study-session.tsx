@@ -15,6 +15,7 @@ import { styles } from '../../study-page.styles'
 import { StudyCompletion } from '../study-completion/study-completion'
 import { StudyControls } from '../study-controls/study-controls'
 import { StudyHelp } from '../study-help/study-help'
+import { StudyQuestion } from '../study-question/study-question'
 
 export type StudySessionProps = Readonly<{ model: StudyModel }>
 
@@ -54,27 +55,33 @@ export const StudySession = reatomComponent(({ model }: StudySessionProps) => {
             />
           </Stack>
           <Stack gap="24" minWidth="0">
-            <QuestionStatusBadge status={model.status()} t={t} />
-            <QuestionContent
+            <StudyQuestion
               key={current.key}
-              loaded={current.loaded}
-              selectedOption={current.selectedOption}
-              interaction={{
-                mode: 'study',
-                hasJustLearned: current.hasJustLearned,
-                shouldAnnounceFeedback: model.flow.shouldAnnounceFeedback,
-                isPending: model.flow.pending(),
-                onSelect: wrap((option) => {
-                  void model.flow.answer(option)
-                }),
-              }}
-              language={model.localization.language()}
-              translationEnabled={model.translation().enabled}
-              onTranslationChange={wrap((enabled) => {
-                void model.flow.setTranslation(enabled)
-              })}
-              t={t}
-            />
+              motion={model.motion}
+              questionKey={current.key}
+              index={current.index}
+            >
+              <QuestionContent
+                status={<QuestionStatusBadge status={model.status()} t={t} />}
+                loaded={current.loaded}
+                selectedOption={current.selectedOption}
+                interaction={{
+                  mode: 'study',
+                  hasJustLearned: current.hasJustLearned,
+                  shouldAnnounceFeedback: model.flow.shouldAnnounceFeedback,
+                  isPending: model.flow.pending(),
+                  onSelect: wrap((option) => {
+                    void model.flow.answer(option)
+                  }),
+                }}
+                language={model.localization.language()}
+                translationEnabled={model.translation().enabled}
+                onTranslationChange={wrap((enabled) => {
+                  void model.flow.setTranslation(enabled)
+                })}
+                t={t}
+              />
+            </StudyQuestion>
             <StudyControls model={model} />
             {model.isGroup ? (
               <a className={styles.link} href={model.exitPath}>

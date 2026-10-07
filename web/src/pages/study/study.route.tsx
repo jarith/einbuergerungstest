@@ -77,6 +77,7 @@ export const createStudyRoutes = (parent: AppRoute) => {
               },
               null,
               session().answers,
+              session.motion,
             )
           : createStudyModel(
               resources,
@@ -95,6 +96,7 @@ export const createStudyRoutes = (parent: AppRoute) => {
               },
               groupId,
               groupSession().answers,
+              groupSession.motion,
             ),
     }
   }
@@ -124,6 +126,7 @@ export const createStudyRoutes = (parent: AppRoute) => {
           <RoutePage
             loader={self.loader}
             page={StudyPage}
+            keepPreviousData
             language={parent.loader.data()?.localization.language()}
           />
         ),
@@ -147,6 +150,7 @@ export const createStudyRoutes = (parent: AppRoute) => {
           <RoutePage
             loader={self.loader}
             page={StudyPage}
+            keepPreviousData
             language={parent.loader.data()?.localization.language()}
           />
         ),

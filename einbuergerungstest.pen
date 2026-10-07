@@ -5481,9 +5481,11 @@
                         {
                           "type": "frame",
                           "id": "QYpff",
-                          "name": "Question learning metadata",
+                          "name": "Question status and translation",
                           "width": "fill_container",
+                          "height": 48,
                           "gap": "$spacing-12",
+                          "justifyContent": "space_between",
                           "alignItems": "center",
                           "children": [
                             {
@@ -5511,6 +5513,45 @@
                                   "fontWeight": "600"
                                 }
                               ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "ZLll4",
+                              "name": "Translation icon button · on",
+                              "context": "lucide-react: import { Languages, Check } from \"lucide-react\". Languages size 28, strokeWidth 2, centered in 48 × 48 button. Translation visible; aria-pressed=true. Accessible name stays Show English translation. Tooltip: Hide English translation. Enter/Space toggles; focus remains on button. Hide in German UI and live mock tests. Persist existing translation preference. Keyboard focus: 2px $focus-ring outline with 2px gap.",
+                              "width": 48,
+                              "height": 48,
+                              "fill": "$accent",
+                              "cornerRadius": "$radius-control",
+                              "stroke": "$accent",
+                              "strokeWidth": 1,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon",
+                                  "id": "Lq0GT",
+                                  "name": "Translation · lucide-react Languages",
+                                  "width": 28,
+                                  "height": 28,
+                                  "icon": "languages",
+                                  "library": "lucide",
+                                  "fill": "$accent-foreground"
+                                },
+                                {
+                                  "type": "icon",
+                                  "id": "TxMBK",
+                                  "layoutPosition": "absolute",
+                                  "x": 36,
+                                  "y": 2,
+                                  "name": "Selected · lucide-react Check",
+                                  "width": 10,
+                                  "height": 10,
+                                  "icon": "check",
+                                  "library": "lucide",
+                                  "fill": "$accent-foreground"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -5526,55 +5567,6 @@
                           "fontFamily": "Inter",
                           "fontSize": "$font-size-28",
                           "fontWeight": "600"
-                        },
-                        {
-                          "type": "frame",
-                          "id": "ZLll4",
-                          "name": "Übersetzungsschalter",
-                          "context": "The full 44 px row is the translation switch target. Name: English translation. Expose on/off state; Space toggles it without moving focus. Hide this control in German UI and in live mock tests.",
-                          "width": "fill_container",
-                          "height": 44,
-                          "justifyContent": "space_between",
-                          "alignItems": "center",
-                          "children": [
-                            {
-                              "type": "text",
-                              "id": "o7E4Ws",
-                              "name": "Übersetzung Label",
-                              "fill": "$text",
-                              "content": "Show English translation",
-                              "lineHeight": 1.45,
-                              "fontFamily": "Inter",
-                              "fontSize": "$font-size-14",
-                              "fontWeight": "500"
-                            },
-                            {
-                              "type": "frame",
-                              "id": "if11M",
-                              "name": "Übersetzung Aktiv",
-                              "height": 28,
-                              "fill": "$dim-green",
-                              "cornerRadius": 6,
-                              "padding": [
-                                0,
-                                10
-                              ],
-                              "alignItems": "center",
-                              "children": [
-                                {
-                                  "type": "text",
-                                  "id": "VGMX5",
-                                  "name": "Übersetzung Aktiv text",
-                                  "fill": "$success",
-                                  "content": "ON",
-                                  "lineHeight": 1.45,
-                                  "fontFamily": "Inter",
-                                  "fontSize": "$font-size-12",
-                                  "fontWeight": "600"
-                                }
-                              ]
-                            }
-                          ]
                         },
                         {
                           "type": "text",
@@ -6361,35 +6353,85 @@
             },
             {
               "type": "frame",
-              "id": "ULPt5",
-              "name": "Question learning status",
-              "fill": "$surface-muted",
-              "cornerRadius": 4,
-              "gap": 5,
-              "padding": [
-                5,
-                10
-              ],
+              "id": "o3Jo0",
+              "name": "Question status and translation",
+              "width": "fill_container",
+              "height": 48,
+              "justifyContent": "space_between",
+              "alignItems": "center",
               "children": [
                 {
-                  "type": "icon",
-                  "id": "O31mHU",
-                  "name": "Learning status icon",
-                  "width": 14,
-                  "height": 14,
-                  "icon": "circle",
-                  "library": "lucide",
-                  "fill": "$text"
+                  "type": "frame",
+                  "id": "ULPt5",
+                  "name": "Question learning status",
+                  "fill": "$surface-muted",
+                  "cornerRadius": 4,
+                  "gap": 5,
+                  "padding": [
+                    5,
+                    10
+                  ],
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "O31mHU",
+                      "name": "Learning status icon",
+                      "width": 14,
+                      "height": 14,
+                      "icon": "circle",
+                      "library": "lucide",
+                      "fill": "$text"
+                    },
+                    {
+                      "type": "text",
+                      "id": "BPRfi",
+                      "name": "Learning status",
+                      "fill": "$text",
+                      "content": "Not started",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    }
+                  ]
                 },
                 {
-                  "type": "text",
-                  "id": "BPRfi",
-                  "name": "Learning status",
-                  "fill": "$text",
-                  "content": "Not started",
-                  "fontFamily": "Inter",
-                  "fontSize": 12,
-                  "fontWeight": "600"
+                  "type": "frame",
+                  "id": "eL5KS",
+                  "name": "Translation icon button · on",
+                  "context": "lucide-react: import { Languages, Check } from \"lucide-react\". Languages size 28, strokeWidth 2, centered in 48 × 48 button. Accessible name stays Show English translation; aria-pressed=true. Tooltip: Hide English translation. Enter/Space toggles English question and choices without moving focus. Hide in German UI and live mock tests. Persist existing translation preference. Keyboard focus: 2px $focus-ring outline with 2px gap.",
+                  "width": 48,
+                  "height": 48,
+                  "fill": "$accent",
+                  "cornerRadius": "$radius-control",
+                  "stroke": "$accent",
+                  "strokeWidth": 1,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "JPsCX",
+                      "name": "Translation · lucide-react Languages",
+                      "width": 28,
+                      "height": 28,
+                      "icon": "languages",
+                      "library": "lucide",
+                      "fill": "$accent-foreground"
+                    },
+                    {
+                      "type": "icon",
+                      "id": "odWIu",
+                      "layoutPosition": "absolute",
+                      "x": 36,
+                      "y": 2,
+                      "name": "Selected · lucide-react Check",
+                      "width": 10,
+                      "height": 10,
+                      "icon": "check",
+                      "library": "lucide",
+                      "fill": "$accent-foreground"
+                    }
+                  ]
                 }
               ]
             },
@@ -6405,55 +6447,6 @@
               "fontFamily": "Inter",
               "fontSize": "$font-size-28",
               "fontWeight": "600"
-            },
-            {
-              "type": "frame",
-              "id": "eL5KS",
-              "name": "Übersetzungsschalter",
-              "context": "The full 44 px row is the translation switch target. Name: English translation. Expose on/off state; Space toggles it without moving focus. Hide this control in German UI and in live mock tests.",
-              "width": "fill_container",
-              "height": 44,
-              "justifyContent": "space_between",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "WTy2I",
-                  "name": "Übersetzung Label",
-                  "fill": "$text",
-                  "content": "Show English translation",
-                  "lineHeight": 1.45,
-                  "fontFamily": "Inter",
-                  "fontSize": "$font-size-14",
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "frame",
-                  "id": "F2Wr0Q",
-                  "name": "Übersetzung Aktiv",
-                  "height": 28,
-                  "fill": "$dim-green",
-                  "cornerRadius": 6,
-                  "padding": [
-                    0,
-                    10
-                  ],
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "jPMXY",
-                      "name": "Übersetzung Aktiv text",
-                      "fill": "$success",
-                      "content": "ON",
-                      "lineHeight": 1.45,
-                      "fontFamily": "Inter",
-                      "fontSize": "$font-size-12",
-                      "fontWeight": "600"
-                    }
-                  ]
-                }
-              ]
             },
             {
               "type": "text",
@@ -7045,35 +7038,85 @@
             },
             {
               "type": "frame",
-              "id": "TJxRF",
-              "name": "Question learning status",
-              "fill": "$surface-muted",
-              "cornerRadius": 4,
-              "gap": 5,
-              "padding": [
-                5,
-                10
-              ],
+              "id": "o08x5o",
+              "name": "Question status and translation",
+              "width": "fill_container",
+              "height": 48,
+              "justifyContent": "space_between",
+              "alignItems": "center",
               "children": [
                 {
-                  "type": "icon",
-                  "id": "Q7Qb6",
-                  "name": "Learning status icon",
-                  "width": 14,
-                  "height": 14,
-                  "icon": "circle",
-                  "library": "lucide",
-                  "fill": "$text"
+                  "type": "frame",
+                  "id": "TJxRF",
+                  "name": "Question learning status",
+                  "fill": "$surface-muted",
+                  "cornerRadius": 4,
+                  "gap": 5,
+                  "padding": [
+                    5,
+                    10
+                  ],
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "Q7Qb6",
+                      "name": "Learning status icon",
+                      "width": 14,
+                      "height": 14,
+                      "icon": "circle",
+                      "library": "lucide",
+                      "fill": "$text"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Pt4af",
+                      "name": "Learning status",
+                      "fill": "$text",
+                      "content": "Not started",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    }
+                  ]
                 },
                 {
-                  "type": "text",
-                  "id": "Pt4af",
-                  "name": "Learning status",
-                  "fill": "$text",
-                  "content": "Not started",
-                  "fontFamily": "Inter",
-                  "fontSize": 12,
-                  "fontWeight": "600"
+                  "type": "frame",
+                  "id": "IgRAI",
+                  "name": "Translation icon button · on",
+                  "context": "lucide-react: import { Languages, Check } from \"lucide-react\". Languages size 28, strokeWidth 2, centered in 48 × 48 button. Translation visible; aria-pressed=true. Accessible name stays Show English translation. Tooltip: Hide English translation. Enter/Space toggles; focus remains on button. Hide in German UI and live mock tests. Persist existing translation preference. Keyboard focus: 2px $focus-ring outline with 2px gap.",
+                  "width": 48,
+                  "height": 48,
+                  "fill": "$accent",
+                  "cornerRadius": "$radius-control",
+                  "stroke": "$accent",
+                  "strokeWidth": 1,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "aE5Yl",
+                      "name": "Translation · lucide-react Languages",
+                      "width": 28,
+                      "height": 28,
+                      "icon": "languages",
+                      "library": "lucide",
+                      "fill": "$accent-foreground"
+                    },
+                    {
+                      "type": "icon",
+                      "id": "y0PYIp",
+                      "layoutPosition": "absolute",
+                      "x": 36,
+                      "y": 2,
+                      "name": "Selected · lucide-react Check",
+                      "width": 10,
+                      "height": 10,
+                      "icon": "check",
+                      "library": "lucide",
+                      "fill": "$accent-foreground"
+                    }
+                  ]
                 }
               ]
             },
@@ -7089,55 +7132,6 @@
               "fontFamily": "Inter",
               "fontSize": "$font-size-24",
               "fontWeight": "600"
-            },
-            {
-              "type": "frame",
-              "id": "IgRAI",
-              "name": "Übersetzungsschalter",
-              "context": "The full 44 px row is the translation switch target. Name: English translation. Expose on/off state; Space toggles it without moving focus. Hide this control in German UI and in live mock tests.",
-              "width": "fill_container",
-              "height": 44,
-              "justifyContent": "space_between",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "kXKge",
-                  "name": "Übersetzung Label",
-                  "fill": "$text",
-                  "content": "Show English translation",
-                  "lineHeight": 1.45,
-                  "fontFamily": "Inter",
-                  "fontSize": "$font-size-14",
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "frame",
-                  "id": "MUxX8",
-                  "name": "Übersetzung Aktiv",
-                  "height": 28,
-                  "fill": "$dim-green",
-                  "cornerRadius": 6,
-                  "padding": [
-                    0,
-                    10
-                  ],
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "In6Sa",
-                      "name": "Übersetzung Aktiv text",
-                      "fill": "$success",
-                      "content": "ON",
-                      "lineHeight": 1.45,
-                      "fontFamily": "Inter",
-                      "fontSize": "$font-size-12",
-                      "fontWeight": "600"
-                    }
-                  ]
-                }
-              ]
             },
             {
               "type": "text",
@@ -8243,9 +8237,11 @@
                         {
                           "type": "frame",
                           "id": "d8RCPd",
-                          "name": "Question learning metadata",
+                          "name": "Question status and translation",
                           "width": "fill_container",
+                          "height": 48,
                           "gap": "$spacing-12",
+                          "justifyContent": "space_between",
                           "alignItems": "center",
                           "children": [
                             {
@@ -8288,6 +8284,45 @@
                               "fontFamily": "Inter",
                               "fontSize": "$font-size-14",
                               "fontWeight": "600"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "MQS17",
+                              "name": "Translation icon button · on",
+                              "context": "lucide-react: import { Languages, Check } from \"lucide-react\". Languages size 28, strokeWidth 2, centered in 48 × 48 button. Accessible name stays Show English translation; aria-pressed=true. Tooltip: Hide English translation. Enter/Space toggles English question and choices without moving focus. Hide in German UI and live mock tests. Persist existing translation preference. Keyboard focus: 2px $focus-ring outline with 2px gap.",
+                              "width": 48,
+                              "height": 48,
+                              "fill": "$accent",
+                              "cornerRadius": "$radius-control",
+                              "stroke": "$accent",
+                              "strokeWidth": 1,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon",
+                                  "id": "Ohdb0",
+                                  "name": "Translation · lucide-react Languages",
+                                  "width": 28,
+                                  "height": 28,
+                                  "icon": "languages",
+                                  "library": "lucide",
+                                  "fill": "$accent-foreground"
+                                },
+                                {
+                                  "type": "icon",
+                                  "id": "lCGYC",
+                                  "layoutPosition": "absolute",
+                                  "x": 36,
+                                  "y": 2,
+                                  "name": "Selected · lucide-react Check",
+                                  "width": 10,
+                                  "height": 10,
+                                  "icon": "check",
+                                  "library": "lucide",
+                                  "fill": "$accent-foreground"
+                                }
+                              ]
                             }
                           ]
                         },
@@ -8303,55 +8338,6 @@
                           "fontFamily": "Inter",
                           "fontSize": "$font-size-28",
                           "fontWeight": "600"
-                        },
-                        {
-                          "type": "frame",
-                          "id": "MQS17",
-                          "name": "Übersetzungsschalter",
-                          "context": "The full 44 px row is the translation switch target. Name: English translation. Expose on/off state; Space toggles it without moving focus. Hide this control in German UI and in live mock tests.",
-                          "width": "fill_container",
-                          "height": 44,
-                          "justifyContent": "space_between",
-                          "alignItems": "center",
-                          "children": [
-                            {
-                              "type": "text",
-                              "id": "wOHF0",
-                              "name": "Übersetzung Label",
-                              "fill": "$text",
-                              "content": "Show English translation",
-                              "lineHeight": 1.45,
-                              "fontFamily": "Inter",
-                              "fontSize": "$font-size-14",
-                              "fontWeight": "500"
-                            },
-                            {
-                              "type": "frame",
-                              "id": "J8lJPp",
-                              "name": "Übersetzung Aktiv",
-                              "height": 28,
-                              "fill": "$dim-green",
-                              "cornerRadius": 6,
-                              "padding": [
-                                0,
-                                10
-                              ],
-                              "alignItems": "center",
-                              "children": [
-                                {
-                                  "type": "text",
-                                  "id": "khjoQ",
-                                  "name": "Übersetzung Aktiv text",
-                                  "fill": "$success",
-                                  "content": "ON",
-                                  "lineHeight": 1.45,
-                                  "fontFamily": "Inter",
-                                  "fontSize": "$font-size-12",
-                                  "fontWeight": "600"
-                                }
-                              ]
-                            }
-                          ]
                         },
                         {
                           "type": "text",
@@ -8752,7 +8738,7 @@
                           "name": "Antwort Rückmeldung",
                           "context": "Not rendered in Study. Answer options keep correctness highlighting and icons. Announce Correct, Incorrect, or Correct — now marked Learned once via a visually hidden polite live region. No visible feedback notice or repeated correct-answer translation.",
                           "enabled": false,
-                          "width": "fill_container(720)",
+                          "width": 720,
                           "fill": "$dim-red",
                           "cornerRadius": "$radius-control",
                           "gap": "$spacing-12",
@@ -9088,35 +9074,85 @@
             },
             {
               "type": "frame",
-              "id": "cDXl9",
-              "name": "Question learning status",
-              "fill": "$dim-red",
-              "cornerRadius": 4,
-              "gap": 5,
-              "padding": [
-                5,
-                10
-              ],
+              "id": "BYrKz",
+              "name": "Question status and translation",
+              "width": "fill_container",
+              "height": 48,
+              "justifyContent": "space_between",
+              "alignItems": "center",
               "children": [
                 {
-                  "type": "icon",
-                  "id": "cdA8j",
-                  "name": "Learning status icon",
-                  "width": 14,
-                  "height": 14,
-                  "icon": "circle-alert",
-                  "library": "lucide",
-                  "fill": "$danger"
+                  "type": "frame",
+                  "id": "cDXl9",
+                  "name": "Question learning status",
+                  "fill": "$dim-red",
+                  "cornerRadius": 4,
+                  "gap": 5,
+                  "padding": [
+                    5,
+                    10
+                  ],
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "cdA8j",
+                      "name": "Learning status icon",
+                      "width": 14,
+                      "height": 14,
+                      "icon": "circle-alert",
+                      "library": "lucide",
+                      "fill": "$danger"
+                    },
+                    {
+                      "type": "text",
+                      "id": "un8aZ",
+                      "name": "Learning status",
+                      "fill": "$text",
+                      "content": "Needs review",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    }
+                  ]
                 },
                 {
-                  "type": "text",
-                  "id": "un8aZ",
-                  "name": "Learning status",
-                  "fill": "$text",
-                  "content": "Needs review",
-                  "fontFamily": "Inter",
-                  "fontSize": 12,
-                  "fontWeight": "600"
+                  "type": "frame",
+                  "id": "L9mO8",
+                  "name": "Translation icon button · on",
+                  "context": "lucide-react: import { Languages, Check } from \"lucide-react\". Languages size 28, strokeWidth 2, centered in 48 × 48 button. Accessible name stays Show English translation; aria-pressed=true. Tooltip: Hide English translation. Enter/Space toggles English question and choices without moving focus. Hide in German UI and live mock tests. Persist existing translation preference. Keyboard focus: 2px $focus-ring outline with 2px gap.",
+                  "width": 48,
+                  "height": 48,
+                  "fill": "$accent",
+                  "cornerRadius": "$radius-control",
+                  "stroke": "$accent",
+                  "strokeWidth": 1,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "PbeyK",
+                      "name": "Translation · lucide-react Languages",
+                      "width": 28,
+                      "height": 28,
+                      "icon": "languages",
+                      "library": "lucide",
+                      "fill": "$accent-foreground"
+                    },
+                    {
+                      "type": "icon",
+                      "id": "nCjE0",
+                      "layoutPosition": "absolute",
+                      "x": 36,
+                      "y": 2,
+                      "name": "Selected · lucide-react Check",
+                      "width": 10,
+                      "height": 10,
+                      "icon": "check",
+                      "library": "lucide",
+                      "fill": "$accent-foreground"
+                    }
+                  ]
                 }
               ]
             },
@@ -9132,55 +9168,6 @@
               "fontFamily": "Inter",
               "fontSize": "$font-size-24",
               "fontWeight": "600"
-            },
-            {
-              "type": "frame",
-              "id": "L9mO8",
-              "name": "Übersetzungsschalter",
-              "context": "The full 44 px row is the translation switch target. Name: English translation. Expose on/off state; Space toggles it without moving focus. Hide this control in German UI and in live mock tests.",
-              "width": "fill_container",
-              "height": 44,
-              "justifyContent": "space_between",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "ZfoI8",
-                  "name": "Übersetzung Label",
-                  "fill": "$text",
-                  "content": "Show English translation",
-                  "lineHeight": 1.45,
-                  "fontFamily": "Inter",
-                  "fontSize": "$font-size-14",
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "frame",
-                  "id": "L04DT",
-                  "name": "Übersetzung Aktiv",
-                  "height": 28,
-                  "fill": "$dim-green",
-                  "cornerRadius": 6,
-                  "padding": [
-                    0,
-                    10
-                  ],
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "CsTJK",
-                      "name": "Übersetzung Aktiv text",
-                      "fill": "$success",
-                      "content": "ON",
-                      "lineHeight": 1.45,
-                      "fontFamily": "Inter",
-                      "fontSize": "$font-size-12",
-                      "fontWeight": "600"
-                    }
-                  ]
-                }
-              ]
             },
             {
               "type": "text",
@@ -9601,7 +9588,7 @@
               "name": "Antwort Rückmeldung",
               "context": "Not rendered in Study. Answer options keep correctness highlighting and icons. Announce Correct, Incorrect, or Correct — now marked Learned once via a visually hidden polite live region. No visible feedback notice or repeated correct-answer translation.",
               "enabled": false,
-              "width": "fill_container(350)",
+              "width": 350,
               "fill": "$dim-red",
               "cornerRadius": "$radius-control",
               "gap": "$spacing-12",
@@ -10428,35 +10415,72 @@
                 },
                 {
                   "type": "frame",
-                  "id": "HBK0V",
-                  "name": "Question learning status",
-                  "fill": "$surface-muted",
-                  "cornerRadius": 4,
-                  "gap": 5,
-                  "padding": [
-                    5,
-                    10
-                  ],
+                  "id": "XvdMf",
+                  "name": "Question status and translation",
+                  "width": "fill_container",
+                  "height": 48,
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
                   "children": [
                     {
-                      "type": "icon",
-                      "id": "Gk6kk",
-                      "name": "Learning status icon",
-                      "width": 14,
-                      "height": 14,
-                      "icon": "circle",
-                      "library": "lucide",
-                      "fill": "$text"
+                      "type": "frame",
+                      "id": "HBK0V",
+                      "name": "Question learning status",
+                      "fill": "$surface-muted",
+                      "cornerRadius": 4,
+                      "gap": 5,
+                      "padding": [
+                        5,
+                        10
+                      ],
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "Gk6kk",
+                          "name": "Learning status icon",
+                          "width": 14,
+                          "height": 14,
+                          "icon": "circle",
+                          "library": "lucide",
+                          "fill": "$text"
+                        },
+                        {
+                          "type": "text",
+                          "id": "vdAGQ",
+                          "name": "Learning status",
+                          "fill": "$text",
+                          "content": "Not started",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        }
+                      ]
                     },
                     {
-                      "type": "text",
-                      "id": "vdAGQ",
-                      "name": "Learning status",
-                      "fill": "$text",
-                      "content": "Not started",
-                      "fontFamily": "Inter",
-                      "fontSize": 12,
-                      "fontWeight": "600"
+                      "type": "frame",
+                      "id": "TBj6j",
+                      "name": "Translation icon button · off",
+                      "context": "lucide-react: import { Languages, Check } from \"lucide-react\". Languages size 28, strokeWidth 2, centered in 48 × 48 button. Accessible name stays Show English translation; aria-pressed=false. Tooltip: Show English translation. Enter/Space toggles English question and choices without moving focus. Hide in German UI and live mock tests. Persist existing translation preference. Keyboard focus: 2px $focus-ring outline with 2px gap.",
+                      "width": 48,
+                      "height": 48,
+                      "fill": "$surface",
+                      "cornerRadius": "$radius-control",
+                      "stroke": "$control-border",
+                      "strokeWidth": 1,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "Vy9Up",
+                          "name": "Translation · lucide-react Languages",
+                          "width": 28,
+                          "height": 28,
+                          "icon": "languages",
+                          "library": "lucide",
+                          "fill": "$text"
+                        }
+                      ]
                     }
                   ]
                 },
@@ -10480,55 +10504,6 @@
                       "fontFamily": "Inter",
                       "fontSize": "$font-size-28",
                       "fontWeight": "600"
-                    },
-                    {
-                      "type": "frame",
-                      "id": "TBj6j",
-                      "name": "Übersetzungsschalter",
-                      "context": "The full 44 px row is the translation switch target. Name: English translation. Expose on/off state; Space toggles it without moving focus. Hide this control in German UI and in live mock tests.",
-                      "width": "fill_container",
-                      "height": 44,
-                      "justifyContent": "space_between",
-                      "alignItems": "center",
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "q34iuu",
-                          "name": "Übersetzung Label",
-                          "fill": "$text",
-                          "content": "Show English translation",
-                          "lineHeight": 1.45,
-                          "fontFamily": "Inter",
-                          "fontSize": "$font-size-14",
-                          "fontWeight": "500"
-                        },
-                        {
-                          "type": "frame",
-                          "id": "dhaKW",
-                          "name": "Übersetzung Inaktiv",
-                          "height": 28,
-                          "fill": "$surface-muted",
-                          "cornerRadius": 6,
-                          "padding": [
-                            0,
-                            10
-                          ],
-                          "alignItems": "center",
-                          "children": [
-                            {
-                              "type": "text",
-                              "id": "BVUfT",
-                              "name": "Übersetzung Inaktiv text",
-                              "fill": "$text",
-                              "content": "OFF",
-                              "lineHeight": 1.45,
-                              "fontFamily": "Inter",
-                              "fontSize": "$font-size-12",
-                              "fontWeight": "600"
-                            }
-                          ]
-                        }
-                      ]
                     },
                     {
                       "type": "frame",
@@ -11293,35 +11268,72 @@
             },
             {
               "type": "frame",
-              "id": "CCq9F",
-              "name": "Question learning status",
-              "fill": "$surface-muted",
-              "cornerRadius": 4,
-              "gap": 5,
-              "padding": [
-                5,
-                10
-              ],
+              "id": "IMBAJ",
+              "name": "Question status and translation",
+              "width": "fill_container",
+              "height": 48,
+              "justifyContent": "space_between",
+              "alignItems": "center",
               "children": [
                 {
-                  "type": "icon",
-                  "id": "ON7ud",
-                  "name": "Learning status icon",
-                  "width": 14,
-                  "height": 14,
-                  "icon": "circle",
-                  "library": "lucide",
-                  "fill": "$text"
+                  "type": "frame",
+                  "id": "CCq9F",
+                  "name": "Question learning status",
+                  "fill": "$surface-muted",
+                  "cornerRadius": 4,
+                  "gap": 5,
+                  "padding": [
+                    5,
+                    10
+                  ],
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "ON7ud",
+                      "name": "Learning status icon",
+                      "width": 14,
+                      "height": 14,
+                      "icon": "circle",
+                      "library": "lucide",
+                      "fill": "$text"
+                    },
+                    {
+                      "type": "text",
+                      "id": "u1yCA",
+                      "name": "Learning status",
+                      "fill": "$text",
+                      "content": "Not started",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    }
+                  ]
                 },
                 {
-                  "type": "text",
-                  "id": "u1yCA",
-                  "name": "Learning status",
-                  "fill": "$text",
-                  "content": "Not started",
-                  "fontFamily": "Inter",
-                  "fontSize": 12,
-                  "fontWeight": "600"
+                  "type": "frame",
+                  "id": "JL33w",
+                  "name": "Translation icon button · off",
+                  "context": "lucide-react: import { Languages, Check } from \"lucide-react\". Languages size 28, strokeWidth 2, centered in 48 × 48 button. Accessible name stays Show English translation; aria-pressed=false. Tooltip: Show English translation. Enter/Space toggles English question and choices without moving focus. Hide in German UI and live mock tests. Persist existing translation preference. Keyboard focus: 2px $focus-ring outline with 2px gap.",
+                  "width": 48,
+                  "height": 48,
+                  "fill": "$surface",
+                  "cornerRadius": "$radius-control",
+                  "stroke": "$control-border",
+                  "strokeWidth": 1,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "m376Y",
+                      "name": "Translation · lucide-react Languages",
+                      "width": 28,
+                      "height": 28,
+                      "icon": "languages",
+                      "library": "lucide",
+                      "fill": "$text"
+                    }
+                  ]
                 }
               ]
             },
@@ -11337,55 +11349,6 @@
               "fontFamily": "Inter",
               "fontSize": "$font-size-28",
               "fontWeight": "600"
-            },
-            {
-              "type": "frame",
-              "id": "JL33w",
-              "name": "Übersetzungsschalter",
-              "context": "The full 44 px row is the translation switch target. Name: English translation. Expose on/off state; Space toggles it without moving focus. Hide this control in German UI and in live mock tests.",
-              "width": "fill_container",
-              "height": 44,
-              "justifyContent": "space_between",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "DgIcw",
-                  "name": "Übersetzung Label",
-                  "fill": "$text",
-                  "content": "Show English translation",
-                  "lineHeight": 1.45,
-                  "fontFamily": "Inter",
-                  "fontSize": "$font-size-14",
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "frame",
-                  "id": "o2iYr",
-                  "name": "Übersetzung Inaktiv",
-                  "height": 28,
-                  "fill": "$surface-muted",
-                  "cornerRadius": 6,
-                  "padding": [
-                    0,
-                    10
-                  ],
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "dANO7",
-                      "name": "Übersetzung Inaktiv text",
-                      "fill": "$text",
-                      "content": "OFF",
-                      "lineHeight": 1.45,
-                      "fontFamily": "Inter",
-                      "fontSize": "$font-size-12",
-                      "fontWeight": "600"
-                    }
-                  ]
-                }
-              ]
             },
             {
               "type": "frame",
@@ -11958,35 +11921,72 @@
             },
             {
               "type": "frame",
-              "id": "DSIln",
-              "name": "Question learning status",
-              "fill": "$surface-muted",
-              "cornerRadius": 4,
-              "gap": 5,
-              "padding": [
-                5,
-                10
-              ],
+              "id": "j7v7W",
+              "name": "Question status and translation",
+              "width": "fill_container",
+              "height": 48,
+              "justifyContent": "space_between",
+              "alignItems": "center",
               "children": [
                 {
-                  "type": "icon",
-                  "id": "nilUO",
-                  "name": "Learning status icon",
-                  "width": 14,
-                  "height": 14,
-                  "icon": "circle",
-                  "library": "lucide",
-                  "fill": "$text"
+                  "type": "frame",
+                  "id": "DSIln",
+                  "name": "Question learning status",
+                  "fill": "$surface-muted",
+                  "cornerRadius": 4,
+                  "gap": 5,
+                  "padding": [
+                    5,
+                    10
+                  ],
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "nilUO",
+                      "name": "Learning status icon",
+                      "width": 14,
+                      "height": 14,
+                      "icon": "circle",
+                      "library": "lucide",
+                      "fill": "$text"
+                    },
+                    {
+                      "type": "text",
+                      "id": "xCsEl",
+                      "name": "Learning status",
+                      "fill": "$text",
+                      "content": "Not started",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    }
+                  ]
                 },
                 {
-                  "type": "text",
-                  "id": "xCsEl",
-                  "name": "Learning status",
-                  "fill": "$text",
-                  "content": "Not started",
-                  "fontFamily": "Inter",
-                  "fontSize": 12,
-                  "fontWeight": "600"
+                  "type": "frame",
+                  "id": "OWrQa",
+                  "name": "Translation icon button · off",
+                  "context": "lucide-react: import { Languages, Check } from \"lucide-react\". Languages size 28, strokeWidth 2, centered in 48 × 48 button. Accessible name stays Show English translation; aria-pressed=false. Tooltip: Show English translation. Enter/Space toggles English question and choices without moving focus. Hide in German UI and live mock tests. Persist existing translation preference. Keyboard focus: 2px $focus-ring outline with 2px gap.",
+                  "width": 48,
+                  "height": 48,
+                  "fill": "$surface",
+                  "cornerRadius": "$radius-control",
+                  "stroke": "$control-border",
+                  "strokeWidth": 1,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "RkqE9",
+                      "name": "Translation · lucide-react Languages",
+                      "width": 28,
+                      "height": 28,
+                      "icon": "languages",
+                      "library": "lucide",
+                      "fill": "$text"
+                    }
+                  ]
                 }
               ]
             },
@@ -12002,55 +12002,6 @@
               "fontFamily": "Inter",
               "fontSize": "$font-size-24",
               "fontWeight": "600"
-            },
-            {
-              "type": "frame",
-              "id": "OWrQa",
-              "name": "Übersetzungsschalter",
-              "context": "The full 44 px row is the translation switch target. Name: English translation. Expose on/off state; Space toggles it without moving focus. Hide this control in German UI and in live mock tests.",
-              "width": "fill_container",
-              "height": 44,
-              "justifyContent": "space_between",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "AUCgY",
-                  "name": "Übersetzung Label",
-                  "fill": "$text",
-                  "content": "Show English translation",
-                  "lineHeight": 1.45,
-                  "fontFamily": "Inter",
-                  "fontSize": "$font-size-14",
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "frame",
-                  "id": "AdeEj",
-                  "name": "Übersetzung Inaktiv",
-                  "height": 28,
-                  "fill": "$surface-muted",
-                  "cornerRadius": 6,
-                  "padding": [
-                    0,
-                    10
-                  ],
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "e16sV",
-                      "name": "Übersetzung Inaktiv text",
-                      "fill": "$text",
-                      "content": "OFF",
-                      "lineHeight": 1.45,
-                      "fontFamily": "Inter",
-                      "fontSize": "$font-size-12",
-                      "fontWeight": "600"
-                    }
-                  ]
-                }
-              ]
             },
             {
               "type": "frame",
@@ -17998,6 +17949,56 @@
                           ]
                         },
                         {
+                          "type": "frame",
+                          "id": "k2lvY",
+                          "name": "Translation action below question progress",
+                          "width": "fill_container",
+                          "height": 48,
+                          "justifyContent": "end",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "CoT7Y",
+                              "name": "Translation icon button · on",
+                              "context": "lucide-react: import { Languages, Check } from \"lucide-react\". Languages size 28, strokeWidth 2, centered in 48 × 48 button. Accessible name stays Show English translation; aria-pressed=true. Tooltip: Hide English translation. Enter/Space toggles English question and choices without moving focus. Hide in German UI and live mock tests. Persist existing translation preference. Keyboard focus: 2px $focus-ring outline with 2px gap.",
+                              "width": 48,
+                              "height": 48,
+                              "fill": "$accent",
+                              "cornerRadius": "$radius-control",
+                              "stroke": "$accent",
+                              "strokeWidth": 1,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon",
+                                  "id": "WYEfm",
+                                  "name": "Translation · lucide-react Languages",
+                                  "width": 28,
+                                  "height": 28,
+                                  "icon": "languages",
+                                  "library": "lucide",
+                                  "fill": "$accent-foreground"
+                                },
+                                {
+                                  "type": "icon",
+                                  "id": "lrxgD",
+                                  "layoutPosition": "absolute",
+                                  "x": 36,
+                                  "y": 2,
+                                  "name": "Selected · lucide-react Check",
+                                  "width": 10,
+                                  "height": 10,
+                                  "icon": "check",
+                                  "library": "lucide",
+                                  "fill": "$accent-foreground"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
                           "type": "text",
                           "id": "I8QsT5",
                           "name": "Fragetitel",
@@ -18009,54 +18010,6 @@
                           "fontFamily": "Inter",
                           "fontSize": "$font-size-28",
                           "fontWeight": "600"
-                        },
-                        {
-                          "type": "frame",
-                          "id": "CoT7Y",
-                          "name": "Übersetzungsschalter",
-                          "context": "The full 44 px row is the translation switch target. Accessible name: English translation; current state on. Space toggles without moving focus. Show or hide English alongside German question and choices. Hide in German UI and live mock tests.",
-                          "width": "fill_container",
-                          "height": 44,
-                          "justifyContent": "space_between",
-                          "alignItems": "center",
-                          "children": [
-                            {
-                              "type": "text",
-                              "id": "J1owkw",
-                              "name": "English translation label",
-                              "fill": "$text",
-                              "content": "Show English translation",
-                              "lineHeight": 1.45,
-                              "fontFamily": "Inter",
-                              "fontSize": "$font-size-14",
-                              "fontWeight": "500"
-                            },
-                            {
-                              "type": "frame",
-                              "id": "N0Vugt",
-                              "name": "Übersetzung Aktiv",
-                              "height": 28,
-                              "fill": "$dim-green",
-                              "cornerRadius": 6,
-                              "padding": [
-                                0,
-                                10
-                              ],
-                              "alignItems": "center",
-                              "children": [
-                                {
-                                  "type": "text",
-                                  "id": "zNAOv",
-                                  "name": "Übersetzung Aktiv text",
-                                  "fill": "$success",
-                                  "content": "ON",
-                                  "fontFamily": "Inter",
-                                  "fontSize": "$font-size-12",
-                                  "fontWeight": "600"
-                                }
-                              ]
-                            }
-                          ]
                         },
                         {
                           "type": "text",
@@ -19256,6 +19209,56 @@
                   ]
                 },
                 {
+                  "type": "frame",
+                  "id": "sUBbk",
+                  "name": "Translation action below question progress",
+                  "width": "fill_container",
+                  "height": 48,
+                  "justifyContent": "end",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "aLUEA",
+                      "name": "Translation icon button · on",
+                      "context": "lucide-react: import { Languages, Check } from \"lucide-react\". Languages size 28, strokeWidth 2, centered in 48 × 48 button. Accessible name stays Show English translation; aria-pressed=true. Tooltip: Hide English translation. Enter/Space toggles English question and choices without moving focus. Hide in German UI and live mock tests. Persist existing translation preference. Keyboard focus: 2px $focus-ring outline with 2px gap.",
+                      "width": 48,
+                      "height": 48,
+                      "fill": "$accent",
+                      "cornerRadius": "$radius-control",
+                      "stroke": "$accent",
+                      "strokeWidth": 1,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "jWegE",
+                          "name": "Translation · lucide-react Languages",
+                          "width": 28,
+                          "height": 28,
+                          "icon": "languages",
+                          "library": "lucide",
+                          "fill": "$accent-foreground"
+                        },
+                        {
+                          "type": "icon",
+                          "id": "I5il2",
+                          "layoutPosition": "absolute",
+                          "x": 36,
+                          "y": 2,
+                          "name": "Selected · lucide-react Check",
+                          "width": 10,
+                          "height": 10,
+                          "icon": "check",
+                          "library": "lucide",
+                          "fill": "$accent-foreground"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
                   "type": "text",
                   "id": "ug8AQ",
                   "name": "Fragetitel",
@@ -19267,54 +19270,6 @@
                   "fontFamily": "Inter",
                   "fontSize": "$font-size-28",
                   "fontWeight": "600"
-                },
-                {
-                  "type": "frame",
-                  "id": "aLUEA",
-                  "name": "Übersetzungsschalter",
-                  "context": "The full 44 px row is the translation switch target. Accessible name: English translation; current state on. Space toggles without moving focus. Show or hide English alongside German question and choices. Hide in German UI and live mock tests.",
-                  "width": "fill_container",
-                  "height": 44,
-                  "justifyContent": "space_between",
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "EMgYj",
-                      "name": "English translation label",
-                      "fill": "$text",
-                      "content": "Show English translation",
-                      "lineHeight": 1.45,
-                      "fontFamily": "Inter",
-                      "fontSize": "$font-size-14",
-                      "fontWeight": "500"
-                    },
-                    {
-                      "type": "frame",
-                      "id": "QfF0N",
-                      "name": "Übersetzung Aktiv",
-                      "height": 28,
-                      "fill": "$dim-green",
-                      "cornerRadius": 6,
-                      "padding": [
-                        0,
-                        10
-                      ],
-                      "alignItems": "center",
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "IL2mo",
-                          "name": "Übersetzung Aktiv text",
-                          "fill": "$success",
-                          "content": "ON",
-                          "fontFamily": "Inter",
-                          "fontSize": "$font-size-12",
-                          "fontWeight": "600"
-                        }
-                      ]
-                    }
-                  ]
                 },
                 {
                   "type": "text",
@@ -20161,6 +20116,56 @@
                   ]
                 },
                 {
+                  "type": "frame",
+                  "id": "sCMPC",
+                  "name": "Translation action below question progress",
+                  "width": "fill_container",
+                  "height": 48,
+                  "justifyContent": "end",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "m7ooK1",
+                      "name": "Translation icon button · on",
+                      "context": "lucide-react: import { Languages, Check } from \"lucide-react\". Languages size 28, strokeWidth 2, centered in 48 × 48 button. Accessible name stays Show English translation; aria-pressed=true. Tooltip: Hide English translation. Enter/Space toggles English question and choices without moving focus. Hide in German UI and live mock tests. Persist existing translation preference. Keyboard focus: 2px $focus-ring outline with 2px gap.",
+                      "width": 48,
+                      "height": 48,
+                      "fill": "$accent",
+                      "cornerRadius": "$radius-control",
+                      "stroke": "$accent",
+                      "strokeWidth": 1,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "S03gJ",
+                          "name": "Translation · lucide-react Languages",
+                          "width": 28,
+                          "height": 28,
+                          "icon": "languages",
+                          "library": "lucide",
+                          "fill": "$accent-foreground"
+                        },
+                        {
+                          "type": "icon",
+                          "id": "uoCTe",
+                          "layoutPosition": "absolute",
+                          "x": 36,
+                          "y": 2,
+                          "name": "Selected · lucide-react Check",
+                          "width": 10,
+                          "height": 10,
+                          "icon": "check",
+                          "library": "lucide",
+                          "fill": "$accent-foreground"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
                   "type": "text",
                   "id": "C4ht8",
                   "name": "Fragetitel",
@@ -20172,54 +20177,6 @@
                   "fontFamily": "Inter",
                   "fontSize": "$font-size-24",
                   "fontWeight": "600"
-                },
-                {
-                  "type": "frame",
-                  "id": "m7ooK1",
-                  "name": "Übersetzungsschalter",
-                  "context": "The full 44 px row is the translation switch target. Accessible name: English translation; current state on. Space toggles without moving focus. Show or hide English alongside German question and choices. Hide in German UI and live mock tests.",
-                  "width": "fill_container",
-                  "height": 44,
-                  "justifyContent": "space_between",
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "HBK3s",
-                      "name": "English translation label",
-                      "fill": "$text",
-                      "content": "Show English translation",
-                      "lineHeight": 1.45,
-                      "fontFamily": "Inter",
-                      "fontSize": "$font-size-14",
-                      "fontWeight": "500"
-                    },
-                    {
-                      "type": "frame",
-                      "id": "v2xu2R",
-                      "name": "Übersetzung Aktiv",
-                      "height": 28,
-                      "fill": "$dim-green",
-                      "cornerRadius": 6,
-                      "padding": [
-                        0,
-                        10
-                      ],
-                      "alignItems": "center",
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "GmqJd",
-                          "name": "Übersetzung Aktiv text",
-                          "fill": "$success",
-                          "content": "ON",
-                          "fontFamily": "Inter",
-                          "fontSize": "$font-size-12",
-                          "fontWeight": "600"
-                        }
-                      ]
-                    }
-                  ]
                 },
                 {
                   "type": "text",
@@ -44511,35 +44468,72 @@
             },
             {
               "type": "frame",
-              "id": "dYp35",
-              "name": "Question learning status",
-              "fill": "$surface-muted",
-              "cornerRadius": 4,
-              "gap": 5,
-              "padding": [
-                5,
-                10
-              ],
+              "id": "KxRHv",
+              "name": "Question status and translation",
+              "width": "fill_container",
+              "height": 48,
+              "justifyContent": "space_between",
+              "alignItems": "center",
               "children": [
                 {
-                  "type": "icon",
-                  "id": "L9U7YM",
-                  "name": "Learning status icon",
-                  "width": 14,
-                  "height": 14,
-                  "icon": "circle",
-                  "library": "lucide",
-                  "fill": "$text"
+                  "type": "frame",
+                  "id": "dYp35",
+                  "name": "Question learning status",
+                  "fill": "$surface-muted",
+                  "cornerRadius": 4,
+                  "gap": 5,
+                  "padding": [
+                    5,
+                    10
+                  ],
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "L9U7YM",
+                      "name": "Learning status icon",
+                      "width": 14,
+                      "height": 14,
+                      "icon": "circle",
+                      "library": "lucide",
+                      "fill": "$text"
+                    },
+                    {
+                      "type": "text",
+                      "id": "hyQuB",
+                      "name": "Learning status",
+                      "fill": "$text",
+                      "content": "Not started",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    }
+                  ]
                 },
                 {
-                  "type": "text",
-                  "id": "hyQuB",
-                  "name": "Learning status",
-                  "fill": "$text",
-                  "content": "Not started",
-                  "fontFamily": "Inter",
-                  "fontSize": 12,
-                  "fontWeight": "600"
+                  "type": "frame",
+                  "id": "Oph3g",
+                  "name": "Translation icon button · off",
+                  "context": "lucide-react: import { Languages, Check } from \"lucide-react\". Languages size 28, strokeWidth 2, centered in 48 × 48 button. Accessible name stays Show English translation; aria-pressed=false. Tooltip: Show English translation. Enter/Space toggles English question and choices without moving focus. Hide in German UI and live mock tests. Persist existing translation preference. Keyboard focus: 2px $focus-ring outline with 2px gap.",
+                  "width": 48,
+                  "height": 48,
+                  "fill": "$surface",
+                  "cornerRadius": "$radius-control",
+                  "stroke": "$control-border",
+                  "strokeWidth": 1,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "tPkoy",
+                      "name": "Translation · lucide-react Languages",
+                      "width": 28,
+                      "height": 28,
+                      "icon": "languages",
+                      "library": "lucide",
+                      "fill": "$text"
+                    }
+                  ]
                 }
               ]
             },
@@ -44555,55 +44549,6 @@
               "fontFamily": "Inter",
               "fontSize": "$font-size-24",
               "fontWeight": "600"
-            },
-            {
-              "type": "frame",
-              "id": "Oph3g",
-              "name": "Übersetzungsschalter",
-              "context": "The full 44 px row is the translation switch target. Name: English translation. Expose on/off state; Space toggles it without moving focus. Hide this control in German UI and in live mock tests.",
-              "width": "fill_container",
-              "height": 44,
-              "justifyContent": "space_between",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "ZxXIw",
-                  "name": "Übersetzung Label",
-                  "fill": "$text",
-                  "content": "Show English translation",
-                  "lineHeight": 1.45,
-                  "fontFamily": "Inter",
-                  "fontSize": "$font-size-14",
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "frame",
-                  "id": "i3jgTI",
-                  "name": "Übersetzung Inaktiv",
-                  "height": 28,
-                  "fill": "$surface-muted",
-                  "cornerRadius": 6,
-                  "padding": [
-                    0,
-                    10
-                  ],
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "IYem1",
-                      "name": "Übersetzung Inaktiv text",
-                      "fill": "$text",
-                      "content": "OFF",
-                      "lineHeight": 1.45,
-                      "fontFamily": "Inter",
-                      "fontSize": "$font-size-12",
-                      "fontWeight": "600"
-                    }
-                  ]
-                }
-              ]
             },
             {
               "type": "frame",
@@ -54224,6 +54169,56 @@
                   ]
                 },
                 {
+                  "type": "frame",
+                  "id": "RKuj0",
+                  "name": "Translation action below question progress",
+                  "width": "fill_container",
+                  "height": 48,
+                  "justifyContent": "end",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "RgJYU",
+                      "name": "Translation icon button · on",
+                      "context": "lucide-react: import { Languages, Check } from \"lucide-react\". Languages size 28, strokeWidth 2, centered in 48 × 48 button. Accessible name stays Show English translation; aria-pressed=true. Tooltip: Hide English translation. Enter/Space toggles English question and choices without moving focus. Hide in German UI and live mock tests. Persist existing translation preference. Keyboard focus: 2px $focus-ring outline with 2px gap.",
+                      "width": 48,
+                      "height": 48,
+                      "fill": "$accent",
+                      "cornerRadius": "$radius-control",
+                      "stroke": "$accent",
+                      "strokeWidth": 1,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "Asy7J",
+                          "name": "Translation · lucide-react Languages",
+                          "width": 28,
+                          "height": 28,
+                          "icon": "languages",
+                          "library": "lucide",
+                          "fill": "$accent-foreground"
+                        },
+                        {
+                          "type": "icon",
+                          "id": "UViqm",
+                          "layoutPosition": "absolute",
+                          "x": 36,
+                          "y": 2,
+                          "name": "Selected · lucide-react Check",
+                          "width": 10,
+                          "height": 10,
+                          "icon": "check",
+                          "library": "lucide",
+                          "fill": "$accent-foreground"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
                   "type": "text",
                   "id": "fuzCR",
                   "name": "Fragetitel",
@@ -54235,55 +54230,6 @@
                   "fontFamily": "Inter",
                   "fontSize": "$font-size-24",
                   "fontWeight": "600"
-                },
-                {
-                  "type": "frame",
-                  "id": "RgJYU",
-                  "name": "Übersetzungsschalter",
-                  "context": "The full 44 px row is the translation switch target. Accessible name: English translation; current state on. Space toggles without moving focus. Show or hide English alongside German question and choices. Hide in German UI and live mock tests.",
-                  "width": "fill_container",
-                  "height": 44,
-                  "justifyContent": "space_between",
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "m0mw00",
-                      "name": "English translation label",
-                      "fill": "$text",
-                      "content": "Show English translation",
-                      "lineHeight": 1.45,
-                      "textAlign": "center",
-                      "fontFamily": "Inter",
-                      "fontSize": "$font-size-14",
-                      "fontWeight": "500"
-                    },
-                    {
-                      "type": "frame",
-                      "id": "lUM3R",
-                      "name": "Übersetzung Aktiv",
-                      "height": 28,
-                      "fill": "$dim-green",
-                      "cornerRadius": 6,
-                      "padding": [
-                        0,
-                        10
-                      ],
-                      "alignItems": "center",
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "WS9t7",
-                          "name": "Übersetzung Aktiv text",
-                          "fill": "$success",
-                          "content": "ON",
-                          "fontFamily": "Inter",
-                          "fontSize": "$font-size-12",
-                          "fontWeight": "600"
-                        }
-                      ]
-                    }
-                  ]
                 },
                 {
                   "type": "text",
@@ -55250,6 +55196,43 @@
               ]
             },
             {
+              "type": "frame",
+              "id": "nlkbU",
+              "name": "Translation action below question progress",
+              "width": "fill_container",
+              "height": 48,
+              "justifyContent": "end",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "lIslp",
+                  "name": "Translation icon button · off",
+                  "context": "lucide-react: import { Languages, Check } from \"lucide-react\". Languages size 28, strokeWidth 2, centered in 48 × 48 button. Accessible name stays Show English translation; aria-pressed=false. Tooltip: Show English translation. Enter/Space toggles English question and choices without moving focus. Hide in German UI and live mock tests. Persist existing translation preference. Keyboard focus: 2px $focus-ring outline with 2px gap.",
+                  "width": 48,
+                  "height": 48,
+                  "fill": "$surface",
+                  "cornerRadius": "$radius-control",
+                  "stroke": "$control-border",
+                  "strokeWidth": 1,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "iNEKV",
+                      "name": "Translation · lucide-react Languages",
+                      "width": 28,
+                      "height": 28,
+                      "icon": "languages",
+                      "library": "lucide",
+                      "fill": "$text"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
               "type": "text",
               "id": "Ovj1U",
               "name": "Fragetitel",
@@ -55261,57 +55244,6 @@
               "fontFamily": "Inter",
               "fontSize": "$font-size-24",
               "fontWeight": "600"
-            },
-            {
-              "type": "frame",
-              "id": "lIslp",
-              "name": "Übersetzungsschalter",
-              "context": "The full 44 px row is the translation switch target. Name: English translation. Expose on/off state; Space toggles it without moving focus. Hide this control in German UI and in live mock tests.",
-              "width": "fill_container",
-              "height": 44,
-              "justifyContent": "space_between",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "KKGcF",
-                  "name": "Übersetzung Label",
-                  "fill": "$text",
-                  "content": "Show English translation",
-                  "lineHeight": 1.45,
-                  "fontFamily": "Inter",
-                  "fontSize": "$font-size-14",
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "frame",
-                  "id": "Vvvdh",
-                  "name": "Übersetzung Inaktiv",
-                  "height": 28,
-                  "fill": "$surface-muted",
-                  "cornerRadius": 6,
-                  "padding": [
-                    0,
-                    10
-                  ],
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "DoXSX",
-                      "name": "Übersetzung Inaktiv text",
-                      "fill": "$text",
-                      "content": "OFF",
-                      "lineHeight": 1.45,
-                      "textAlign": "center",
-                      "fontFamily": "Inter",
-                      "fontSize": "$font-size-12",
-                      "fontWeight": "600"
-                    }
-                  ]
-                }
-              ]
             },
             {
               "type": "frame",
@@ -70404,35 +70336,85 @@
             },
             {
               "type": "frame",
-              "id": "eWDh2",
-              "name": "Question learning status",
-              "fill": "$dim-green",
-              "cornerRadius": 4,
-              "gap": 5,
-              "padding": [
-                5,
-                10
-              ],
+              "id": "w3fVg",
+              "name": "Question status and translation",
+              "width": "fill_container",
+              "height": 48,
+              "justifyContent": "space_between",
+              "alignItems": "center",
               "children": [
                 {
-                  "type": "icon",
-                  "id": "U3rGae",
-                  "name": "Learning status icon",
-                  "width": 14,
-                  "height": 14,
-                  "icon": "check",
-                  "library": "lucide",
-                  "fill": "$success"
+                  "type": "frame",
+                  "id": "eWDh2",
+                  "name": "Question learning status",
+                  "fill": "$dim-green",
+                  "cornerRadius": 4,
+                  "gap": 5,
+                  "padding": [
+                    5,
+                    10
+                  ],
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "U3rGae",
+                      "name": "Learning status icon",
+                      "width": 14,
+                      "height": 14,
+                      "icon": "check",
+                      "library": "lucide",
+                      "fill": "$success"
+                    },
+                    {
+                      "type": "text",
+                      "id": "mThM4",
+                      "name": "Learning status",
+                      "fill": "$text",
+                      "content": "Learned",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    }
+                  ]
                 },
                 {
-                  "type": "text",
-                  "id": "mThM4",
-                  "name": "Learning status",
-                  "fill": "$text",
-                  "content": "Learned",
-                  "fontFamily": "Inter",
-                  "fontSize": 12,
-                  "fontWeight": "600"
+                  "type": "frame",
+                  "id": "myF1j",
+                  "name": "Translation icon button · on",
+                  "context": "lucide-react: import { Languages, Check } from \"lucide-react\". Languages size 28, strokeWidth 2, centered in 48 × 48 button. Accessible name stays Show English translation; aria-pressed=true. Tooltip: Hide English translation. Enter/Space toggles English question and choices without moving focus. Hide in German UI and live mock tests. Persist existing translation preference. Keyboard focus: 2px $focus-ring outline with 2px gap.",
+                  "width": 48,
+                  "height": 48,
+                  "fill": "$accent",
+                  "cornerRadius": "$radius-control",
+                  "stroke": "$accent",
+                  "strokeWidth": 1,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "hV8HE",
+                      "name": "Translation · lucide-react Languages",
+                      "width": 28,
+                      "height": 28,
+                      "icon": "languages",
+                      "library": "lucide",
+                      "fill": "$accent-foreground"
+                    },
+                    {
+                      "type": "icon",
+                      "id": "AH7qI",
+                      "layoutPosition": "absolute",
+                      "x": 36,
+                      "y": 2,
+                      "name": "Selected · lucide-react Check",
+                      "width": 10,
+                      "height": 10,
+                      "icon": "check",
+                      "library": "lucide",
+                      "fill": "$accent-foreground"
+                    }
+                  ]
                 }
               ]
             },
@@ -70448,55 +70430,6 @@
               "fontFamily": "Inter",
               "fontSize": "$font-size-24",
               "fontWeight": "600"
-            },
-            {
-              "type": "frame",
-              "id": "myF1j",
-              "name": "Übersetzungsschalter",
-              "context": "The full 44 px row is the translation switch target. Name: English translation. Expose on/off state; Space toggles it without moving focus. Hide this control in German UI and in live mock tests.",
-              "width": "fill_container",
-              "height": 44,
-              "justifyContent": "space_between",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "FTugM",
-                  "name": "Übersetzung Label",
-                  "fill": "$text",
-                  "content": "Show English translation",
-                  "lineHeight": 1.45,
-                  "fontFamily": "Inter",
-                  "fontSize": "$font-size-14",
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "frame",
-                  "id": "kc72Y",
-                  "name": "Übersetzung Aktiv",
-                  "height": 28,
-                  "fill": "$dim-green",
-                  "cornerRadius": 6,
-                  "padding": [
-                    0,
-                    10
-                  ],
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "H7niYD",
-                      "name": "Übersetzung Aktiv text",
-                      "fill": "$success",
-                      "content": "ON",
-                      "lineHeight": 1.45,
-                      "fontFamily": "Inter",
-                      "fontSize": "$font-size-12",
-                      "fontWeight": "600"
-                    }
-                  ]
-                }
-              ]
             },
             {
               "type": "text",
@@ -70890,7 +70823,7 @@
               "name": "Antwort Rückmeldung",
               "context": "Not rendered in Study. Answer options keep correctness highlighting and icons. Announce Correct, Incorrect, or Correct — now marked Learned once via a visually hidden polite live region. No visible feedback notice or repeated correct-answer translation.",
               "enabled": false,
-              "width": "fill_container(350)",
+              "width": 350,
               "fill": "$dim-green",
               "cornerRadius": "$radius-control",
               "gap": "$spacing-12",
@@ -71514,6 +71447,56 @@
                   ]
                 },
                 {
+                  "type": "frame",
+                  "id": "ZE7m1",
+                  "name": "Translation action below question progress",
+                  "width": "fill_container",
+                  "height": 48,
+                  "justifyContent": "end",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Z9Roh4",
+                      "name": "Translation icon button · on",
+                      "context": "lucide-react: import { Languages, Check } from \"lucide-react\". Languages size 28, strokeWidth 2, centered in 48 × 48 button. Accessible name stays Show English translation; aria-pressed=true. Tooltip: Hide English translation. Enter/Space toggles English question and choices without moving focus. Hide in German UI and live mock tests. Persist existing translation preference. Keyboard focus: 2px $focus-ring outline with 2px gap.",
+                      "width": 48,
+                      "height": 48,
+                      "fill": "$accent",
+                      "cornerRadius": "$radius-control",
+                      "stroke": "$accent",
+                      "strokeWidth": 1,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "Fgk5T",
+                          "name": "Translation · lucide-react Languages",
+                          "width": 28,
+                          "height": 28,
+                          "icon": "languages",
+                          "library": "lucide",
+                          "fill": "$accent-foreground"
+                        },
+                        {
+                          "type": "icon",
+                          "id": "hgwDK",
+                          "layoutPosition": "absolute",
+                          "x": 36,
+                          "y": 2,
+                          "name": "Selected · lucide-react Check",
+                          "width": 10,
+                          "height": 10,
+                          "icon": "check",
+                          "library": "lucide",
+                          "fill": "$accent-foreground"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
                   "type": "text",
                   "id": "VPld1",
                   "name": "Fragetitel",
@@ -71525,54 +71508,6 @@
                   "fontFamily": "Inter",
                   "fontSize": "$font-size-24",
                   "fontWeight": "600"
-                },
-                {
-                  "type": "frame",
-                  "id": "Z9Roh4",
-                  "name": "Übersetzungsschalter",
-                  "context": "The full 44 px row is the translation switch target. Accessible name: English translation; current state on. Space toggles without moving focus. Show or hide English alongside German question and choices. Hide in German UI and live mock tests.",
-                  "width": "fill_container",
-                  "height": 44,
-                  "justifyContent": "space_between",
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "g39Upt",
-                      "name": "English translation label",
-                      "fill": "$text",
-                      "content": "Show English translation",
-                      "lineHeight": 1.45,
-                      "fontFamily": "Inter",
-                      "fontSize": "$font-size-14",
-                      "fontWeight": "500"
-                    },
-                    {
-                      "type": "frame",
-                      "id": "FPvld",
-                      "name": "Übersetzung Aktiv",
-                      "height": 28,
-                      "fill": "$dim-green",
-                      "cornerRadius": 6,
-                      "padding": [
-                        0,
-                        10
-                      ],
-                      "alignItems": "center",
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "I0hOp",
-                          "name": "Übersetzung Aktiv text",
-                          "fill": "$success",
-                          "content": "ON",
-                          "fontFamily": "Inter",
-                          "fontSize": "$font-size-12",
-                          "fontWeight": "600"
-                        }
-                      ]
-                    }
-                  ]
                 },
                 {
                   "type": "text",
@@ -80556,6 +80491,56 @@
                           ]
                         },
                         {
+                          "type": "frame",
+                          "id": "J4mS1",
+                          "name": "Translation action below question progress",
+                          "width": "fill_container",
+                          "height": 48,
+                          "justifyContent": "end",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "LHqiV",
+                              "name": "Translation icon button · on",
+                              "context": "lucide-react: import { Languages, Check } from \"lucide-react\". Languages size 28, strokeWidth 2, centered in 48 × 48 button. Accessible name stays Show English translation; aria-pressed=true. Tooltip: Hide English translation. Enter/Space toggles English question and choices without moving focus. Hide in German UI and live mock tests. Persist existing translation preference. Keyboard focus: 2px $focus-ring outline with 2px gap.",
+                              "width": 48,
+                              "height": 48,
+                              "fill": "$accent",
+                              "cornerRadius": "$radius-control",
+                              "stroke": "$accent",
+                              "strokeWidth": 1,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon",
+                                  "id": "zjG0K",
+                                  "name": "Translation · lucide-react Languages",
+                                  "width": 28,
+                                  "height": 28,
+                                  "icon": "languages",
+                                  "library": "lucide",
+                                  "fill": "$accent-foreground"
+                                },
+                                {
+                                  "type": "icon",
+                                  "id": "ASvNA",
+                                  "layoutPosition": "absolute",
+                                  "x": 36,
+                                  "y": 2,
+                                  "name": "Selected · lucide-react Check",
+                                  "width": 10,
+                                  "height": 10,
+                                  "icon": "check",
+                                  "library": "lucide",
+                                  "fill": "$accent-foreground"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
                           "type": "text",
                           "id": "Ga8Rx",
                           "name": "Fragetitel",
@@ -80567,54 +80552,6 @@
                           "fontFamily": "Inter",
                           "fontSize": "$font-size-28",
                           "fontWeight": "600"
-                        },
-                        {
-                          "type": "frame",
-                          "id": "LHqiV",
-                          "name": "Übersetzungsschalter",
-                          "context": "The full 44 px row is the translation switch target. Accessible name: English translation; current state on. Space toggles without moving focus. Show or hide English alongside German question and choices. Hide in German UI and live mock tests.",
-                          "width": "fill_container",
-                          "height": 44,
-                          "justifyContent": "space_between",
-                          "alignItems": "center",
-                          "children": [
-                            {
-                              "type": "text",
-                              "id": "i650E",
-                              "name": "English translation label",
-                              "fill": "$text",
-                              "content": "Show English translation",
-                              "lineHeight": 1.45,
-                              "fontFamily": "Inter",
-                              "fontSize": "$font-size-14",
-                              "fontWeight": "500"
-                            },
-                            {
-                              "type": "frame",
-                              "id": "HS6NH",
-                              "name": "Übersetzung Aktiv",
-                              "height": 28,
-                              "fill": "$dim-green",
-                              "cornerRadius": 6,
-                              "padding": [
-                                0,
-                                10
-                              ],
-                              "alignItems": "center",
-                              "children": [
-                                {
-                                  "type": "text",
-                                  "id": "X14W6J",
-                                  "name": "Übersetzung Aktiv text",
-                                  "fill": "$success",
-                                  "content": "ON",
-                                  "fontFamily": "Inter",
-                                  "fontSize": "$font-size-12",
-                                  "fontWeight": "600"
-                                }
-                              ]
-                            }
-                          ]
                         },
                         {
                           "type": "text",
@@ -82806,6 +82743,56 @@
                   ]
                 },
                 {
+                  "type": "frame",
+                  "id": "j2UDp",
+                  "name": "Translation action below question progress",
+                  "width": "fill_container",
+                  "height": 48,
+                  "justifyContent": "end",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "vShYR",
+                      "name": "Translation icon button · on",
+                      "context": "lucide-react: import { Languages, Check } from \"lucide-react\". Languages size 28, strokeWidth 2, centered in 48 × 48 button. Accessible name stays Show English translation; aria-pressed=true. Tooltip: Hide English translation. Enter/Space toggles English question and choices without moving focus. Hide in German UI and live mock tests. Persist existing translation preference. Keyboard focus: 2px $focus-ring outline with 2px gap.",
+                      "width": 48,
+                      "height": 48,
+                      "fill": "$accent",
+                      "cornerRadius": "$radius-control",
+                      "stroke": "$accent",
+                      "strokeWidth": 1,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "RUGWc",
+                          "name": "Translation · lucide-react Languages",
+                          "width": 28,
+                          "height": 28,
+                          "icon": "languages",
+                          "library": "lucide",
+                          "fill": "$accent-foreground"
+                        },
+                        {
+                          "type": "icon",
+                          "id": "dfqnm",
+                          "layoutPosition": "absolute",
+                          "x": 36,
+                          "y": 2,
+                          "name": "Selected · lucide-react Check",
+                          "width": 10,
+                          "height": 10,
+                          "icon": "check",
+                          "library": "lucide",
+                          "fill": "$accent-foreground"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
                   "type": "text",
                   "id": "o2poN",
                   "name": "Fragetitel",
@@ -82817,54 +82804,6 @@
                   "fontFamily": "Inter",
                   "fontSize": "$font-size-24",
                   "fontWeight": "600"
-                },
-                {
-                  "type": "frame",
-                  "id": "vShYR",
-                  "name": "Übersetzungsschalter",
-                  "context": "The full 44 px row is the translation switch target. Accessible name: English translation; current state on. Space toggles without moving focus. Show or hide English alongside German question and choices. Hide in German UI and live mock tests.",
-                  "width": "fill_container",
-                  "height": 44,
-                  "justifyContent": "space_between",
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "N3GCPw",
-                      "name": "English translation label",
-                      "fill": "$text",
-                      "content": "Show English translation",
-                      "lineHeight": 1.45,
-                      "fontFamily": "Inter",
-                      "fontSize": "$font-size-14",
-                      "fontWeight": "500"
-                    },
-                    {
-                      "type": "frame",
-                      "id": "VmAud",
-                      "name": "Übersetzung Aktiv",
-                      "height": 28,
-                      "fill": "$dim-green",
-                      "cornerRadius": 6,
-                      "padding": [
-                        0,
-                        10
-                      ],
-                      "alignItems": "center",
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "TOCpc",
-                          "name": "Übersetzung Aktiv text",
-                          "fill": "$success",
-                          "content": "ON",
-                          "fontFamily": "Inter",
-                          "fontSize": "$font-size-12",
-                          "fontWeight": "600"
-                        }
-                      ]
-                    }
-                  ]
                 },
                 {
                   "type": "text",
@@ -89529,35 +89468,72 @@
             },
             {
               "type": "frame",
-              "id": "HvWsj",
-              "name": "Question learning status",
-              "fill": "$surface-muted",
-              "cornerRadius": 4,
-              "gap": 5,
-              "padding": [
-                5,
-                10
-              ],
+              "id": "YZaql",
+              "name": "Question status and translation",
+              "width": "fill_container",
+              "height": 48,
+              "justifyContent": "space_between",
+              "alignItems": "center",
               "children": [
                 {
-                  "type": "icon",
-                  "id": "tNETl",
-                  "name": "Learning status icon",
-                  "width": 14,
-                  "height": 14,
-                  "icon": "circle",
-                  "library": "lucide",
-                  "fill": "$text"
+                  "type": "frame",
+                  "id": "HvWsj",
+                  "name": "Question learning status",
+                  "fill": "$surface-muted",
+                  "cornerRadius": 4,
+                  "gap": 5,
+                  "padding": [
+                    5,
+                    10
+                  ],
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "tNETl",
+                      "name": "Learning status icon",
+                      "width": 14,
+                      "height": 14,
+                      "icon": "circle",
+                      "library": "lucide",
+                      "fill": "$text"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Uxu9w",
+                      "name": "Learning status",
+                      "fill": "$text",
+                      "content": "Not started",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    }
+                  ]
                 },
                 {
-                  "type": "text",
-                  "id": "Uxu9w",
-                  "name": "Learning status",
-                  "fill": "$text",
-                  "content": "Not started",
-                  "fontFamily": "Inter",
-                  "fontSize": 12,
-                  "fontWeight": "600"
+                  "type": "frame",
+                  "id": "DazTQ",
+                  "name": "Translation icon button · off",
+                  "context": "lucide-react: import { Languages, Check } from \"lucide-react\". Languages size 28, strokeWidth 2, centered in 48 × 48 button. Accessible name stays Show English translation; aria-pressed=false. Tooltip: Show English translation. Enter/Space toggles English question and choices without moving focus. Hide in German UI and live mock tests. Persist existing translation preference. Keyboard focus: 2px $focus-ring outline with 2px gap.",
+                  "width": 48,
+                  "height": 48,
+                  "fill": "$surface",
+                  "cornerRadius": "$radius-control",
+                  "stroke": "$control-border",
+                  "strokeWidth": 1,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "O1t7oh",
+                      "name": "Translation · lucide-react Languages",
+                      "width": 28,
+                      "height": 28,
+                      "icon": "languages",
+                      "library": "lucide",
+                      "fill": "$text"
+                    }
+                  ]
                 }
               ]
             },
@@ -89573,55 +89549,6 @@
               "fontFamily": "Inter",
               "fontSize": "$font-size-24",
               "fontWeight": "600"
-            },
-            {
-              "type": "frame",
-              "id": "DazTQ",
-              "name": "Übersetzungsschalter",
-              "context": "The full 44 px row is the translation switch target. Name: English translation. Expose on/off state; Space toggles it without moving focus. Hide this control in German UI and in live mock tests.",
-              "width": "fill_container",
-              "height": 44,
-              "justifyContent": "space_between",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "pXdb3",
-                  "name": "Übersetzung Label",
-                  "fill": "$text",
-                  "content": "Show English translation",
-                  "lineHeight": 1.45,
-                  "fontFamily": "Inter",
-                  "fontSize": "$font-size-14",
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "frame",
-                  "id": "Gw5iB",
-                  "name": "Übersetzung Inaktiv",
-                  "height": 28,
-                  "fill": "$surface-muted",
-                  "cornerRadius": 6,
-                  "padding": [
-                    0,
-                    10
-                  ],
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "qmEho",
-                      "name": "Übersetzung Inaktiv text",
-                      "fill": "$text",
-                      "content": "OFF",
-                      "lineHeight": 1.45,
-                      "fontFamily": "Inter",
-                      "fontSize": "$font-size-12",
-                      "fontWeight": "600"
-                    }
-                  ]
-                }
-              ]
             },
             {
               "type": "frame",
@@ -104398,6 +104325,364 @@
           "textGrowth": "fixed-width",
           "width": "fill_container",
           "content": "English: Question status / Mock tests / Filter all groups / Show next 10 questions. German: Fragenstatus / Probetests / Alle Gruppen filtern / Nächste 10 Fragen anzeigen. Preserve the existing Not started → Needs review → Learning → Learned status vocabulary and translations.",
+          "lineHeight": 1.5,
+          "fontFamily": "Inter",
+          "fontSize": 14,
+          "fontWeight": "normal"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "J9naF",
+      "x": -2413,
+      "y": 9278,
+      "name": "TRANSLATION / Icon button · states and implementation notes",
+      "theme": {
+        "mode": "light"
+      },
+      "width": 800,
+      "fill": "$bg",
+      "layout": "vertical",
+      "gap": 20,
+      "padding": 24,
+      "children": [
+        {
+          "type": "text",
+          "id": "uAq0E",
+          "name": "Translation control specification",
+          "fill": "$text",
+          "content": "Show English translation",
+          "fontFamily": "Inter",
+          "fontSize": 24,
+          "fontWeight": "600"
+        },
+        {
+          "type": "text",
+          "id": "XQDuU",
+          "name": "Lucide implementation note",
+          "fill": "$text",
+          "textGrowth": "fixed-width",
+          "width": "fill_container",
+          "content": "Use Languages from lucide-react — the Lucide translation icon.\nimport { Languages, Check } from \"lucide-react\"\nLanguages: 28 × 28 px, strokeWidth 2. Button: 48 × 48 px, 8 px radius.\nSource: https://lucide.dev/icons/languages",
+          "lineHeight": 1.5,
+          "fontFamily": "Inter",
+          "fontSize": 14,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "frame",
+          "id": "DfeZ3",
+          "name": "Light and dark translation button states",
+          "width": "fill_container",
+          "gap": 16,
+          "children": [
+            {
+              "type": "frame",
+              "id": "oWFs9",
+              "name": "light theme states",
+              "theme": {
+                "mode": "light"
+              },
+              "width": "fill_container",
+              "fill": "$bg",
+              "cornerRadius": 8,
+              "stroke": "$border",
+              "strokeWidth": 1,
+              "layout": "vertical",
+              "gap": 16,
+              "padding": 20,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "CSTpI",
+                  "name": "light theme heading",
+                  "fill": "$text-muted",
+                  "content": "LIGHT",
+                  "fontFamily": "Inter",
+                  "fontSize": 12,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "frame",
+                  "id": "TnUGD",
+                  "name": "Off and on state comparison",
+                  "width": "fill_container",
+                  "gap": 32,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "nenOG",
+                      "name": "Off · translation hidden",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "L5mJa",
+                          "name": "Off · translation hidden · 48px button",
+                          "context": "lucide-react: import { Languages, Check } from \"lucide-react\". Languages size 28, strokeWidth 2, centered in 48 × 48 button. Accessible name stays Show English translation; aria-pressed=false. Tooltip: Show English translation. Enter/Space toggles English question and choices without moving focus. Hide in German UI and live mock tests. Persist existing translation preference. Keyboard focus: 2px $focus-ring outline with 2px gap.",
+                          "width": 48,
+                          "height": 48,
+                          "fill": "$surface",
+                          "cornerRadius": "$radius-control",
+                          "stroke": "$control-border",
+                          "strokeWidth": 1,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "W9wu5b",
+                              "name": "Translation · lucide-react Languages",
+                              "width": 28,
+                              "height": 28,
+                              "icon": "languages",
+                              "library": "lucide",
+                              "fill": "$text"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "i5fVBT",
+                          "name": "Off · translation hidden caption",
+                          "fill": "$text",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Off · translation hidden",
+                          "lineHeight": 1.45,
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "x9c2O",
+                      "name": "On · translation visible",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "Ztz7O",
+                          "name": "On · translation visible · 48px button",
+                          "context": "lucide-react: import { Languages, Check } from \"lucide-react\". Languages size 28, strokeWidth 2, centered in 48 × 48 button. Translation visible; aria-pressed=true. Accessible name stays Show English translation. Tooltip: Hide English translation. Enter/Space toggles; focus remains on button. Hide in German UI and live mock tests. Persist existing translation preference. Keyboard focus: 2px $focus-ring outline with 2px gap.",
+                          "width": 48,
+                          "height": 48,
+                          "fill": "$accent",
+                          "cornerRadius": "$radius-control",
+                          "stroke": "$accent",
+                          "strokeWidth": 1,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "rzSpF",
+                              "name": "Translation · lucide-react Languages",
+                              "width": 28,
+                              "height": 28,
+                              "icon": "languages",
+                              "library": "lucide",
+                              "fill": "$accent-foreground"
+                            },
+                            {
+                              "type": "icon",
+                              "id": "U8ZJi",
+                              "layoutPosition": "absolute",
+                              "x": 36,
+                              "y": 2,
+                              "name": "Selected · lucide-react Check",
+                              "width": 10,
+                              "height": 10,
+                              "icon": "check",
+                              "library": "lucide",
+                              "fill": "$accent-foreground"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "Uj3dJ",
+                          "name": "On · translation visible caption",
+                          "fill": "$text",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "On · translation visible",
+                          "lineHeight": 1.45,
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Dwi9l",
+              "name": "dark theme states",
+              "theme": {
+                "mode": "dark"
+              },
+              "width": "fill_container",
+              "fill": "$bg",
+              "cornerRadius": 8,
+              "stroke": "$border",
+              "strokeWidth": 1,
+              "layout": "vertical",
+              "gap": 16,
+              "padding": 20,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "y2I0ng",
+                  "name": "dark theme heading",
+                  "fill": "$text-muted",
+                  "content": "DARK",
+                  "fontFamily": "Inter",
+                  "fontSize": 12,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "frame",
+                  "id": "cmAzs",
+                  "name": "Off and on state comparison",
+                  "width": "fill_container",
+                  "gap": 32,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "lrzO3",
+                      "name": "Off · translation hidden",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "ID0zK",
+                          "name": "Off · translation hidden · 48px button",
+                          "context": "lucide-react: import { Languages, Check } from \"lucide-react\". Languages size 28, strokeWidth 2, centered in 48 × 48 button. Accessible name stays Show English translation; aria-pressed=false. Tooltip: Show English translation. Enter/Space toggles English question and choices without moving focus. Hide in German UI and live mock tests. Persist existing translation preference. Keyboard focus: 2px $focus-ring outline with 2px gap.",
+                          "width": 48,
+                          "height": 48,
+                          "fill": "$surface",
+                          "cornerRadius": "$radius-control",
+                          "stroke": "$control-border",
+                          "strokeWidth": 1,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "lRMQ3",
+                              "name": "Translation · lucide-react Languages",
+                              "width": 28,
+                              "height": 28,
+                              "icon": "languages",
+                              "library": "lucide",
+                              "fill": "$text"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "oxi7t",
+                          "name": "Off · translation hidden caption",
+                          "fill": "$text",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Off · translation hidden",
+                          "lineHeight": 1.45,
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "m4xKk",
+                      "name": "On · translation visible",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "odwoc",
+                          "name": "On · translation visible · 48px button",
+                          "context": "lucide-react: import { Languages, Check } from \"lucide-react\". Languages size 28, strokeWidth 2, centered in 48 × 48 button. Translation visible; aria-pressed=true. Accessible name stays Show English translation. Tooltip: Hide English translation. Enter/Space toggles; focus remains on button. Hide in German UI and live mock tests. Persist existing translation preference. Keyboard focus: 2px $focus-ring outline with 2px gap.",
+                          "width": 48,
+                          "height": 48,
+                          "fill": "$accent",
+                          "cornerRadius": "$radius-control",
+                          "stroke": "$accent",
+                          "strokeWidth": 1,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "aqoRy",
+                              "name": "Translation · lucide-react Languages",
+                              "width": 28,
+                              "height": 28,
+                              "icon": "languages",
+                              "library": "lucide",
+                              "fill": "$accent-foreground"
+                            },
+                            {
+                              "type": "icon",
+                              "id": "ARlVh",
+                              "layoutPosition": "absolute",
+                              "x": 36,
+                              "y": 2,
+                              "name": "Selected · lucide-react Check",
+                              "width": 10,
+                              "height": 10,
+                              "icon": "check",
+                              "library": "lucide",
+                              "fill": "$accent-foreground"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "MY7Zu",
+                          "name": "On · translation visible caption",
+                          "fill": "$text",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "On · translation visible",
+                          "lineHeight": 1.45,
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "BEgAr",
+          "name": "Placement and accessible interaction notes",
+          "fill": "$text",
+          "textGrowth": "fixed-width",
+          "width": "fill_container",
+          "content": "Placement: right edge of the question container, below progress; vertically centered with the question status badge. In result review, place below the question count.\nOff: outlined surface. On: solid accent with a Check icon (10 px) for a non-color selected cue.\nNative toggle button: stable accessible name “Show English translation”; aria-pressed false / true. Tooltip on hover and focus: “Show English translation” / “Hide English translation”.\nEnter or Space toggles English question and choices; keep focus on the button. Focus: 2 px focus-ring outline with a 2 px gap. Reading order: progress → status → translation → question. Preserve translation preference and hide this control in German UI and live mock tests.",
           "lineHeight": 1.5,
           "fontFamily": "Inter",
           "fontSize": 14,

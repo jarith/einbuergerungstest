@@ -51,6 +51,7 @@
     "light": "Light",
     "dark": "Dark",
     "studyTranslation": "Show English translation",
+    "hideStudyTranslation": "Hide English translation",
     "plannedDate": "Planned test date",
     "calendar": {
       "nextMonth": "Next month",

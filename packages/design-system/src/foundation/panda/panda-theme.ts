@@ -58,6 +58,25 @@ const alternateColors: Readonly<Record<string, Readonly<Record<ColorScheme, stri
   alternateTheme.colors
 
 export const pandaTheme = {
+  keyframes: {
+    feedbackIn: { from: { opacity: 0 }, to: { opacity: 1 } },
+    completionIn: {
+      from: { opacity: 0, transform: 'translateY({spacing.8})' },
+      to: { opacity: 1, transform: 'translateY(0)' },
+    },
+    completionCheck: {
+      from: { opacity: 0, transform: 'scale(0.9)' },
+      to: { opacity: 1, transform: 'scale(1)' },
+    },
+  },
+  tokens: {
+    durations: Object.fromEntries(
+      Object.entries(baselineTheme.durations).map(([key, value]) => [key, { value: `${value}ms` }]),
+    ),
+    easings: Object.fromEntries(
+      Object.entries(baselineTheme.easings).map(([key, value]) => [key, { value }]),
+    ),
+  },
   semanticTokens: {
     colors: {
       ...Object.fromEntries(
@@ -163,6 +182,6 @@ export const globalStyles = defineGlobalStyles({
   body: { textStyle: 'body', backgroundColor: 'canvas', color: 'content.primary' },
   ':where(:focus-visible), .ds-focus:focus-visible': { layerStyle: 'focus' },
   '*, *::before, *::after': {
-    _motionReduce: { animationDuration: '0.01ms!', transitionDuration: '0.01ms!' },
+    _motionReduce: { animation: 'none!', transitionDuration: '0ms!', transitionDelay: '0ms!' },
   },
 })

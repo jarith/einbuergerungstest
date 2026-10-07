@@ -46,6 +46,9 @@ test('Next reveals the new question and keyboard answering preserves focus', asy
 test('double tapping active Study scrolls up without restarting the session or adding history', async ({
   page,
 }) => {
+  // The compact study page fits a tall phone; use a shorter viewport to exercise scrolling.
+  await page.setViewportSize({ width: 390, height: 700 })
+
   await page.emulateMedia({ reducedMotion: 'reduce' })
 
   await page.goto('/study')

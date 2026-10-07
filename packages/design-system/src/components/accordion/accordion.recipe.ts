@@ -23,6 +23,7 @@ export const accordionRecipe = defineSlotRecipe({
     },
     label: { minWidth: '0', padding: '0', fontWeight: 'semibold' },
     chevron: {
+      transition: 'transform {durations.backdrop} {easings.enter}',
       width: 'control.field',
       height: 'control.field',
       justifyContent: 'center',
