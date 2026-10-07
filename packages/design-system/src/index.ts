@@ -57,3 +57,6 @@ export {
   toolbar,
 } from '../styled-system/patterns'
 export { ButtonLink } from './components/button-link/button-link'
+export { Reveal } from './components/reveal/reveal'
+
+export type { RevealProps } from './components/reveal/reveal'

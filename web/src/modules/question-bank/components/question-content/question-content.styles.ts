@@ -20,6 +20,8 @@ export const reviewTitle = css({
 })
 
 export const translationText = css({
+  display: 'block',
+  paddingBlockStart: '16',
   fontSize: '14',
   lineHeight: '15',
   color: 'content.muted',

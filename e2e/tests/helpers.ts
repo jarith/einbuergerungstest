@@ -90,10 +90,14 @@ export const expectReadable = async (elements: Locator) => {
 }
 
 export const expectReachableAboveNavigation = async (page: Page, target: Locator) => {
-  await target.scrollIntoViewIfNeeded()
-
   await expect
     .poll(async () => {
+      // Expanding translations can move the target after a scroll. Center it on each
+      // check: scrollIntoViewIfNeeded treats controls behind fixed navigation as in view.
+      await target.evaluate((element) =>
+        element.scrollIntoView({ block: 'center', behavior: 'instant' }),
+      )
+
       const control = await bounds(target)
       const navigation = await bounds(page.getByRole('navigation'))
 

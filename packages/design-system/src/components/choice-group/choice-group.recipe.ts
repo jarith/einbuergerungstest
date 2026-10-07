@@ -8,6 +8,8 @@ export const choiceGroupRecipe = defineSlotRecipe({
   base: {
     card: {
       ...interactive,
+      transition:
+        'background-color {durations.feedback} {easings.enter}, border-color {durations.feedback} {easings.enter}',
       width: '100%',
       minHeight: 'control.choice',
       display: 'flex',
@@ -28,6 +30,8 @@ export const choiceGroupRecipe = defineSlotRecipe({
       },
     },
     marker: {
+      transition:
+        'background-color {durations.feedback} {easings.enter}, border-color {durations.feedback} {easings.enter}',
       display: 'grid',
       placeItems: 'center',
       width: '32',
@@ -48,6 +52,7 @@ export const choiceGroupRecipe = defineSlotRecipe({
     label: { textStyle: 'body', fontWeight: 'medium' },
     description: { textStyle: 'choiceDescription', color: 'content.muted' },
     result: {
+      '&[data-animate=true]': { animation: 'feedbackIn {durations.icon} {easings.enter}' },
       display: 'flex',
       alignItems: 'center',
       gap: '4',

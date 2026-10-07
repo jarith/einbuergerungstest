@@ -21,6 +21,7 @@ export type ChoiceGroupProps = Omit<PrimitiveProps<RadioGroupProps>, 'children'>
   Readonly<{
     options: readonly ChoiceOption[]
     density?: 'regular' | 'compact'
+    animateFeedback?: boolean
     readOnly?: boolean
     ref?: Ref<HTMLDivElement>
   }>
@@ -32,6 +33,7 @@ export type ChoiceGroupProps = Omit<PrimitiveProps<RadioGroupProps>, 'children'>
 export const ChoiceGroup = ({
   options,
   density = 'regular',
+  animateFeedback = false,
   readOnly = false,
   onChange,
   ref,
@@ -77,7 +79,7 @@ export const ChoiceGroup = ({
               )}
             </span>
             {option.result && (
-              <span className={classes.result}>
+              <span className={classes.result} data-animate={animateFeedback}>
                 {option.resultLabel ?? (option.result === 'correct' ? 'Correct' : 'Incorrect')}
               </span>
             )}

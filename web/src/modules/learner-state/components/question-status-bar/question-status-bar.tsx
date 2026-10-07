@@ -33,21 +33,16 @@ export const QuestionStatusBar = ({ group, t, focusable = true }: QuestionStatus
         preserveAspectRatio="none"
         className={styles.root}
       >
-        {segments.flatMap((segment) =>
-          segment.count === 0
-            ? []
-            : [
-                <rect
-                  key={segment.status}
-                  className={progressStatus({ status: segment.status })}
-                  x={segment.offset * 100}
-                  y={0}
-                  width={segment.portion * 100}
-                  height={8}
-                  fill="currentColor"
-                />,
-              ],
-        )}
+        {segments.map((segment) => (
+          <rect
+            key={segment.status}
+            className={progressStatus({ status: segment.status })}
+            style={{ x: `${segment.offset * 100}%`, width: `${segment.portion * 100}%` }}
+            y={0}
+            height={8}
+            fill="currentColor"
+          />
+        ))}
       </svg>
     </Tooltip>
   )

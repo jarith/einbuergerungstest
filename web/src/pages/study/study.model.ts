@@ -5,10 +5,18 @@ import type { StudyMode } from '../../modules/learner-state'
 import type { QuestionKey } from '../../modules/question-bank'
 import { getAppPath } from '../../app/offline/app-mode'
 import { createOrderedStudy, createStudySession } from '../../modules/learner-state'
+import { createStudyMotion } from './study-motion/study-motion'
 
 export const createStudySessionScope = () =>
   atom({ answers: createStudySession() }, 'study.session').extend(
-    withActions((scope) => ({ start: () => scope.set({ answers: createStudySession() }) })),
+    () => ({ motion: createStudyMotion() }),
+    withActions((scope) => ({
+      start: () => {
+        scope.motion.clear()
+
+        scope.set({ answers: createStudySession() })
+      },
+    })),
   )
 
 export const createStudyModel = (
@@ -18,6 +26,7 @@ export const createStudyModel = (
   navigate: (key: QuestionKey) => void,
   groupId: string | null = null,
   session: ReturnType<typeof createStudySession> = createStudySession(),
+  motion = createStudyMotion(),
 ) => {
   const flow = createOrderedStudy(
     resources.questions.bank,
@@ -42,6 +51,8 @@ export const createStudyModel = (
   }, 'study.scope').extend(() => ({
     flow,
     session,
+    motion,
+    shouldAnimateCompletion: !flow().isCompleted,
     status: computed(
       () => resources.learner.progress.questions().get(flow().key)?.status ?? 'not-started',
       'study.status',
@@ -59,20 +70,44 @@ export const createStudyModel = (
       return total
     }, 'study.totals'),
     previous: action(async () => {
+      if (flow.pending()) {
+        return
+      }
+      const before = flow()
+
+      motion.prepare(before.key, before.index, 'previous')
+
       await wrap(flow.previous())
+
+      if (flow.error() !== null || flow().key === before.key) {
+        motion.clear()
+      }
 
       if (flow.error() === null && flow().key !== target) {
         navigate(flow().key)
       }
     }, 'study.previous').extend(withAsync()),
     next: action(async () => {
+      if (flow.pending()) {
+        return
+      }
+      const before = flow()
+
+      motion.prepare(before.key, before.index, 'next')
+
       await wrap(flow.next())
+
+      if (flow.error() !== null || flow().key === before.key) {
+        motion.clear()
+      }
 
       if (flow.error() === null && !flow().isCompleted && flow().key !== target) {
         navigate(flow().key)
       }
     }, 'study.next').extend(withAsync()),
     restart: action(async () => {
+      motion.clear()
+
       await wrap(flow.restart())
 
       if (flow.error() === null && flow().key !== target) {

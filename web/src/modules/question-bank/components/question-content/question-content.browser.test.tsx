@@ -65,7 +65,13 @@ for (const scenario of cases) {
       .toBeVisible()
 
     await expect
-      .poll(() => screen.getByText(question.question_en, { exact: true }).query() !== null)
+      .poll(
+        () =>
+          screen
+            .getByText(question.question_en, { exact: true })
+            .query()
+            ?.checkVisibility({ checkVisibilityCSS: true }) ?? false,
+      )
       .toBe(scenario.translated)
 
     for (const option of question.answer_options) {
@@ -74,7 +80,13 @@ for (const scenario of cases) {
       await expect.element(answer.getByText(option.text_de, { exact: true })).toBeVisible()
 
       await expect
-        .poll(() => answer.getByText(option.text_en, { exact: true }).query() !== null)
+        .poll(
+          () =>
+            answer
+              .getByText(option.text_en, { exact: true })
+              .query()
+              ?.checkVisibility({ checkVisibilityCSS: true }) ?? false,
+        )
         .toBe(scenario.translated)
     }
 

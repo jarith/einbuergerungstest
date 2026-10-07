@@ -2,6 +2,11 @@
 
 This context describes preparation for the Berlin version of the German Einbürgerungstest.
 
+Study question motion must survive React StrictMode's development ref cleanup/reconnect
+cycle. Defer disposal until the microtask boundary and cancel only if the element was not
+reattached. Production-only browser tests do not exercise this lifecycle; the
+StudyQuestion browser component regression mounts under StrictMode.
+
 ## Language
 
 **UI language**: The learner's preferred language for app controls and navigation,
@@ -139,6 +144,12 @@ dialog close control has a touch target of at least 44px. Full-screen image dial
 account for all display safe areas. The document theme color follows the saved appearance;
 the manifest launch background remains the default light appearance. Installed iOS/Android
 system bars and safe areas require real-device checks.
+
+Translation reveals keep hidden text mounted so expansion can reverse smoothly. UI tests
+must check visibility rather than DOM removal. Mobile reachability checks must account for
+content expanding after a scroll: center the target during each bounds check and retain
+the fixed-navigation overlap and clickability assertions. `scrollIntoViewIfNeeded` alone
+considers a control behind fixed navigation to be inside the viewport.
 
 The calendar displays dates as `DD.MM.YYYY` while storing `YYYY-MM-DD`. Settings disables
 past popup dates with `excludeDate`, allowing typed past dates to reach the existing field

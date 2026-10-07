@@ -4,6 +4,16 @@ export const styles = {
   root: css({
     textStyle: 'caption',
     color: 'content.muted',
+    '&::details-content': {
+      _motionReduce: { transition: '[none]' },
+      interpolateSize: 'allow-keywords',
+      blockSize: '0',
+      opacity: '[0]',
+      overflow: 'clip',
+      transition:
+        '[block-size {durations.feedback} {easings.enter}, opacity {durations.feedback} {easings.enter}, content-visibility {durations.feedback} allow-discrete]',
+    },
+    '&[open]::details-content': { blockSize: 'auto', opacity: '[1]', transitionDuration: 'reveal' },
     '&[open] summary svg': { transform: 'rotate(180deg)' },
   }),
   trigger: css({
@@ -16,5 +26,10 @@ export const styles = {
     '&::-webkit-details-marker': { display: 'none' },
     _focusVisible: { layerStyle: 'focus' },
   }),
-  icon: css({ width: 'icon.action', height: 'icon.action', flexShrink: '0' }),
+  icon: css({
+    transition: '[transform {durations.backdrop} {easings.enter}]',
+    width: 'icon.action',
+    height: 'icon.action',
+    flexShrink: '0',
+  }),
 }

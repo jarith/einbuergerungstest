@@ -201,3 +201,19 @@ Its Theme and Skin controls cover light/dark and baseline/alternate. Browser che
 computed colors and geometry, keyboard focus, accessible labels/errors, and axe checks
 across all four combinations. The app's existing tests cover counter behavior and
 preserving state when the color scheme changes.
+
+## Motion
+
+Shared durations (milliseconds) and entrance/exit curves live in `tokens/tokens.ts`. Panda
+exposes them as `durations.*` and `easings.*`; Mantine and the study slide use the same
+generated values. `Reveal` keeps translation content mounted for reversible expansion,
+with collapsed content hidden from interaction and assistive technology. Keep reusable
+motion styles in registered recipes so both application and Storybook builds emit them.
+The configured public CSS import is recognized for app-local styles; the internal styling
+bridge alone does not register new `css()` calls for extraction.
+
+Reduced motion disables CSS animation and transition time, enables Mantine's
+reduced-motion handling, and skips the study slide's Web Animations lifecycle. Normal
+study navigation uses a short slide while retaining heading focus; its outgoing snapshot
+is inert and removed on completion, interruption, or departure. Full-screen media dialogs
+fade without translation to keep zoom controls stationary.

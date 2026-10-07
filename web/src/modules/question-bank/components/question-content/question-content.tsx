@@ -1,7 +1,7 @@
 import type { ChoiceOption } from '@einbuergerungstest/design-system'
 import type { TFunction } from 'i18next'
 import type { ReactNode } from 'react'
-import { ChoiceGroup } from '@einbuergerungstest/design-system'
+import { ChoiceGroup, Reveal } from '@einbuergerungstest/design-system'
 import { Flex, Stack } from '@einbuergerungstest/design-system/jsx'
 import { Check, X } from 'lucide-react'
 
@@ -84,7 +84,11 @@ export const QuestionContent = ({
       value: option.label,
       marker: option.label,
       label: <span lang="de">{option.text_de}</span>,
-      description: showTranslation ? <span lang="en">{option.text_en}</span> : null,
+      description: hasTranslation ? (
+        <Reveal opened={showTranslation}>
+          <span lang="en">{option.text_en}</span>
+        </Reveal>
+      ) : null,
     }
 
     if (result === undefined) {
@@ -122,19 +126,23 @@ export const QuestionContent = ({
           ) : null}
         </Flex>
       ) : null}
-      <h2
-        lang="de"
-        data-question-heading
-        tabIndex={-1}
-        className={isReadOnly ? reviewTitle : questionTitle}
-      >
-        {question.question_de}
-      </h2>
-      {showTranslation ? (
-        <p lang="en" className={translationText}>
-          {question.question_en}
-        </p>
-      ) : null}
+      <div>
+        <h2
+          lang="de"
+          data-question-heading
+          tabIndex={-1}
+          className={isReadOnly ? reviewTitle : questionTitle}
+        >
+          {question.question_de}
+        </h2>
+        {hasTranslation ? (
+          <Reveal opened={showTranslation}>
+            <span lang="en" className={translationText}>
+              {question.question_en}
+            </span>
+          </Reveal>
+        ) : null}
+      </div>
       {image === undefined ? null : (
         <QuestionImage
           key={image.url}
@@ -144,6 +152,7 @@ export const QuestionContent = ({
         />
       )}
       <ChoiceGroup
+        animateFeedback={interaction.mode === 'study' && interaction.shouldAnnounceFeedback}
         density="compact"
         aria-label={question.question_de}
         labelProps={{ lang: 'de' }}

@@ -63,7 +63,7 @@ for (const width of [320, 390]) {
 
     await expect(translation).toHaveAttribute('aria-pressed', 'false')
     await expect(translation).toBeFocused()
-    await expect(page.getByText(question.question_en, { exact: true })).toHaveCount(0)
+    await expect(page.getByText(question.question_en, { exact: true })).toBeHidden()
   })
 
   test(`German mock and translated review actions remain reachable at ${width}px`, async ({

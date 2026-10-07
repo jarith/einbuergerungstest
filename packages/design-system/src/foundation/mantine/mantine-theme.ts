@@ -22,6 +22,7 @@ const accentRole: MantineColorsTuple = [
 
 export const mantineTheme = createTheme({
   components: mantineComponents,
+  respectReducedMotion: true,
   fontFamily: token.var('fonts.ui'),
   fontFamilyMonospace: token.var('fonts.mono'),
   headings: { fontFamily: token.var('fonts.ui') },

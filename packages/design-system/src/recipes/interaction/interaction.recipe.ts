@@ -4,6 +4,8 @@ export const interactive = {
   boxSizing: 'border-box',
   textStyle: 'controlLabel',
   touchAction: 'manipulation',
+  transition:
+    'background-color {durations.press} {easings.enter}, border-color {durations.press} {easings.enter}',
   _focusVisible: { layerStyle: 'focus' },
   '&:is(:disabled, [data-disabled], [data-loading])': {
     opacity: 'disabled',
