@@ -4,6 +4,7 @@ import type { AppResources } from '../../app/bootstrap.model'
 import type { QuestionKey } from '../../modules/question-bank'
 import { getAppPath } from '../../app/offline/app-mode'
 import { isLearnerStateConflict } from '../../modules/learner-state'
+import { createQuestionMotion, createQuestionSession } from '../../modules/question-session'
 import { browserNavigationAtom } from '../../shared/navigation/browser-navigation.model'
 
 export const createMockPageModel = (
@@ -11,9 +12,10 @@ export const createMockPageModel = (
   testId: string | undefined,
   questionKey: QuestionKey | undefined,
   openQuestion: (id: string, key: QuestionKey) => void,
+  motion = createQuestionMotion(),
+  picker = atom(false, 'mockPage.picker'),
 ) => {
   const { mock, learner, localization, questions } = resources
-  const picker = atom(false, 'mockPage.picker')
 
   const current = computed(() => {
     const sitting = learner()?.mockSittings.find((item) => item.id === testId) ?? null
@@ -24,8 +26,43 @@ export const createMockPageModel = (
     return { sitting, index, answer, loaded }
   }, 'mockPage.current')
 
+  const questionSession = createQuestionSession(
+    {
+      current: () => ({
+        key: current().loaded?.key ?? '',
+        index: current().index,
+        total: current().sitting?.answers.length ?? 0,
+        isPending:
+          mock.pending() || mock.remaining() === 0 || current().sitting?.status !== 'active',
+        canAnswer: current().answer !== undefined,
+        canFinish: false,
+      }),
+      answer: async (option) => {
+        const loaded = current().loaded
+
+        if (loaded !== undefined) {
+          await wrap(mock.select(loaded.key, option))
+        }
+      },
+      navigate: (index) => {
+        const sitting = current().sitting
+        const answer = sitting?.answers[index]
+
+        if (sitting === null || answer === undefined || sitting.status !== 'active') {
+          return false
+        }
+
+        openQuestion(sitting.id, answer.questionKey)
+
+        return true
+      },
+    },
+    motion,
+  )
+
   return current.extend(() => ({
     mock,
+    questions: questionSession,
     hasConflict: computed(
       () => isLearnerStateConflict(mock.error() ?? undefined),
       'mockPage.hasConflict',
@@ -50,16 +87,6 @@ export const createMockPageModel = (
         openQuestion(sitting.id, first.questionKey)
       }
     }, 'mockPage.start').extend(withAsync()),
-    go: action((index: number) => {
-      const sitting = current().sitting
-      const answer = sitting?.answers[index]
-
-      if (sitting !== null && answer !== undefined && sitting.status === 'active') {
-        picker.set(false)
-
-        openQuestion(sitting.id, answer.questionKey)
-      }
-    }, 'mockPage.go'),
     connect: action(() => {
       const watcher = effect(() => {
         const sitting = current().sitting

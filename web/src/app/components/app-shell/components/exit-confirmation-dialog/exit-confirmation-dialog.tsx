@@ -39,7 +39,7 @@ export const ExitConfirmationDialog = reatomComponent(
             {t(hasStorageConflict ? 'errors.storageConflict' : 'errors.storage')}
           </InlineNotice>
         )}
-        <Wrap gap="layout.inline">
+        <Wrap gap="layout.inline" marginTop="24">
           <Button
             appearance="outline"
             data-autofocus

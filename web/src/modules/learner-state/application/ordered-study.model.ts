@@ -107,7 +107,7 @@ export const createOrderedStudy = (
     position.set(next)
   }
 
-  return current.extend(() => ({
+  const model = current.extend(() => ({
     error,
     shouldAnnounceFeedback: !session().has(target),
     pending: computed(() => busy() || learner.pending() > 0, 'orderedStudy.pending'),
@@ -180,5 +180,12 @@ export const createOrderedStudy = (
     setTranslation: action(async (studyTranslation: boolean) => {
       await wrap(run(() => learner.updatePreferences({ studyTranslation })))
     }, 'orderedStudy.setTranslation').extend(withAsync()),
+  }))
+
+  return model.extend(() => ({
+    saving: computed(
+      () => model.pending() && model.previous.pending() === 0 && model.next.pending() === 0,
+      'orderedStudy.saving',
+    ),
   }))
 }

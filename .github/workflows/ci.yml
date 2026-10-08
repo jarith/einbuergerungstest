@@ -51,14 +51,14 @@ jobs:
     uses: ./.github/workflows/run-check.yml
     with:
       script: test:behavior
-      install-browsers: true
+      browsers: chromium
 
   ui-tests:
     name: Browser UI tests
     uses: ./.github/workflows/run-check.yml
     with:
       script: test:ui
-      install-browsers: true
+      browsers: chromium webkit
 
   e2e-scope:
     name: Select E2E scope
@@ -93,21 +93,21 @@ jobs:
     uses: ./.github/workflows/run-check.yml
     with:
       script: test:e2e
-      install-browsers: true
+      browsers: chromium
 
   browser-tests:
     name: Browser tests
     uses: ./.github/workflows/run-check.yml
     with:
       script: test:browser
-      install-browsers: true
+      browsers: chromium
 
   storybook-tests:
     name: Storybook tests
     uses: ./.github/workflows/run-check.yml
     with:
       script: test:storybook
-      install-browsers: true
+      browsers: chromium
 
   deploy:
     name: Deploy production

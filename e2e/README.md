@@ -107,10 +107,19 @@ or workflow paths change. The complete suite runs on master pushes. CI runs only
 requests and master pushes. No application unit-test requirement is introduced by this
 migration.
 
+Browser CI jobs use the version-pinned Playwright container, which includes browsers and
+their system dependencies. Keep its tag in `.github/workflows/run-check.yml` aligned with
+the Playwright packages in `package.json`. The workflow's `browsers` input selects
+Chromium for behavior, component, Storybook, and selected E2E checks; UI checks also need
+WebKit. A startup check launches only those preinstalled browsers, using Chromium's
+headless shell, without downloading browsers or running APT. The image itself includes all
+browsers. Checks without a `browsers` input run directly on the hosted runner.
+
 `.features-gen`, `test-results`, and `playwright-report` are disposable ignored output.
 Generation rejects missing/ambiguous steps; CI rejects focused tests. Production-browser
-failures retain traces and screenshots. See
-[migration and coverage ownership](../docs/bdd-migration.md).
+failures retain traces and screenshots. Failed `test:ui` CI jobs upload these alongside
+the HTML report as a `ui-test-failure-<sha>-<attempt>` artifact, retained for seven days.
+See [migration and coverage ownership](../docs/bdd-migration.md).
 
 ## Automatic deployment updates
 

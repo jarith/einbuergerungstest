@@ -7,11 +7,11 @@ on:
         description: Root package script to run
         required: true
         type: string
-      install-browsers:
-        description: Whether to install Chromium, WebKit, and their system dependencies
+      browsers:
+        description: Space-separated preinstalled browsers to use (chromium and/or webkit); empty runs on the host
         required: false
-        default: false
-        type: boolean
+        default: ''
+        type: string
       production-build:
         description: Build indexable public pages and upload the production artifact
         required: false
@@ -25,7 +25,14 @@ jobs:
   run-check:
     name: Run ${{ inputs.script }}
     runs-on: ubuntu-26.04
+    container:
+      # Keep this version aligned with the Playwright packages in package.json.
+      image: ${{ inputs.browsers != '' && 'mcr.microsoft.com/playwright:v1.63.0-resolute' || '' }}
+      options: --init --ipc=host
     timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
     steps:
       - name: Check out repository
         uses: actions/checkout@v7
@@ -58,15 +65,44 @@ jobs:
       - name: Install dependencies
         run: mise exec -- yarn install --immutable
 
-      - name: Install Playwright browser
-        if: ${{ inputs.install-browsers }}
-        run: mise exec -- yarn browser:install --with-deps
+      - name: Verify preinstalled Playwright browsers
+        if: inputs.browsers != ''
+        env:
+          BROWSERS: ${{ inputs.browsers }}
+        run: |
+          mise exec -- node --input-type=module <<'NODE'
+          import { chromium, webkit } from 'playwright'
+
+          const browserTypes = new Map([['chromium', chromium], ['webkit', webkit]])
+
+          for (const name of process.env.BROWSERS.split(' ')) {
+            const browserType = browserTypes.get(name)
+            if (!browserType) throw new Error(`Unsupported CI browser: ${name}`)
+
+            // Default headless Chromium uses the preinstalled headless shell.
+            const browser = await browserType.launch({ headless: true })
+            console.log(`${name}: ${browser.version()}`)
+            await browser.close()
+          }
+          NODE
 
       - name: Run check
+        id: check
         env:
           SCRIPT: ${{ inputs.script }}
           SITE_INDEXABLE: ${{ inputs.production-build && inputs.script == 'build' && 'true' || 'false' }}
         run: mise exec -- yarn "$SCRIPT"
+
+      - name: Save UI test failure artifacts
+        if: failure() && inputs.script == 'test:ui' && steps.check.outcome == 'failure'
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: ui-test-failure-${{ github.sha }}-${{ github.run_attempt }}
+          path: |
+            e2e/test-results
+            e2e/playwright-report
+          if-no-files-found: ignore
+          retention-days: 7
 
       - name: Save production build
         if: inputs.production-build && inputs.script == 'build'

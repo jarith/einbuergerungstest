@@ -2,19 +2,19 @@ import { StrictMode } from 'react'
 import { expect, test } from 'vitest'
 import { render } from 'vitest-browser-react'
 
-import { createStudyMotion } from '../../../../study-motion/study-motion'
-import { StudyQuestion } from './study-question'
+import { createQuestionMotion } from '../../../../question-motion/question-motion'
+import { QuestionSlide } from './question-slide'
 
 import '@einbuergerungstest/design-system/styles.css'
 
 test('question slides survive StrictMode ref replay and clean up on unmount', async () => {
-  const motion = createStudyMotion()
+  const motion = createQuestionMotion()
 
   const question = (index: number) => (
     <StrictMode>
-      <StudyQuestion key={index} motion={motion} questionKey={String(index)} index={index}>
+      <QuestionSlide key={index} motion={motion} questionKey={String(index)} index={index}>
         <div>Question {index}</div>
-      </StudyQuestion>
+      </QuestionSlide>
     </StrictMode>
   )
 
@@ -36,5 +36,5 @@ test('question slides survive StrictMode ref replay and clean up on unmount', as
   await screen.unmount()
 
   expect(animation?.playState).toBe('idle')
-  expect(document.querySelector('[data-study-outgoing]')).toBeNull()
+  expect(document.querySelector('[data-question-outgoing]')).toBeNull()
 })
