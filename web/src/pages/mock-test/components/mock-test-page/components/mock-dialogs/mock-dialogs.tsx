@@ -79,7 +79,11 @@ export const MockDialogs = reatomComponent(({ model }: MockDialogsProps) => {
                 aria-current={index === current.index ? 'step' : undefined}
                 aria-label={`${t('common.questionPosition', { current: index + 1, total: 33 })}: ${t(answer.selectedOption === null ? 'mock.unanswered' : 'mock.answered')}`}
                 disabled={isPending}
-                onClick={wrap(() => model.go(index))}
+                onClick={wrap(() => {
+                  model.closePicker()
+
+                  void model.questions.go(index)
+                })}
                 rightSection={
                   answer.selectedOption === null ? undefined : (
                     <Check size={14} aria-hidden="true" />

@@ -1,6 +1,6 @@
 import { token } from '@einbuergerungstest/design-system'
 
-import { styles } from './study-motion.styles'
+import { styles } from './question-motion.styles'
 
 type Direction = 'next' | 'previous'
 
@@ -17,8 +17,8 @@ type MotionLifecycle = {
   stop: (() => void) | undefined
 }
 
-/** DOM-only transition lifecycle, owned by one study session across route reloads. */
-export const createStudyMotion = () => {
+/** DOM-only transition lifecycle, owned by one question session across route reloads. */
+export const createQuestionMotion = () => {
   const lifecycle: MotionLifecycle = { current: null, departure: null, stop: undefined }
 
   const clear = () => {
@@ -64,7 +64,7 @@ export const createStudyMotion = () => {
 
       snapshot.className = `${snapshot.className} ${styles.outgoing}`
 
-      snapshot.dataset['studyOutgoing'] = ''
+      snapshot.dataset['questionOutgoing'] = ''
       lifecycle.departure = { key, index, direction, snapshot }
     },
     connect: (element: HTMLDivElement | null, key: string, index: number) => {
@@ -164,3 +164,5 @@ export const createStudyMotion = () => {
     },
   }
 }
+
+export type QuestionMotion = ReturnType<typeof createQuestionMotion>

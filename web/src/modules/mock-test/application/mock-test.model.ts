@@ -50,7 +50,7 @@ export const createMockTest = (
     submission.set(false)
   }
 
-  return active.extend(() => ({
+  const model = active.extend(() => ({
     error,
     submission,
     pending: computed(() => run.pending() > 0 || learner.pending() > 0, 'mockTest.pending'),
@@ -118,5 +118,16 @@ export const createMockTest = (
         await wrap(learner.finishMock(sitting.id, 'unfinished'))
       }
     }, 'mockTest.leave').extend(withAsync()),
+  }))
+
+  return model.extend(() => ({
+    hasExpired: computed(() => model.remaining() === 0, 'mockTest.hasExpired'),
+    // Navigation persists only the position; it must not refresh submission controls.
+    saving: computed(
+      () =>
+        run.pending() > model.navigate.pending() ||
+        learner.pending() > learner.navigateMock.pending(),
+      'mockTest.saving',
+    ),
   }))
 }

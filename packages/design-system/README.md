@@ -213,7 +213,8 @@ The configured public CSS import is recognized for app-local styles; the interna
 bridge alone does not register new `css()` calls for extraction.
 
 Reduced motion disables CSS animation and transition time, enables Mantine's
-reduced-motion handling, and skips the study slide's Web Animations lifecycle. Normal
-study navigation uses a short slide while retaining heading focus; its outgoing snapshot
-is inert and removed on completion, interruption, or departure. Full-screen media dialogs
-fade without translation to keep zoom controls stationary.
+reduced-motion handling, and skips the shared question slide's Web Animations lifecycle.
+Study and live mock navigation use the same short slide through
+`modules/question-session`, retaining heading focus. Its outgoing snapshot is inert and
+removed on completion, interruption, or departure. Full-screen media dialogs fade without
+translation to keep zoom controls stationary.

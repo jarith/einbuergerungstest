@@ -2,10 +2,21 @@
 
 This context describes preparation for the Berlin version of the German Einbürgerungstest.
 
-Study question motion must survive React StrictMode's development ref cleanup/reconnect
-cycle. Defer disposal until the microtask boundary and cancel only if the element was not
+Study and live mock tests share `modules/question-session`: question presentation, answer
+dispatch, Previous/Next controls, and directional slide lifecycle. Their adapters retain
+study's one-answer feedback and completion rules and mock's editable answers, timer,
+picker, and submission rules. Route scopes retain motion across question loads; both
+question routes keep previous data while loading. Surrounding UI subscribes to its own
+state: the mock timer, question position, summary, study progress, and help are separate
+render regions. Stable regions receive stable services or compare displayed progress
+values, rather than receiving each new question model. Navigation persistence remains part
+of action guards but must not toggle Submit test or the study saving notice; their
+`saving` state excludes position-only writes. The learner's queue still serializes writes.
+
+Question motion must survive React StrictMode's development ref cleanup/reconnect cycle.
+Defer disposal until the microtask boundary and cancel only if the element was not
 reattached. Production-only browser tests do not exercise this lifecycle; the
-StudyQuestion browser component regression mounts under StrictMode.
+QuestionSlide browser component regression mounts under StrictMode.
 
 ## Language
 

@@ -46,8 +46,12 @@ export const RoutePage = reatomComponent(
       )
     }
 
+    // Retained content belongs to the departure; focus only the loaded destination.
     return (
-      <Box display="contents" ref={wrap(browserNavigationAtom.complete)}>
+      <Box
+        display="contents"
+        ref={loader.ready() ? wrap(browserNavigationAtom.complete) : undefined}
+      >
         <Page data={data} />
       </Box>
     )

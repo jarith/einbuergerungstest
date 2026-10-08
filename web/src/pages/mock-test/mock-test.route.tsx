@@ -1,14 +1,21 @@
 import type { ReactElement } from 'react'
-import { wrap } from '@reatom/core'
+import { atom, wrap } from '@reatom/core'
 
 import type { AppRoute } from '../../app/routing'
 import { pageNotFound, RoutePage } from '../../app/routing'
+import { createQuestionMotion } from '../../modules/question-session'
 import { MockTestPage } from './components/mock-test-page/mock-test-page'
 import { createMockPageModel } from './mock-test.model'
 
 export const createMockTestRoutes = (parent: AppRoute) => {
+  const motion = createQuestionMotion()
+  const picker = atom(false, 'mockRoute.picker')
+
   const load = async (testId?: string, questionKey?: string) => {
     const resources = await wrap(parent.loader())
+
+    picker.set(false)
+
     const sittings = resources.learner()?.mockSittings ?? []
 
     const sitting = sittings.find((item) =>
@@ -18,8 +25,13 @@ export const createMockTestRoutes = (parent: AppRoute) => {
     if (sitting === undefined && testId === undefined) {
       return {
         ...resources,
-        model: createMockPageModel(resources, undefined, undefined, (id, target) =>
-          question.go({ testId: id, questionKey: target }),
+        model: createMockPageModel(
+          resources,
+          undefined,
+          undefined,
+          (id, target) => question.go({ testId: id, questionKey: target }),
+          motion,
+          picker,
         ),
       }
     }
@@ -41,8 +53,13 @@ export const createMockTestRoutes = (parent: AppRoute) => {
 
     return {
       ...resources,
-      model: createMockPageModel(resources, sitting.id, selected.key, (id, target) =>
-        question.go({ testId: id, questionKey: target }),
+      model: createMockPageModel(
+        resources,
+        sitting.id,
+        selected.key,
+        (id, target) => question.go({ testId: id, questionKey: target }),
+        motion,
+        picker,
       ),
     }
   }
@@ -55,6 +72,7 @@ export const createMockTestRoutes = (parent: AppRoute) => {
         <RoutePage
           loader={self.loader}
           page={MockTestPage}
+          keepPreviousData
           language={parent.loader.data()?.localization.language()}
         />
       ),
