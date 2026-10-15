@@ -1,6 +1,8 @@
 import { expect } from '@playwright/test'
 import { createBdd } from 'playwright-bdd'
 
+import bank from '../../../web/public/questionbank-berlin.json' with { type: 'json' }
+
 const { When, Then } = createBdd()
 
 When('I start a new all-question study session', async ({ page }) => {
@@ -17,7 +19,7 @@ When('I select study answer {string}', async ({ page }, label: string) => {
   }
 
   await page.evaluate<void, 'A' | 'B' | 'C' | 'D'>(
-    (value) => window.behavior.study().answer(value),
+    (value) => window.behavior.answerStudy(value),
     label,
   )
 
@@ -43,14 +45,18 @@ Then('the correct study option is {string}', async ({ page }, option: string) =>
 })
 
 When('I go to the next study question', async ({ page }) => {
-  await page.evaluate(() => window.behavior.study().next())
+  await page.evaluate(() => window.behavior.navigateStudy('next'))
 })
 
 When('I go to the previous study question', async ({ page }) => {
-  await page.evaluate(() => window.behavior.study().previous())
+  await page.evaluate(() => window.behavior.navigateStudy('previous'))
 })
 
-When('I enable English translation', async ({ page }) => {
+When('I enable {word} translation', async ({ page }, language: string) => {
+  if (language !== 'English' && language !== 'Russian') {
+    throw new Error(`Unknown translation language ${language}`)
+  }
+
   await page.evaluate(() =>
     window.behavior.resources().learner.updatePreferences({ studyTranslation: true }),
   )
@@ -59,22 +65,23 @@ When('I enable English translation', async ({ page }) => {
 Then(
   'German and English content for study question {int} and its options is available',
   async ({ page }, order: number) => {
-    const result = await page.evaluate((number) => {
-      const question = window.behavior.question(number)
+    const result = await page.evaluate(() => {
+      const question = window.behavior.study()().question
 
       return {
         content: window.behavior.resources().localization.getQuestion(question, 'study'),
         question,
       }
-    }, order)
+    })
 
+    expect(result.question.order).toBe(order)
     expect(result.content).toEqual({
       german: result.question.question_de,
-      english: result.question.question_en,
+      translation: result.question.question_en,
       options: result.question.answer_options.map((option) => ({
         label: option.label,
         german: option.text_de,
-        english: option.text_en,
+        translation: option.text_en,
       })),
     })
   },
@@ -82,22 +89,23 @@ Then(
 Then(
   'the original German content for study question {int} is available without translation',
   async ({ page }, order: number) => {
-    const result = await page.evaluate((number) => {
-      const question = window.behavior.question(number)
+    const result = await page.evaluate(() => {
+      const question = window.behavior.study()().question
 
       return {
         content: window.behavior.resources().localization.getQuestion(question, 'study'),
         question,
       }
-    }, order)
+    })
 
+    expect(result.question.order).toBe(order)
     expect(result.content).toEqual({
       german: result.question.question_de,
-      english: null,
+      translation: null,
       options: result.question.answer_options.map((option) => ({
         label: option.label,
         german: option.text_de,
-        english: null,
+        translation: null,
       })),
     })
   },
@@ -142,7 +150,7 @@ When('I choose the {string} group', async ({ page }, title: string) => {
       throw new Error(`Unknown group ${name}`)
     }
 
-    window.behavior.startStudy(undefined, group.id)
+    return window.behavior.startStudy(undefined, group.id)
   }, title)
 })
 
@@ -150,19 +158,28 @@ Then('question {int} is the current group question', async ({ page }, order: num
   expect(await page.evaluate(() => window.behavior.study()().question.order)).toBe(order)
 })
 When('I answer and advance through the Berlin group to its final question', async ({ page }) => {
-  for (let order = 301; order < 310; order += 1) {
-    expect(await page.evaluate(() => window.behavior.study()().question.order)).toBe(order)
+  const expectedOrders = [301, 302, 303, 304, 305, 306, 307, 308, 309]
+
+  const observedOrders = await expectedOrders.reduce(async (pendingOrders) => {
+    const orders = await pendingOrders
+    const order = await page.evaluate(() => window.behavior.study()().question.order)
 
     await page.evaluate(() =>
-      window.behavior.study().answer(window.behavior.study()().question.correct_option),
+      window.behavior.answerStudy(window.behavior.study()().question.correct_option),
     )
 
-    await page.evaluate(() => window.behavior.study().next())
-  }
+    await page.evaluate(() => window.behavior.navigateStudy('next'))
+
+    orders.push(order)
+
+    return orders
+  }, Promise.resolve<number[]>([]))
+
+  expect(observedOrders).toEqual(expectedOrders)
 })
 
 When('I finish the group', async ({ page }) => {
-  await page.evaluate(() => window.behavior.study().next())
+  await page.evaluate(() => window.behavior.navigateStudy('next'))
 })
 
 Then('the group pass is completed', async ({ page }) => {
@@ -170,38 +187,67 @@ Then('the group pass is completed', async ({ page }) => {
 })
 
 When('I review the completed group', async ({ page }) => {
-  await page.evaluate(() => window.behavior.study().restart())
+  await page.evaluate(() => window.behavior.restartStudy())
 })
 
 Then(
   'the group catalog includes every group with its description and question count',
   async ({ page }) => {
-    const result = await page.evaluate(() => ({
-      groups: window.behavior.dashboard().groups(),
-      bank: window.behavior.resources().questions.bank,
+    const expectedGroupCount = 14
+
+    // Counts from the study-note assignment manifest in docs/question-groups.md.
+    const expectedCounts = new Map([
+      ['fundamental-rights', 20],
+      ['state-structure', 56],
+      ['elections-civic-participation', 36],
+      ['rule-of-law-courts', 21],
+      ['social-security', 17],
+      ['history-until-war-end', 15],
+      ['postwar-history', 39],
+      ['reunification', 7],
+      ['europe-eu', 20],
+      ['symbols-holidays-culture', 13],
+      ['education-family-everyday-life', 42],
+      ['jewish-life-antisemitism', 10],
+      ['migration', 4],
+      ['berlin', 10],
+    ])
+
+    const expectedGroups = bank.groups.map(({ id, title, description }) => ({
+      id,
+      title,
+      description,
+      total: expectedCounts.get(id),
     }))
 
-    expect(result.groups).toHaveLength(13)
+    const groups = await page.evaluate(() =>
+      window.behavior
+        .dashboard()
+        .groups()
+        .map(({ id, title, description, total }) => ({
+          id,
+          title,
+          description,
+          total,
+        })),
+    )
 
-    for (const group of result.bank.groups) {
-      expect(result.groups.find((item) => item.id === group.id)).toMatchObject({
-        title: group.title,
-        description: group.description,
-        total: result.bank.questions.filter((question) => question.group_id === group.id).length,
-      })
-    }
+    expect(groups).toHaveLength(expectedGroupCount)
+    expect(groups).toEqual(expect.arrayContaining(expectedGroups))
   },
 )
 Then('every question group has zero progress', async ({ page }) => {
-  const groups = await page.evaluate(() => [
-    ...window.behavior.resources().learner.progress.groups().values(),
-  ])
+  const expectedGroupCount = 14
+  const expectedGroups = bank.groups.map(({ id }) => ({ id, contributing: 0, percentage: 0 }))
 
-  expect(groups).toHaveLength(13)
+  const groups = await page.evaluate(() =>
+    [...window.behavior.resources().learner.progress.groups()].map(
+      ([id, { contributing, percentage }]) => ({ id, contributing, percentage }),
+    ),
+  )
 
-  for (const group of groups) {
-    expect(group).toMatchObject({ contributing: 0, percentage: 0 })
-  }
+  expect(groups).toHaveLength(expectedGroupCount)
+  expect(groups).toEqual(expect.arrayContaining(expectedGroups))
 })
 Then(
   'the {string} group shows {int} of {int} contributing to progress and {int} percent',
@@ -249,13 +295,11 @@ Then(
     ).toBe(1)
   },
 )
-Then('the Constitution and rights group has a German title and description', async ({ page }) => {
+Then('the Fundamental rights group has a German title and description', async ({ page }) => {
   const result = await page.evaluate(() => {
     const group = window.behavior
       .resources()
-      .questions.bank.groups.find(
-        (item) => item.title === 'Constitution, rights, and democratic principles',
-      )
+      .questions.bank.groups.find((item) => item.title === 'Fundamental rights')
 
     if (!group) {
       throw new Error('Missing group')

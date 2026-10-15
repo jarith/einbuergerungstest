@@ -1,0 +1,54 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$(testing_root=$(git rev-parse --show-toplevel); if test -f \"$testing_root/.codex/hooks/testing/codex.mjs\"; then printf '%s' \"$testing_root\"; else git worktree list --porcelain | sed -n '1s/^worktree //p'; fi)/.codex/hooks/testing/codex.mjs\"",
+            "timeout": 20,
+            "statusMessage": "Testing SessionStart"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$(testing_root=$(git rev-parse --show-toplevel); if test -f \"$testing_root/.codex/hooks/testing/codex.mjs\"; then printf '%s' \"$testing_root\"; else git worktree list --porcelain | sed -n '1s/^worktree //p'; fi)/.codex/hooks/testing/codex.mjs\"",
+            "timeout": 20,
+            "statusMessage": "Testing PreToolUse"
+          }
+        ],
+        "matcher": "Bash|apply_patch"
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$(testing_root=$(git rev-parse --show-toplevel); if test -f \"$testing_root/.codex/hooks/testing/codex.mjs\"; then printf '%s' \"$testing_root\"; else git worktree list --porcelain | sed -n '1s/^worktree //p'; fi)/.codex/hooks/testing/codex.mjs\"",
+            "timeout": 20,
+            "statusMessage": "Testing PostToolUse"
+          }
+        ],
+        "matcher": "Bash|apply_patch"
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$(testing_root=$(git rev-parse --show-toplevel); if test -f \"$testing_root/.codex/hooks/testing/codex.mjs\"; then printf '%s' \"$testing_root\"; else git worktree list --porcelain | sed -n '1s/^worktree //p'; fi)/.codex/hooks/testing/codex.mjs\"",
+            "timeout": 20,
+            "statusMessage": "Testing Stop"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -6,6 +6,8 @@ node_modules/
 *.tsbuildinfo
 dist/
 coverage/
+reports/mutation/
+.stryker-tmp/
 *.lcov
 .features-gen/
 playwright-report/

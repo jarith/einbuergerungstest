@@ -16,8 +16,10 @@ Feature: Practice a Berlin Einbürgerungstest
     Then the selected mock answer is "B"
     And answer correctness is withheld
     When I go to the next mock question
-    And I go to the previous mock question
-    Then the selected mock answer is "B"
+    Then I am on mock question 2
+    When I go to the previous mock question
+    Then I am on mock question 1
+    And the selected mock answer is "B"
 
   Scenario: Blank answers warn before submission and score zero
     When I start a mock test
@@ -27,11 +29,11 @@ Feature: Practice a Berlin Einbürgerungstest
     Then the mock remains active
     When I confirm submitting the mock with unanswered questions
     Then the mock result is 0 of 33 and "failed"
-    And the completed review includes every question and correct answer
+    And the completed review includes every unanswered question and its correct answer
     And the question totals are 310 not started, 0 needing review, 0 learning, and 0 learned
     And the mock totals are 1 completed, 0 passed, 1 failed, and 0 unfinished
     When I review the completed mock
-    Then the completed review includes every question and correct answer
+    Then the completed review includes every unanswered question and its correct answer
 
   Scenario Outline: The pass threshold is 17 correct answers
     When I start a mock test

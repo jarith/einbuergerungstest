@@ -19,6 +19,12 @@ export const BackupPreview = reatomComponent(
     const date = (value: string | null) =>
       value === null ? t('settings.none') : localization.formatPlannedDate(value)
 
+    const languageLabels = {
+      en: 'settings.english',
+      de: 'settings.german',
+      ru: 'settings.russian',
+    } as const
+
     const rows = [
       [t('settings.studyAttempts'), preview.studyAttempts, current.studyAttempts.length],
       [
@@ -38,8 +44,8 @@ export const BackupPreview = reatomComponent(
       ],
       [
         t('settings.language'),
-        t(preview.preferences.language === 'en' ? 'settings.english' : 'settings.german'),
-        t(current.preferences.language === 'en' ? 'settings.english' : 'settings.german'),
+        t(languageLabels[preview.preferences.language]),
+        t(languageLabels[current.preferences.language]),
       ],
       [
         t('settings.studyTranslation'),

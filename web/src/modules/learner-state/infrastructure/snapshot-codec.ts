@@ -178,7 +178,7 @@ export const parseLearnerSnapshot = (value: JsonValue): LearnerSnapshot => {
   const appearance = preferences['appearance']
 
   if (
-    (language !== 'en' && language !== 'de') ||
+    (language !== 'en' && language !== 'de' && language !== 'ru') ||
     typeof studyTranslation !== 'boolean' ||
     (appearance !== 'light' && appearance !== 'dark')
   ) {

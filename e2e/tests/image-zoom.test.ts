@@ -10,7 +10,7 @@ for (const { question, width, height } of [
   { question: 308, width: 390, height: 844 },
   { question: 308, width: 844, height: 390 },
 ]) {
-  test(`question ${question} keeps zoom controls stable at ${width} × ${height}`, async ({
+  test(`question ${question} keeps zoom controls stable and resets on reopening at ${width} × ${height}`, async ({
     page,
   }) => {
     await page.setViewportSize({ width, height })
@@ -23,19 +23,13 @@ for (const { question, width, height } of [
 
     await expect(image).toHaveJSProperty('complete', true)
 
-    if (question === 21) {
-      await studyAnswer(page, 'A').click()
+    await studyAnswer(page, 'A').click()
 
-      await expect(studyAnswer(page, 'A')).toBeChecked()
-    }
+    await expect(studyAnswer(page, 'A')).toBeChecked()
 
     const size = await bounds(image)
 
     expect(size.height).toBeGreaterThan(0)
-
-    if (width >= 1024) {
-      expect(size.height).toBeLessThanOrEqual(400)
-    }
 
     await page.getByRole('button', { name: 'Enlarge question image', exact: true }).click()
 
@@ -57,8 +51,8 @@ for (const { question, width, height } of [
     expect(fittedImage.height).toBeLessThanOrEqual(initialViewport.height + 1)
     await expect(zoomOut).toBeDisabled()
 
-    for (const zoom of [1, 2, 3]) {
-      await expect(level).toHaveText(`${zoom * 100}%`)
+    const expectZoomLayout = async (zoom: number, expectedLabel: string) => {
+      await expect(level).toHaveText(expectedLabel)
       expect(await bounds(dialog)).toEqual({ x: 0, y: 0, ...screen })
       expect(await bounds(viewport)).toEqual(initialViewport)
       expect(await bounds(zoomIn)).toEqual(initialControl)
@@ -77,11 +71,19 @@ for (const { question, width, height } of [
 
       expect(enlarged.width).toBeCloseTo(fittedImage.width * zoom, 0)
       expect(enlarged.height).toBeCloseTo(fittedImage.height * zoom, 0)
-
-      if (zoom < 3) {
-        await zoomIn.click()
-      }
     }
+
+    // Legacy characterization: the existing viewer starts at 100%, changes by 100%,
+    // caps at 300%, and resets on reopening. These values are not new product requirements.
+    await expectZoomLayout(1, '100%')
+
+    await zoomIn.click()
+
+    await expectZoomLayout(2, '200%')
+
+    await zoomIn.click()
+
+    await expectZoomLayout(3, '300%')
 
     await expect(zoomIn).toBeDisabled()
 
@@ -97,6 +99,10 @@ for (const { question, width, height } of [
 
     await expect(level).toHaveText('100%')
     await expect(zoomOut).toBeDisabled()
+
+    await zoomIn.click()
+
+    await expect(level).toHaveText('200%')
 
     const trigger = page.getByRole('button', { name: 'Enlarge question image', exact: true })
 
@@ -121,9 +127,26 @@ for (const { question, width, height } of [
       page.getByRole('heading', { name: sourceQuestion(question).question_de, exact: true }),
     ).toBeVisible()
 
-    if (question === 21) {
-      await expect(studyAnswer(page, 'A')).toBeChecked()
-      await expect(studyAnswer(page, 'A')).toBeDisabled()
-    }
+    await expect(studyAnswer(page, 'A')).toBeChecked()
+    await expect(studyAnswer(page, 'A')).toBeDisabled()
+  })
+}
+
+// Preserve the existing desktop image-size characterization separately from zoom behavior.
+for (const question of [21, 308]) {
+  test(`desktop illustration ${question} respects the existing height cap`, async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 })
+
+    await page.goto(`/study/${sourceQuestion(question).id}`)
+
+    const image = page.getByRole('img', { name: /Illustration for question/ })
+
+    await expect(image).toHaveJSProperty('complete', true)
+
+    const size = await bounds(image)
+    const expectedMaximumHeight = 400
+
+    expect(size.height).toBeGreaterThan(0)
+    expect(size.height).toBeLessThanOrEqual(expectedMaximumHeight)
   })
 }

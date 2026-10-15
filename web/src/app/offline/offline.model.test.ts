@@ -1,4 +1,5 @@
-import { afterEach, expect, test, vi } from 'vitest'
+import { getGlobalDispatcher, MockAgent, setGlobalDispatcher } from 'undici'
+import { afterEach, beforeEach, expect, onTestFinished, test, vi } from 'vitest'
 
 import { createOfflineModel } from './offline.model'
 
@@ -52,41 +53,109 @@ const createEnvironment = (
     }),
   )
 
-  vi.stubGlobal('fetch', () => Promise.resolve(new Response(null, { status: 404 })))
-
   return { registration, serviceWorker, reload }
 }
+
+const createNetwork = () => {
+  const previousDispatcher = getGlobalDispatcher()
+  const network = new MockAgent()
+
+  network.disableNetConnect()
+
+  setGlobalDispatcher(network)
+
+  onTestFinished(async () => {
+    setGlobalDispatcher(previousDispatcher)
+
+    await network.close()
+  })
+
+  return network
+}
+
+beforeEach(() => {
+  vi.useFakeTimers({
+    toFake: ['Date', 'setTimeout', 'clearTimeout', 'setInterval', 'clearInterval'],
+  })
+
+  vi.setSystemTime(new Date('2026-10-15T10:00:00Z'))
+
+  // Node's native AbortSignal.timeout uses an internal timer outside Vitest's
+  // clock. Keep its browser-boundary semantics on the same controlled clock.
+  vi.spyOn(AbortSignal, 'timeout').mockImplementation((delay) => {
+    const controller = new AbortController()
+
+    setTimeout(() => controller.abort(new DOMException('Timed out', 'TimeoutError')), delay)
+
+    return controller.signal
+  })
+})
 
 afterEach(() => {
   vi.unstubAllGlobals()
 
   vi.unstubAllEnvs()
+
+  vi.restoreAllMocks()
+
+  vi.useRealTimers()
 })
 
+const interceptActivation = (network: MockAgent) =>
+  network.get('https://example.test').intercept({
+    path: /^\/pwa\/offline-ready\?check=[^&]+$/,
+    method: 'GET',
+    headers: { 'cache-control': 'no-cache', pragma: 'no-cache' },
+  })
+
 test.each([
-  { responds: true, expected: 'ready' },
-  { responds: false, expected: 'activation-pending' },
+  {
+    evidence: 'identified activation response',
+    status: 204,
+    headers: { 'X-Offline-Worker': 'https://example.test/pwa/sw.js' },
+    expected: 'ready',
+  },
+  {
+    evidence: 'missing activation response',
+    status: 404,
+    headers: {},
+    expected: 'activation-pending',
+  },
+  {
+    evidence: 'activation response without worker identity',
+    status: 204,
+    headers: {},
+    expected: 'activation-pending',
+  },
+  {
+    evidence: 'activation response identifying another worker',
+    status: 204,
+    headers: { 'X-Offline-Worker': 'https://example.test/pwa/another-worker.js' },
+    expected: 'activation-pending',
+  },
+  {
+    evidence: 'identified response without the activation status',
+    status: 200,
+    headers: { 'X-Offline-Worker': 'https://example.test/pwa/sw.js' },
+    expected: 'activation-pending',
+  },
 ])(
-  'an activating worker with a complete cache reports $expected',
-  async ({ responds, expected }) => {
+  'an activating worker with $evidence and a complete cache reports $expected',
+  async ({ status, headers, expected }) => {
+    const network = createNetwork()
     const worker = createWorker('activating')
 
     const { reload } = createEnvironment(worker)
 
-    vi.stubGlobal('fetch', () =>
-      Promise.resolve(
-        new Response(null, {
-          status: responds ? 204 : 404,
-          headers: responds ? { 'X-Offline-Worker': worker.scriptURL } : {},
-        }),
-      ),
-    )
+    interceptActivation(network).reply(status, '', { headers })
 
     const offline = createOfflineModel(() => false)
     const subscription = offline.subscribe()
 
     try {
       await vi.waitFor(() => expect(offline()).toBe(expected))
+
+      network.assertNoPendingInterceptors()
 
       expect(offline.missing()).toEqual([])
       expect(reload).not.toHaveBeenCalled()
@@ -97,10 +166,13 @@ test.each([
 )
 
 test('an automatic restart waits for the replacement controller to finish activation', async () => {
+  const network = createNetwork()
   const original = createWorker('activated')
   const replacement = createWorker('installing')
 
   const { registration, serviceWorker, reload } = createEnvironment(original, replacement)
+
+  interceptActivation(network).reply(404, '').persist()
 
   const offline = createOfflineModel(() => false)
   const subscription = offline.subscribe()
@@ -119,8 +191,7 @@ test('an automatic restart waits for the replacement controller to finish activa
 
     serviceWorker.dispatchEvent(new Event('controllerchange'))
 
-    // Let the model's scheduled effects observe controllerchange.
-    await new Promise<void>((resolve) => setImmediate(resolve))
+    await vi.waitFor(() => expect(offline()).toBe('activation-pending'))
 
     expect(reload).not.toHaveBeenCalled()
 

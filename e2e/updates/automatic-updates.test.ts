@@ -1,6 +1,8 @@
 import type { Page } from '@playwright/test'
 import { expect } from '@playwright/test'
 
+import { makePreviousGroupProfile } from '../behavior/fixtures/previous-groups'
+import { savedProfile } from '../behavior/fixtures/storage'
 import { sourceQuestion, studyAnswer } from '../support/browser'
 import { exposeStaleActivationState } from '../support/offline'
 import { test } from '../support/releases'
@@ -30,6 +32,56 @@ test.describe('installed PWA release transitions', () => {
     await context.addInitScript(() =>
       Object.defineProperty(navigator, 'standalone', { value: true }),
     )
+  })
+
+  test('an online launch updates and recalculates old group progress without a backup import', async ({
+    page,
+    context,
+    deployment,
+    setOffline,
+  }) => {
+    await page.goto(`${deployment.origin}/pwa/settings`)
+
+    await expect(version(page, 'release-a')).toBeVisible()
+    await expect(ready(page)).toHaveCount(1)
+
+    // Arrange the previous grouping's persisted profile at the real storage boundary.
+    // Both release builds use current code; the other integration scenarios verify
+    // the legacy profile directly, while this checks delivery, reload, and offline use.
+    const previous = makePreviousGroupProfile(Date.now())
+
+    await page.evaluate(savedProfile, JSON.stringify(previous))
+
+    await page.close()
+
+    deployment.publish('release-b')
+
+    const reopened = await context.newPage()
+
+    await reopened.goto(`${deployment.origin}/pwa/settings`)
+
+    await expect(version(reopened, 'release-b')).toBeVisible({ timeout: 20_000 })
+    await expect(ready(reopened)).toHaveCount(1)
+
+    await reopened.goto(`${deployment.origin}/pwa/dashboard`)
+
+    const rights = reopened.getByRole('listitem').filter({
+      has: reopened.getByRole('heading', { name: 'Fundamental rights', exact: true }),
+    })
+
+    const courts = reopened.getByRole('listitem').filter({
+      has: reopened.getByRole('heading', { name: 'The rule of law and courts', exact: true }),
+    })
+
+    await expect(rights.getByText('2 of 20 learning or learned', { exact: true })).toBeVisible()
+    await expect(courts.getByText('1 of 21 learning or learned', { exact: true })).toBeVisible()
+
+    await setOffline(true)
+
+    await reopened.reload()
+
+    await expect(rights.getByText('2 of 20 learning or learned', { exact: true })).toBeVisible()
+    await expect(courts.getByText('1 of 21 learning or learned', { exact: true })).toBeVisible()
   })
 
   test('a stale activating state verifies the real worker and survives an offline reload', async ({
@@ -213,6 +265,8 @@ test.describe('installed PWA release transitions', () => {
     context,
     deployment,
   }) => {
+    deployment.observeActivations()
+
     await page.goto(`${deployment.origin}/pwa/settings`)
 
     await expect(ready(page)).toHaveCount(1)
@@ -239,8 +293,15 @@ test.describe('installed PWA release transitions', () => {
       )
       .toBe(true)
 
-    // Cross the handshake deadline and verify the selected answer is untouched.
-    await page.waitForTimeout(3000)
+    // The worker has completed its actual ACTIVATE_UPDATE handler, including
+    // any conservative timeout veto. No native activation request may have been made.
+    await expect.poll(() => deployment.completedActivations().length).toBeGreaterThan(0)
+
+    expect(
+      deployment
+        .completedActivations()
+        .filter((check) => !check.fulfilled || check.activationRequested),
+    ).toEqual([])
 
     await expect(version(page, 'release-a')).toBeVisible()
     await expect(exam.getByRole('radio').first()).toBeChecked()

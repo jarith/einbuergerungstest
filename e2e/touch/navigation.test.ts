@@ -46,6 +46,8 @@ test('Next reveals the new question and keyboard answering preserves focus', asy
 test('double tapping active Study scrolls up without restarting the session or adding history', async ({
   page,
 }) => {
+  await page.clock.install({ time: new Date('2026-10-05T10:00:00Z') })
+
   // The compact study page fits a tall phone; use a shorter viewport to exercise scrolling.
   await page.setViewportSize({ width: 390, height: 700 })
 
@@ -58,6 +60,10 @@ test('double tapping active Study scrolls up without restarting the session or a
   await studyAnswer(page, 'A').tap()
 
   await expect(studyAnswer(page, 'A')).toBeChecked()
+
+  // Playwright's clock also controls Event.timeStamp. Pause after setup so browser
+  // and runner latency cannot stretch the interval between the two real taps.
+  await page.clock.pauseAt(new Date('2026-10-05T12:00:00Z'))
 
   const before = await page.evaluate(() => ({ url: location.href, entries: history.length }))
 
@@ -76,6 +82,8 @@ test('double tapping active Study scrolls up without restarting the session or a
   await study.tap()
 
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(position)
+
+  await page.clock.runFor(200)
 
   await study.tap()
 
@@ -116,7 +124,7 @@ test('Back preserves the expanded Progress list and its scroll position', async 
 
   await waitForAppReady(page)
 
-  const group = page.getByRole('region', { name: /^Constitution, rights/ })
+  const group = page.getByRole('region', { name: /^Fundamental rights/ })
 
   await group.getByRole('button', { name: 'Show next 10 questions', exact: true }).tap()
 

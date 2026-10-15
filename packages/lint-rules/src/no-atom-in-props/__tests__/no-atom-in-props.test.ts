@@ -23,10 +23,24 @@ describe('no-atom-in-props', () => {
   it('reports all expected violations', async () => {
     expect.hasAssertions()
 
+    const expectedViolationCount = 3
+
+    const expectedViolations = [
+      'violations.ts:5:10: error app(no-atom-in-props): Atom<>',
+      'violations.ts:10:9: error app(no-atom-in-props): AtomMut<>',
+      'violations.ts:15:9: error app(no-atom-in-props): Computed<>',
+    ]
+
     const { stdout } = await runOxlint('violations.ts')
 
     const violations = stdout.match(/is not allowed in Props interfaces/gu)
-    expect(violations).toHaveLength(3)
+
+    const diagnostics = stdout.match(
+      /violations\.ts:\d+:\d+: error app\(no-atom-in-props\): \w+<>/gu,
+    )
+
+    expect(violations).toHaveLength(expectedViolationCount)
+    expect(diagnostics).toEqual(expect.arrayContaining(expectedViolations))
   })
 
   it('does not report violations for clean code', async () => {

@@ -1,6 +1,8 @@
 import { expect } from '@playwright/test'
 import { createBdd } from 'playwright-bdd'
 
+import { restartLearner } from '../restart'
+
 const { Before, Given, When, Then } = createBdd()
 
 Before(async ({ page }) => {
@@ -26,24 +28,24 @@ Given('the current time is {string}', async ({ page }, instant: string) => {
 })
 
 When('I choose {word} as my preferred language', async ({ page }, language: string) => {
-  if (language !== 'English' && language !== 'German') {
+  if (language !== 'English' && language !== 'German' && language !== 'Russian') {
     throw new Error(`Unknown language ${language}`)
   }
 
-  await page.evaluate<void, 'en' | 'de'>(
+  await page.evaluate<void, 'en' | 'de' | 'ru'>(
     (value) => window.behavior.resources().learner.updatePreferences({ language: value }),
-    language === 'German' ? 'de' : 'en',
+    language === 'Russian' ? 'ru' : language === 'German' ? 'de' : 'en',
   )
 })
 
 Then('my preferred language is {word}', async ({ page }, language: string) => {
   expect(await page.evaluate(() => window.behavior.resources().localization.language())).toBe(
-    language === 'German' ? 'de' : 'en',
+    language === 'Russian' ? 'ru' : language === 'German' ? 'de' : 'en',
   )
 })
 
 When('I restart with my saved history', async ({ page }) => {
-  await page.evaluate(() => window.behavior.restart())
+  await restartLearner(page)
 })
 
 When('I set the test date to {string}', async ({ page }, date: string) => {
@@ -173,15 +175,33 @@ When('I create a backup of my progress', async ({ page }) => {
 })
 
 When('I preview the saved backup', async ({ page }) => {
-  await page.evaluate(() => {
+  await page.evaluate(async () => {
     const source = window.behavior.state.exported
 
     if (source === undefined) {
       throw new Error('Create a backup first.')
     }
 
+    window.behavior.state.beforePreview = {
+      current: await window.behavior.resources().learner.exportBackup(),
+      saved: await window.behavior.savedProfile(),
+    }
+
     return window.behavior.backup().selectFile(new File([source], 'backup.json'))
   })
+})
+
+Then('the preview has not replaced my current or saved history', async ({ page }) => {
+  const expected = await page.evaluate(() => window.behavior.state.beforePreview)
+
+  if (expected === undefined) {
+    throw new Error('Preview a backup before checking unchanged history.')
+  }
+
+  expect(await page.evaluate(() => window.behavior.resources().learner.exportBackup())).toBe(
+    expected.current,
+  )
+  expect(await page.evaluate(() => window.behavior.savedProfile())).toBe(expected.saved)
 })
 
 Then('the import preview describes 1 study attempt', async ({ page }) => {
@@ -224,7 +244,13 @@ Then('reset awaits confirmation', async ({ page }) => {
 })
 
 When('I cancel the reset', async ({ page }) => {
+  const before = await page.evaluate(() => window.behavior.resources().learner.exportBackup())
+
   await page.evaluate(() => window.behavior.backup().cancel())
+
+  expect(await page.evaluate(() => window.behavior.backup().isConfirming())).toBe(false)
+  expect(await page.evaluate(() => window.behavior.resources().learner.confirmation())).toBeNull()
+  expect(await page.evaluate(() => window.behavior.resources().learner.exportBackup())).toBe(before)
 })
 
 When('I request and confirm a progress reset', async ({ page }) => {
@@ -248,7 +274,7 @@ Then('the replacement is refused and saved history is unchanged', async ({ page 
 
   const before = await page.evaluate(() => window.behavior.resources().learner.exportBackup())
 
-  await page.evaluate(() => window.behavior.restart())
+  await restartLearner(page)
 
   expect(await page.evaluate(() => window.behavior.resources().learner.exportBackup())).toBe(before)
 })

@@ -5,7 +5,7 @@ import { getAppMode, observePwaAnalytics } from './offline/pwa.analytics'
 export const startPageAnalytics = () => {
   const analytics = createUmamiAnalytics(() => ({
     app_mode: getAppMode(),
-    ui_language: document.documentElement.lang === 'de' ? 'de' : 'en',
+    ui_language: document.documentElement.lang,
   }))
 
   const stopPwa = analytics.run(() => {

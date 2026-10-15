@@ -21,11 +21,16 @@ Feature: Reject unsafe backups before replacing progress
       | more than 50000 study attempts  |
       | more than 1000 mock tests       |
       | deeply nested unused data      |
-      | oversized UTF-8 text            |
       | the maximum date timestamp      |
       | a study timestamp beyond a day  |
       | a mock start beyond a day       |
       | a mock finish beyond a day      |
+
+  Scenario: Oversized UTF-8 text is rejected by its encoded size
+    When I preview a backup with "oversized UTF-8 text"
+    Then the oversized text is rejected by its encoded size
+    And the unsafe backup has no replacement preview
+    And my saved history is unchanged after restarting
 
   Scenario: Supported clock skew still permits saving subsequent answers
     When I import a study attempt dated tomorrow

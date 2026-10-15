@@ -23,7 +23,13 @@ rule:
                   regex: '^(?:document|window)$'
               - has:
                   field: index
-                  regex: '^addEventListener$'
+                  any:
+                    - regex: '^addEventListener$'
+                    - all:
+                        - kind: string
+                        - has:
+                            kind: string_fragment
+                            regex: '^addEventListener$'
     - not:
         inside:
           any:
@@ -60,7 +66,13 @@ rule:
                   regex: '^(?:document|window)$'
               - has:
                   field: index
-                  regex: '^addEventListener$'
+                  any:
+                    - regex: '^addEventListener$'
+                    - all:
+                        - kind: string
+                        - has:
+                            kind: string_fragment
+                            regex: '^addEventListener$'
     - not:
         inside:
           any:

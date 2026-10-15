@@ -75,18 +75,53 @@ export const bounds = async (locator: Locator) => {
 export const expectReadable = async (elements: Locator) => {
   await expect(elements.first()).toBeVisible()
 
-  for (const element of await elements.all()) {
-    await expect(element).toBeVisible()
+  await expect
+    .poll(() =>
+      elements.evaluateAll(
+        (nodes) =>
+          nodes.filter((node) => {
+            type AncestorCursor = { ancestor: Element | null }
 
-    await expect
-      .poll(() =>
-        element.evaluate(
-          (node) =>
-            node.scrollWidth <= node.clientWidth + 1 && node.scrollHeight <= node.clientHeight + 1,
-        ),
-      )
-      .toBe(true)
-  }
+            const range = document.createRange()
+
+            range.selectNodeContents(node)
+
+            const fragments = [...range.getClientRects()]
+            const ancestors: Element[] = []
+            const cursor: AncestorCursor = { ancestor: node }
+
+            // Inspect clipping containers, not the viewport: readable content may be below the fold.
+            while (cursor.ancestor !== null && cursor.ancestor !== document.body) {
+              ancestors.push(cursor.ancestor)
+
+              cursor.ancestor = cursor.ancestor.parentElement
+            }
+
+            return (
+              !node.checkVisibility({ visibilityProperty: true, opacityProperty: true }) ||
+              fragments.length === 0 ||
+              node.getBoundingClientRect().width === 0 ||
+              node.getBoundingClientRect().height === 0 ||
+              node.scrollWidth > node.clientWidth + 1 ||
+              node.scrollHeight > node.clientHeight + 1 ||
+              ancestors.some((container) => {
+                const style = getComputedStyle(container)
+                const clip = container.getBoundingClientRect()
+                const clipsX = /hidden|clip|auto|scroll/.test(style.overflowX)
+                const clipsY = /hidden|clip|auto|scroll/.test(style.overflowY)
+
+                return fragments.some(
+                  (fragment) =>
+                    (clipsX &&
+                      (fragment.left < clip.left - 1 || fragment.right > clip.right + 1)) ||
+                    (clipsY && (fragment.top < clip.top - 1 || fragment.bottom > clip.bottom + 1)),
+                )
+              })
+            )
+          }).length,
+      ),
+    )
+    .toBe(0)
 }
 
 export const expectReachableAboveNavigation = async (page: Page, target: Locator) => {

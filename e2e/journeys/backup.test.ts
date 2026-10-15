@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test'
 
+import { sourceQuestion } from '../support/browser'
 import { openSettings, progressFixture, seedProfile } from './fixtures'
 
 test(
@@ -8,6 +9,12 @@ test(
   async ({ page }) => {
     // E2E criterion: irreversible replacement; actual browser download and file selection.
     const saved = progressFixture()
+
+    if (saved.preferences.plannedTestDate === null) {
+      throw new Error('The backup fixture must include a planned date to restore.')
+    }
+
+    const expectedPlannedDate = saved.preferences.plannedTestDate.split('-').reverse().join('.')
 
     await seedProfile(page, JSON.stringify(saved))
 
@@ -29,8 +36,16 @@ test(
       JSON.stringify({
         ...saved,
         preferences: { ...saved.preferences, plannedTestDate: null },
-        studyAttempts: [],
-        mockSittings: [],
+        studyAttempts: saved.studyAttempts.map((attempt) => ({
+          ...attempt,
+          id: 'study-replaced-by-backup',
+          questionKey: sourceQuestion(2).id,
+          selectedOption: sourceQuestion(2).correct_option,
+        })),
+        mockSittings: saved.mockSittings.map((sitting) => ({
+          ...sitting,
+          id: 'mock-replaced-by-backup',
+        })),
       }),
     )
 
@@ -55,17 +70,25 @@ test(
 
     await page.reload()
 
-    await expect(page.getByLabel('Planned test date', { exact: true })).not.toHaveValue('')
+    await expect(page.getByLabel('Planned test date', { exact: true })).toHaveValue(
+      expectedPlannedDate,
+    )
     await expect(page.getByRole('dialog')).toHaveCount(0)
 
     await page.getByRole('navigation').getByRole('link', { name: 'Progress', exact: true }).click()
 
     await expect(page.getByText('Needs review · 1', { exact: true })).toBeVisible()
+    await expect(page.getByText('Learning · 0', { exact: true })).toBeVisible()
 
     await page.getByRole('tab', { name: 'Mock tests', exact: true }).click()
 
-    await expect(page.getByRole('region', { name: 'Test history', exact: true })).toContainText(
-      '1 completed',
-    )
+    const history = page.getByRole('region', { name: 'Test history', exact: true })
+    const review = history.getByRole('link')
+    const expectedReviewPath = '/progress/tests/completed-before-backup'
+
+    await expect(history).toContainText('1 completed')
+    await expect(review).toHaveCount(1)
+    await expect(review).toBeVisible()
+    await expect(review).toHaveAttribute('href', expectedReviewPath)
   },
 )

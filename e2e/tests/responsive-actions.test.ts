@@ -1,3 +1,4 @@
+import type { Page } from '@playwright/test'
 import { expect, test } from '@playwright/test'
 
 import questionBank from '../../web/public/questionbank-berlin.json' with { type: 'json' }
@@ -9,6 +10,28 @@ import {
   expectViewportFit,
   startMock,
 } from './helpers'
+
+const expectTranslatedTextReadable = async (
+  page: Page,
+  question: (typeof questionBank.questions)[number],
+) => {
+  const answers = page.getByRole('radiogroup', { name: question.question_de, exact: true })
+
+  const text = question.answer_options.reduce(
+    (content, option) =>
+      content
+        .or(answers.getByText(option.text_de, { exact: true }))
+        .or(answers.getByText(option.text_en, { exact: true })),
+    page
+      .getByRole('heading', { name: question.question_de, exact: true })
+      .or(page.getByText(question.question_en, { exact: true })),
+  )
+
+  // Two question texts and both language blocks for all four choices must actually render.
+  await expect(text).toHaveCount(10)
+
+  await expectReadable(text)
+}
 
 for (const width of [320, 390]) {
   test(`translated study content wraps and its next action is reachable at ${width}px`, async ({
@@ -43,9 +66,7 @@ for (const width of [320, 390]) {
 
     await expect(page.getByText(question.question_en, { exact: true })).toBeVisible()
 
-    await expectReadable(page.getByRole('heading', { name: question.question_de, exact: true }))
-
-    await expectReadable(page.getByRole('radio'))
+    await expectTranslatedTextReadable(page, question)
 
     await expectViewportFit(page)
 
@@ -77,7 +98,22 @@ for (const width of [320, 390]) {
 
     await startMock(page)
 
-    await expectReadable(page.getByRole('radio'))
+    const questionKey = new URL(page.url()).pathname.split('/').at(-1)
+    const question = questionBank.questions.find((item) => item.id === questionKey)
+
+    if (question === undefined) {
+      throw new Error('The reviewed question must belong to the source bank.')
+    }
+
+    const germanText = question.answer_options.reduce(
+      (content, option) =>
+        content.or(page.getByRole('radio').getByText(option.text_de, { exact: true })),
+      page.getByRole('heading', { name: question.question_de, exact: true }),
+    )
+
+    await expect(germanText).toHaveCount(5)
+
+    await expectReadable(germanText)
 
     await expectViewportFit(page)
 
@@ -105,8 +141,7 @@ for (const width of [320, 390]) {
 
     await page.getByRole('button', { name: 'Show English translation', exact: true }).click()
 
-    // Both language blocks must fit inside their choices, not merely inside the document.
-    await expectReadable(page.getByRole('radio'))
+    await expectTranslatedTextReadable(page, question)
 
     await expectViewportFit(page)
 

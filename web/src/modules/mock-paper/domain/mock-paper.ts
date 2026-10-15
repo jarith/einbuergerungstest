@@ -6,22 +6,23 @@ type PaperQuestion = Pick<Question, 'id' | 'group_id'>
 // These implement the app's practice policy, not a verified current BAMF blueprint.
 const topicQuotas = {
   democracy: [
-    ['constitution-rights', [3, 3]],
-    ['federalism-state-symbols', [2, 2]],
-    ['government-institutions', [2, 2]],
-    ['elections-participation', [5, 5]],
-    ['justice-legal-system', [2, 2]],
-    ['economy-social-security', [1, 1]],
+    ['fundamental-rights', [2, 2]],
+    ['state-structure', [6, 6]],
+    ['elections-civic-participation', [4, 4]],
+    ['rule-of-law-courts', [2, 2]],
+    ['social-security', [1, 1]],
   ],
   history: [
-    ['jewish-life-nazi-history', [2, 2]],
-    ['postwar-ddr-reunification', [3, 4]],
-    ['europe-eu', [2, 2]],
+    ['history-until-war-end', [1, 1]],
+    ['postwar-history', [3, 4]],
+    ['reunification', [1, 1]],
+    ['europe-eu', [1, 1]],
+    ['jewish-life-antisemitism', [1, 1]],
   ],
   society: [
-    ['family-education', [4, 4]],
-    ['everyday-administration', [1, 1]],
-    ['equality-religion-migration', [3, 2]],
+    ['symbols-holidays-culture', [2, 1]],
+    ['education-family-everyday-life', [5, 5]],
+    ['migration', [1, 1]],
   ],
 } as const
 

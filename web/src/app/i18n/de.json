@@ -68,7 +68,7 @@
     "reset": "Fortschritt und Einstellungen zurücksetzen",
     "description": "Dein Fortschritt wird auf diesem Gerät gespeichert. Ein Backup enthält Versuche, Tests und Einstellungen.",
     "preferences": "Einstellungen",
-    "languageHelp": "Fragen und Antworten bleiben auf Deutsch sichtbar. Wenn die Benutzeroberfläche auf Englisch eingestellt ist, kannst du beim Lernen zusätzlich englische Übersetzungen anzeigen.",
+    "languageHelp": "Fragen und Antworten bleiben auf Deutsch sichtbar. Wenn die Benutzeroberfläche auf Englisch oder Russisch eingestellt ist, kannst du beim Lernen zusätzlich Übersetzungen in dieser Sprache anzeigen.",
     "dateHelp": "Optional · heute oder ein zukünftiges Datum",
     "exportHelp": "Übertrage deinen Fortschritt mit diesem Backup auf ein anderes Gerät.",
     "chooseFile": "Backup-Datei auswählen",
@@ -88,7 +88,8 @@
     "selectedBackup": "Gewähltes Backup",
     "thisDevice": "Dieses Gerät",
     "backup": "Datensicherung",
-    "backupFile": "Backup-Datei"
+    "backupFile": "Backup-Datei",
+    "russian": "Russisch"
   },
   "study": {
     "correct": "Richtig",

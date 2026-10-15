@@ -36,5 +36,5 @@ export const getAnswerFeedback = (
 
 export const isQuestionTranslationAvailable = (
   mode: QuestionMode,
-  language: 'en' | 'de',
-): boolean => language === 'en' && (mode === 'study' || mode === 'completed-review')
+  language: 'en' | 'de' | 'ru',
+): boolean => language !== 'de' && (mode === 'study' || mode === 'completed-review')

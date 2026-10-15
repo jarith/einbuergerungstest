@@ -68,7 +68,7 @@
     "reset": "Reset progress and settings",
     "description": "Your progress is stored on this device. A backup includes attempts, tests, and settings.",
     "preferences": "Preferences",
-    "languageHelp": "Questions and answers stay visible in German. When the interface is in English, you can also show English translations while studying.",
+    "languageHelp": "Questions and answers stay visible in German. When the interface is in English or Russian, you can also show translations in that language while studying.",
     "dateHelp": "Optional · today or a future date",
     "exportHelp": "Use this backup to copy progress to another device.",
     "chooseFile": "Choose backup file",
@@ -88,7 +88,8 @@
     "selectedBackup": "Selected backup",
     "thisDevice": "This device",
     "backup": "Backup",
-    "backupFile": "Backup file"
+    "backupFile": "Backup file",
+    "russian": "Russian"
   },
   "study": {
     "correct": "Correct",

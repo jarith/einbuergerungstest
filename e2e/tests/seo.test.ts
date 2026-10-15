@@ -81,6 +81,7 @@ test('public pages need neither learner storage nor question-bank loading', asyn
   const bankRequests: string[] = []
 
   page.on('request', (request) => {
+    // testing-ignore -- This observer filters browser requests; it does not conditionally assert.
     if (request.url().includes('questionbank')) {
       bankRequests.push(request.url())
     }
@@ -138,16 +139,15 @@ test('discovery includes only public canonical pages and unknown URLs return 404
   request,
   page,
 }) => {
+  const expectedCanonicalPages =
+    process.env['SITE_INDEXABLE'] === 'true' ? [`${origin}/`, `${origin}/en/`] : []
+
   const sitemap = await request.get('/sitemap.xml')
   const body = await sitemap.text()
 
-  if (process.env['SITE_INDEXABLE'] === 'true') {
-    expect(body.match(/<loc>/g)).toHaveLength(2)
-    expect(body).toContain(`<loc>${origin}/</loc>`)
-    expect(body).toContain(`<loc>${origin}/en/</loc>`)
-  } else {
-    expect(body).not.toContain('<loc>')
-  }
+  const canonicalPages = Array.from(body.matchAll(/<loc>(.*?)<\/loc>/g), (match) => match[1])
+
+  expect(canonicalPages).toEqual(expectedCanonicalPages)
 
   const robots = await request.get('/robots.txt')
 

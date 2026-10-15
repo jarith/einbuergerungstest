@@ -65,11 +65,16 @@ valid:
   - "const setup = () => { document.addEventListener('click', handler) }"
   - "function setup() { window.addEventListener('click', handler) }"
   - "const setup = { run() { document.addEventListener('click', handler) } }"
-  - "window['addEventListener']('click', handler)"
   - "element.addEventListener('click', handler)"
+  - "element['addEventListener']('click', handler)"
+  - "window['removeEventListener']('click', handler)"
+  - "const setup = () => { window['addEventListener']('click', handler) }"
+  - 'function setup() { document["addEventListener"]("click", handler) }'
 invalid:
   - "document.addEventListener('click', handler)"
   - "window.addEventListener('click', handler)"
+  - "window['addEventListener']('click', handler)"
+  - 'document["addEventListener"]("click", handler)'
   - "if (enabled) { window.addEventListener('click', handler) }"
   - "document[addEventListener]('click', handler)"
 ---
@@ -157,11 +162,16 @@ valid:
   - "const setup = () => { document.addEventListener('click', handler) }"
   - "function setup() { window.addEventListener('click', handler) }"
   - "const setup = { run() { document.addEventListener('click', handler) } }"
-  - "window['addEventListener']('click', handler)"
   - "element.addEventListener('click', handler)"
+  - "element['addEventListener']('click', handler)"
+  - "window['removeEventListener']('click', handler)"
+  - "const setup = () => { window['addEventListener']('click', handler) }"
+  - 'function setup() { document["addEventListener"]("click", handler) }'
 invalid:
   - "document.addEventListener('click', handler)"
   - "window.addEventListener('click', handler)"
+  - "window['addEventListener']('click', handler)"
+  - 'document["addEventListener"]("click", handler)'
   - "if (enabled) { window.addEventListener('click', handler) }"
   - "document[addEventListener]('click', handler)"
 ---

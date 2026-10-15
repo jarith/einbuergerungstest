@@ -5,5 +5,6 @@ export default defineConfig({
     exclude: ['**/fixtures/**'],
     fileParallelism: false,
     globals: true,
+    sequence: { shuffle: true },
   },
 })

@@ -4,7 +4,8 @@ import type { Page } from '@playwright/test'
 import { expect, test } from '@playwright/test'
 
 import questionBank from '../../web/public/questionbank-berlin.json' with { type: 'json' }
-import { exposeStaleActivationState } from '../support/offline'
+import { sourceQuestion, studyAnswer } from '../support/browser'
+import { evictCachedBank, exposeStaleActivationState, holdNextCacheCheck } from '../support/offline'
 
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => {
@@ -15,6 +16,60 @@ test.beforeEach(async ({ page }) => {
 const readyStatus = (page: Page) =>
   page.getByRole('contentinfo', { includeHidden: true }).getByText('Ready offline', { exact: true })
 
+const expectPreparedStudyUsable = async (page: Page) => {
+  const question = sourceQuestion(21)
+  const imagePath = question.question_image_resource
+
+  if (imagePath === undefined) {
+    throw new Error('The illustrated study question must name its image resource.')
+  }
+
+  // Inspect the prepared copy before navigating: a network fetch must not repair
+  // missing cached resources and conceal damage from the failed update.
+  const cached = await page.evaluate(async (illustration) => {
+    const app = await caches.match(new URL('/app.html', location.origin), { ignoreSearch: true })
+
+    const bank = await caches.match(new URL('/questionbank-berlin.json', location.origin), {
+      ignoreSearch: true,
+    })
+
+    const image = await caches.match(new URL(illustration, location.origin), { ignoreSearch: true })
+
+    return {
+      app: { ok: app?.ok, bytes: (await app?.arrayBuffer())?.byteLength ?? 0 },
+      bank: await bank?.json(),
+      image: { ok: image?.ok, bytes: (await image?.arrayBuffer())?.byteLength ?? 0 },
+    }
+  }, imagePath)
+
+  expect(cached.app.ok).toBe(true)
+  expect(cached.app.bytes).toBeGreaterThan(0)
+  expect(cached.bank).toEqual(questionBank)
+  expect(cached.image.ok).toBe(true)
+  expect(cached.image.bytes).toBeGreaterThan(0)
+
+  await page.goto(`/pwa/study/${question.id}`)
+
+  const illustration = page.getByRole('img', { name: 'Illustration for question 21', exact: true })
+
+  await expect(illustration).toBeVisible()
+
+  await expect
+    .poll(() =>
+      illustration.evaluate(
+        (image) => image instanceof HTMLImageElement && image.complete && image.naturalWidth > 0,
+      ),
+    )
+    .toBe(true)
+
+  const answer = studyAnswer(page, question.correct_option)
+
+  await answer.click()
+
+  await expect(answer).toBeChecked()
+  await expect(answer).toContainText('Correct')
+}
+
 test(
   'complete downloads need activation confirmation and retry can recover',
   { tag: '@webkit' },
@@ -22,20 +77,25 @@ test(
     await exposeStaleActivationState(page)
 
     await page.addInitScript(() => {
-      const original = window.fetch
+      const getScriptURL = Object.getOwnPropertyDescriptor(
+        ServiceWorker.prototype,
+        'scriptURL',
+      )?.get
 
-      window.fetch = (input, init) => {
-        const url = new URL(input instanceof Request ? input.url : String(input), location.href)
-
-        if (
-          url.pathname === '/pwa/offline-ready' &&
-          document.documentElement.dataset['allowActivation'] !== 'true'
-        ) {
-          return Promise.resolve(new Response(null, { status: 404 }))
-        }
-
-        return original(input, init)
+      if (getScriptURL === undefined) {
+        throw new Error('The browser must expose the worker identity.')
       }
+
+      Object.defineProperty(ServiceWorker.prototype, 'scriptURL', {
+        configurable: true,
+        get() {
+          const actual: unknown = getScriptURL.call(this)
+
+          return document.documentElement.dataset['allowActivation'] === 'true'
+            ? actual
+            : new URL('/pwa/unconfirmed-worker.js', location.origin).href
+        },
+      })
     })
 
     await page.goto('/settings')
@@ -101,45 +161,54 @@ test(
     }, images)
 
     expect(cached.bank).toEqual(questionBank)
-    expect(cached.images).toHaveLength(images.length)
-
-    for (const image of cached.images) {
-      expect(image.ok, image.path).toBe(true)
-      expect(image.bytes, image.path).toBeGreaterThan(0)
-    }
+    expect(cached.images.filter((image) => image.ok !== true || image.bytes === 0)).toEqual([])
   },
 )
 
 test(
-  'a delayed cache check recovers without a false download error',
+  'a delayed cache check retries and confirms the repaired resources',
   { tag: '@webkit' },
   async ({ page }) => {
     await page.goto('/dashboard')
 
     await expect(readyStatus(page)).toHaveCount(1)
 
-    await page.evaluate(() => {
-      const original = ServiceWorker.prototype.postMessage
+    const bank = await evictCachedBank(page)
 
-      ServiceWorker.prototype.postMessage = function (message, transfer) {
-        ServiceWorker.prototype.postMessage = original
+    await page.evaluate(() => window.dispatchEvent(new Event('focus')))
 
-        setTimeout(
-          () => original.call(this, message, Array.isArray(transfer) ? { transfer } : transfer),
-          11_000,
-        )
-      }
+    await expect(
+      page.getByText('Missing resources: questionbank-berlin.json', { exact: true }),
+    ).toBeVisible()
 
-      window.dispatchEvent(new Event('focus'))
-    })
+    await bank.evaluate((entry) => entry.restore())
 
-    // Cross the actual ten-second message deadline, rather than mocking the model.
-    await page.waitForTimeout(10_500)
+    await page.clock.install()
 
+    const delayed = await holdNextCacheCheck(page)
+
+    await page.evaluate(() => window.dispatchEvent(new Event('focus')))
+
+    await delayed.evaluate((check) => check.captured)
+
+    // Characterize the existing 10-second message deadline and 1-second retry;
+    // these durations are implementation choices, not product timing requirements.
+    // The first response is still held, so only a subsequent real cache
+    // verification can clear the error.
+    await page.clock.fastForward(10_000)
+
+    await page.clock.fastForward(1_000)
+
+    await expect(readyStatus(page)).toHaveCount(1)
     await expect(
       page.getByText('Offline preparation could not finish.', { exact: true }),
     ).toHaveCount(0)
-    await expect(readyStatus(page)).toHaveCount(1)
+
+    await delayed.evaluate((check) => check.release())
+
+    await delayed.dispose()
+
+    await bank.dispose()
   },
 )
 
@@ -155,6 +224,7 @@ test(
           return original.call(this, message, Array.isArray(transfer) ? { transfer } : transfer)
         }
 
+        // testing-ignore -- The browser message fake validates its transfer port; no assertions branch here.
         if (Array.isArray(transfer) && transfer[0] instanceof MessagePort) {
           transfer[0].postMessage(null)
         }
@@ -192,34 +262,38 @@ test(
 
     await expect(readyStatus(page)).toHaveCount(1)
 
-    await page.evaluate(() => {
-      const original = ServiceWorker.prototype.postMessage
+    const bank = await evictCachedBank(page)
 
-      ServiceWorker.prototype.postMessage = function (message, transfer) {
-        ServiceWorker.prototype.postMessage = original
+    await page.evaluate(() => window.dispatchEvent(new Event('focus')))
 
-        if (
-          message === 'CHECK_OFFLINE' &&
-          Array.isArray(transfer) &&
-          transfer[0] instanceof MessagePort
-        ) {
-          const port = transfer[0]
+    await expect(
+      page.getByText('Missing resources: questionbank-berlin.json', { exact: true }),
+    ).toBeVisible()
 
-          setTimeout(() => port.postMessage(['questionbank-berlin.json']), 500)
-        }
-      }
+    const obsolete = await holdNextCacheCheck(page)
 
-      window.dispatchEvent(new Event('focus'))
+    await page.evaluate(() => window.dispatchEvent(new Event('focus')))
 
-      window.dispatchEvent(new PageTransitionEvent('pageshow', { persisted: true }))
-    })
+    await obsolete.evaluate((check) => check.captured)
 
-    await page.waitForTimeout(750)
+    await bank.evaluate((entry) => entry.restore())
+
+    await page.evaluate(() =>
+      window.dispatchEvent(new PageTransitionEvent('pageshow', { persisted: true })),
+    )
+
+    await expect(readyStatus(page)).toHaveCount(1)
+
+    await obsolete.evaluate((check) => check.release())
 
     await expect(readyStatus(page)).toHaveCount(1)
     await expect(
       page.getByText('Offline preparation could not finish.', { exact: true }),
     ).toHaveCount(0)
+
+    await obsolete.dispose()
+
+    await bank.dispose()
   },
 )
 
@@ -240,6 +314,7 @@ test(
     }
 
     await page.evaluate(async (path) => {
+      // testing-ignore -- Evict the browser cache fixture; this loop contains no assertions.
       for (const name of await caches.keys()) {
         const cache = await caches.open(name)
 
@@ -269,12 +344,27 @@ test(
 
     await expect(readyStatus(page)).toHaveCount(1)
 
-    await page.evaluate(() => {
-      ServiceWorkerRegistration.prototype.update = () =>
-        Promise.reject(new Error('Update network failure'))
+    const failedUpdate = await page.evaluateHandle(() => {
+      const completed = Promise.withResolvers<void>()
 
+      ServiceWorkerRegistration.prototype.update = () => {
+        const rejected = Promise.reject(new Error('Update network failure'))
+
+        void rejected.catch(() => completed.resolve())
+
+        return rejected
+      }
+
+      return { completed: completed.promise }
+    })
+
+    await page.evaluate(() => {
       window.dispatchEvent(new Event('online'))
     })
+
+    await failedUpdate.evaluate((update) => update.completed)
+
+    await failedUpdate.dispose()
 
     await expect(
       page.getByText('An update could not be downloaded.', { exact: false }),
@@ -283,6 +373,8 @@ test(
     await expect(
       page.getByText('Offline preparation could not finish.', { exact: true }),
     ).toHaveCount(0)
+
+    await expectPreparedStudyUsable(page)
   },
 )
 
@@ -294,28 +386,20 @@ test(
 
     await expect(readyStatus(page)).toHaveCount(1)
 
-    await page.clock.install()
+    const bank = await evictCachedBank(page)
+    const backgrounded = await holdNextCacheCheck(page)
+
+    await page.evaluate(() => window.dispatchEvent(new Event('focus')))
+
+    await backgrounded.evaluate((check) => check.captured)
 
     await page.evaluate(() => {
-      const original = ServiceWorker.prototype.postMessage
-
-      ServiceWorker.prototype.postMessage = function (message, transfer) {
-        ServiceWorker.prototype.postMessage = original
-
-        setTimeout(
-          () => original.call(this, message, Array.isArray(transfer) ? { transfer } : transfer),
-          11_000,
-        )
-      }
-
-      window.dispatchEvent(new Event('focus'))
-
       Object.defineProperty(document, 'visibilityState', { configurable: true, value: 'hidden' })
 
       document.dispatchEvent(new Event('visibilitychange'))
     })
 
-    await page.clock.fastForward(12_000)
+    await backgrounded.evaluate((check) => check.release())
 
     await expect(readyStatus(page)).toHaveCount(1)
     await expect(
@@ -328,17 +412,26 @@ test(
       document.dispatchEvent(new Event('visibilitychange'))
     })
 
-    await expect(readyStatus(page)).toHaveCount(1)
+    await expect(
+      page.getByText('Missing resources: questionbank-berlin.json', { exact: true }),
+    ).toBeVisible()
+    await expect(readyStatus(page)).toHaveCount(0)
+
+    await backgrounded.dispose()
+
+    await bank.dispose()
   },
 )
 
 test(
-  'a failed replacement worker does not invalidate the active cache',
+  'a redundant-worker event rechecks the active cache and retains offline readiness',
   { tag: '@webkit' },
   async ({ page }) => {
     await page.goto('/dashboard')
 
     await expect(readyStatus(page)).toHaveCount(1)
+
+    const verification = await holdNextCacheCheck(page)
 
     await page.evaluate(async () => {
       const registration = await navigator.serviceWorker.getRegistration('/pwa/')
@@ -347,6 +440,8 @@ test(
         throw new Error('The prepared app must have a service worker registration.')
       }
 
+      // Event-handler integration only. Real failed installations are exercised
+      // by updates/automatic-updates.test.ts with the release transport.
       const installing = new EventTarget()
 
       Object.defineProperty(installing, 'state', { configurable: true, value: 'installing' })
@@ -362,6 +457,13 @@ test(
       Reflect.deleteProperty(registration, 'installing')
     })
 
+    // The redundant-worker handler must trigger and complete a real cache check.
+    await verification.evaluate((check) => check.captured)
+
+    await verification.evaluate((check) => check.release())
+
+    await verification.dispose()
+
     await expect(
       page.getByText('An update could not be downloaded.', { exact: false }),
     ).toHaveCount(0)
@@ -369,5 +471,7 @@ test(
     await expect(
       page.getByText('Offline preparation could not finish.', { exact: true }),
     ).toHaveCount(0)
+
+    await expectPreparedStudyUsable(page)
   },
 )

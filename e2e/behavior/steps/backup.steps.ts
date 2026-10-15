@@ -2,6 +2,7 @@ import { expect } from '@playwright/test'
 import { createBdd } from 'playwright-bdd'
 
 import { backupWithProblem } from '../fixtures/backup'
+import { restartLearner } from '../restart'
 
 const { When, Then } = createBdd()
 
@@ -52,6 +53,12 @@ Then('the unsafe backup has no replacement preview', async ({ page }) => {
   expect(await page.evaluate(() => window.behavior.resources().learner.confirmation())).toBeNull()
 })
 
+Then('the oversized text is rejected by its encoded size', async ({ page }) => {
+  expect(await page.evaluate(() => window.behavior.resources().learner.error()?.message)).toContain(
+    'Backup exceeds 10 MiB',
+  )
+})
+
 Then('my saved history is unchanged after restarting', async ({ page }) => {
   const expected = await page.evaluate(() => window.behavior.state.exported)
 
@@ -59,7 +66,7 @@ Then('my saved history is unchanged after restarting', async ({ page }) => {
     expected,
   )
 
-  await page.evaluate(() => window.behavior.restart())
+  await restartLearner(page)
 
   expect(await page.evaluate(() => window.behavior.resources().learner.exportBackup())).toBe(
     expected,

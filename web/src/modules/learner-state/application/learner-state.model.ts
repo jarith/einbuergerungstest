@@ -15,6 +15,7 @@ import {
   getNextAttemptTime,
   normalizeLearnerLaunch,
 } from '../domain/learner-state'
+import { migrateStudyGroups } from '../domain/study-group-migration'
 import { decodeLearnerBackup } from '../infrastructure/backup-validation'
 import { createLearnerRepository } from '../infrastructure/learner-repository'
 import { decodeLearnerSnapshot, parsePlannedDate } from '../infrastructure/snapshot-codec'
@@ -129,7 +130,12 @@ export const createLearnerState = (bank: QuestionBank) => {
         const saved = await wrap(repository.read())
 
         const current = decodeLearnerSnapshot(
-          JSON.stringify(normalizeLearnerLaunch(saved ?? createLearnerSnapshot(), new Date())),
+          JSON.stringify(
+            normalizeLearnerLaunch(
+              migrateStudyGroups(saved ?? createLearnerSnapshot(), bank),
+              new Date(),
+            ),
+          ),
         )
 
         validateReferences(current)
@@ -344,7 +350,7 @@ export const createLearnerState = (bank: QuestionBank) => {
     confirmationAtom.set(null)
 
     try {
-      const imported = decodeLearnerBackup(source, Date.now())
+      const imported = migrateStudyGroups(decodeLearnerBackup(source, Date.now()), bank)
 
       validateReferences(imported)
 

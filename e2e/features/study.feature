@@ -62,7 +62,7 @@ Feature: Study the Berlin question bank in order
     And the question totals are 309 not started, 0 needing review, 0 learning, and 1 learned
     And overall progress is 1 of 310 questions contributing to progress and 0 percent
     When I choose English as my preferred language
-    Then the "Constitution, rights, and democratic principles" group shows 1 of 27 contributing to progress and 4 percent
+    Then the "Fundamental rights" group shows 1 of 20 contributing to progress and 5 percent
     When I start a new all-question study session
     And I select study answer "D"
     Then this correct answer is not a new transition to Learned

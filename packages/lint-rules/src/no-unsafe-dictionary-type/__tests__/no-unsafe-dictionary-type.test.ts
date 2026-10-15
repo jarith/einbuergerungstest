@@ -45,7 +45,10 @@ tester.run('app/no-unsafe-dictionary-type', noUnsafeDictionaryTypeRule, {
   invalid: [
     { code: 'type A = Record<string, unknown>;', errors: [error] },
     { code: 'type A = { [key: string]: any };', errors: [error] },
-    { code: 'type A = { [index: number]: Command; [key: string]: unknown | Command };', errors: 1 },
+    {
+      code: 'type A = { [index: number]: Command; [key: string]: unknown | Command };',
+      errors: [{ ...error, line: 1, column: 9, endLine: 1, endColumn: 71 }],
+    },
     { code: 'type A = { [K in PropertyKey]: object };', errors: [error] },
     { code: 'type A = { [K in PropertyKey]: NonNullable<unknown> };', errors: [error] },
     { code: 'type A = { [key: string]: NonNullable<unknown> };', errors: [error] },
@@ -72,50 +75,83 @@ tester.run('app/no-unsafe-dictionary-type', noUnsafeDictionaryTypeRule, {
     { code: 'type A = Readonly<Partial<Required<(Record<string, unknown>)>>>;', errors: [error] },
     { code: 'type A = { readonly [key: string]: unknown };', errors: [error] },
     { code: 'type A = { readonly [K in string]: unknown };', errors: [error] },
-    { code: 'type Source = Record<string, unknown>; type A = Pick<Source, string>;', errors: 2 },
-    { code: 'type Source = Record<string, unknown>; type A = Omit<Source, never>;', errors: 2 },
-    { code: 'type Index<T> = Record<string, T>; type A = Index<unknown>;', errors: 1 },
+    {
+      code: 'type Source = Record<string, unknown>; type A = Pick<Source, string>;',
+      errors: [
+        { ...error, line: 1, column: 14, endLine: 1, endColumn: 37 },
+        { ...error, line: 1, column: 48, endLine: 1, endColumn: 68 },
+      ],
+    },
+    {
+      code: 'type Source = Record<string, unknown>; type A = Omit<Source, never>;',
+      errors: [
+        { ...error, line: 1, column: 14, endLine: 1, endColumn: 37 },
+        { ...error, line: 1, column: 48, endLine: 1, endColumn: 67 },
+      ],
+    },
+    {
+      code: 'type Index<T> = Record<string, T>; type A = Index<unknown>;',
+      errors: [{ ...error, line: 1, column: 44, endLine: 1, endColumn: 58 }],
+    },
     { code: 'interface A { [key: string]: unknown }', errors: [error] },
-    { code: 'type A = Readonly<Record<string, unknown>>;', errors: 1 },
+    {
+      code: 'type A = Readonly<Record<string, unknown>>;',
+      errors: [{ ...error, line: 1, column: 9, endLine: 1, endColumn: 42 }],
+    },
     { code: 'type A = Record<string, Readonly<unknown>>;', errors: [error] },
     { code: 'type A = Record<string, Partial<unknown>>;', errors: [error] },
     { code: 'type A = Record<string, Required<unknown>>;', errors: [error] },
-    { code: 'type Escape = Readonly<unknown>; type A = Record<string, Escape>;', errors: 1 },
+    {
+      code: 'type Escape = Readonly<unknown>; type A = Record<string, Escape>;',
+      errors: [{ ...error, line: 1, column: 42, endLine: 1, endColumn: 64 }],
+    },
     {
       code: 'type Wrapped<T> = Readonly<T>; type A = Record<string, Wrapped<unknown>>;',
-      errors: 1,
+      errors: [{ ...error, line: 1, column: 40, endLine: 1, endColumn: 72 }],
     },
     { code: 'type A = Record<string, NonNullable<unknown>>;', errors: [error] },
-    { code: 'type Escape = NonNullable<unknown>; type A = Record<string, Escape>;', errors: 1 },
+    {
+      code: 'type Escape = NonNullable<unknown>; type A = Record<string, Escape>;',
+      errors: [{ ...error, line: 1, column: 45, endLine: 1, endColumn: 67 }],
+    },
     {
       code: 'type Unsafe = Record<string, unknown>; const x: Unsafe = {}; const y: Unsafe = {};',
-      errors: 1,
+      errors: [{ ...error, line: 1, column: 14, endLine: 1, endColumn: 37 }],
     },
     {
       code: 'type Unsafe = Record<string, unknown>; type AlsoUnsafe = Unsafe; const x: Unsafe = {};',
-      errors: 2,
+      errors: [
+        { ...error, line: 1, column: 14, endLine: 1, endColumn: 37 },
+        { ...error, line: 1, column: 57, endLine: 1, endColumn: 63 },
+      ],
     },
-    { code: 'type Index<T = unknown> = Record<string, T>; type A = Index;', errors: 1 },
+    {
+      code: 'type Index<T = unknown> = Record<string, T>; type A = Index;',
+      errors: [{ ...error, line: 1, column: 54, endLine: 1, endColumn: 59 }],
+    },
     {
       code: 'type Index<T, U = T> = Record<string, U>; type A = Index<string, unknown>;',
-      errors: 1,
+      errors: [{ ...error, line: 1, column: 51, endLine: 1, endColumn: 73 }],
     },
-    { code: 'type Index<T, U = T> = Record<string, U>; type A = Index<unknown>;', errors: 1 },
+    {
+      code: 'type Index<T, U = T> = Record<string, U>; type A = Index<unknown>;',
+      errors: [{ ...error, line: 1, column: 51, endLine: 1, endColumn: 65 }],
+    },
     {
       code: 'type Value<T> = T; type Index<T, U = Value<T>> = Record<string, U>; type A = Index<unknown>;',
-      errors: 1,
+      errors: [{ ...error, line: 1, column: 77, endLine: 1, endColumn: 91 }],
     },
     {
       code: 'type Marker<T> = { readonly __brand?: never }; type Index<T, U = Marker<T>> = Record<string, U>; type A = Index<Item>;',
-      errors: 1,
+      errors: [{ ...error, line: 1, column: 106, endLine: 1, endColumn: 117 }],
     },
     {
       code: 'function outer() { type Identity<T> = T; type A = Record<string, Identity<unknown>>; }',
-      errors: 1,
+      errors: [{ ...error, line: 1, column: 50, endLine: 1, endColumn: 83 }],
     },
     {
       code: 'function local() { type Record<K, V> = { key: K; value: V }; type A = Record<string, unknown>; } function global() { type A = Record<string, unknown>; }',
-      errors: 1,
+      errors: [{ ...error, line: 1, column: 126, endLine: 1, endColumn: 149 }],
     },
   ],
 })

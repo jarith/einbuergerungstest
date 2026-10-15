@@ -47,14 +47,14 @@ When('I request a fresh profile', async ({ page }) => {
 
 When('I cancel the fresh start', async ({ page }) => {
   await page.evaluate(() => window.behavior.recovery().cancel())
+
+  expect(await page.evaluate(() => window.behavior.recovery().confirmation())).toBeNull()
 })
 
 When('I confirm the fresh start', async ({ page }) => {
   await page.evaluate(() => window.behavior.recovery().confirm())
 
-  if ((await page.evaluate(() => window.behavior.recovery().message())) === null) {
-    await page.evaluate(() => window.behavior.launch())
-  }
+  await page.evaluate(() => window.behavior.state.recoveryRetry)
 })
 
 When('another session replaces the rejected profile', async ({ page }) => {

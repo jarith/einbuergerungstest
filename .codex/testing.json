@@ -1,0 +1,23 @@
+{
+  "mode": "standard",
+  "sides": {
+    "frontend": true,
+    "backend": false,
+    "fullstack": false
+  },
+  "commands": {
+    "testAll": "mise exec -- yarn test:all",
+    "mutation": "npm run test:mutation"
+  },
+  "mutation": {
+    "required": false,
+    "report": "reports/mutation/report.json"
+  },
+  "priorityModules": [
+    "web/src/pages/study",
+    "web/src/modules/question-session",
+    "web/src/modules/mock-test",
+    "web/src/pages/mock-test",
+    "web/src/modules/mock-paper"
+  ]
+}

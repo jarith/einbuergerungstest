@@ -25,17 +25,31 @@ describe('no-inline-types', () => {
   it('reports all expected violations', async () => {
     expect.hasAssertions()
 
+    const expectedParameterViolationCount = 5
+    const expectedReturnViolationCount = 2
+
+    const expectedViolations = [
+      'violations.ts:4:30: error app(no-inline-types): Inline object type in parameter',
+      'violations.ts:7:31: error app(no-inline-types): Inline object type in parameter',
+      'violations.ts:12:31: error app(no-inline-types): Inline object type in return type',
+      'violations.ts:15:35: error app(no-inline-types): Inline object type in parameter',
+      'violations.ts:18:32: error app(no-inline-types): Inline object type in parameter',
+      'violations.ts:21:35: error app(no-inline-types): Inline object type in return type',
+      'violations.ts:24:19: error app(no-inline-types): Inline object type in parameter',
+    ]
+
     const { stdout } = await runOxlint('violations.ts')
 
     const paramViolations = stdout.match(/Inline object type in parameter/gu)
     const returnViolations = stdout.match(/Inline object type in return type/gu)
 
-    // violations.ts has: arrowInlineParam, fnDeclInlineParam, destructuredParam,
-    // genericParam, FnType = 5 param violations
-    expect(paramViolations).toHaveLength(5)
+    const violations = stdout.match(
+      /violations\.ts:\d+:\d+: error app\(no-inline-types\): Inline object type in (?:parameter|return type)/gu,
+    )
 
-    // violations.ts has: arrowInlineReturn, genericReturn = 2 return violations
-    expect(returnViolations).toHaveLength(2)
+    expect(paramViolations).toHaveLength(expectedParameterViolationCount)
+    expect(returnViolations).toHaveLength(expectedReturnViolationCount)
+    expect(violations).toEqual(expect.arrayContaining(expectedViolations))
   })
 
   it('does not report violations for clean code', async () => {

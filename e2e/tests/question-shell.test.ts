@@ -8,6 +8,7 @@ for (const mode of ['study', 'mock'] as const) {
     `${mode} navigation leaves surrounding controls unchanged`,
     { tag: '@webkit' },
     async ({ page }) => {
+      // testing-ignore: Only route setup varies; the stability assertions run for every mode.
       if (mode === 'mock') {
         await page.goto('/dashboard')
 
@@ -33,6 +34,7 @@ for (const mode of ['study', 'mock'] as const) {
           records.forEach((record) => changes.push(`${record.type}:${record.attributeName ?? ''}`))
         })
 
+        // testing-ignore: Observe every DOM region; this loop contains no assertion.
         elements.forEach((element) =>
           observer.observe(element, {
             attributes: true,
@@ -45,7 +47,7 @@ for (const mode of ['study', 'mock'] as const) {
         return { elements, changes, observer }
       }, mode)
 
-      for (const button of ['Next', 'Next', 'Previous']) {
+      const navigate = async (button: 'Next' | 'Previous') => {
         const previous = await page
           .locator('[data-question-slide]')
           .getAttribute('data-question-slide')
@@ -59,6 +61,12 @@ for (const mode of ['study', 'mock'] as const) {
         await expect(page.locator('[data-question-slide] [data-question-heading]')).toBeFocused()
       }
 
+      await navigate('Next')
+
+      await navigate('Next')
+
+      await navigate('Previous')
+
       const result = await shell.evaluate(({ elements, changes, observer }) => {
         observer.disconnect()
 
@@ -69,6 +77,8 @@ for (const mode of ['study', 'mock'] as const) {
         }
       })
 
+      // These are the summary, or study help/save/progress regions named in CONTEXT.md.
+      // Their retained DOM and lack of mutations intentionally guard render isolation.
       expect(result.count).toBe(mode === 'mock' ? 1 : 3)
       expect(result.connected).toBe(true)
       expect(result.changes).toEqual([])

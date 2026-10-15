@@ -3,16 +3,17 @@ import { Button, InlineNotice } from '@einbuergerungstest/design-system'
 import { PendingNotice } from '../../../components/pending-notice/pending-notice'
 import de from '../../../i18n/de.json'
 import en from '../../../i18n/en.json'
+import ru from '../../../i18n/ru.json'
 import { getAppPath } from '../../../offline/app-mode'
 
 type RouteStatusProps = Readonly<{
-  language?: 'en' | 'de' | undefined
+  language?: 'en' | 'de' | 'ru' | undefined
   error?: Error | undefined
   retry?: (() => void) | undefined
 }>
 
 export const RouteStatus = ({ error, retry, language = 'en' }: RouteStatusProps) => {
-  const messages = language === 'de' ? de : en
+  const messages = { en, de, ru }[language]
 
   return (
     <InlineNotice

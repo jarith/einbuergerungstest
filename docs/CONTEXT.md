@@ -21,7 +21,14 @@ QuestionSlide browser component regression mounts under StrictMode.
 ## Language
 
 **UI language**: The learner's preferred language for app controls and navigation,
-distinct from the German question-bank content.
+distinct from the German question-bank content. Settings offers English, German, and
+Russian; English remains the default. Russian follows English for study and
+completed-review translations, using the same saved toggle preference. Live mock tests and
+unfinished reviews keep German content only. Russian question and answer text lives in
+`question_ru` and `text_ru`; group titles and descriptions use `title_ru` and
+`description_ru`. These fields are required in the bundled bank. Language preferences are
+retained by backups without a profile version change. Public landing URLs remain German
+and English.
 
 **Study translation**: Text in the UI language shown alongside the original German
 question and answer choices during study.
@@ -108,7 +115,7 @@ Interface copy describes the combined Learning and Learned count as “learning 
 (“im Lernen oder gelernt” in German). The German Learning label is “Im Lernen”. Titles and
 headings omit trailing full stops; explanatory sentences keep normal punctuation.
 
-The approved distill pass keeps all 13 groups, their complete descriptions, progress, and
+The approved distill pass keeps all 14 groups, their complete descriptions, progress, and
 resume hints. Progress shows bank-wide counts within the status filters; filtering or
 pagination must not change those counts. Study help is a collapsed disclosure below
 navigation on every screen size. Backup download, file selection, and the full comparison
@@ -117,7 +124,7 @@ import, and reset controls are available only in Settings, with no backup link o
 disclosure on Progress. The question browser lives on `/progress`; the separate
 `/progress/questions` list route is removed. Question status is the default Progress tab;
 Mock tests uses `/progress?tab=mock-tests`, owned by the Reatom route search codec. Tab
-navigation retains keyboard focus. All 13 question groups remain visible and expand
+navigation retains keyboard focus. All 14 question groups remain visible and expand
 independently through the Mantine-based design-system Accordion. The first two groups
 start expanded. Filters apply to every question before each group's pagination; each
 expanded group previews 10 matches in bank order and reveals 10 more on request. Changing
@@ -149,12 +156,13 @@ scrolling. Cancelled pointer gestures clear the tap sequence.
 Translation uses a 48px icon toggle button with Lucide Languages at 28px, right-aligned
 below question progress and centered with the Study status badge. Review places it below
 the question count. The off state is outlined; the on state is solid accent with a small
-Check indicator. Its accessible name stays “Show English translation” with `aria-pressed`;
-hover/focus tooltips describe Show or Hide. Enter/Space toggles without moving focus. The
-dialog close control has a touch target of at least 44px. Full-screen image dialogs
-account for all display safe areas. The document theme color follows the saved appearance;
-the manifest launch background remains the default light appearance. Installed iOS/Android
-system bars and safe areas require real-device checks.
+Check indicator. Its accessible name stays “Show English translation” or “Показать русский
+перевод” in the selected UI language, with `aria-pressed`; hover/focus tooltips describe
+Show or Hide. Enter/Space toggles without moving focus. The dialog close control has a
+touch target of at least 44px. Full-screen image dialogs account for all display safe
+areas. The document theme color follows the saved appearance; the manifest launch
+background remains the default light appearance. Installed iOS/Android system bars and
+safe areas require real-device checks.
 
 Translation reveals keep hidden text mounted so expansion can reverse smoothly. UI tests
 must check visibility rather than DOM removal. Mobile reachability checks must account for
@@ -216,3 +224,14 @@ They use two columns when the content container is at least 40rem wide and stack
 that width. There is no separate installation route; `/settings/installation` returns 404
 and is excluded from both the Cloudflare rewrite allowlist and the service-worker
 navigation fallback.
+
+## Study-note groups (2026-10-16)
+
+The bank follows the fourteen numbered headings in `einbuergerungstest-notes.md`. See
+[question groups](question-groups.md) for the assignment manifest and upgrade policy.
+Question IDs and answer histories remain stable. Startup automatically removes bookmarks
+for the eleven retired scopes before validating the profile; it preserves all-question,
+Berlin, and Europe bookmarks. Progress is derived from saved study and completed-mock
+answers against the current bank, including after a PWA update or backup import. No manual
+backup migration is required. New scopes start fresh study passes without resetting
+question statuses.
