@@ -160,6 +160,13 @@ subject under test.
 
 ## Known debt and unrelated findings
 
+- The mock-start behavior step must wait for `mock.pending()` to clear before the next
+  step advances the fake clock. Route loading can still persist the question position
+  after `startMock()` returns. On master run 39073124973 (2026-10-17), jumping 60 minutes
+  fired that write's 30-second timeout before IndexedDB delivered its completion event,
+  throwing `InvalidStateError` from `transaction.abort()`. An instrumented local run
+  reproduced the exception with a navigation save pending. PR and master source trees were
+  identical; preserve state-based synchronization, not a sleep or a longer timeout.
 - Stryker 10's Vitest adapter joins nested suite names with spaces, but Vitest 5's
   test-name filter uses suite separators. In the group-migration work (2026-10-16), this
   produced apparent survivors with `testsCompleted: 0`. Flat test names, matching the
