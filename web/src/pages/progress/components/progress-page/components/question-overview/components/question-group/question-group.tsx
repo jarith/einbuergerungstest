@@ -1,4 +1,4 @@
-import { Accordion, Button, Panel } from '@einbuergerungstest/design-system'
+import { Accordion, Button } from '@einbuergerungstest/design-system'
 import { Stack } from '@einbuergerungstest/design-system/jsx'
 import { wrap } from '@reatom/core'
 import { reatomComponent } from '@reatom/react'
@@ -15,7 +15,7 @@ export const QuestionGroup = reatomComponent(({ group, model }: QuestionGroupPro
 
   return (
     <Accordion.Item value={group.id}>
-      <Accordion.Control>
+      <Accordion.Control className={styles.groupControl}>
         <Stack as="span" gap="8">
           <span className={styles.groupTitle}>{group.title}</span>
           <span className={styles.muted}>
@@ -35,17 +35,15 @@ export const QuestionGroup = reatomComponent(({ group, model }: QuestionGroupPro
           <output className={styles.muted}>
             {t('questions.showing', { count: group.rows.length, total: group.matches })}
           </output>
-          <Panel className={styles.panel}>
-            {group.rows.length === 0 ? (
-              <p className={styles.muted}>{t('progress.noGroupMatches')}</p>
-            ) : (
-              <Stack as="ol" css={styles.list}>
-                {group.rows.map((row) => (
-                  <QuestionRow key={row.key} row={row} t={t} />
-                ))}
-              </Stack>
-            )}
-          </Panel>
+          {group.rows.length === 0 ? (
+            <p className={styles.muted}>{t('progress.noGroupMatches')}</p>
+          ) : (
+            <Stack as="ol" css={styles.list}>
+              {group.rows.map((row) => (
+                <QuestionRow key={row.key} row={row} t={t} />
+              ))}
+            </Stack>
+          )}
           {group.remaining > 0 ? (
             <Button appearance="outline" fullWidth onClick={wrap(() => model.showMore(group.id))}>
               {t('questions.showMore', { count: Math.min(model.pageSize, group.remaining) })}

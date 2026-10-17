@@ -129,11 +129,14 @@ independently through the Mantine-based design-system Accordion. The first two g
 start expanded. Filters apply to every question before each group's pagination; each
 expanded group previews 10 matches in bank order and reveals 10 more on request. Changing
 the filter resets all group limits. Group status bars always describe the full group.
-Filters, expanded groups, and revealed counts survive tab and question-history navigation
-for the current loaded learner. Browser Back preserves the departure scroll position. List
-separators appear only between items, and hoverable rows retain padding in every state.
-The dashboard omits the “Saved on this device” notice. These simplifications do not change
-learning, scoring, or persistence rules.
+Progress uses the Accordion's separated appearance: tinted headers with 16 px padding, 8
+px corners, and 16 px gaps between groups instead of separator borders. Expanded questions
+share the group's surface without a nested panel outline. Filters, expanded groups, and
+revealed counts survive tab and question-history navigation for the current loaded
+learner. Browser Back preserves the departure scroll position. List separators appear only
+between items, and hoverable rows retain padding in every state. The dashboard omits the
+“Saved on this device” notice. These simplifications do not change learning, scoring, or
+persistence rules.
 
 At desktop widths (1024px and above), Study, Mock test, and Settings use a container
 measuring 50% of the viewport width, centered within the main area beside navigation. Page

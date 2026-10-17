@@ -38,6 +38,7 @@ export const QuestionOverview = reatomComponent(({ model }: QuestionOverviewProp
         </Panel>
       ) : null}
       <Accordion
+        appearance="separated"
         multiple
         keepMounted={false}
         value={model.expanded()}

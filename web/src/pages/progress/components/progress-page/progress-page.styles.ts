@@ -19,6 +19,7 @@ const rowCss = css.raw({
 export const styles = {
   root: css.raw({ minWidth: '0', overflowWrap: 'anywhere', hyphens: 'auto' }),
   filterLabel: css({ textStyle: 'controlLabel' }),
+  groupControl: css({ paddingInline: '16' }),
   groupTitle: css({
     fontSize: '16',
     lineHeight: '16',
