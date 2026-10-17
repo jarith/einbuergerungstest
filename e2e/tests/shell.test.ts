@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 
-import { expectViewportFit } from './helpers'
+import { bounds, expectViewportFit } from './helpers'
 
 test('desktop navigation sits beside the main content', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 })
@@ -22,8 +22,27 @@ test('desktop navigation sits beside the main content', async ({ page }) => {
 
   expect(navigationBounds.x + navigationBounds.width).toBeLessThanOrEqual(mainBounds.x)
   expect(mainBounds.y).toBe(0)
-  await expect(navigation).toHaveCSS('flex-direction', 'column')
-  await expect(main).toHaveCSS('padding-inline-start', '46px')
+
+  const firstLink = await bounds(navigation.getByRole('link').first())
+  const lastLink = await bounds(navigation.getByRole('link').last())
+
+  const linkBounds = await navigation.getByRole('link').evaluateAll((links) =>
+    links.map((link) => {
+      const { x, y, bottom } = link.getBoundingClientRect()
+
+      return { x, y, bottom }
+    }),
+  )
+
+  const heading = await bounds(main.getByRole('heading', { level: 1 }))
+
+  expect(lastLink.y).toBeGreaterThanOrEqual(firstLink.y + firstLink.height)
+  expect(new Set(linkBounds.map(({ x }) => x)).size).toBe(1)
+  expect(
+    linkBounds.slice(1).every((next, index) => next.y >= (linkBounds[index]?.bottom ?? Infinity)),
+  ).toBe(true)
+  expect(heading.x).toBeGreaterThan(mainBounds.x)
+  expect(heading.x + heading.width).toBeLessThanOrEqual(mainBounds.x + mainBounds.width)
 })
 
 test('phone navigation stays fixed at the bottom without horizontal overflow', async ({ page }) => {

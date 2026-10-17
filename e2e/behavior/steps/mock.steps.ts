@@ -1,6 +1,8 @@
 import { expect } from '@playwright/test'
 import { createBdd } from 'playwright-bdd'
 
+import bank from '../../../web/public/questionbank-berlin.json' with { type: 'json' }
+
 const { Given, When, Then } = createBdd()
 
 When('I start a mock test', async ({ page }) => {
@@ -96,11 +98,11 @@ Then('the live mock question and choices are in German', async ({ page }) => {
 
   expect(result.content).toEqual({
     german: result.question.question_de,
-    english: null,
+    translation: null,
     options: result.question.answer_options.map((option) => ({
       label: option.label,
       german: option.text_de,
-      english: null,
+      translation: null,
     })),
   })
 })
@@ -155,25 +157,23 @@ Then('answer correctness is withheld', async ({ page }) => {
 })
 
 When('I go to the next mock question', async ({ page }) => {
-  await page.evaluate(() =>
-    window.behavior
-      .resources()
-      .learner.navigateMock(
-        window.behavior.sitting().id,
-        window.behavior.sitting().currentQuestion + 1,
-      ),
-  )
+  await page.evaluate(() => window.behavior.navigateMock('next'))
 })
 
 When('I go to the previous mock question', async ({ page }) => {
-  await page.evaluate(() =>
-    window.behavior
-      .resources()
-      .learner.navigateMock(
-        window.behavior.sitting().id,
-        window.behavior.sitting().currentQuestion - 1,
-      ),
+  await page.evaluate(() => window.behavior.navigateMock('previous'))
+})
+
+Then('I am on mock question {int}', async ({ page }, position: number) => {
+  const expectedKey = await page.evaluate(
+    (index) => window.behavior.sitting().answers[index]?.questionKey,
+    position - 1,
   )
+
+  expect(await page.evaluate(() => window.behavior.mockPage()().loaded?.key)).toBe(expectedKey)
+  expect(await page.evaluate(() => window.behavior.mockPage()().index)).toBe(position - 1)
+  expect(await page.evaluate(() => window.behavior.sitting().currentQuestion)).toBe(position - 1)
+  expect(await page.evaluate(() => window.behavior.navigation())).toBe(false)
 })
 
 When('I request mock submission', async ({ page }) => {
@@ -187,7 +187,12 @@ Then('submission awaits confirmation for 33 unanswered questions', async ({ page
 })
 
 When('I cancel mock submission', async ({ page }) => {
+  const before = await page.evaluate(() => window.behavior.resources().learner.exportBackup())
+
   await page.evaluate(() => window.behavior.resources().mock.cancelSubmission())
+
+  expect(await page.evaluate(() => window.behavior.resources().mock.submission())).toBe(false)
+  expect(await page.evaluate(() => window.behavior.resources().learner.exportBackup())).toBe(before)
 })
 
 Then('the mock remains active', async ({ page }) => {
@@ -271,7 +276,12 @@ Then('ending the mock awaits confirmation', async ({ page }) => {
 })
 
 When('I cancel ending the mock', async ({ page }) => {
+  const before = await page.evaluate(() => window.behavior.resources().learner.exportBackup())
+
   await page.evaluate(() => window.behavior.navigation.cancel())
+
+  expect(await page.evaluate(() => window.behavior.navigation())).toBe(false)
+  expect(await page.evaluate(() => window.behavior.resources().learner.exportBackup())).toBe(before)
 })
 
 When('I confirm ending the mock early', async ({ page }) => {
@@ -298,23 +308,62 @@ When('I review the unfinished mock', async ({ page }) => {
   })
 })
 
-Then('the completed review includes every question and correct answer', async ({ page }) => {
-  const entries = await page.evaluate(() => window.behavior.review().entries())
-  expect(entries).toHaveLength(33)
+Then(
+  'the completed review includes every unanswered question and its correct answer',
+  async ({ page }) => {
+    const expectedQuestionCount = 33
+    const expectedOptionLabels = ['A', 'B', 'C', 'D']
 
-  for (let index = 0; index < 33; index += 1) {
-    await page.evaluate((position) => window.behavior.review().go(position), index)
-
-    const entry = await page.evaluate(() => window.behavior.review()())
-
-    expect(entry.loaded.question.answer_options.map((option) => option.label)).toContain(
-      entry.loaded.question.correct_option,
+    const paper = await page.evaluate(() =>
+      window.behavior.sitting().answers.map((answer) => answer.questionKey),
     )
-    expect(entries[index]?.feedback).not.toBe('hidden')
-  }
 
-  await page.evaluate(() => window.behavior.review().go(0))
-})
+    const expectedQuestions = paper.map((key) => {
+      const question = bank.questions.find((item) => item.id === key)
+
+      if (question === undefined) {
+        throw new Error(`The saved paper contains an unknown question: ${key}`)
+      }
+
+      return {
+        questionKey: key,
+        answerKey: key,
+        correctOption: question.correct_option,
+        selectedOption: null,
+        optionLabels: expectedOptionLabels,
+      }
+    })
+
+    const expectedEntries = paper.map((key) => ({ key, feedback: 'unanswered' }))
+
+    const result = await page.evaluate((total) => {
+      const review = window.behavior.review()
+      const entries = review.entries().map(({ key, feedback }) => ({ key, feedback }))
+
+      const questions = Array.from({ length: total }, (_, index) => {
+        review.go(index)
+
+        const current = review()
+
+        return {
+          questionKey: current.loaded.key,
+          answerKey: current.answer.questionKey,
+          correctOption: current.loaded.question.correct_option,
+          selectedOption: current.answer.selectedOption,
+          optionLabels: current.loaded.question.answer_options.map((option) => option.label),
+        }
+      })
+
+      review.go(0)
+
+      return { entries, questions }
+    }, expectedQuestionCount)
+
+    expect(result.entries).toHaveLength(expectedQuestionCount)
+    expect(result.entries).toEqual(expectedEntries)
+    expect(result.questions).toEqual(expectedQuestions)
+  },
+)
 Then(
   'the unfinished review retains answer {string} without grading',
   async ({ page }, option: string) => {
@@ -333,7 +382,11 @@ Then(
   },
 )
 
-When('I enable English translation in the review', async ({ page }) => {
+When('I enable {word} translation in the review', async ({ page }, language: string) => {
+  if (language !== 'English' && language !== 'Russian') {
+    throw new Error(`Unknown translation language ${language}`)
+  }
+
   await page.evaluate(() => window.behavior.review().setTranslation(true))
 })
 
@@ -349,11 +402,11 @@ Then('German and English appear together in the review', async ({ page }) => {
 
   expect(result.content).toEqual({
     german: result.question.question_de,
-    english: result.question.question_en,
+    translation: result.question.question_en,
     options: result.question.answer_options.map((option) => ({
       label: option.label,
       german: option.text_de,
-      english: option.text_en,
+      translation: option.text_en,
     })),
   })
 })

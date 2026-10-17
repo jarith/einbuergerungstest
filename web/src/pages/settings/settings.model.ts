@@ -43,7 +43,7 @@ export const createSettingsModel = ({ learner }: AppResources) => {
     backup: createBackupModel(learner),
     pending: computed(() => learner.pending() > 0, 'settings.pending'),
     setLanguage: action((language: string) => {
-      if (language === 'en' || language === 'de') {
+      if (language === 'en' || language === 'de' || language === 'ru') {
         void save({ language })
       }
     }, 'settings.setLanguage'),

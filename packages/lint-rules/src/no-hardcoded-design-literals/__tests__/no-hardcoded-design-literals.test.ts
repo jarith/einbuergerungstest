@@ -20,13 +20,91 @@ describe('no-hardcoded-design-literals', () => {
     expect(stdout).toContain('app(no-hardcoded-design-literals)')
   })
 
-  it('reports exactly 13 violations', async () => {
+  it('reports each historical design literal violation at its source location', async () => {
     expect.hasAssertions()
+
+    // Characterize the existing fixture's token policy; these values are not a new policy.
+    const expectedDiagnostics = [
+      {
+        line: 4,
+        column: 17,
+        message: "Hardcoded color '#F3EBE2'. Use a color token instead.",
+      },
+      {
+        line: 7,
+        column: 20,
+        message: "Hardcoded color 'rgba(0, 0, 0, 0.5)'. Use a color token instead.",
+      },
+      {
+        line: 10,
+        column: 22,
+        message: "Hardcoded spacing '16px'. Use a spacing token (xs/sm/md/lg/xl) instead.",
+      },
+      {
+        line: 13,
+        column: 18,
+        message: "Hardcoded spacing '8px'. Use a spacing token (xs/sm/md/lg/xl) instead.",
+      },
+      {
+        line: 16,
+        column: 27,
+        message: "Hardcoded radius '12px'. Use a radius token (sm/md/lg/xl/full) instead.",
+      },
+      {
+        line: 19,
+        column: 24,
+        message: 'Hardcoded shadow literal. Use a shadow token (sm/md/lg) instead.',
+      },
+      {
+        line: 22,
+        column: 25,
+        message:
+          "Hardcoded font-weight '600'. Use a font-weight token (normal/medium/semibold/bold) instead.",
+      },
+      {
+        line: 25,
+        column: 25,
+        message:
+          "Hardcoded line-height '1.5'. Use a line-height token (tight/normal/relaxed) instead.",
+      },
+      {
+        line: 28,
+        column: 29,
+        message: "Hardcoded spacing '4px'. Use a spacing token (xs/sm/md/lg/xl) instead.",
+      },
+      {
+        line: 28,
+        column: 44,
+        message: "Hardcoded spacing '32px'. Use a spacing token (xs/sm/md/lg/xl) instead.",
+      },
+      {
+        line: 31,
+        column: 20,
+        message: "Hardcoded size '20px'. Use a sizing token (2xs/xs/sm/md/lg/xl/2xl/3xl) instead.",
+      },
+      {
+        line: 34,
+        column: 21,
+        message: 'Hardcoded color in border value. Use borderColor with a color token instead.',
+      },
+      {
+        line: 37,
+        column: 26,
+        message: "Hardcoded color '#DAD2CA'. Use a color token instead.",
+      },
+    ]
 
     const { stdout } = await runOxlint('violations.ts')
 
-    const violations = stdout.match(/Hardcoded /gu)
-    expect(violations).toHaveLength(13)
+    const diagnostics = Array.from(
+      stdout.matchAll(
+        /violations\.ts:(\d+):(\d+): error app\(no-hardcoded-design-literals\): ([^\n]+)/gu,
+      ),
+      ([, line, column, message]) => ({ line: Number(line), column: Number(column), message }),
+    )
+
+    expect(diagnostics).toHaveLength(expectedDiagnostics.length)
+    expect(diagnostics).toEqual(expect.arrayContaining(expectedDiagnostics))
   })
 
   it('catches hex color literals', async () => {

@@ -1,0 +1,3677 @@
+{
+  "title": "Einbürgerungstest Berlin",
+  "notesDate": "2026-09-26",
+  "groups": [
+    {
+      "id": "group-1",
+      "number": "01",
+      "title": "Fundamental rights",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            [
+              {
+                "text": "Meinungsfreiheit",
+                "strong": true
+              },
+              {
+                "text": " (freedom of expression) - you may openly criticise die Regierung (the government). You may express your opinion online.",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Meinungsfreiheit (freedom of expression) is restricted in cases of ",
+                "strong": false
+              },
+              {
+                "text": "öffentliche Verbreitung falscher Behauptungen",
+                "strong": true
+              },
+              {
+                "text": " (public dissemination of false claims) about specific people.",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Pressefreiheit",
+                "strong": true
+              },
+              {
+                "text": " (freedom of the press) is a Grundrecht (fundamental right); a Partei (political party) cannot abolish it.",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Pressezensur",
+                "strong": true
+              },
+              {
+                "text": " (press censorship) is NOT a feature of Demokratie (democracy).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Religionsfreiheit",
+                "strong": true
+              },
+              {
+                "text": " (freedom of religion) - until a child is ",
+                "strong": false
+              },
+              {
+                "text": "14 years old",
+                "strong": true
+              },
+              {
+                "text": ", Eltern (parents) decide whether the child attends ",
+                "strong": false
+              },
+              {
+                "text": "Religionsunterricht",
+                "strong": true
+              },
+              {
+                "text": " (religious education classes).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Glaubens- und Gewissensfreiheit",
+                "strong": true
+              },
+              {
+                "text": " (freedom of faith and conscience) is a fundamental right.",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Freizügigkeit",
+                "strong": true
+              },
+              {
+                "text": " (freedom of movement) - you may choose your own Wohnort (place of residence).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Recht auf Asyl",
+                "strong": true
+              },
+              {
+                "text": " (right to asylum) is the only Grundrecht (fundamental right) that applies ",
+                "strong": false
+              },
+              {
+                "text": "only to Ausländer",
+                "strong": true
+              },
+              {
+                "text": " (foreign nationals).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Artikel 1 GG",
+                "strong": true
+              },
+              {
+                "text": " (Article 1 of the Basic Law) guarantees the ",
+                "strong": false
+              },
+              {
+                "text": "Unantastbarkeit der Menschenwürde",
+                "strong": true
+              },
+              {
+                "text": " (inviolability of human dignity).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Grundgesetz",
+                "strong": true
+              },
+              {
+                "text": " (Basic Law) is the name of Germany's Verfassung (constitution).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Zwangsarbeit",
+                "strong": true
+              },
+              {
+                "text": " (forced labour) is prohibited by the Grundgesetz (Basic Law).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "A ",
+                "strong": false
+              },
+              {
+                "text": "Geldstrafe",
+                "strong": true
+              },
+              {
+                "text": " (fine) is compatible with the Grundgesetz (Basic Law).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "NOT in the Grundgesetz (Basic Law): \"alle sollen gleich viel Geld haben\" (everyone should have the same amount of money).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "The state prohibits ",
+                "strong": false
+              },
+              {
+                "text": "Ungleichbehandlung",
+                "strong": true
+              },
+              {
+                "text": " (unequal treatment) of Bürger (citizens).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Briefgeheimnis",
+                "strong": true
+              },
+              {
+                "text": " (privacy of correspondence) - you must not open other people's Briefe (letters).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "A Partei (political party) seeking a Diktatur (dictatorship) is ",
+                "strong": false
+              },
+              {
+                "text": "verfassungswidrig",
+                "strong": true
+              },
+              {
+                "text": " (unconstitutional).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "A Partei (political party) may be verboten (banned) if it ",
+                "strong": false
+              },
+              {
+                "text": "gegen die Verfassung kämpft",
+                "strong": true
+              },
+              {
+                "text": " (fights against the constitution).",
+                "strong": false
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "group-2",
+      "number": "02",
+      "title": "Structure of the state",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            [
+              {
+                "text": "Germany is a ",
+                "strong": false
+              },
+              {
+                "text": "Republik",
+                "strong": true
+              },
+              {
+                "text": " (republic), a ",
+                "strong": false
+              },
+              {
+                "text": "demokratischer und sozialer Bundesstaat",
+                "strong": true
+              },
+              {
+                "text": " (democratic and social federal state). It is NOT a Monarchie (monarchy).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Full name: ",
+                "strong": false
+              },
+              {
+                "text": "Bundesrepublik Deutschland",
+                "strong": true
+              },
+              {
+                "text": " (Federal Republic of Germany).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Einwohner (population): ",
+                "strong": false
+              },
+              {
+                "text": "84 Millionen",
+                "strong": true
+              },
+              {
+                "text": " (84 million).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "16 Bundesländer",
+                "strong": true
+              },
+              {
+                "text": " (16 federal states). ",
+                "strong": false
+              },
+              {
+                "text": "Elsass-Lothringen",
+                "strong": true
+              },
+              {
+                "text": " (Alsace-Lorraine) is NOT a federal state.",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Structure: ",
+                "strong": false
+              },
+              {
+                "text": "Bund",
+                "strong": true
+              },
+              {
+                "text": " (federation) → ",
+                "strong": false
+              },
+              {
+                "text": "Länder",
+                "strong": true
+              },
+              {
+                "text": " (federal states) → ",
+                "strong": false
+              },
+              {
+                "text": "Kommunen",
+                "strong": true
+              },
+              {
+                "text": " (local authorities). The lowest level is the ",
+                "strong": false
+              },
+              {
+                "text": "Gemeinden",
+                "strong": true
+              },
+              {
+                "text": " (municipalities).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Each federal state has its ",
+                "strong": false
+              },
+              {
+                "text": "eigene Regierung",
+                "strong": true
+              },
+              {
+                "text": " (own government). Its head is the ",
+                "strong": false
+              },
+              {
+                "text": "Ministerpräsident/in",
+                "strong": true
+              },
+              {
+                "text": " (state premier).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Schulpolitik",
+                "strong": true
+              },
+              {
+                "text": " (school policy) is the responsibility of the Länder (federal states), not the federation.",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Staat (the state) and Religionsgemeinschaften (religious communities) are ",
+                "strong": false
+              },
+              {
+                "text": "getrennt",
+                "strong": true
+              },
+              {
+                "text": " (separate).",
+                "strong": false
+              }
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "content": [
+            {
+              "text": "Parlament und Regierung (Parliament and government):",
+              "strong": true
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            [
+              {
+                "text": "Parliament = ",
+                "strong": false
+              },
+              {
+                "text": "Bundestag",
+                "strong": true
+              },
+              {
+                "text": " (Federal Parliament). Abgeordnete (members of parliament) are elected by the Volk (people).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Bundestag",
+                "strong": true
+              },
+              {
+                "text": " (Federal Parliament) + ",
+                "strong": false
+              },
+              {
+                "text": "Bundesrat",
+                "strong": true
+              },
+              {
+                "text": " (Federal Council) = ",
+                "strong": false
+              },
+              {
+                "text": "Legislative",
+                "strong": true
+              },
+              {
+                "text": " (legislature).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Bundesrat",
+                "strong": true
+              },
+              {
+                "text": " (Federal Council) = Regierungsvertreter der Länder (representatives of the federal state governments). Through it, the federal states participate in ",
+                "strong": false
+              },
+              {
+                "text": "Gesetzgebung",
+                "strong": true
+              },
+              {
+                "text": " (legislation).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "The ",
+                "strong": false
+              },
+              {
+                "text": "Bundeskanzler/in",
+                "strong": true
+              },
+              {
+                "text": " (Federal Chancellor) leads the Kabinett (cabinet) and is elected by the ",
+                "strong": false
+              },
+              {
+                "text": "Bundestag",
+                "strong": true
+              },
+              {
+                "text": " (Federal Parliament).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "The ",
+                "strong": false
+              },
+              {
+                "text": "Bundespräsident/in",
+                "strong": true
+              },
+              {
+                "text": " (Federal President) is the Staatsoberhaupt (head of state) and repräsentiert das Land (represents the country). The president is elected by the ",
+                "strong": false
+              },
+              {
+                "text": "Bundesversammlung",
+                "strong": true
+              },
+              {
+                "text": " (Federal Convention). Citizens ",
+                "strong": false
+              },
+              {
+                "text": "cannot elect the president directly",
+                "strong": true
+              },
+              {
+                "text": " (nicht direkt wählen).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "The president proposes a candidate for chancellor and ",
+                "strong": false
+              },
+              {
+                "text": "ernennt die Minister",
+                "strong": true
+              },
+              {
+                "text": " (appoints the ministers).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Opposition",
+                "strong": true
+              },
+              {
+                "text": " (opposition) = members of parliament who do not belong to the governing coalition. Its task: ",
+                "strong": false
+              },
+              {
+                "text": "die Regierung kontrollieren",
+                "strong": true
+              },
+              {
+                "text": " (scrutinise the government).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Fraktion",
+                "strong": true
+              },
+              {
+                "text": " (parliamentary group) = a group of members of the same political party in parliament.",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Koalition",
+                "strong": true
+              },
+              {
+                "text": " (coalition) = cooperation between parties for Regierungsbildung (forming a government).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "A ",
+                "strong": false
+              },
+              {
+                "text": "Bürgerversammlung",
+                "strong": true
+              },
+              {
+                "text": " (citizens' assembly) is NOT a Verfassungsorgan (constitutional body).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "The ",
+                "strong": false
+              },
+              {
+                "text": "Presse",
+                "strong": true
+              },
+              {
+                "text": " (press) is NOT a staatliche Gewalt (branch of state power).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "The president of the Bundestag (Federal Parliament) is a member of the ",
+                "strong": false
+              },
+              {
+                "text": "stärkste Fraktion",
+                "strong": true
+              },
+              {
+                "text": " (largest parliamentary group).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "The ",
+                "strong": false
+              },
+              {
+                "text": "Bundeskanzleramt",
+                "strong": true
+              },
+              {
+                "text": " (Federal Chancellery) and the Bundestag (Federal Parliament) are in ",
+                "strong": false
+              },
+              {
+                "text": "Berlin",
+                "strong": true
+              },
+              {
+                "text": ".",
+                "strong": false
+              }
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "content": [
+            {
+              "text": "Aktuelle Personen (Current officeholders):",
+              "strong": true
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            [
+              {
+                "text": "Kanzler (Chancellor): ",
+                "strong": false
+              },
+              {
+                "text": "Friedrich Merz",
+                "strong": true
+              },
+              {
+                "text": ".",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Präsident (President): ",
+                "strong": false
+              },
+              {
+                "text": "Frank-Walter Steinmeier",
+                "strong": true
+              },
+              {
+                "text": ".",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Largest Fraktionen (parliamentary groups): ",
+                "strong": false
+              },
+              {
+                "text": "CDU/CSU",
+                "strong": true
+              },
+              {
+                "text": " and ",
+                "strong": false
+              },
+              {
+                "text": "AfD",
+                "strong": true
+              },
+              {
+                "text": ".",
+                "strong": false
+              }
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "content": [
+            {
+              "text": "Parteien (Political parties):",
+              "strong": true
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            [
+              {
+                "text": "CDU = ",
+                "strong": false
+              },
+              {
+                "text": "Christlich Demokratische Union",
+                "strong": true
+              },
+              {
+                "text": " (Christian Democratic Union).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "CSU = ",
+                "strong": false
+              },
+              {
+                "text": "Christlich-Soziale Union",
+                "strong": true
+              },
+              {
+                "text": " (Christian Social Union).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "SPD = ",
+                "strong": false
+              },
+              {
+                "text": "Sozialdemokratische Partei Deutschlands",
+                "strong": true
+              },
+              {
+                "text": " (Social Democratic Party of Germany).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "FDP = ",
+                "strong": false
+              },
+              {
+                "text": "Freie Demokratische Partei",
+                "strong": true
+              },
+              {
+                "text": " (Free Democratic Party).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Ampelkoalition",
+                "strong": true
+              },
+              {
+                "text": " (traffic light coalition) = SPD + FDP + Bündnis 90/Die Grünen (Alliance 90/The Greens).",
+                "strong": false
+              }
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "content": [
+            {
+              "text": "Sonstiges (Other facts):",
+              "strong": true
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            [
+              {
+                "text": "Bundeswehr",
+                "strong": true
+              },
+              {
+                "text": " (German armed forces) = deutsche Armee (German army).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Soziale Marktwirtschaft",
+                "strong": true
+              },
+              {
+                "text": " (social market economy) = Angebot und Nachfrage (supply and demand) + sozialer Ausgleich (social balance).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "More ",
+                "strong": false
+              },
+              {
+                "text": "Zweitstimmen",
+                "strong": true
+              },
+              {
+                "text": " (second votes) for a party = more Sitze (seats) in parliament.",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Most working people are ",
+                "strong": false
+              },
+              {
+                "text": "bei einer Firma oder Behörde beschäftigt",
+                "strong": true
+              },
+              {
+                "text": " (employed by a company or a public authority).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Bundesverdienstkreuz",
+                "strong": true
+              },
+              {
+                "text": " (Federal Cross of Merit) is a state Ehrung (honour).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "The ",
+                "strong": false
+              },
+              {
+                "text": "Ordnungsamt",
+                "strong": true
+              },
+              {
+                "text": " (public order office) is part of the ",
+                "strong": false
+              },
+              {
+                "text": "Gemeindeverwaltung",
+                "strong": true
+              },
+              {
+                "text": " (municipal administration).",
+                "strong": false
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "group-3",
+      "number": "03",
+      "title": "Elections and participation",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            [
+              {
+                "text": "The Bundestag (Federal Parliament) is elected ",
+                "strong": false
+              },
+              {
+                "text": "alle 4 Jahre",
+                "strong": true
+              },
+              {
+                "text": " (every 4 years).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "You may wählen (vote) from the age of ",
+                "strong": false
+              },
+              {
+                "text": "18",
+                "strong": true
+              },
+              {
+                "text": " if you are a Staatsbürger (citizen).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Voting is ",
+                "strong": false
+              },
+              {
+                "text": "ein Recht",
+                "strong": true
+              },
+              {
+                "text": " (a right), not a Pflicht (duty).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Electoral principles: ",
+                "strong": false
+              },
+              {
+                "text": "frei, gleich, geheim",
+                "strong": true
+              },
+              {
+                "text": " (free, equal, secret).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Nobody may zwingen (force) you to vote or beeinflussen (influence) your vote.",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Aktives Wahlrecht",
+                "strong": true
+              },
+              {
+                "text": " (right to vote) = the right to wählen (vote). ",
+                "strong": false
+              },
+              {
+                "text": "Passives Wahlrecht",
+                "strong": true
+              },
+              {
+                "text": " (right to stand for election) = the right to be elected.",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "5%-Hürde",
+                "strong": true
+              },
+              {
+                "text": " (5% threshold) - a party needs at least 5% of the Zweitstimmen (second votes) to enter Parlament (parliament). It prevents numerous small Parteien (parties) from making Regierungsbildung (forming a government) difficult.",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "System: ",
+                "strong": false
+              },
+              {
+                "text": "Mehrheits- und Verhältniswahlrecht",
+                "strong": true
+              },
+              {
+                "text": " (a combination of majority voting and proportional representation).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "The party with the ",
+                "strong": false
+              },
+              {
+                "text": "meisten Stimmen",
+                "strong": true
+              },
+              {
+                "text": " (most votes) wins.",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Briefwahl",
+                "strong": true
+              },
+              {
+                "text": " (postal voting) is erlaubt (permitted).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Before an election, the Gemeinde (municipality) sends a ",
+                "strong": false
+              },
+              {
+                "text": "Wahlbenachrichtigung",
+                "strong": true
+              },
+              {
+                "text": " (polling notification).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Abgeordnete",
+                "strong": true
+              },
+              {
+                "text": " (members of parliament) = vom Volk gewählt (elected by the people).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Volkssouveränität",
+                "strong": true
+              },
+              {
+                "text": " (popular sovereignty) = Staatsgewalt geht vom Volke aus (state power derives from the people).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Regular elections make a ",
+                "strong": false
+              },
+              {
+                "text": "Regierungswechsel",
+                "strong": true
+              },
+              {
+                "text": " (change of government) possible.",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Several parties are needed to ",
+                "strong": false
+              },
+              {
+                "text": "unterschiedliche Meinungen vertreten",
+                "strong": true
+              },
+              {
+                "text": " (represent different opinions).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "A ",
+                "strong": false
+              },
+              {
+                "text": "Bürgerinitiative",
+                "strong": true
+              },
+              {
+                "text": " (citizens' initiative) is a form of political Beteiligung (participation).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Wahlhelfer/in",
+                "strong": true
+              },
+              {
+                "text": " (election assistant) = an ",
+                "strong": false
+              },
+              {
+                "text": "Ehrenamt",
+                "strong": true
+              },
+              {
+                "text": " (unpaid civic role). After the election, their task is Stimmen zählen (counting votes).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Bürgermeister/in",
+                "strong": true
+              },
+              {
+                "text": " (mayor) = Oberhaupt einer Gemeinde (head of a municipality).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Ehrenamt",
+                "strong": true
+              },
+              {
+                "text": " (voluntary service) = freiwillige und unbezahlte Arbeit (voluntary, unpaid work) in Vereinen (associations).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Landtagswahl",
+                "strong": true
+              },
+              {
+                "text": " (state parliamentary election) = election of a federal state's parliament.",
+                "strong": false
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "group-4",
+      "number": "04",
+      "title": "Rule of law and courts",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            [
+              {
+                "text": "Rechtsstaat",
+                "strong": true
+              },
+              {
+                "text": " (state governed by the rule of law) = everyone, both Bürger (citizens) and Staat (the state), ",
+                "strong": false
+              },
+              {
+                "text": "müssen sich an die Gesetze halten",
+                "strong": true
+              },
+              {
+                "text": " (must obey the laws).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Three Gewalten (branches of power): ",
+                "strong": false
+              },
+              {
+                "text": "Legislative",
+                "strong": true
+              },
+              {
+                "text": " (legislature), ",
+                "strong": false
+              },
+              {
+                "text": "Exekutive",
+                "strong": true
+              },
+              {
+                "text": " (executive), ",
+                "strong": false
+              },
+              {
+                "text": "Judikative",
+                "strong": true
+              },
+              {
+                "text": " (judiciary).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Gerichte",
+                "strong": true
+              },
+              {
+                "text": " (courts) do NOT belong to the Exekutive (executive); they are part of the ",
+                "strong": false
+              },
+              {
+                "text": "Judikative",
+                "strong": true
+              },
+              {
+                "text": " (judiciary).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Presse",
+                "strong": true
+              },
+              {
+                "text": " (press) and ",
+                "strong": false
+              },
+              {
+                "text": "Direktive",
+                "strong": true
+              },
+              {
+                "text": " (directive) are NOT a staatliche Gewalt (branch of state power).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "The ",
+                "strong": false
+              },
+              {
+                "text": "Bundesverfassungsgericht",
+                "strong": true
+              },
+              {
+                "text": " (Federal Constitutional Court) interprets the Grundgesetz (Basic Law).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "A ",
+                "strong": false
+              },
+              {
+                "text": "Richter/in",
+                "strong": true
+              },
+              {
+                "text": " (judge) belongs to the ",
+                "strong": false
+              },
+              {
+                "text": "Judikative",
+                "strong": true
+              },
+              {
+                "text": " (judiciary), also called rechtsprechende Gewalt (judicial power). A judge spricht Urteile (delivers judgments).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "A ",
+                "strong": false
+              },
+              {
+                "text": "Rechtsanwalt/Rechtsanwältin",
+                "strong": true
+              },
+              {
+                "text": " (lawyer) berät (advises) and vertritt vor Gericht (represents clients in court).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Schöffe/Schöffin",
+                "strong": true
+              },
+              {
+                "text": " (lay judge) = ",
+                "strong": false
+              },
+              {
+                "text": "ehrenamtlicher Richter",
+                "strong": true
+              },
+              {
+                "text": " (volunteer judge). Together with the professional judge, a lay judge decides on Schuld und Strafe (guilt and punishment).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Prozess",
+                "strong": true
+              },
+              {
+                "text": " (trial) = Verfahren vor Gericht (court proceedings).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Arbeitsgericht",
+                "strong": true
+              },
+              {
+                "text": " (labour court) handles employment disputes, such as ungerechtfertigte Kündigung (unjustified dismissal).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Kündigungsschutzklage",
+                "strong": true
+              },
+              {
+                "text": " (action for protection against dismissal) is brought in cases of wrongful dismissal.",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "The ",
+                "strong": false
+              },
+              {
+                "text": "Polizei",
+                "strong": true
+              },
+              {
+                "text": " (police) ensure Einhaltung von Gesetzen (compliance with the law).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Privatpolizei (private police) ",
+                "strong": false
+              },
+              {
+                "text": "cannot",
+                "strong": true
+              },
+              {
+                "text": " verhaften (arrest) people without grounds; this contradicts the Rechtsstaat (rule of law).",
+                "strong": false
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "group-5",
+      "number": "05",
+      "title": "Social security",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            [
+              {
+                "text": "Sozialversicherung",
+                "strong": true
+              },
+              {
+                "text": " (social insurance) is funded through ",
+                "strong": false
+              },
+              {
+                "text": "Sozialabgaben",
+                "strong": true
+              },
+              {
+                "text": " (social security contributions).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Arbeitgeber",
+                "strong": true
+              },
+              {
+                "text": " (employers) + ",
+                "strong": false
+              },
+              {
+                "text": "Arbeitnehmer",
+                "strong": true
+              },
+              {
+                "text": " (employees) pay these contributions.",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "With a feste Anstellung (permanent job), Sozialversicherung (social insurance) contributions are paid ",
+                "strong": false
+              },
+              {
+                "text": "automatisch",
+                "strong": true
+              },
+              {
+                "text": " (automatically).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Krankenversicherung",
+                "strong": true
+              },
+              {
+                "text": " (health insurance) provides soziale Sicherheit (social protection).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Pflegeversicherung",
+                "strong": true
+              },
+              {
+                "text": " (long-term care insurance) is part of Sozialversicherung (social insurance).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Lebensversicherung",
+                "strong": true
+              },
+              {
+                "text": " (life insurance) is NOT part of gesetzliche Sozialversicherung (statutory social insurance).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Gewerkschaften",
+                "strong": true
+              },
+              {
+                "text": " (trade unions) = Interessenverbände der Arbeitnehmer (associations representing employees' interests).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "A ",
+                "strong": false
+              },
+              {
+                "text": "Betriebsrat",
+                "strong": true
+              },
+              {
+                "text": " (works council) helps Arbeitnehmer (employees) within a Firma (company).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Umsatzsteuer",
+                "strong": true
+              },
+              {
+                "text": " (value added tax, VAT) is NOT deducted from Gehalt (salary).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Kirchensteuer",
+                "strong": true
+              },
+              {
+                "text": " (church tax) exists; this is why membership of a Kirche (church) is stated in the Steuererklärung (tax return).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "The ",
+                "strong": false
+              },
+              {
+                "text": "Kündigungsfrist",
+                "strong": true
+              },
+              {
+                "text": " (notice period) must be observed when giving Kündigung (notice of termination).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "An ",
+                "strong": false
+              },
+              {
+                "text": "Einspruch",
+                "strong": true
+              },
+              {
+                "text": " (objection) is filed against an incorrect ",
+                "strong": false
+              },
+              {
+                "text": "Steuerbescheid",
+                "strong": true
+              },
+              {
+                "text": " (tax assessment).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "A ",
+                "strong": false
+              },
+              {
+                "text": "Widerspruch",
+                "strong": true
+              },
+              {
+                "text": " (administrative objection) is filed against an incorrect bill from a ",
+                "strong": false
+              },
+              {
+                "text": "Behörde",
+                "strong": true
+              },
+              {
+                "text": " (public authority).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Poor treatment at a Behörde (public authority) → complain to the ",
+                "strong": false
+              },
+              {
+                "text": "Behördenleiter/in",
+                "strong": true
+              },
+              {
+                "text": " (head of the authority).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "The state builds Straßen und Schulen (roads and schools), but ",
+                "strong": false
+              },
+              {
+                "text": "does NOT pay for Urlaubsreisen",
+                "strong": true
+              },
+              {
+                "text": " (holiday trips).",
+                "strong": false
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "group-6",
+      "number": "06",
+      "title": "History: up to 1945",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            [
+              {
+                "text": "The ",
+                "strong": false
+              },
+              {
+                "text": "Nationalsozialisten",
+                "strong": true
+              },
+              {
+                "text": " (National Socialists, Nazis) were in power from ",
+                "strong": false
+              },
+              {
+                "text": "1933-1945",
+                "strong": true
+              },
+              {
+                "text": ".",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Hitler became ",
+                "strong": false
+              },
+              {
+                "text": "Reichskanzler",
+                "strong": true
+              },
+              {
+                "text": " (Reich Chancellor) in ",
+                "strong": false
+              },
+              {
+                "text": "1933",
+                "strong": true
+              },
+              {
+                "text": ".",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "The National Socialists established a ",
+                "strong": false
+              },
+              {
+                "text": "Diktatur",
+                "strong": true
+              },
+              {
+                "text": " (dictatorship). \"Drittes Reich\" (Third Reich) = Diktatur (dictatorship).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Under National Socialism, there were ",
+                "strong": false
+              },
+              {
+                "text": "no freie Wahlen",
+                "strong": true
+              },
+              {
+                "text": " (free elections); Parteien (political parties) were verboten (banned).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "NS-Staat (Nazi state) = a policy of ",
+                "strong": false
+              },
+              {
+                "text": "staatlicher Rassismus",
+                "strong": true
+              },
+              {
+                "text": " (state racism).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "9. November 1938",
+                "strong": true
+              },
+              {
+                "text": " (9 November 1938) - Kristallnacht (Night of Broken Glass): ",
+                "strong": false
+              },
+              {
+                "text": "Synagogen",
+                "strong": true
+              },
+              {
+                "text": " (synagogues) and ",
+                "strong": false
+              },
+              {
+                "text": "jüdische Geschäfte",
+                "strong": true
+              },
+              {
+                "text": " (Jewish shops) were destroyed.",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Claus Schenk Graf von Stauffenberg",
+                "strong": true
+              },
+              {
+                "text": " - Attentat auf Hitler (assassination attempt against Hitler), ",
+                "strong": false
+              },
+              {
+                "text": "20. Juli 1944",
+                "strong": true
+              },
+              {
+                "text": " (20 July 1944).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Zweiter Weltkrieg",
+                "strong": true
+              },
+              {
+                "text": " (Second World War): ",
+                "strong": false
+              },
+              {
+                "text": "1939-1945",
+                "strong": true
+              },
+              {
+                "text": ".",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "End of the war in Europe: ",
+                "strong": false
+              },
+              {
+                "text": "8. Mai 1945",
+                "strong": true
+              },
+              {
+                "text": " (8 May 1945) - Germany's ",
+                "strong": false
+              },
+              {
+                "text": "bedingungslose Kapitulation",
+                "strong": true
+              },
+              {
+                "text": " (unconditional surrender).",
+                "strong": false
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "group-7",
+      "number": "07",
+      "title": "History: 1945-1990",
+      "blocks": [
+        {
+          "type": "heading",
+          "content": [
+            {
+              "text": "Besatzung (Occupation):",
+              "strong": true
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            [
+              {
+                "text": "Alliierte Besatzungsmächte",
+                "strong": true
+              },
+              {
+                "text": " (Allied occupying powers): ",
+                "strong": false
+              },
+              {
+                "text": "USA",
+                "strong": true
+              },
+              {
+                "text": " (United States), ",
+                "strong": false
+              },
+              {
+                "text": "Sowjetunion",
+                "strong": true
+              },
+              {
+                "text": " (Soviet Union), ",
+                "strong": false
+              },
+              {
+                "text": "Großbritannien",
+                "strong": true
+              },
+              {
+                "text": " (Great Britain), ",
+                "strong": false
+              },
+              {
+                "text": "Frankreich",
+                "strong": true
+              },
+              {
+                "text": " (France). Japan was NOT an Allied power.",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "4 Besatzungszonen",
+                "strong": true
+              },
+              {
+                "text": " (4 occupation zones): GB (Great Britain) - Nordwesten (northwest); UdSSR (Soviet Union) - Nordosten (northeast); USA (United States) - Südosten (southeast); Frankreich (France) - Südwesten (southwest).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Berlin",
+                "strong": true
+              },
+              {
+                "text": " was divided into ",
+                "strong": false
+              },
+              {
+                "text": "4 Sektoren",
+                "strong": true
+              },
+              {
+                "text": " (4 sectors).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Luftbrücke",
+                "strong": true
+              },
+              {
+                "text": " (Berlin Airlift), ",
+                "strong": false
+              },
+              {
+                "text": "1948-1949",
+                "strong": true
+              },
+              {
+                "text": ": the Sowjetunion (Soviet Union) blocked Landverkehr (land transport) to West-Berlin (West Berlin).",
+                "strong": false
+              }
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "content": [
+            {
+              "text": "Zwei Staaten (Two states):",
+              "strong": true
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            [
+              {
+                "text": "The BRD (Federal Republic of Germany) and DDR (German Democratic Republic) were founded in ",
+                "strong": false
+              },
+              {
+                "text": "1949",
+                "strong": true
+              },
+              {
+                "text": ".",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "The DDR (German Democratic Republic) emerged in the ",
+                "strong": false
+              },
+              {
+                "text": "sowjetische Besatzungszone",
+                "strong": true
+              },
+              {
+                "text": " (Soviet occupation zone).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "DDR = ",
+                "strong": false
+              },
+              {
+                "text": "Deutsche Demokratische Republik",
+                "strong": true
+              },
+              {
+                "text": " (German Democratic Republic). It existed from ",
+                "strong": false
+              },
+              {
+                "text": "1949-1990",
+                "strong": true
+              },
+              {
+                "text": ".",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "First Bundeskanzler (Federal Chancellor) of the BRD (Federal Republic of Germany): ",
+                "strong": false
+              },
+              {
+                "text": "Konrad Adenauer",
+                "strong": true
+              },
+              {
+                "text": ".",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Wirtschaftswunder",
+                "strong": true
+              },
+              {
+                "text": " (economic miracle) - the ",
+                "strong": false
+              },
+              {
+                "text": "1950er Jahre",
+                "strong": true
+              },
+              {
+                "text": " (1950s).",
+                "strong": false
+              }
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "content": [
+            {
+              "text": "DDR (German Democratic Republic):",
+              "strong": true
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            [
+              {
+                "text": "17. Juni 1953",
+                "strong": true
+              },
+              {
+                "text": " (17 June 1953) - ",
+                "strong": false
+              },
+              {
+                "text": "Volksaufstand",
+                "strong": true
+              },
+              {
+                "text": " (popular uprising) in the DDR (German Democratic Republic).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Stasi",
+                "strong": true
+              },
+              {
+                "text": " = ",
+                "strong": false
+              },
+              {
+                "text": "Ministerium für Staatssicherheit",
+                "strong": true
+              },
+              {
+                "text": " (Ministry for State Security), the Geheimpolizei (secret police) of the DDR (German Democratic Republic).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "DDR (German Democratic Republic) = ",
+                "strong": false
+              },
+              {
+                "text": "Planwirtschaft",
+                "strong": true
+              },
+              {
+                "text": " (planned economy).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "The DDR (German Democratic Republic) belonged to the ",
+                "strong": false
+              },
+              {
+                "text": "Warschauer Pakt",
+                "strong": true
+              },
+              {
+                "text": " (Warsaw Pact).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Flagge (flag) of the DDR (German Democratic Republic): schwarz-rot-gold (black, red and gold) + ",
+                "strong": false
+              },
+              {
+                "text": "Hammer, Zirkel, Ährenkranz",
+                "strong": true
+              },
+              {
+                "text": " (hammer, compass and wreath of grain).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Eiserner Vorhang",
+                "strong": true
+              },
+              {
+                "text": " (Iron Curtain) = Abgrenzung (separation) of the Warsaw Pact bloc from the Westen (West).",
+                "strong": false
+              }
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "content": [
+            {
+              "text": "Berliner Mauer (Berlin Wall):",
+              "strong": true
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            [
+              {
+                "text": "Built by the ",
+                "strong": false
+              },
+              {
+                "text": "DDR",
+                "strong": true
+              },
+              {
+                "text": " (German Democratic Republic) in ",
+                "strong": false
+              },
+              {
+                "text": "1961",
+                "strong": true
+              },
+              {
+                "text": ".",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Berlin was durch eine Mauer geteilt (divided by a wall) from ",
+                "strong": false
+              },
+              {
+                "text": "1961-1989",
+                "strong": true
+              },
+              {
+                "text": ".",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Mauerfall (fall of the Wall): ",
+                "strong": false
+              },
+              {
+                "text": "1989",
+                "strong": true
+              },
+              {
+                "text": ".",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Montagsdemonstrationen",
+                "strong": true
+              },
+              {
+                "text": " (Monday demonstrations), 1989 - people chanted \"",
+                "strong": false
+              },
+              {
+                "text": "Wir sind das Volk",
+                "strong": true
+              },
+              {
+                "text": "\" (We are the people).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Die Wende",
+                "strong": true
+              },
+              {
+                "text": " (the turning point) - autumn 1989: the transition from Diktatur (dictatorship) to Demokratie (democracy).",
+                "strong": false
+              }
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "content": [
+            {
+              "text": "Ehemalige DDR-Länder (Former East German states)",
+              "strong": true
+            },
+            {
+              "text": " - remember all 5:",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "type": "ordered-list",
+          "items": [
+            [
+              {
+                "text": "Mecklenburg-Vorpommern (Mecklenburg-Western Pomerania)",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Brandenburg (Brandenburg)",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Sachsen (Saxony)",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Sachsen-Anhalt (Saxony-Anhalt)",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Thüringen (Thuringia)",
+                "strong": false
+              }
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "content": [
+            {
+              "text": "Sonstiges (Other facts):",
+              "strong": true
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            [
+              {
+                "text": "Willy Brandt",
+                "strong": true
+              },
+              {
+                "text": " - ",
+                "strong": false
+              },
+              {
+                "text": "Ostverträge",
+                "strong": true
+              },
+              {
+                "text": " (Eastern Treaties); ",
+                "strong": false
+              },
+              {
+                "text": "Kniefall in Warschau",
+                "strong": true
+              },
+              {
+                "text": " (kneeling in Warsaw), ",
+                "strong": false
+              },
+              {
+                "text": "1970",
+                "strong": true
+              },
+              {
+                "text": " - he asked Poland and the Jewish people for Verzeihung (forgiveness).",
+                "strong": false
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "group-8",
+      "number": "08",
+      "title": "Reunification",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            [
+              {
+                "text": "3. Oktober",
+                "strong": true
+              },
+              {
+                "text": " (3 October) - ",
+                "strong": false
+              },
+              {
+                "text": "Tag der Deutschen Einheit",
+                "strong": true
+              },
+              {
+                "text": " (German Unity Day).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "5 östliche Länder",
+                "strong": true
+              },
+              {
+                "text": " (5 eastern federal states) joined the BRD (Federal Republic of Germany).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "This is called ",
+                "strong": false
+              },
+              {
+                "text": "Deutsche Wiedervereinigung",
+                "strong": true
+              },
+              {
+                "text": " (German reunification).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Kanzler der Deutschen Einheit (Chancellor of German Unity): ",
+                "strong": false
+              },
+              {
+                "text": "Helmut Kohl",
+                "strong": true
+              },
+              {
+                "text": ".",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Germany's present Grenzen (borders) date from ",
+                "strong": false
+              },
+              {
+                "text": "1990",
+                "strong": true
+              },
+              {
+                "text": ".",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "After reunification, the eastern federal states became part of the ",
+                "strong": false
+              },
+              {
+                "text": "EU",
+                "strong": true
+              },
+              {
+                "text": " (European Union).",
+                "strong": false
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "group-9",
+      "number": "09",
+      "title": "Europe and the EU",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            [
+              {
+                "text": "The BRD (Federal Republic of Germany) is a ",
+                "strong": false
+              },
+              {
+                "text": "Gründungsmitglied",
+                "strong": true
+              },
+              {
+                "text": " (founding member) of the EU (European Union).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "EU = ",
+                "strong": false
+              },
+              {
+                "text": "Europäische Union",
+                "strong": true
+              },
+              {
+                "text": " (European Union). It currently has ",
+                "strong": false
+              },
+              {
+                "text": "27 Mitgliedstaaten",
+                "strong": true
+              },
+              {
+                "text": " (27 member states).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Römische Verträge",
+                "strong": true
+              },
+              {
+                "text": " (Treaties of Rome) - establishment of the ",
+                "strong": false
+              },
+              {
+                "text": "EWG / Europäische Wirtschaftsgemeinschaft",
+                "strong": true
+              },
+              {
+                "text": " (European Economic Community). Its 50th Jubiläum (anniversary) was in ",
+                "strong": false
+              },
+              {
+                "text": "2007",
+                "strong": true
+              },
+              {
+                "text": ".",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Europäische Integration",
+                "strong": true
+              },
+              {
+                "text": " (European integration) = Zusammenschluss (union) of European states within the EU (European Union).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Aim of the EU (European Union): ",
+                "strong": false
+              },
+              {
+                "text": "Frieden und Sicherheit",
+                "strong": true
+              },
+              {
+                "text": " (peace and security).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Europäisches Parlament",
+                "strong": true
+              },
+              {
+                "text": " (European Parliament) - elected every ",
+                "strong": false
+              },
+              {
+                "text": "5 Jahre",
+                "strong": true
+              },
+              {
+                "text": " (5 years). It works in ",
+                "strong": false
+              },
+              {
+                "text": "Straßburg",
+                "strong": true
+              },
+              {
+                "text": " (Strasbourg), ",
+                "strong": false
+              },
+              {
+                "text": "Luxemburg",
+                "strong": true
+              },
+              {
+                "text": " (Luxembourg) and ",
+                "strong": false
+              },
+              {
+                "text": "Brüssel",
+                "strong": true
+              },
+              {
+                "text": " (Brussels).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Europawahl",
+                "strong": true
+              },
+              {
+                "text": " (European Parliament election) = election of the Abgeordnete des EP (Members of the European Parliament).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Schengener Abkommen",
+                "strong": true
+              },
+              {
+                "text": " (Schengen Agreement) - travel in Europe ",
+                "strong": false
+              },
+              {
+                "text": "ohne Passkontrolle",
+                "strong": true
+              },
+              {
+                "text": " (without passport checks).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Euro",
+                "strong": true
+              },
+              {
+                "text": " (euro) cash has been in circulation, in bar (as banknotes and coins), since ",
+                "strong": false
+              },
+              {
+                "text": "2002",
+                "strong": true
+              },
+              {
+                "text": ".",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Germany's ",
+                "strong": false
+              },
+              {
+                "text": "Nachbarländer",
+                "strong": true
+              },
+              {
+                "text": " (neighbouring countries): Schweiz (Switzerland), Polen (Poland), Dänemark (Denmark), Luxemburg (Luxembourg), Tschechien (Czechia), Frankreich (France), Österreich (Austria), Belgien (Belgium), Niederlande (Netherlands).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Österreich",
+                "strong": true
+              },
+              {
+                "text": " (Austria) is a country with a large deutschsprachige Bevölkerung (German-speaking population).",
+                "strong": false
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "group-10",
+      "number": "10",
+      "title": "Symbols, holidays, culture",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            [
+              {
+                "text": "Flagge",
+                "strong": true
+              },
+              {
+                "text": " (flag): ",
+                "strong": false
+              },
+              {
+                "text": "schwarz-rot-gold",
+                "strong": true
+              },
+              {
+                "text": " (black, red and gold).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Wappentier",
+                "strong": true
+              },
+              {
+                "text": " (heraldic animal): ",
+                "strong": false
+              },
+              {
+                "text": "Adler",
+                "strong": true
+              },
+              {
+                "text": " (eagle). The ",
+                "strong": false
+              },
+              {
+                "text": "Bundesadler",
+                "strong": true
+              },
+              {
+                "text": " (federal eagle) hangs in the Plenarsaal (plenary chamber) of the Bundestag (Federal Parliament).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "The ",
+                "strong": false
+              },
+              {
+                "text": "Nationalhymne",
+                "strong": true
+              },
+              {
+                "text": " (national anthem) begins: \"",
+                "strong": false
+              },
+              {
+                "text": "Einigkeit und Recht und Freiheit",
+                "strong": true
+              },
+              {
+                "text": "\" (Unity and justice and freedom).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Rosenmontag",
+                "strong": true
+              },
+              {
+                "text": " (Rose Monday) - Karneval (carnival): Kostüme und Masken (costumes and masks).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Weihnachten",
+                "strong": true
+              },
+              {
+                "text": " (Christmas) - ",
+                "strong": false
+              },
+              {
+                "text": "Tannenbaum schmücken",
+                "strong": true
+              },
+              {
+                "text": " (decorate a Christmas tree).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Adventszeit",
+                "strong": true
+              },
+              {
+                "text": " (Advent) - 4 Wochen vor Weihnachten (4 weeks before Christmas).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Ostern",
+                "strong": true
+              },
+              {
+                "text": " (Easter) - ",
+                "strong": false
+              },
+              {
+                "text": "Eier bemalen",
+                "strong": true
+              },
+              {
+                "text": " (paint eggs).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Pfingsten",
+                "strong": true
+              },
+              {
+                "text": " (Pentecost) is a christlicher Feiertag (Christian holiday).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Christentum",
+                "strong": true
+              },
+              {
+                "text": " (Christianity) has shaped europäische und deutsche Kultur (European and German culture).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Religiöse Toleranz",
+                "strong": true
+              },
+              {
+                "text": " (religious tolerance) = jeder kann glauben, was er möchte (everyone may believe what they wish).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "27. Januar",
+                "strong": true
+              },
+              {
+                "text": " (27 January) - ",
+                "strong": false
+              },
+              {
+                "text": "Gedenktag",
+                "strong": true
+              },
+              {
+                "text": " (remembrance day) for Opfer des Nationalsozialismus (victims of National Socialism). Befreiung von Auschwitz (liberation of Auschwitz).",
+                "strong": false
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "group-11",
+      "number": "11",
+      "title": "Education, family, everyday life",
+      "blocks": [
+        {
+          "type": "heading",
+          "content": [
+            {
+              "text": "Bildung (Education):",
+              "strong": true
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            [
+              {
+                "text": "Schulpflicht",
+                "strong": true
+              },
+              {
+                "text": " (compulsory schooling) applies to all Kinder (children). The state supervises schools because this is laid down in the Grundgesetz (Basic Law).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Anwesenheitspflicht",
+                "strong": true
+              },
+              {
+                "text": " (compulsory attendance) - a child must be present at Schule (school).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Abitur",
+                "strong": true
+              },
+              {
+                "text": " (university entrance qualification) is needed to enter a ",
+                "strong": false
+              },
+              {
+                "text": "Universität",
+                "strong": true
+              },
+              {
+                "text": " (university). Adults can obtain it at an ",
+                "strong": false
+              },
+              {
+                "text": "Abendgymnasium",
+                "strong": true
+              },
+              {
+                "text": " (evening secondary school).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Kindergartenplatz",
+                "strong": true
+              },
+              {
+                "text": " (kindergarten place) - a right from the age of ",
+                "strong": false
+              },
+              {
+                "text": "3",
+                "strong": true
+              },
+              {
+                "text": " until school starts. ",
+                "strong": false
+              },
+              {
+                "text": "Eltern",
+                "strong": true
+              },
+              {
+                "text": " (parents) decide whether their child attends Kindergarten (kindergarten).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "VHS / Volkshochschule",
+                "strong": true
+              },
+              {
+                "text": " (adult education centre) = an institution for ",
+                "strong": false
+              },
+              {
+                "text": "Weiterbildung",
+                "strong": true
+              },
+              {
+                "text": " (continuing education).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "BIZ / Berufsinformationszentrum",
+                "strong": true
+              },
+              {
+                "text": " (careers information centre) helps people find a ",
+                "strong": false
+              },
+              {
+                "text": "Lehrstelle",
+                "strong": true
+              },
+              {
+                "text": " (apprenticeship place).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Best chances of finding an Arbeitsplatz (job) = being ",
+                "strong": false
+              },
+              {
+                "text": "gut ausgebildet",
+                "strong": true
+              },
+              {
+                "text": " (well trained).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Erwachsene (adults) should continue learning after their Ausbildung (training).",
+                "strong": false
+              }
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "content": [
+            {
+              "text": "Familie und Kinder (Family and children):",
+              "strong": true
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            [
+              {
+                "text": "Kindererziehung",
+                "strong": true
+              },
+              {
+                "text": " (raising children) is the responsibility of ",
+                "strong": false
+              },
+              {
+                "text": "Eltern",
+                "strong": true
+              },
+              {
+                "text": " (parents).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Kinder schlagen",
+                "strong": true
+              },
+              {
+                "text": " (hitting children) is ",
+                "strong": false
+              },
+              {
+                "text": "strafbar",
+                "strong": true
+              },
+              {
+                "text": " (a punishable offence).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "The ",
+                "strong": false
+              },
+              {
+                "text": "Jugendamt",
+                "strong": true
+              },
+              {
+                "text": " (youth welfare office) helps with Erziehungsprobleme (parenting problems). It can remove a Kind (child) from a Familie (family).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Elterngeld",
+                "strong": true
+              },
+              {
+                "text": " (parental allowance) requires an ",
+                "strong": false
+              },
+              {
+                "text": "Antrag",
+                "strong": true
+              },
+              {
+                "text": " (application) to the ",
+                "strong": false
+              },
+              {
+                "text": "Elterngeldstelle",
+                "strong": true
+              },
+              {
+                "text": " (parental allowance office).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Mutterschutz",
+                "strong": true
+              },
+              {
+                "text": " (maternity protection) provides legal protection for Schwangere (pregnant women).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Dismissal because of Schwangerschaft (pregnancy) is ",
+                "strong": false
+              },
+              {
+                "text": "verboten",
+                "strong": true
+              },
+              {
+                "text": " (prohibited).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Strafmündig",
+                "strong": true
+              },
+              {
+                "text": " (criminally responsible) from the age of ",
+                "strong": false
+              },
+              {
+                "text": "14",
+                "strong": true
+              },
+              {
+                "text": ".",
+                "strong": false
+              }
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "content": [
+            {
+              "text": "Ehe und Alter (Marriage and age):",
+              "strong": true
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            [
+              {
+                "text": "Volljährig",
+                "strong": true
+              },
+              {
+                "text": " (legally an adult) from the age of ",
+                "strong": false
+              },
+              {
+                "text": "18",
+                "strong": true
+              },
+              {
+                "text": " - you make your own Entscheidungen (decisions).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "You may be in an ",
+                "strong": false
+              },
+              {
+                "text": "Ehe",
+                "strong": true
+              },
+              {
+                "text": " (marriage) with only ",
+                "strong": false
+              },
+              {
+                "text": "einem Partner",
+                "strong": true
+              },
+              {
+                "text": " (one partner) at a time.",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Anne (13) and Tim (25) may NOT zusammenleben (live together).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "For a Heirat (marriage), first go to the ",
+                "strong": false
+              },
+              {
+                "text": "Standesamt",
+                "strong": true
+              },
+              {
+                "text": " (civil registry office).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Trennungsjahr",
+                "strong": true
+              },
+              {
+                "text": " (year of separation) - at least 1 year before ",
+                "strong": false
+              },
+              {
+                "text": "Scheidung",
+                "strong": true
+              },
+              {
+                "text": " (divorce). An ",
+                "strong": false
+              },
+              {
+                "text": "Anwalt/Anwältin",
+                "strong": true
+              },
+              {
+                "text": " (lawyer) is required.",
+                "strong": false
+              }
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "content": [
+            {
+              "text": "Alltag (Everyday life):",
+              "strong": true
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            [
+              {
+                "text": "After an Umzug (move), register with the ",
+                "strong": false
+              },
+              {
+                "text": "Einwohnermeldeamt",
+                "strong": true
+              },
+              {
+                "text": " (residents' registration office).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Nachtruhe",
+                "strong": true
+              },
+              {
+                "text": " (night-time quiet hours) begins at ",
+                "strong": false
+              },
+              {
+                "text": "22 Uhr",
+                "strong": true
+              },
+              {
+                "text": " (22:00).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "A ",
+                "strong": false
+              },
+              {
+                "text": "Demonstration",
+                "strong": true
+              },
+              {
+                "text": " (demonstration) must be ",
+                "strong": false
+              },
+              {
+                "text": "angemeldet",
+                "strong": true
+              },
+              {
+                "text": " (registered in advance).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "To open a restaurant, you need a ",
+                "strong": false
+              },
+              {
+                "text": "Gaststättenerlaubnis",
+                "strong": true
+              },
+              {
+                "text": " (restaurant licence).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Führerschein (driving licence): the Theorieprüfung (theory test) can be taken ",
+                "strong": false
+              },
+              {
+                "text": "in einer anderen Sprache",
+                "strong": true
+              },
+              {
+                "text": " (in another language; more than 10 languages are available).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Hausordnung",
+                "strong": true
+              },
+              {
+                "text": " (house rules) = Regeln (rules) for all Bewohner (residents).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Gleichbehandlung",
+                "strong": true
+              },
+              {
+                "text": " (equal treatment) - you must not benachteiligen (discriminate against) people because of Behinderung (disability), Hautfarbe (skin colour) or Mutterschaft (motherhood).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Faulty goods → ",
+                "strong": false
+              },
+              {
+                "text": "reklamieren",
+                "strong": true
+              },
+              {
+                "text": " (make a complaint to the seller or return the goods).",
+                "strong": false
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "group-12",
+      "number": "12",
+      "title": "Jewish life and antisemitism",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            [
+              {
+                "text": "Jüdische Gemeinden",
+                "strong": true
+              },
+              {
+                "text": " (Jewish communities) have existed in Germany for around ",
+                "strong": false
+              },
+              {
+                "text": "1,700 years",
+                "strong": true
+              },
+              {
+                "text": ".",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "The largest jüdische Gemeinden (Jewish communities) are in ",
+                "strong": false
+              },
+              {
+                "text": "Berlin",
+                "strong": true
+              },
+              {
+                "text": " and ",
+                "strong": false
+              },
+              {
+                "text": "München",
+                "strong": true
+              },
+              {
+                "text": " (Munich).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Synagoge",
+                "strong": true
+              },
+              {
+                "text": " (synagogue) = jüdisches Gotteshaus (Jewish house of worship).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Makkabi-Sportvereine",
+                "strong": true
+              },
+              {
+                "text": " (Makkabi sports clubs; around 40 in Germany) - ",
+                "strong": false
+              },
+              {
+                "text": "jeder Mensch",
+                "strong": true
+              },
+              {
+                "text": " (anyone) can become a member.",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Holocaust (Holocaust) denial = up to ",
+                "strong": false
+              },
+              {
+                "text": "5 years of Freiheitsstrafe",
+                "strong": true
+              },
+              {
+                "text": " (imprisonment) or a Geldstrafe (fine). It is an example of ",
+                "strong": false
+              },
+              {
+                "text": "antisemitisches Verhalten",
+                "strong": true
+              },
+              {
+                "text": " (antisemitic behaviour).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Öffentlicher Aufruf zur Vernichtung Israels",
+                "strong": true
+              },
+              {
+                "text": " (public call for the destruction of Israel) is verboten (prohibited).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Stolpersteine",
+                "strong": true
+              },
+              {
+                "text": " (stumbling stones) commemorate the ",
+                "strong": false
+              },
+              {
+                "text": "Opfer des Nationalsozialismus",
+                "strong": true
+              },
+              {
+                "text": " (victims of National Socialism).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Staat Israel (the State of Israel) was founded on the basis of a ",
+                "strong": false
+              },
+              {
+                "text": "UN-Resolution",
+                "strong": true
+              },
+              {
+                "text": " (United Nations resolution).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Germany has a besondere Verantwortung (special responsibility) towards Israel because of ",
+                "strong": false
+              },
+              {
+                "text": "NS-Verbrechen gegen Juden",
+                "strong": true
+              },
+              {
+                "text": " (Nazi crimes against Jews).",
+                "strong": false
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "group-13",
+      "number": "13",
+      "title": "Migration",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            [
+              {
+                "text": "The largest group of Migranten (migrants) to Germany comes from ",
+                "strong": false
+              },
+              {
+                "text": "Türkei",
+                "strong": true
+              },
+              {
+                "text": " (Turkey).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "The first ",
+                "strong": false
+              },
+              {
+                "text": "Gastarbeiter",
+                "strong": true
+              },
+              {
+                "text": " (guest workers), in the 1950s and 1960s, came from ",
+                "strong": false
+              },
+              {
+                "text": "Italien",
+                "strong": true
+              },
+              {
+                "text": " (Italy).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Migrants in the DDR (German Democratic Republic) came from ",
+                "strong": false
+              },
+              {
+                "text": "Vietnam",
+                "strong": true
+              },
+              {
+                "text": " (Vietnam), ",
+                "strong": false
+              },
+              {
+                "text": "Polen",
+                "strong": true
+              },
+              {
+                "text": " (Poland) and ",
+                "strong": false
+              },
+              {
+                "text": "Mosambik",
+                "strong": true
+              },
+              {
+                "text": " (Mozambique).",
+                "strong": false
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "group-14",
+      "number": "14",
+      "title": "Berlin",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "text": "10 questions.",
+              "strong": false
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            [
+              {
+                "text": "Berlin's ",
+                "strong": false
+              },
+              {
+                "text": "Wappen",
+                "strong": true
+              },
+              {
+                "text": " (coat of arms): a ",
+                "strong": false
+              },
+              {
+                "text": "Bär",
+                "strong": true
+              },
+              {
+                "text": " (bear).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Bezirk",
+                "strong": true
+              },
+              {
+                "text": " (borough): ",
+                "strong": false
+              },
+              {
+                "text": "Pankow",
+                "strong": true
+              },
+              {
+                "text": " is a borough of Berlin.",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "The ",
+                "strong": false
+              },
+              {
+                "text": "Landesparlament",
+                "strong": true
+              },
+              {
+                "text": " (state parliament) is elected for ",
+                "strong": false
+              },
+              {
+                "text": "5 Jahre",
+                "strong": true
+              },
+              {
+                "text": " (5 years).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "In Berlin, you may vote in ",
+                "strong": false
+              },
+              {
+                "text": "Kommunalwahlen",
+                "strong": true
+              },
+              {
+                "text": " (local elections) from the age of ",
+                "strong": false
+              },
+              {
+                "text": "16",
+                "strong": true
+              },
+              {
+                "text": ".",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Landesflagge",
+                "strong": true
+              },
+              {
+                "text": " (state flag): ",
+                "strong": false
+              },
+              {
+                "text": "weiß-rot",
+                "strong": true
+              },
+              {
+                "text": " (white and red).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Political information: ",
+                "strong": false
+              },
+              {
+                "text": "Landeszentrale für politische Bildung",
+                "strong": true
+              },
+              {
+                "text": " (State Agency for Civic Education).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Berlin is a ",
+                "strong": false
+              },
+              {
+                "text": "Stadtstaat",
+                "strong": true
+              },
+              {
+                "text": " (city-state).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Head of Berlin: ",
+                "strong": false
+              },
+              {
+                "text": "Regierender Bürgermeister / Regierende Bürgermeisterin",
+                "strong": true
+              },
+              {
+                "text": " (Governing Mayor).",
+                "strong": false
+              }
+            ],
+            [
+              {
+                "text": "Berlin has NO ",
+                "strong": false
+              },
+              {
+                "text": "Senator/in für Außenbeziehungen",
+                "strong": true
+              },
+              {
+                "text": " (senator for foreign relations); this is a federal responsibility.",
+                "strong": false
+              }
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

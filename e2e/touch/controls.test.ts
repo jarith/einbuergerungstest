@@ -3,17 +3,19 @@ import { expect, test } from '@playwright/test'
 import { sourceQuestion } from '../support/browser'
 import { bounds, waitForAppReady } from '../tests/helpers'
 
-test('a touch tap clears the planned date while focused and after reload', async ({ page }) => {
-  await page.clock.setFixedTime(new Date('2026-10-05T12:00:00Z'))
+for (const reload of [false, true]) {
+  test(`a touch tap clears the planned date ${reload ? 'after reload' : 'while focused'}`, async ({
+    page,
+  }) => {
+    await page.clock.setFixedTime(new Date('2026-10-05T12:00:00Z'))
 
-  await page.goto('/settings')
+    await page.goto('/settings')
 
-  await waitForAppReady(page)
+    await waitForAppReady(page)
 
-  const date = page.getByRole('textbox', { name: 'Planned test date', exact: true })
-  const clear = page.getByRole('button', { name: 'Clear', exact: true })
+    const date = page.getByRole('textbox', { name: 'Planned test date', exact: true })
+    const clear = page.getByRole('button', { name: 'Clear', exact: true })
 
-  for (const reload of [false, true]) {
     await date.fill('20.12.2026')
 
     await date.press('Enter')
@@ -22,11 +24,12 @@ test('a touch tap clears the planned date while focused and after reload', async
 
     await expect(clear).toBeEnabled()
 
+    // testing-ignore: Only setup differs; all date and persistence assertions run for both cases.
     if (reload) {
       await page.reload()
-
-      await expect(date).toHaveValue('20.12.2026')
     }
+
+    await expect(date).toHaveValue('20.12.2026')
 
     await clear.tap()
 
@@ -35,8 +38,8 @@ test('a touch tap clears the planned date while focused and after reload', async
     await page.reload()
 
     await expect(date).toHaveValue('')
-  }
-})
+  })
+}
 
 test('answer groups have a name and translation and dialog controls have large touch targets', async ({
   page,

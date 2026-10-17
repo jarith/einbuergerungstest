@@ -1,6 +1,9 @@
 import type { LearnerSnapshot } from '../../../web/src/modules/learner-state/domain/learner-state'
 import bank from '../../../web/public/questionbank-berlin.json' with { type: 'json' }
 
+// These fixtures characterize the named rejection cases. They do not approve the importer's
+// broader policies: depth 8, 64 object entries, 64 characters for every string/key, or
+// 50,000 entries for every array. Those implementation limits need a separate owner decision.
 export const backupWithProblem = (snapshot: LearnerSnapshot, problem: string, now: number) => {
   const attempt = snapshot.studyAttempts[0]
 
@@ -39,9 +42,11 @@ export const backupWithProblem = (snapshot: LearnerSnapshot, problem: string, no
         mockSittings: Array.from({ length: 1_001 }, (_, index) => ({ ...sitting, id: `${index}` })),
       })
     case 'deeply nested unused data':
+      // Characterize rejection of extreme nesting without prescribing an accepted depth limit.
       return `${JSON.stringify(snapshot).slice(0, -1)},"unused":${'['.repeat(20_000)}0${']'.repeat(20_000)}}`
     case 'oversized UTF-8 text':
       // Fewer than 10 MiB UTF-16 code units, but more than 10 MiB encoded bytes.
+      // The scenario checks size rejection specifically: this text also exceeds structural limits.
       return `${JSON.stringify(snapshot).slice(0, -1)},"unused":"${'€'.repeat(4 * 1024 * 1024)}"}`
     case 'the maximum date timestamp':
       return JSON.stringify({ ...snapshot, studyAttempts: [{ ...attempt, answeredAt: 8.64e15 }] })
@@ -55,10 +60,12 @@ export const backupWithProblem = (snapshot: LearnerSnapshot, problem: string, no
         ...snapshot,
         mockSittings: [
           {
-            ...sitting,
+            id: sitting.id,
             startedAt: tomorrow + 1,
             deadline: tomorrow + 3_600_001,
-            endedAt: tomorrow + 1,
+            currentQuestion: sitting.currentQuestion,
+            answers: sitting.answers,
+            status: 'active',
           },
         ],
       })

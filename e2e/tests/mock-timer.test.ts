@@ -3,7 +3,9 @@ import { expect, test } from '@playwright/test'
 import { startMock } from './helpers'
 
 test('the mock timer displays zero-padded minutes and seconds', async ({ page }) => {
-  await page.clock.install({ time: new Date('2026-09-26T12:00:00Z') })
+  await page.clock.install({ time: new Date('2026-09-26T11:59:00Z') })
+
+  await page.clock.pauseAt(new Date('2026-09-26T12:00:00Z'))
 
   await page.goto('/dashboard')
 

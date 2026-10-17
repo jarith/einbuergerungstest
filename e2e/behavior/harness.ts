@@ -1,38 +1,67 @@
-import { action, urlAtom, wrap } from '@reatom/core'
+import { action, computed, take, urlAtom, wrap } from '@reatom/core'
 
-import { loadAppResources } from '../../web/src/app/bootstrap.model'
+import type { loadAppResources } from '../../web/src/app/bootstrap.model'
+import type { OptionLabel } from '../../web/src/modules/question-bank'
+import type { MockPageModel } from '../../web/src/pages/mock-test/mock-test.model'
+import type { StudyModel } from '../../web/src/pages/study/study.model'
+import type { createStudyRoutes } from '../../web/src/pages/study/study.route'
+import { appRoute, routes as appRoutes } from '../../web/src/app/app.route'
+import { startNavigation } from '../../web/src/app/navigation.model'
 import { createBackupModel } from '../../web/src/modules/learner-state/application/backup.model'
 import { createLearnerState } from '../../web/src/modules/learner-state/application/learner-state.model'
-import { createOrderedStudy } from '../../web/src/modules/learner-state/application/ordered-study.model'
 import { createStartupRecovery } from '../../web/src/modules/learner-state/application/startup-recovery.model'
-import { getRemainingSeconds } from '../../web/src/modules/mock-test/domain/mock-test'
 import { getAnswerFeedback } from '../../web/src/modules/question-bank/domain/question-answer'
 import { createDashboardModel } from '../../web/src/pages/dashboard/dashboard.model'
-import { createMockPageModel } from '../../web/src/pages/mock-test/mock-test.model'
 import { createProgressPageModel } from '../../web/src/pages/progress/progress.model'
 import { createTestReviewModel } from '../../web/src/pages/test-review/test-review.model'
 import { browserNavigationAtom } from '../../web/src/shared/navigation/browser-navigation.model'
 import { savedProfile, rejectedProfile, replacementProfile } from './fixtures/storage'
 
+const createStudyLoader = (routes: ReturnType<typeof createStudyRoutes>) =>
+  computed(() => {
+    const route = Object.values(routes).find((candidate) => candidate.exact())
+
+    if (route === undefined) {
+      return { model: undefined, error: undefined }
+    }
+
+    // Entry loaders redirect. Observe the destination loader instead of awaiting
+    // an entry promise that the redirect legitimately invalidates.
+    void route.loader()
+
+    return {
+      model:
+        (route === routes.study || route === routes.groupStudy) && route.loader.ready()
+          ? route.loader.data()?.model
+          : undefined,
+      error: route.loader.status().isRejected ? route.loader.error() : undefined,
+    }
+  }, 'test.studyLoader')
+
 type ScenarioState = {
   resources?: Awaited<ReturnType<typeof loadAppResources>>
-  study?: ReturnType<typeof createOrderedStudy>
+  study?: StudyModel
+  studyRoutes?: ReturnType<typeof createStudyRoutes>
+  studyLoader?: ReturnType<typeof createStudyLoader>
+  mockPage?: MockPageModel
+  disconnectMock?: () => void
   dashboard?: ReturnType<typeof createDashboardModel>
   list?: ReturnType<typeof createProgressPageModel>
   backup?: ReturnType<typeof createBackupModel>
   review?: ReturnType<typeof createTestReviewModel>
   recovery?: ReturnType<typeof createStartupRecovery>
+  recoveryRetry?: Promise<void>
   failure?: Error
   exported?: string
+  beforePreview?: { current: string; saved: string | undefined }
   rejected?: string
-  group: string | null
   notedQuestion: number
   neutralFirst: boolean
   dispose: (() => void)[]
 }
 
 const createHarness = () => {
-  const state: ScenarioState = { group: null, notedQuestion: 1, neutralFirst: false, dispose: [] }
+  const state: ScenarioState = { notedQuestion: 1, neutralFirst: false, dispose: [] }
 
   const resources = () => {
     if (!state.resources) {
@@ -52,13 +81,15 @@ const createHarness = () => {
     return value
   }
 
-  const study = () => {
+  const studyModel = () => {
     if (!state.study) {
       throw new Error('Start a study session first.')
     }
 
     return state.study
   }
+
+  const study = () => studyModel().flow
 
   const dashboard = () => {
     if (!state.dashboard) {
@@ -102,44 +133,121 @@ const createHarness = () => {
     return value
   }
 
+  const mockPage = () => {
+    if (state.mockPage === undefined) {
+      throw new Error('Open a mock question first.')
+    }
+
+    return state.mockPage
+  }
+
+  const loadMock = action(async () => {
+    const data = await wrap(appRoutes.mock.question.loader())
+
+    state.disconnectMock?.()
+    state.mockPage = data.model
+    state.disconnectMock = data.model.connect()
+  }, 'test.loadMock')
+
+  const navigateMock = action(async (direction: 'next' | 'previous') => {
+    await wrap(mockPage().questions[direction]())
+
+    await wrap(loadMock())
+  }, 'test.navigateMock')
+
   const review = () => {
     state.review ??= createTestReviewModel(resources(), sitting().id)
 
     return state.review
   }
 
-  const startStudy = (order?: number, group: string | null = null) => {
-    const app = resources()
-
-    const position =
-      group === null ? app.learner()?.positions.all : app.learner()?.positions.groups[group]
-
-    const first = app.questions.bank.questions.find(
-      (item) => group === null || item.group_id === group,
-    )
-
-    if (!first) {
-      throw new Error(`Empty study group ${group}`)
+  const studyRoutes = () => {
+    if (!state.studyRoutes) {
+      throw new Error('Start a learner before navigating study.')
     }
-    const target = order === undefined ? (position?.questionKey ?? first.id) : question(order).id
-    state.group = group
-    state.study = createOrderedStudy(app.questions.bank, app.learner, target, 'sequential', group)
+
+    return state.studyRoutes
   }
+
+  const loadStudy = action(async () => {
+    const loader = state.studyLoader
+
+    if (loader === undefined) {
+      throw new Error('Start a learner before loading study.')
+    }
+
+    const loaded = { current: loader() }
+
+    while (loaded.current.model === undefined) {
+      if (loaded.current.error !== undefined) {
+        throw loaded.current.error
+      }
+
+      loaded.current = await wrap(take(loader))
+    }
+
+    state.study = loaded.current.model
+  }, 'test.loadStudy')
+
+  const startStudy = action(async (order?: number, group: string | null = null) => {
+    // A new session means departing study and entering through its real route.
+    urlAtom.go('/dashboard')
+
+    await wrap(Promise.resolve())
+
+    const routes = studyRoutes()
+
+    if (group !== null) {
+      routes.groupEntry.go({ groupId: group })
+    } else if (order === undefined) {
+      routes.entry.go()
+    } else {
+      routes.study.go({ questionKey: question(order).id, mode: 'inspection' })
+    }
+
+    await wrap(loadStudy())
+  }, 'test.startStudy')
+
+  const navigateStudy = action(async (direction: 'next' | 'previous') => {
+    await wrap(studyModel().questions[direction]())
+
+    await wrap(loadStudy())
+  }, 'test.navigateStudy')
+
+  const restartStudy = action(async () => {
+    await wrap(studyModel().restart())
+
+    await wrap(loadStudy())
+  }, 'test.restartStudy')
 
   const launch = action(async () => {
     state.dispose.forEach((dispose) => dispose())
 
     state.dispose = []
+    state.disconnectMock?.()
+    delete state.mockPage
+    delete state.disconnectMock
     state.resources?.localization.dispose()
     delete state.review
     delete state.study
     delete state.failure
     try {
-      const app = await wrap(loadAppResources())
+      const app = await wrap(appRoute.loader.retry())
       state.resources = app
       state.dashboard = createDashboardModel(app)
       state.list = createProgressPageModel(app)
       state.backup = createBackupModel(app.learner)
+      state.studyRoutes = appRoutes.study
+      state.studyLoader = createStudyLoader(state.studyRoutes)
+
+      // Route subscriptions keep production change hooks active without rendering screens.
+      state.dispose.push(state.studyRoutes.study.subscribe(() => undefined))
+
+      state.dispose.push(state.studyRoutes.groupStudy.subscribe(() => undefined))
+
+      state.dispose.push(state.studyLoader.subscribe(() => undefined))
+
+      state.dispose.push(appRoutes.mock.question.subscribe(() => undefined))
 
       state.dispose.push(state.dashboard.date.subscribe(() => undefined))
     } catch (cause) {
@@ -150,7 +258,9 @@ const createHarness = () => {
 
       state.recovery = createStartupRecovery(
         () => state.failure,
-        () => undefined,
+        () => {
+          state.recoveryRetry = launch()
+        },
       )
     }
   }, 'test.launch')
@@ -176,26 +286,26 @@ const createHarness = () => {
     }
     const current = sitting()
 
-    const model = createMockPageModel(
-      app,
-      current.id,
-      current.answers[0]?.questionKey,
-      () => undefined,
-    )
+    const first = current.answers[0]
 
-    state.dispose.push(model.connect())
+    if (first === undefined) {
+      throw new Error('A mock paper must contain a first question.')
+    }
+
+    appRoutes.mock.question.go({ testId: current.id, questionKey: first.questionKey })
+
+    await wrap(loadMock())
   }, 'test.startMock')
 
-  const restart = action(async () => {
-    const position = state.study?.().question.order
-    const group = state.group
-
+  const reopen = action(async (studyPath: string | null) => {
     await wrap(launch())
 
-    if (position !== undefined && !state.failure) {
-      startStudy(position, group)
+    if (studyPath !== null && !state.failure) {
+      urlAtom.go(studyPath)
+
+      await wrap(loadStudy())
     }
-  }, 'test.restart')
+  }, 'test.reopen')
 
   const changeElsewhere = action(async () => {
     const other = createLearnerState(resources().questions.bank)
@@ -213,16 +323,10 @@ const createHarness = () => {
     await wrap(launch())
   }, 'test.prepareRejected')
 
-  browserNavigationAtom.start((destination) => {
-    const active = state.resources?.mock()
-
-    return active && destination.pathname === '/leave-mock'
-      ? { leave: () => resources().mock.leave() }
-      : null
-  })
+  startNavigation()
 
   return {
-    requestExit: () => urlAtom.go('/leave-mock'),
+    requestExit: () => appRoutes.dashboard.go(),
     mockFeedback: () => {
       const current = sitting()
       const answer = current.answers[current.currentQuestion]
@@ -253,9 +357,14 @@ const createHarness = () => {
     review,
     recovery,
     launch,
-    restart,
+    reopen,
     startStudy,
+    navigateStudy,
+    restartStudy,
+    answerStudy: (option: OptionLabel) => studyModel().questions.answer(option),
     startMock,
+    mockPage,
+    navigateMock,
     changeElsewhere,
     prepareRejected,
     savedProfile,
@@ -263,7 +372,7 @@ const createHarness = () => {
     navigation: browserNavigationAtom,
     progress: (order: number) => resources().learner.progress.questions().get(question(order).id),
     feedback: () => getAnswerFeedback(study()().question, 'study', study()().selectedOption),
-    remaining: () => getRemainingSeconds(sitting(), Date.now()),
+    remaining: () => resources().mock.remaining(),
   }
 }
 

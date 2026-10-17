@@ -41,7 +41,7 @@ export type QuestionContentProps = Readonly<{
   loaded: LoadedQuestion
   interaction: QuestionInteraction
   selectedOption: OptionLabel | null
-  language: 'en' | 'de'
+  language: 'en' | 'de' | 'ru'
   translationEnabled: boolean
   onTranslationChange: (enabled: boolean) => void
   status?: ReactNode
@@ -86,7 +86,7 @@ export const QuestionContent = ({
       label: <span lang="de">{option.text_de}</span>,
       description: hasTranslation ? (
         <Reveal opened={showTranslation}>
-          <span lang="en">{option.text_en}</span>
+          <span lang={language}>{language === 'ru' ? option.text_ru : option.text_en}</span>
         </Reveal>
       ) : null,
     }
@@ -137,8 +137,8 @@ export const QuestionContent = ({
         </h2>
         {hasTranslation ? (
           <Reveal opened={showTranslation}>
-            <span lang="en" className={translationText}>
-              {question.question_en}
+            <span lang={language} className={translationText}>
+              {language === 'ru' ? question.question_ru : question.question_en}
             </span>
           </Reveal>
         ) : null}

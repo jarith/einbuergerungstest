@@ -4,12 +4,14 @@
 
 The app prepares a learner for the Berlin Einbürgerungstest with the supplied
 [`questionbank-berlin.json`](../web/public/questionbank-berlin.json). The file contains
-300 general and 10 Berlin questions, four answer choices per question, English text for
-every question and choice, and local image resources for the 13 illustrated questions. The
-German text and answer choices are the exam content. The question bank and its images are
-fixed and will never change; no content versioning or saved-history migration is required.
-The English translations are an unofficial study aid; the app does not need an additional
-translation notice.
+300 general and 10 Berlin questions, four answer choices per question, English and Russian
+text for every question and choice, and local image resources for the 13 illustrated
+questions. The German text and answer choices are the exam content. Question IDs, question
+text, answers, and images remain stable when study groups change. Group metadata and
+membership follow the [study-note assignment manifest](question-groups.md); startup
+automatically normalizes retired group bookmarks and derives new group totals from
+existing answer history. The English and Russian translations are unofficial study aids;
+the app does not need an additional translation notice.
 
 The
 [BAMF test guide](https://www.bamf.de/DE/Themen/Integration/ZugewanderteTeilnehmende/Einbuergerung/einbuergerung-node.html)
@@ -28,24 +30,26 @@ BAMF's current selection algorithm.
 Each new paper independently chooses one of two compositions with equal probability: A has
 15 democracy, 7 history, 8 society, and 3 Berlin questions; B has 15 democracy, 8 history,
 7 society, and 3 Berlin questions. The approved per-group allocations reflect the groups'
-relative sizes, rounded to preserve the topic totals:
+relative sizes within the fourteen study-note groups, with at least one question per group
+and the topic totals preserved:
 
-| Topic                        | Existing group ID           |      A |      B |
-| ---------------------------- | --------------------------- | -----: | -----: |
-| Leben in der Demokratie      | constitution-rights         |      3 |      3 |
-| Leben in der Demokratie      | federalism-state-symbols    |      2 |      2 |
-| Leben in der Demokratie      | government-institutions     |      2 |      2 |
-| Leben in der Demokratie      | elections-participation     |      5 |      5 |
-| Leben in der Demokratie      | justice-legal-system        |      2 |      2 |
-| Leben in der Demokratie      | economy-social-security     |      1 |      1 |
-| Geschichte und Verantwortung | jewish-life-nazi-history    |      2 |      2 |
-| Geschichte und Verantwortung | postwar-ddr-reunification   |      3 |      4 |
-| Geschichte und Verantwortung | europe-eu                   |      2 |      2 |
-| Mensch und Gesellschaft      | family-education            |      4 |      4 |
-| Mensch und Gesellschaft      | everyday-administration     |      1 |      1 |
-| Mensch und Gesellschaft      | equality-religion-migration |      3 |      2 |
-| State-specific               | berlin                      |      3 |      3 |
-| **Total**                    |                             | **33** | **33** |
+| Topic                        | Group ID                       |      A |      B |
+| ---------------------------- | ------------------------------ | -----: | -----: |
+| Leben in der Demokratie      | fundamental-rights             |      2 |      2 |
+| Leben in der Demokratie      | state-structure                |      6 |      6 |
+| Leben in der Demokratie      | elections-civic-participation  |      4 |      4 |
+| Leben in der Demokratie      | rule-of-law-courts             |      2 |      2 |
+| Leben in der Demokratie      | social-security                |      1 |      1 |
+| Geschichte und Verantwortung | history-until-war-end          |      1 |      1 |
+| Geschichte und Verantwortung | postwar-history                |      3 |      4 |
+| Geschichte und Verantwortung | reunification                  |      1 |      1 |
+| Geschichte und Verantwortung | europe-eu                      |      1 |      1 |
+| Geschichte und Verantwortung | jewish-life-antisemitism       |      1 |      1 |
+| Mensch und Gesellschaft      | symbols-holidays-culture       |      2 |      1 |
+| Mensch und Gesellschaft      | education-family-everyday-life |      5 |      5 |
+| Mensch und Gesellschaft      | migration                      |      1 |      1 |
+| State-specific               | berlin                         |      3 |      3 |
+| **Total**                    |                                | **33** | **33** |
 
 Selection is uniformly random without replacement inside each group. Shuffle the 30
 selected general questions together, then append the three Berlin questions in random
@@ -63,9 +67,9 @@ ordering, input preservation, and invalid inputs without probabilistic assertion
 
 - Ordered study covers all 310 questions, including the illustrations, with immediate
   answer feedback and repeat attempts. German question and answer text remains visible. In
-  English UI, a translation toggle adds English text for the question and every answer
-  choice alongside the German original. The toggle remains in its chosen state across
-  questions, reloads, and switches away from and back to English UI. It is absent in
+  English or Russian UI, a translation toggle adds text in the selected language for the
+  question and every answer choice alongside the German original. The toggle remains in
+  its chosen state across questions, reloads, and language switches. It is absent in
   German UI.
 - The dashboard is the entry point for studying every question group in the supplied bank,
   including Berlin. Each group shows its title, knowledge-area description, question
@@ -82,18 +86,18 @@ ordering, input preservation, and invalid inputs without probabilistic assertion
   groups and completed passes do not show this resume hint. Group-study back links return
   to the dashboard. The existing Study action continues to cover all 310 questions.
 - A live mock test uses German content only. Answer selection can be revised, and grading
-  is withheld until the test ends. In English UI, a completed test's review offers a
-  translation toggle that shows English questions and choices beside the German original.
-  The control is absent in German UI.
+  is withheld until the test ends. In English or Russian UI, a completed test's review
+  offers a translation toggle that shows questions and choices in the selected language
+  beside the German original. The control is absent in German UI.
 - The progress view shows each question's latest status and prior attempts, lets the
   learner open a question in study mode, and summarizes completed and unfinished mock
   tests. A blank answer scores zero in its completed test but leaves an otherwise
   unanswered question in Not started status in overall progress.
 - All app interface text, including navigation, settings, study feedback, and mock-test
-  controls and results, is available in English and German. A new learner starts with
-  English UI and can change the UI language in Settings. This preference affects interface
-  text and available translation controls, but never replaces the German question-bank
-  content or translates a live mock test.
+  controls and results, is available in English, German, and Russian. A new learner starts
+  with English UI and can change the UI language in Settings. This preference affects
+  interface text and available translation controls, but never replaces the German
+  question-bank content or translates a live mock test.
 - Settings lets the learner choose an optional planned date for the real test. Today or a
   future date is accepted; an earlier date is rejected with visible feedback. The learner
   can change or clear the date at any time. The dashboard shows the number of local
@@ -262,8 +266,9 @@ change question status, or reset the consecutive-correct count. Mock-test scores
 the correctness of answers in that test, independently of learning status.
 
 Use these four statuses consistently in question indicators, totals, filters, and history.
-Provide localized labels in English and German, with text or icons alongside the colors.
-Progress counts Learning and Learned equally, while status totals distinguish them.
+Provide localized labels in English, German, and Russian, with text or icons alongside the
+colors. Progress counts Learning and Learned equally, while status totals distinguish
+them.
 
 The executable acceptance specification is in [`e2e/features/`](../e2e/features/). Its
 existing status and total assertions use this four-state terminology. The glossary is in

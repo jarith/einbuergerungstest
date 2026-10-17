@@ -11,6 +11,8 @@ import { reatomComponent } from '@reatom/react'
 import { X } from 'lucide-react'
 // oxlint-disable-next-line import/no-unassigned-import -- Day.js registers locales through side-effect imports.
 import 'dayjs/locale/de'
+// oxlint-disable-next-line import/no-unassigned-import -- Day.js registers locales through side-effect imports.
+import 'dayjs/locale/ru'
 
 import type { PageProps } from '../../../../../../app/routing'
 import type { SettingsData } from '../../../../settings.model'
@@ -37,6 +39,7 @@ export const PreferencesSection = reatomComponent(({ data }: PageProps<SettingsD
             data={[
               { value: 'en', label: 'English' },
               { value: 'de', label: 'Deutsch' },
+              { value: 'ru', label: 'Русский' },
             ]}
             onChange={wrap(settings.setLanguage)}
           />

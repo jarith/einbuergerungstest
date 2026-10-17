@@ -10,14 +10,17 @@ export type QuestionGroup = Readonly<{
   id: string
   title: string
   title_de: string
+  title_ru: string
   description: string
   description_de: string
+  description_ru: string
 }>
 
 export type AnswerOption = Readonly<{
   label: OptionLabel
   text_de: string
   text_en: string
+  text_ru: string
 }>
 
 export type ImageVariant = Readonly<{ width: number; resource: string }>
@@ -29,6 +32,7 @@ export type Question = Readonly<{
   group_id: string
   question_de: string
   question_en: string
+  question_ru: string
   answer_options: readonly AnswerOption[]
   correct_option: OptionLabel
   question_image_resource?: string
@@ -196,8 +200,10 @@ const parseGroup = (raw: JsonValue, index: number): QuestionGroup => {
     id,
     title: requireText(group['title'], `${place}.title`),
     title_de: requireText(group['title_de'], `${place}.title_de`),
+    title_ru: requireText(group['title_ru'], `${place}.title_ru`),
     description: requireText(group['description'], `${place}.description`),
     description_de: requireText(group['description_de'], `${place}.description_de`),
+    description_ru: requireText(group['description_ru'], `${place}.description_ru`),
   }
 }
 
@@ -284,6 +290,7 @@ const parseQuestion = (raw: JsonValue, index: number): Question => {
       label,
       text_de: requireText(option['text_de'], `${optionPlace}.text_de`),
       text_en: requireText(option['text_en'], `${optionPlace}.text_en`),
+      text_ru: requireText(option['text_ru'], `${optionPlace}.text_ru`),
     }
   })
 
@@ -294,6 +301,7 @@ const parseQuestion = (raw: JsonValue, index: number): Question => {
     group_id: requireText(entry['group_id'], `${place}.group_id`),
     question_de: requireText(entry['question_de'], `${place}.question_de`),
     question_en: requireText(entry['question_en'], `${place}.question_en`),
+    question_ru: requireText(entry['question_ru'], `${place}.question_ru`),
     answer_options,
     correct_option: requireLabel(entry['correct_option'], `${place}.correct_option`),
     ...parseImage(entry, place),
@@ -310,7 +318,7 @@ export const parseQuestionBank = (value: JsonValue): QuestionBank => {
   if (root['question_count'] !== 310) {
     return fail('question_count', 'expected 310')
   }
-  const groups = requireArray(root['groups'], 'groups', 13).map(parseGroup)
+  const groups = requireArray(root['groups'], 'groups', 14).map(parseGroup)
 
   const questions = requireArray(root['questions'], 'questions', 310)
     .map(parseQuestion)

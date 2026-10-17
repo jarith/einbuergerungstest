@@ -20,13 +20,34 @@ describe('no-reexport-outside-index', () => {
     expect(stdout).toContain('app(no-reexport-outside-index)')
   })
 
-  it('reports exactly 8 violations', async () => {
+  it('reports each non-index re-export at its source location', async () => {
     expect.hasAssertions()
+
+    const expectedMessage =
+      'Re-exports are only allowed in index files. Move this re-export to an index file or use a direct export instead.'
+
+    const expectedDiagnostics = [
+      { line: 4, column: 1, message: expectedMessage },
+      { line: 5, column: 1, message: expectedMessage },
+      { line: 6, column: 1, message: expectedMessage },
+      { line: 9, column: 1, message: expectedMessage },
+      { line: 12, column: 1, message: expectedMessage },
+      { line: 13, column: 1, message: expectedMessage },
+      { line: 18, column: 1, message: expectedMessage },
+      { line: 19, column: 1, message: expectedMessage },
+    ]
 
     const { stdout } = await runOxlint('violations.ts')
 
-    const matches = stdout.match(/Re-exports are only allowed in index files/gu)
-    expect(matches).toHaveLength(8)
+    const diagnostics = Array.from(
+      stdout.matchAll(
+        /violations\.ts:(\d+):(\d+): error app\(no-reexport-outside-index\): ([^\n]+)/gu,
+      ),
+      ([, line, column, message]) => ({ line: Number(line), column: Number(column), message }),
+    )
+
+    expect(diagnostics).toHaveLength(expectedDiagnostics.length)
+    expect(diagnostics).toEqual(expect.arrayContaining(expectedDiagnostics))
   })
 
   it('does not report violations for clean local exports', async () => {
@@ -56,12 +77,31 @@ describe('no-reexport-outside-index', () => {
     expect(stdout).toContain('app(no-reexport-outside-index)')
   })
 
-  it('reports exactly 8 parent re-export violations in index file', async () => {
+  it('reports only parent re-exports at their source locations in an index file', async () => {
     expect.hasAssertions()
+
+    const expectedMessage =
+      'Index files must not re-export from parent directories. Import from a sibling module instead.'
+
+    const expectedDiagnostics = [
+      { line: 4, column: 1, message: expectedMessage },
+      { line: 5, column: 1, message: expectedMessage },
+      { line: 6, column: 1, message: expectedMessage },
+      { line: 7, column: 1, message: expectedMessage },
+      { line: 8, column: 1, message: expectedMessage },
+      { line: 9, column: 1, message: expectedMessage },
+      { line: 14, column: 1, message: expectedMessage },
+      { line: 15, column: 1, message: expectedMessage },
+    ]
 
     const { stdout } = await runOxlint('index-parent-reexports/index.ts')
 
-    const matches = stdout.match(/Index files must not re-export from parent directories/gu)
-    expect(matches).toHaveLength(8)
+    const diagnostics = Array.from(
+      stdout.matchAll(/index\.ts:(\d+):(\d+): error app\(no-reexport-outside-index\): ([^\n]+)/gu),
+      ([, line, column, message]) => ({ line: Number(line), column: Number(column), message }),
+    )
+
+    expect(diagnostics).toHaveLength(expectedDiagnostics.length)
+    expect(diagnostics).toEqual(expect.arrayContaining(expectedDiagnostics))
   })
 })

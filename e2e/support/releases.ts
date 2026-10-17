@@ -10,6 +10,8 @@ import { fileURLToPath } from 'node:url'
 
 type Release = 'release-a' | 'release-b'
 
+type ActivationCheck = Readonly<{ fulfilled: boolean; activationRequested: boolean }>
+
 type Deployment = Readonly<{
   origin: string
   publish: (release: Release) => void
@@ -18,7 +20,42 @@ type Deployment = Readonly<{
   failedRequests: () => number
   serveLegacyWorker: () => void
   setConnected: (connected: boolean) => void
+  observeActivations: () => void
+  completedActivations: () => readonly ActivationCheck[]
 }>
+
+// Opt-in observation of real browser API boundaries. The original application
+// promise, skipWaiting call, and native event lifetime are all preserved. A second
+// waitUntil only keeps the observer's reporting request alive until it is delivered.
+const activationObserver = `
+(() => {
+  const nativeWaitUntil = ExtendableMessageEvent.prototype.waitUntil;
+  const nativeSkipWaiting = self.skipWaiting;
+  let activationRequests = 0;
+
+  self.skipWaiting = function (...args) {
+    activationRequests += 1;
+    return nativeSkipWaiting.apply(this, args);
+  };
+
+  ExtendableMessageEvent.prototype.waitUntil = function (promise) {
+    nativeWaitUntil.call(this, promise);
+    if (this.data !== 'ACTIVATE_UPDATE') return;
+
+    const requestsBefore = activationRequests;
+    const report = (fulfilled) => fetch(
+      '/__test__/activation-complete?fulfilled=' + fulfilled +
+      '&requested=' + (activationRequests > requestsBefore),
+      { method: 'POST', cache: 'no-store' },
+    );
+
+    nativeWaitUntil.call(this, Promise.resolve(promise).then(
+      () => report(true),
+      () => report(false),
+    ));
+  };
+})();
+`
 
 const contentTypes = new Map([
   ['.html', 'text/html'],
@@ -119,7 +156,10 @@ export const test = base.extend<
       failed: 0,
       legacy: false,
       connected: true,
+      observeActivations: false,
     }
+
+    const completedActivations: ActivationCheck[] = []
 
     const headers = await readFile(join(releases, 'release-a', '_headers'), 'utf8')
     const policy = headers.match(/^  Content-Security-Policy: (.+)$/m)?.[1]
@@ -142,6 +182,17 @@ export const test = base.extend<
 
       void (async () => {
         const url = new URL(request.url ?? '/', 'http://localhost')
+
+        if (state.observeActivations && url.pathname === '/__test__/activation-complete') {
+          completedActivations.push({
+            fulfilled: url.searchParams.get('fulfilled') === 'true',
+            activationRequested: url.searchParams.get('requested') === 'true',
+          })
+
+          response.writeHead(204).end()
+
+          return
+        }
 
         if (url.pathname === '/pwa/sw.js') {
           state.workers += 1
@@ -178,7 +229,11 @@ export const test = base.extend<
               'Content-Type': contentTypes.get(extname(pathname)) ?? 'application/octet-stream',
               'Cache-Control': 'public, max-age=0, must-revalidate, no-transform',
             })
-            .end(body)
+            .end(
+              state.observeActivations && pathname === '/pwa/update-worker.js'
+                ? activationObserver + body.toString('utf8')
+                : body,
+            )
         } catch {
           response.writeHead(404).end()
         }
@@ -212,6 +267,10 @@ export const test = base.extend<
         setConnected: (connected) => {
           state.connected = connected
         },
+        observeActivations: () => {
+          state.observeActivations = true
+        },
+        completedActivations: () => [...completedActivations],
       })
     } finally {
       server.closeAllConnections()

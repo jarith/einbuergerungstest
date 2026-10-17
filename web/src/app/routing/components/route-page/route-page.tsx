@@ -11,7 +11,7 @@ import { RouteStatus } from '../route-status/route-status'
 type RoutePageProps<Params extends object, Data> = Readonly<{
   loader: RouteLoader<Params, Data>
   page: ComponentType<PageProps<Data>>
-  language?: 'en' | 'de' | undefined
+  language?: 'en' | 'de' | 'ru' | undefined
   keepPreviousData?: boolean
 }>
 

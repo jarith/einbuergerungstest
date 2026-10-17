@@ -21,14 +21,34 @@ describe('no-conditional-jsx-return', () => {
     expect(stdout).toContain('Conditional JSX return is not allowed')
   })
 
-  it('reports exactly 8 violations', async () => {
+  it('reports each conditional JSX return at its source location', async () => {
     expect.hasAssertions()
+
+    const expectedMessage =
+      'Conditional JSX return is not allowed. Use explicit if statements with early returns instead.'
+
+    const expectedDiagnostics = [
+      { line: 4, column: 18, message: expectedMessage },
+      { line: 7, column: 17, message: expectedMessage },
+      { line: 10, column: 17, message: expectedMessage },
+      { line: 13, column: 17, message: expectedMessage },
+      { line: 17, column: 10, message: expectedMessage },
+      { line: 22, column: 10, message: expectedMessage },
+      { line: 26, column: 18, message: expectedMessage },
+      { line: 29, column: 18, message: expectedMessage },
+    ]
 
     const { stdout } = await runOxlint('violations.tsx')
 
-    const violations = stdout.match(/Conditional JSX return is not allowed/gu)
+    const diagnostics = Array.from(
+      stdout.matchAll(
+        /violations\.tsx:(\d+):(\d+): error app\(no-conditional-jsx-return\): ([^\n]+)/gu,
+      ),
+      ([, line, column, message]) => ({ line: Number(line), column: Number(column), message }),
+    )
 
-    expect(violations).toHaveLength(8)
+    expect(diagnostics).toHaveLength(expectedDiagnostics.length)
+    expect(diagnostics).toEqual(expect.arrayContaining(expectedDiagnostics))
   })
 
   it('does not report violations for clean code', async () => {

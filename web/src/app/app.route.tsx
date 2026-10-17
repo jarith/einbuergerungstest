@@ -2,6 +2,7 @@ import type { ReactElement } from 'react'
 import { reatomRoute } from '@reatom/core'
 
 import { createStartupRecovery } from '../modules/learner-state'
+import { createCheatSheetRoute } from '../pages/cheat-sheet'
 import { createDashboardRoute } from '../pages/dashboard'
 import { createMockTestRoutes } from '../pages/mock-test'
 import { createProgressRoute } from '../pages/progress'
@@ -35,6 +36,7 @@ export const routes = {
   study: createStudyRoutes(appRoute),
   mock: createMockTestRoutes(appRoute),
   progress: createProgressRoute(appRoute),
+  cheatSheet: createCheatSheetRoute(appRoute),
   questionHistory: createQuestionHistoryRoute(appRoute),
   testReview: createTestReviewRoute(appRoute),
   settings: createSettingsRoute(appRoute),

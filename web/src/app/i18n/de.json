@@ -20,7 +20,8 @@
     "settingsShort": "Einstellungen",
     "questionHistory": "Fragenverlauf",
     "testReview": "Testauswertung",
-    "notFound": "Seite nicht gefunden"
+    "notFound": "Seite nicht gefunden",
+    "cheatSheet": "Spickzettel"
   },
   "common": {
     "back": "Zurück",
@@ -68,7 +69,7 @@
     "reset": "Fortschritt und Einstellungen zurücksetzen",
     "description": "Dein Fortschritt wird auf diesem Gerät gespeichert. Ein Backup enthält Versuche, Tests und Einstellungen.",
     "preferences": "Einstellungen",
-    "languageHelp": "Fragen und Antworten bleiben auf Deutsch sichtbar. Wenn die Benutzeroberfläche auf Englisch eingestellt ist, kannst du beim Lernen zusätzlich englische Übersetzungen anzeigen.",
+    "languageHelp": "Fragen und Antworten bleiben auf Deutsch sichtbar. Wenn die Benutzeroberfläche auf Englisch oder Russisch eingestellt ist, kannst du beim Lernen zusätzlich Übersetzungen in dieser Sprache anzeigen.",
     "dateHelp": "Optional · heute oder ein zukünftiges Datum",
     "exportHelp": "Übertrage deinen Fortschritt mit diesem Backup auf ein anderes Gerät.",
     "chooseFile": "Backup-Datei auswählen",
@@ -88,7 +89,8 @@
     "selectedBackup": "Gewähltes Backup",
     "thisDevice": "Dieses Gerät",
     "backup": "Datensicherung",
-    "backupFile": "Backup-Datei"
+    "backupFile": "Backup-Datei",
+    "russian": "Russisch"
   },
   "study": {
     "correct": "Richtig",
@@ -317,5 +319,16 @@
     "resetTitle": "Gespeicherte Daten zurücksetzen?",
     "resetBody": "Dadurch werden die gespeicherten Fortschritte und Einstellungen in diesem Browser endgültig entfernt und ein neues Profil angelegt. Lade zuerst eine Kopie herunter, wenn du die ursprünglichen Daten behalten möchtest.",
     "reset": "Gespeicherte Daten zurücksetzen"
+  },
+  "cheatSheet": {
+    "introduction": "Wiederhole die wichtigsten Fakten für den Einbürgerungstest. Öffne eine Gruppe, um ihre Notizen zu lesen.",
+    "download": "PDF herunterladen",
+    "pdfDescription": "Alle {{count}} Gruppen · Deutsch",
+    "pdfHint": "Zum Offline-Lesen oder Ausdrucken.",
+    "closeGroup": "Gruppe schließen",
+    "preparing": "PDF wird vorbereitet…",
+    "longWait": "Die Vorbereitung der PDF dauert länger als erwartet. Bitte warte; bei einem Fehler kannst du es erneut versuchen.",
+    "ready": "PDF bereit. Sieh in den Downloads oder im PDF-Viewer deines Browsers nach.",
+    "failed": "Die PDF konnte nicht vorbereitet werden. Versuche es erneut."
   }
 }

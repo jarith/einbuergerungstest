@@ -20,13 +20,33 @@ describe('prefer-array-methods', () => {
     expect(stdout).toContain('app(prefer-array-methods)')
   })
 
-  it('reports exactly 7 violations', async () => {
+  it('reports the expected imperative collection loop violation count', async () => {
     expect.hasAssertions()
+
+    const expectedViolationCount = 7
 
     const { stdout } = await runOxlint('violations.ts')
 
     const violations = stdout.match(/Prefer declarative methods/gu)
-    expect(violations).toHaveLength(7)
+    expect(violations).toHaveLength(expectedViolationCount)
+  })
+
+  it.each([
+    { pattern: 'indexed push', expectedLine: 6 },
+    { pattern: 'for-of push', expectedLine: 14 },
+    { pattern: 'conditional push', expectedLine: 22 },
+    { pattern: 'object assignment', expectedLine: 32 },
+    { pattern: 'Map insertion', expectedLine: 40 },
+    { pattern: 'Set insertion', expectedLine: 48 },
+    { pattern: 'unshift', expectedLine: 56 },
+  ])('identifies the $pattern loop', async ({ expectedLine }) => {
+    const expectedColumn = 3
+
+    const { stdout } = await runOxlint('violations.ts')
+
+    expect(stdout).toContain(
+      `violations.ts:${expectedLine}:${expectedColumn}: error app(prefer-array-methods)`,
+    )
   })
 
   it('does not report violations for clean code', async () => {

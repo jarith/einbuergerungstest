@@ -6,6 +6,7 @@ export default defineConfig({
     include: ['web/src/**/*.test.ts', 'packages/*/src/**/*.test.ts'],
     exclude: ['**/*.browser.test.*', '**/node_modules/**'],
     restoreMocks: true,
+    sequence: { shuffle: true },
     allowOnly: (process.env['CI'] ?? '') === '',
   },
 })

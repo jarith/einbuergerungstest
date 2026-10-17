@@ -124,17 +124,17 @@ for (const { colorScheme, incorrect, correct } of [
     correct: { background: 'rgb(46, 61, 26)', border: 'rgb(167, 192, 128)' },
   },
 ]) {
-  test(`${colorScheme} answer feedback keeps its colors when selected and hovered`, async ({
-    page,
-  }) => {
-    await page.goto(
-      `/iframe.html?id=components-choicegroup--feedback&globals=colorScheme:${colorScheme}`,
-    )
+  for (const { marker, result, background, border } of [
+    { marker: 'A', result: 'Incorrect', ...incorrect },
+    { marker: 'D', result: 'Correct', ...correct },
+  ]) {
+    test(`${colorScheme} ${result.toLowerCase()} feedback keeps its colors when selected and hovered`, async ({
+      page,
+    }) => {
+      await page.goto(
+        `/iframe.html?id=components-choicegroup--feedback&globals=colorScheme:${colorScheme}`,
+      )
 
-    for (const { marker, result, background, border } of [
-      { marker: 'A', result: 'Incorrect', ...incorrect },
-      { marker: 'D', result: 'Correct', ...correct },
-    ]) {
       const answer = page.getByRole('radio', { name: new RegExp(`^${marker}\\b`) })
 
       await expect(answer).toContainText(result)
@@ -151,8 +151,8 @@ for (const { colorScheme, incorrect, correct } of [
       await expect(answer).toBeChecked()
       await expect(answer).toHaveCSS('background-color', background)
       await expect(answer).toHaveCSS('border-color', border)
-    }
-  })
+    })
+  }
 }
 
 test('compact filter choices remain keyboard operable', async ({ page }) => {
@@ -179,6 +179,20 @@ test('confirmation dialog traps focus and restores it on Escape', async ({ page 
   await trigger.click()
 
   await expect(page.getByRole('dialog', { name: 'Submit the mock test?' })).toBeVisible()
+
+  const dialog = page.getByRole('dialog', { name: 'Submit the mock test?' })
+  const first = dialog.getByRole('button', { name: 'Close dialog', exact: true })
+  const last = dialog.getByRole('button', { name: 'Open question list', exact: true })
+
+  await first.focus()
+
+  await first.press('Shift+Tab')
+
+  await expect(last).toBeFocused()
+
+  await last.press('Tab')
+
+  await expect(first).toBeFocused()
 
   await page.keyboard.press('Escape')
 

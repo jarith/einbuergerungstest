@@ -20,6 +20,8 @@ Feature: Keep and move learning progress on this device
     And I select study answer "D"
     And I preview the saved backup
     Then the import preview describes 1 study attempt
+    And the preview has not replaced my current or saved history
+    And question 1 has 2 recorded attempts
     When I confirm replacing local progress
     Then question 1 has status "needs-review"
     And question 1 has 1 recorded attempt

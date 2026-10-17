@@ -19,12 +19,6 @@ const rowCss = css.raw({
 export const styles = {
   root: css.raw({ minWidth: '0', overflowWrap: 'anywhere', hyphens: 'auto' }),
   filterLabel: css({ textStyle: 'controlLabel' }),
-  groupTitle: css({
-    fontSize: '16',
-    lineHeight: '16',
-    fontWeight: 'semibold',
-    '@media (min-width: 48rem)': { fontSize: '18' },
-  }),
   empty: css({ padding: '20', gap: '16', alignItems: 'start' }),
   panel: css({ padding: '12', gap: '8' }),
   heading: css({

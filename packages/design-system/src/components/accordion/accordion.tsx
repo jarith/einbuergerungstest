@@ -10,20 +10,24 @@ import { ChevronDown } from 'lucide-react'
 import type { PrimitiveProps } from '../../foundation/mantine/props'
 import { token } from '../../foundation/panda/styling'
 import { accordion } from './accordion.styles'
+import { AccordionGroup } from './components/accordion-group/accordion-group'
 
 export type AccordionProps<Multiple extends boolean = false> = Omit<
   PrimitiveProps<MantineAccordionProps<Multiple>>,
   'transitionDuration' | 'chevronSize' | 'chevronIconSize'
->
+> & { appearance?: 'inline' | 'separated' }
 
 /** Inline disclosure groups with keyboard navigation and full-width touch controls. */
-export const Accordion = <Multiple extends boolean = false>(props: AccordionProps<Multiple>) => (
+export const Accordion = <Multiple extends boolean = false>({
+  appearance,
+  ...props
+}: AccordionProps<Multiple>) => (
   <MantineAccordion
     order={3}
     chevron={<ChevronDown size={18} aria-hidden="true" />}
     {...props}
     transitionDuration={Number.parseFloat(token('durations.reveal'))}
-    classNames={accordion()}
+    classNames={accordion({ appearance })}
   />
 )
 
@@ -36,3 +40,5 @@ Accordion.Control = (props: PrimitiveProps<AccordionControlProps>) => (
 Accordion.Panel = (props: PrimitiveProps<AccordionPanelProps>) => (
   <MantineAccordion.Panel {...props} />
 )
+
+Accordion.Group = AccordionGroup

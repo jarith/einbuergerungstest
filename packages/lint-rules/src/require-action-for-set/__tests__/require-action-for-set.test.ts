@@ -11,7 +11,7 @@ const configPath = resolve(fixturesDir, '.oxlintrc.json')
 const runOxlint = (file: string) => runLint(configPath, resolve(fixturesDir, file))
 
 describe('require-action-for-set', () => {
-  it('reports violations for functions with 2+ distinct atom .set() calls', async () => {
+  it('reports violations for functions setting multiple distinct atoms', async () => {
     expect.hasAssertions()
 
     const { exitCode, stdout } = await runOxlint('violations.ts')
@@ -20,13 +20,27 @@ describe('require-action-for-set', () => {
     expect(stdout).toContain('app(require-action-for-set)')
   })
 
-  it('reports exactly 3 violations', async () => {
+  it('reports the expected unbatched multi-atom mutation violation count', async () => {
     expect.hasAssertions()
+
+    const expectedViolationCount = 3
 
     const { stdout } = await runOxlint('violations.ts')
 
     const violations = stdout.match(/must be wrapped in action/gu)
-    expect(violations).toHaveLength(3)
+    expect(violations).toHaveLength(expectedViolationCount)
+  })
+
+  it.each([
+    { scope: 'plain function', expectedLine: 4, expectedColumn: 17 },
+    { scope: 'callback', expectedLine: 10, expectedColumn: 17 },
+    { scope: 'module', expectedLine: 17, expectedColumn: 1 },
+  ])('identifies the unbatched $scope mutation', async ({ expectedLine, expectedColumn }) => {
+    const { stdout } = await runOxlint('violations.ts')
+
+    expect(stdout).toContain(
+      `violations.ts:${expectedLine}:${expectedColumn}: error app(require-action-for-set)`,
+    )
   })
 
   it('does not report violations for clean code', async () => {

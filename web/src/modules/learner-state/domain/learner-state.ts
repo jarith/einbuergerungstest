@@ -1,7 +1,7 @@
 import type { OptionLabel, QuestionKey } from '../../question-bank/domain'
 
 export type Preferences = Readonly<{
-  language: 'en' | 'de'
+  language: 'en' | 'de' | 'ru'
   studyTranslation: boolean
   appearance: 'light' | 'dark'
   plannedTestDate: string | null

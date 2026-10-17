@@ -20,16 +20,20 @@ for (const { width, height } of [
 
     await expectViewportFit(page)
 
-    for (const label of ['A', 'B', 'C', 'D']) {
-      const bounds = await studyAnswer(page, label).boundingBox()
+    const answerTargets = await page.getByRole('radio').evaluateAll((answers) =>
+      answers.map((answer) => {
+        const { width: targetWidth, height: targetHeight } = answer.getBoundingClientRect()
 
-      if (bounds === null) {
-        throw new Error(`Answer ${label} has no visible touch target`)
-      }
+        return { wideEnough: targetWidth >= 44, tallEnough: targetHeight >= 44 }
+      }),
+    )
 
-      expect(bounds.width).toBeGreaterThanOrEqual(44)
-      expect(bounds.height).toBeGreaterThanOrEqual(44)
-    }
+    expect(answerTargets).toEqual([
+      { wideEnough: true, tallEnough: true },
+      { wideEnough: true, tallEnough: true },
+      { wideEnough: true, tallEnough: true },
+      { wideEnough: true, tallEnough: true },
+    ])
   })
 }
 
