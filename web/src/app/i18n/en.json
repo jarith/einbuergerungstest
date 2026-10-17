@@ -20,7 +20,8 @@
     "settingsShort": "Settings",
     "questionHistory": "Question history",
     "testReview": "Test review",
-    "notFound": "Page not found"
+    "notFound": "Page not found",
+    "cheatSheet": "Cheat sheet"
   },
   "common": {
     "back": "Back",
@@ -318,5 +319,16 @@
     "resetTitle": "Reset saved data?",
     "resetBody": "This permanently removes the saved progress and settings from this browser and starts a fresh profile. Download a copy first if you want to keep the original data.",
     "reset": "Reset saved data"
+  },
+  "cheatSheet": {
+    "introduction": "Review the key facts for the citizenship test. Open a group to read its notes.",
+    "download": "Download PDF",
+    "pdfDescription": "All {{count}} groups · English",
+    "pdfHint": "For offline reading or printing.",
+    "closeGroup": "Close group",
+    "preparing": "Preparing PDF…",
+    "longWait": "Preparing the PDF is taking longer than expected. Please wait; you can try again if preparation fails.",
+    "ready": "PDF ready. Check your browser’s downloads or PDF viewer.",
+    "failed": "Couldn’t prepare the PDF. Try again."
   }
 }

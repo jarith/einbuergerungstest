@@ -10,7 +10,7 @@ export const styles = {
     background: 'panel.bg',
     padding: 'shell.navigationPadding',
     borderBlockStart: '{borderWidths.control} solid {colors.panel.border}',
-    grid: 'none / repeat(5, minmax(0, 1fr))',
+    grid: 'none / repeat(6, minmax(0, 1fr))',
     placeSelf: 'end stretch',
     gap: '2',
     '@media (min-width: 48rem)': {

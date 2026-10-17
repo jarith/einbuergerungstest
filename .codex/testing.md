@@ -183,8 +183,9 @@ subject under test.
   findings. Do not weaken assertions or add blanket suppressions; explain intentional
   exceptions where appropriate.
 - The initial run emitted Node's localStorage experimental warning; it still passed.
-- `.github/workflows/run-check.yml` pins Playwright container 1.63.0 while package.json
-  uses 1.64.1. CI was explicitly left unchanged; investigate alignment in a separate task.
+- PR #19 repair aligned `.github/workflows/run-check.yml` with Playwright 1.64.1. Keep the
+  container tag aligned with the Playwright packages when updating dependencies; a
+  mismatch prevents the shared browser-launch prerequisite from reaching any tests.
 - `e2e/README.md` links to missing `docs/bdd-migration.md`. The current
   requirements/context and README define ownership for this setup.
 

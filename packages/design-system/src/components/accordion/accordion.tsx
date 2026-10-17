@@ -10,6 +10,7 @@ import { ChevronDown } from 'lucide-react'
 import type { PrimitiveProps } from '../../foundation/mantine/props'
 import { token } from '../../foundation/panda/styling'
 import { accordion } from './accordion.styles'
+import { AccordionGroup } from './components/accordion-group/accordion-group'
 
 export type AccordionProps<Multiple extends boolean = false> = Omit<
   PrimitiveProps<MantineAccordionProps<Multiple>>,
@@ -39,3 +40,5 @@ Accordion.Control = (props: PrimitiveProps<AccordionControlProps>) => (
 Accordion.Panel = (props: PrimitiveProps<AccordionPanelProps>) => (
   <MantineAccordion.Panel {...props} />
 )
+
+Accordion.Group = AccordionGroup

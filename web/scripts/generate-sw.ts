@@ -22,6 +22,9 @@ const bank = parseQuestionBank(bankValue)
 
 const requiredResources = [
   'questionbank-berlin.json',
+  ...['en', 'de', 'ru'].map(
+    (language) => `cheat-sheet/einbuergerungstest-berlin-cheat-sheet-${language}.pdf`,
+  ),
   ...bank.questions.flatMap((question) => [
     ...(question.question_image_resource === undefined ? [] : [question.question_image_resource]),
     ...(question.question_image_variants ?? []).map((variant) => variant.resource),
@@ -53,7 +56,7 @@ await copyFile(new URL('./workers/retire-worker.js', import.meta.url), `${output
 
 const result = await generateSW({
   globDirectory: output,
-  globPatterns: ['**/*.{html,js,css,woff2,woff,ttf,json,webp,png,svg,ico,webmanifest}'],
+  globPatterns: ['**/*.{html,js,css,woff2,woff,ttf,json,webp,png,svg,ico,webmanifest,pdf}'],
   globIgnores: ['sw.js', 'workbox-*.js', 'offline-check.js', 'pwa/**'],
   swDest: `${output}/pwa/sw.js`,
   importScripts: ['/pwa/offline-check.js', '/pwa/update-worker.js'],

@@ -18,6 +18,8 @@
 /progress/questions/ /app 200
 /settings /app 200
 /settings/ /app 200
+/cheat-sheet /app 200
+/cheat-sheet/ /app 200
 
 /study/:question /app 200
 /study/:question/ /app 200
@@ -47,6 +49,8 @@
 /pwa/progress/questions/ /app 200
 /pwa/settings /app 200
 /pwa/settings/ /app 200
+/pwa/cheat-sheet /app 200
+/pwa/cheat-sheet/ /app 200
 /pwa/study/:question /app 200
 /pwa/study/:question/ /app 200
 /pwa/study/groups/:group /app 200

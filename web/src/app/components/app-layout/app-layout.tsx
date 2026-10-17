@@ -1,6 +1,13 @@
 import { wrap } from '@reatom/core'
 import { reatomComponent } from '@reatom/react'
-import { BookOpen, ChartNoAxesColumn, ClipboardCheck, House, Settings } from 'lucide-react'
+import {
+  BookOpen,
+  ChartNoAxesColumn,
+  ClipboardCheck,
+  House,
+  NotebookText,
+  Settings,
+} from 'lucide-react'
 
 import type { AppRoutes } from '../../app.route'
 import type { AppRoute } from '../../routing'
@@ -88,6 +95,12 @@ export const AppLayout = reatomComponent(({ route, routes, title, recovery }: Ap
           icon: ChartNoAxesColumn,
           active: routes.progress.match(),
           href: routes.progress.path(),
+        },
+        {
+          label: t('navigation.cheatSheet'),
+          icon: NotebookText,
+          active: routes.cheatSheet.match(),
+          href: routes.cheatSheet.path(),
         },
         {
           label: t('navigation.settingsShort'),

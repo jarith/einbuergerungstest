@@ -14,7 +14,7 @@ export const getPublicLanguage = (pathname: string) => {
 
 // Only learner routes get the app shell. Unknown public URLs must stay 404s.
 export const getLearnerPathPattern = () =>
-  /^\/(?:dashboard|study(?:\/[^/]+|\/groups\/[^/]+(?:\/[^/]+)?)?|mock-test(?:\/[^/]+(?:\/[^/]+)?)?|progress(?:\/questions(?:\/[^/]+)?|\/tests\/[^/]+)?|settings)\/?$/
+  /^\/(?:dashboard|study(?:\/[^/]+|\/groups\/[^/]+(?:\/[^/]+)?)?|mock-test(?:\/[^/]+(?:\/[^/]+)?)?|progress(?:\/questions(?:\/[^/]+)?|\/tests\/[^/]+)?|cheat-sheet|settings)\/?$/
 
 export const isLearnerPath = (pathname: string) =>
   getLearnerPathPattern().test(pathname.replace(/^\/pwa(?=\/)/, ''))

@@ -28,11 +28,15 @@ const expectScopedLinks = async (
 
   expect(paths).toEqual(
     expect.arrayContaining(
-      ['dashboard', 'study', 'mock-test', 'progress', 'settings'].map((path) => `${base}/${path}`),
+      ['dashboard', 'study', 'mock-test', 'progress', 'cheat-sheet', 'settings'].map(
+        (path) => `${base}/${path}`,
+      ),
     ),
   )
 
-  const learnerPath = new RegExp(`^${base}/(?:dashboard|study|mock-test|progress|settings)(?:/|$)`)
+  const learnerPath = new RegExp(
+    `^${base}/(?:dashboard|study|mock-test|progress|cheat-sheet|settings)(?:/|$)`,
+  )
 
   expect(paths.filter((path) => !learnerPath.test(path))).toEqual([])
 

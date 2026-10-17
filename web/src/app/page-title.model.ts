@@ -13,6 +13,7 @@ export const createPageTitleAtom = (appRoute: AppRoute, routes: AppRoutes) => {
     { route: routes.mock.entry, title: 'navigation.mockTest' },
     { route: routes.mock.question, title: 'navigation.mockTest' },
     { route: routes.progress, title: 'navigation.progress' },
+    { route: routes.cheatSheet, title: 'navigation.cheatSheet' },
     { route: routes.questionHistory, title: 'navigation.questionHistory' },
     { route: routes.testReview, title: 'navigation.testReview' },
     { route: routes.settings, title: 'navigation.settings' },
