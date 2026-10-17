@@ -7,6 +7,12 @@ const { Given, When, Then } = createBdd()
 
 When('I start a mock test', async ({ page }) => {
   await page.evaluate(() => window.behavior.startMock())
+
+  // Route loading can still be saving the question position when startMock returns.
+  // Settle that write before a clock jump also advances its storage timeout.
+  await expect
+    .poll(() => page.evaluate(() => window.behavior.resources().mock.pending()))
+    .toBe(false)
 })
 
 Given('the mock includes a question with language-neutral choices first', async ({ page }) => {
