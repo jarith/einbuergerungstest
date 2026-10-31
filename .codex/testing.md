@@ -160,6 +160,12 @@ subject under test.
 
 ## Known debt and unrelated findings
 
+- After dependency updates, Vitest 5 can race while invalidating the shared
+  `node_modules/.vitest-cache` for a changed lockfile: one parallel runner deletes it
+  while another writes, causing `ENOTEMPTY` during startup. This affected workspace tests
+  and Stryker on 2026-10-30. With no tests running, clear the generated cache using
+  `mise exec -- yarn vitest --clearCache` before rerunning the unchanged parallel command.
+  Do not weaken runner isolation or serialize the suites to hide this cache race.
 - The mock-start behavior step must wait for `mock.pending()` to clear before the next
   step advances the fake clock. Route loading can still persist the question position
   after `startMock()` returns. On master run 39073124973 (2026-10-17), jumping 60 minutes
